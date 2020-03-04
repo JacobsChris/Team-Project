@@ -1,11 +1,10 @@
 
 
-function test() {
+module.exports = function test(option) {
 
-    return "test"
+    if (option) {
+        return "true";
+    }
+    else return "false";
+};
 
-}
-
-
-
-module.exports = test()
