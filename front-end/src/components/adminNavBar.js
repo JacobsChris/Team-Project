@@ -10,10 +10,10 @@ class AdminNavBar extends React.Component {
                 <Navbar.Toggle aria-controls="collapse"/>
                     <Navbar.Collapse id="collapse">
                         <Nav className='ml-auto'>
-                            <Nav.Link href="/">HOME</Nav.Link>
-                            <Nav.Link href="/adduser">ADD USER</Nav.Link>
-                            <Nav.Link href="/help">HELP</Nav.Link>
-                            <Nav.Link href="/login">SIGN OUT</Nav.Link>
+                            <Nav.Link href="admin/home">HOME</Nav.Link>
+                            <Nav.Link href="admin/adduser">ADD USER</Nav.Link>
+                            <Nav.Link href="admin/help">HELP</Nav.Link>
+                            <Nav.Link href="admin/login">SIGN OUT</Nav.Link>
                         </Nav>
                     </Navbar.Collapse>
             </Navbar>
