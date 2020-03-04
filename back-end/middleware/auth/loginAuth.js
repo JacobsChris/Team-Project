@@ -3,7 +3,6 @@ const LocalStrategy = require('passport-local').Strategy;
 const bcrypt = require('bcrypt');
 const userModel = require('../../database/sequelize');
 
-const router = express.Router();
 
 const loginAuth = passport.use("login", new LocalStrategy(
 

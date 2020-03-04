@@ -1,6 +1,6 @@
 const express = require('express');
 const jwt = require('jsonwebtoken');
-const jwtKey = require('./jwtConfig');
+const jwtKey = require('../middleware/auth/jwtConfig');
 const userModel = require('../database/sequelize');
 const loginAuth = require('../middleware/auth/loginAuth');
 
@@ -36,3 +36,5 @@ router.post("/login", function(req, res, next) {
             } 
     })(req, res, next);
 });
+
+module.exports = router;
