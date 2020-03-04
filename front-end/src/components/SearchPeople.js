@@ -1,6 +1,6 @@
 import React from 'react';
 import FormInput from './FormInput.js';
-import './SignIn.css';
+import '../styles/SignIn.css';
 
 
 // const validEmailRegex = RegExp(/^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i);
@@ -206,50 +206,44 @@ export default class SearchPeople extends React.Component {
                                 {errors.surname.length > 0 && 
                                 <span className='error'>{errors.surname}</span>}
                             </div>
-                            <div className='DOB'>
+                            <div className='dob'>
                                 <label htmlFor="dob">Date of Birth</label>
-                                <FormInput name='dateofbirth' value={this.state.dob} handleChange={this.handleChange}/>
+                                <FormInput name='dob' value={this.state.dob} handleChange={this.handleChange}/>
                                 {errors.dob.length > 0 && 
                                 <span className='error'>{errors.dob}</span>}
                             </div>
                             <div className='birthPlace'>
-                                <label htmlFor="birthplace">Last Name</label>
+                                <label htmlFor="birthplace">Place of Birth</label>
                                 <FormInput name='birthPlace' value={this.state.birthPlace} handleChange={this.handleChange}/>
                                 {errors.birthPlace.length > 0 && 
                                 <span className='error'>{errors.birthPlace}</span>}
                             </div>
-                            <div className='lastName'>
-                                <label htmlFor="lastname">Last Name</label>
-                                <FormInput name='lastname' value={this.state.lastName} handleChange={this.handleChange}/>
-                                {errors.lastName.length > 0 && 
-                                <span className='error'>{errors.lastName}</span>}
-                            </div>
                             <div className='houseNumber'>
-                                <label htmlFor="houseNumber">Last Name</label>
+                                <label htmlFor="houseNumber">House Number</label>
                                 <FormInput name='houseNumber' value={this.state.houseNumber} handleChange={this.handleChange}/>
                                 {errors.houseNumber.length > 0 && 
                                 <span className='error'>{errors.houseNumber}</span>}
                             </div>
                             <div className='houseName'>
-                                <label htmlFor="houseName">Last Name</label>
+                                <label htmlFor="houseName">House Name</label>
                                 <FormInput name='houseName' value={this.state.houseName} handleChange={this.handleChange}/>
                                 {errors.houseName.length > 0 && 
                                 <span className='error'>{errors.houseName}</span>}
                             </div>
                             <div className='street'>
-                                <label htmlFor="street">Last Name</label>
+                                <label htmlFor="street">Street Name</label>
                                 <FormInput name='street' value={this.state.street} handleChange={this.handleChange}/>
                                 {errors.street.length > 0 && 
                                 <span className='error'>{errors.street}</span>}
                             </div>
                             <div className='town'>
-                                <label htmlFor="town">Last Name</label>
+                                <label htmlFor="town">Town</label>
                                 <FormInput name='town' value={this.state.town} handleChange={this.handleChange}/>
                                 {errors.town.length > 0 && 
                                 <span className='error'>{errors.town}</span>}
                             </div>
                             <div className='postcode'>
-                                <label htmlFor="postcode">Last Name</label>
+                                <label htmlFor="postcode">Postcode</label>
                                 <FormInput name='postcode' value={this.state.postcode} handleChange={this.handleChange}/>
                                 {errors.postcode.length > 0 && 
                                 <span className='error'>{errors.postcode}</span>}
