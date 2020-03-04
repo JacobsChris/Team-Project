@@ -10,8 +10,8 @@ class SearchNavBar extends React.Component {
                     <Navbar.Collapse id="collapse">
                         <Nav className='mr-auto ml-auto'>
                             <Nav.Link href="/user/home/searchpeople">Search People</Nav.Link>
-                            <Nav.Link href="/home/searchvehicles">Search Vehicles</Nav.Link>
-                            <Nav.Link href="/home/searchlocation">Search Location</Nav.Link>
+                            <Nav.Link href="/user/home/searchvehicles">Search Vehicles</Nav.Link>
+                            <Nav.Link href="/user/home/searchlocation">Search Location</Nav.Link>
                         </Nav>
                     </Navbar.Collapse>
             </Navbar>
