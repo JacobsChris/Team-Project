@@ -1,15 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import FormInput from './FormInput.js';
 import '../styles/SignIn.css';
 import DatePicker from './DateSelector.js';
-import "react-datepicker/dist/react-datepicker.css"
+import "react-datepicker/dist/react-datepicker.css";
+import Modal from './ValidModal.js';
 
 
 // const validEmailRegex = RegExp(/^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i);
 // const validEmailRegex = RegExp(/[A-Za-z0-9.]+@[A-Za-z.]+\.[A-Za-z]{2,3}$/);
 const postcodeRegex = RegExp(/^(([gG][iI][rR] {0,}0[aA]{2})|(([aA][sS][cC][nN]|[sS][tT][hH][lL]|[tT][dD][cC][uU]|[bB][bB][nN][dD]|[bB][iI][qQ][qQ]|[fF][iI][qQ][qQ]|[pP][cC][rR][nN]|[sS][iI][qQ][qQ]|[iT][kK][cC][aA]) {0,}1[zZ]{2})|((([a-pr-uwyzA-PR-UWYZ][a-hk-yxA-HK-XY]?[0-9][0-9]?)|(([a-pr-uwyzA-PR-UWYZ][0-9][a-hjkstuwA-HJKSTUW])|([a-pr-uwyzA-PR-UWYZ][a-hk-yA-HK-Y][0-9][abehmnprv-yABEHMNPRV-Y]))) {0,}[0-9][abd-hjlnp-uw-zABD-HJLNP-UW-Z]{2}))$/);
 const houseNumberRegex = RegExp(/^[0-9]+[A-Za-z]?$/);
-const nameRegex = RegExp(/^(([A-Za-z]{2,})|([A-Za-z]{2,})+[-]?([A-Za-z]{2,}))$/);
+const nameRegex = RegExp(/^(([A-Za-z]{2,})|([A-Za-z]{2,})+[-]?([A-Za-z]{2,})|([A-Za-z]{2,})+[-]?([A-Za-z]{2,})+[-]?([A-Za-z]{2,}))$/);
 
 const validateForm = (errors) => {
   let valid = true;
@@ -57,6 +58,9 @@ export default class SearchPeople extends React.Component {
             date: {
                 startDate: '',
                 setStartDate: ''
+            },
+            modal: {
+                open: false
             }
         }
     }
@@ -205,9 +209,21 @@ export default class SearchPeople extends React.Component {
 
     }
 
+    handleOpen = () => {
+        this.setState({
+            open: true
+        })
+      };
+    
+     handleClose = () => {
+        this.setState({
+            open: false
+        })
+      };
+
     render(){
         const {errors, formValid} = this.state;
-        const {startDate, setStartDate} = this.state.date;
+
         return(
             <div className='wrapper'>
                 <div className='form-wrapper'>
@@ -270,7 +286,8 @@ export default class SearchPeople extends React.Component {
                                 {errors.postcode.length > 0 && 
                                 <span className='error'>{errors.postcode}</span>}
                             </div>
-                        <button onClick={this.submit}>Submit</button>
+                        <button onClick={this.handleShow}>Submit</button>
+                        {/* <Modal /> */}
                         {this.state.errorCount !== null ? <p className="form-status">Form is {formValid ? 'valid ✅' : 'invalid ❌'}</p> : 'Form not submitted'}
                     </fieldset>
                     </form>
