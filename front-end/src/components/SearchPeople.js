@@ -1,6 +1,8 @@
 import React from 'react';
 import FormInput from './FormInput.js';
 import '../styles/SignIn.css';
+import DatePicker from './DateSelector.js';
+import "react-datepicker/dist/react-datepicker.css"
 
 
 // const validEmailRegex = RegExp(/^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i);
@@ -48,6 +50,10 @@ export default class SearchPeople extends React.Component {
                 street: '',
                 town: '',
                 postcode: ''
+            },
+            date: {
+                startDate: '',
+                setStartDate: ''
             }
         }
     }
@@ -188,6 +194,7 @@ export default class SearchPeople extends React.Component {
 
     render(){
         const {errors, formValid} = this.state;
+        const {startDate, setStartDate} = this.state.date;
         return(
             <div className='wrapper'>
                 <div className='form-wrapper'>
@@ -208,7 +215,9 @@ export default class SearchPeople extends React.Component {
                             </div>
                             <div className='dob'>
                                 <label htmlFor="dob">Date of Birth</label>
-                                <FormInput name='dob' value={this.state.dob} handleChange={this.handleChange}/>
+                                {/* <FormInput name='dob' value={this.state.dob} handleChange={this.handleChange} */}
+                                    <DatePicker onChange={this.handleChange}/>
+                                {/* /> */}
                                 {errors.dob.length > 0 && 
                                 <span className='error'>{errors.dob}</span>}
                             </div>
