@@ -7,6 +7,7 @@ import "react-datepicker/dist/react-datepicker.css"
 
 // const validEmailRegex = RegExp(/^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i);
 // const validEmailRegex = RegExp(/[A-Za-z0-9.]+@[A-Za-z.]+\.[A-Za-z]{2,3}$/);
+const postcodeRegex = RegExp(/^(([gG][iI][rR] {0,}0[aA]{2})|(([aA][sS][cC][nN]|[sS][tT][hH][lL]|[tT][dD][cC][uU]|[bB][bB][nN][dD]|[bB][iI][qQ][qQ]|[fF][iI][qQ][qQ]|[pP][cC][rR][nN]|[sS][iI][qQ][qQ]|[iT][kK][cC][aA]) {0,}1[zZ]{2})|((([a-pr-uwyzA-PR-UWYZ][a-hk-yxA-HK-XY]?[0-9][0-9]?)|(([a-pr-uwyzA-PR-UWYZ][0-9][a-hjkstuwA-HJKSTUW])|([a-pr-uwyzA-PR-UWYZ][a-hk-yA-HK-Y][0-9][abehmnprv-yABEHMNPRV-Y]))) {0,}[0-9][abd-hjlnp-uw-zABD-HJLNP-UW-Z]{2}))$/);
 
 const validateForm = (errors) => {
   let valid = true;
@@ -56,6 +57,13 @@ export default class SearchPeople extends React.Component {
                 setStartDate: ''
             }
         }
+    }
+
+    handleDateChange = date => {
+        this.setState({
+            dob: date
+        });
+        console.log(this.state.dob);
     }
 
     handleChange = ({ target: {value, name}}) => {
@@ -112,9 +120,9 @@ export default class SearchPeople extends React.Component {
             break;
             case 'postcode': 
             errors.postcode = 
-              value.length < 2
-                ? 'Postcode'
-                : '';
+              postcodeRegex.test(value)
+                ? ''
+                : 'Postcode is not valid';
             break;
           // case 'email': 
           //   errors.email = 
@@ -187,6 +195,7 @@ export default class SearchPeople extends React.Component {
                 this.setState({
                     postcode: event.target.value
                 })
+                console.log(this.state.postcode);
             }
         }
 
@@ -200,7 +209,7 @@ export default class SearchPeople extends React.Component {
                 <div className='form-wrapper'>
                     <form>
                         <fieldset>
-                            <legend>Sign In</legend>
+                            <legend>Search People</legend>
                             <div className='forename'>
                                 <label htmlFor="forename">First Name</label>
                                 <FormInput name='forename' value={this.state.forename} handleChange={this.handleChange}/>
@@ -216,7 +225,7 @@ export default class SearchPeople extends React.Component {
                             <div className='dob'>
                                 <label htmlFor="dob">Date of Birth</label>
                                 {/* <FormInput name='dob' value={this.state.dob} handleChange={this.handleChange} */}
-                                    <DatePicker onChange={this.handleChange}/>
+                                    <DatePicker name='dob' value={this.state.dob} handleChange={this.handleDateChange}/>
                                 {/* /> */}
                                 {errors.dob.length > 0 && 
                                 <span className='error'>{errors.dob}</span>}

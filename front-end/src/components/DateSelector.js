@@ -1,14 +1,17 @@
 import React, { useState } from 'react';
 import DatePicker from 'react-datepicker';
 
-export function DateSelector() {
+export default class DateSelector extends React.Component {
 // () => {
-    const [startDate, setStartDate] = useState(new Date());
+    // const [startDate, setStartDate] = useState(new Date());
+    render(){
     return (
       <DatePicker
       placeholderText="Click to select a date"
         // selected={startDate}
-        onChange={date => setStartDate(date)}
+        onChange={this.props.handleChange}
+        value={this.props.value || ''}
+        name={this.props.name || ''} 
         // placeholderText="Click to select a date"
         peekNextMonth
         showMonthDropdown
@@ -16,7 +19,5 @@ export function DateSelector() {
         dropdownMode="select"
       />
     );
-  };
-// }
-
-export default DateSelector;
+    }
+  }
