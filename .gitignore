@@ -23,3 +23,4 @@ Team-Project.iml
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+/back-end/middleware/service/person/config.json
