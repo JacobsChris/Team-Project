@@ -7,12 +7,10 @@ export default class DateSelector extends React.Component {
     render(){
     return (
       <DatePicker
-      placeholderText="Click to select a date"
-        // selected={startDate}
+        placeholderText="Click to select a date"
         onChange={this.props.handleChange}
-        value={this.props.value || ''}
-        name={this.props.name || ''} 
-        // placeholderText="Click to select a date"
+        name={this.props.name || ''}
+        selected={this.props.value || ''} 
         peekNextMonth
         showMonthDropdown
         showYearDropdown
