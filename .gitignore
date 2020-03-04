@@ -23,3 +23,10 @@ Team-Project.iml
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+### node packages ###
+
+/*/node_modules
+/node_modules
+/*/package-lock.json
+/package-lock.json
