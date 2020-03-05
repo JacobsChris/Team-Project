@@ -5,24 +5,26 @@ const auth = require('./sqlauth.js')
 const {QueryTypes} = require('sequelize');
 
 module.exports = {
-    searchByNames: function searchByNames(forenames, surname, homeAddress,dateOfBirth,placeOfBirth, sex, limit) {
+    searchByNames: function searchByNames(citizenID,forenames, surname, homeAddress,dateOfBirth,placeOfBirth, sex, limit) {
         if ((typeof forenames != 'string')||(typeof surname != 'string')||(typeof homeAddress != 'string')||(typeof placeOfBirth != 'string')||(typeof sex != 'string')) {
             console.log("Not string error");
         } else {
+            citizenID = wildStr.addWildStr(citizenID);
             forenames = wildStr.addWildStr(forenames);
             surname = wildStr.addWildStr(surname);
             homeAddress = wildStr.addWildStr(homeAddress);
             dateOfBirth = wildStr.addWildStr(dateOfBirth);
             placeOfBirth = wildStr.addWildStr(placeOfBirth);
-            sex = exactStr.addExactStr(sex);
+            sex = wildStr.addWildStr(sex);
 
             let sqlSearchString = "SELECT * FROM citizen WHERE " +
-                "forenames LIKE " + forenames +
+                "citizenID LIKE " + citizenID +
+                " AND forenames LIKE " + forenames +
                 " AND surname LIKE " + surname +
                 " AND homeAddress LIKE " + homeAddress +
                 " AND dateOfBirth LIKE " + dateOfBirth +
                 " AND placeOfBirth LIKE " + placeOfBirth +
-                " AND sex=" + sex +
+                " AND sex LIKE " + sex +
                 " LIMIT " + limit;
             auth.SQLauthenticate(sqlSearchString)
         }
