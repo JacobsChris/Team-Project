@@ -24,14 +24,14 @@ function JsonToStringName(input){
 }
 
 function JsonToStringDetails(input){
-    let intialString = "";
+    let initialString = "";
     try {
-        intialString = JSON.parse(input);
+        initialString = JSON.parse(input);
     } catch (e) {
-        intialString = input;
+        initialString = input;
     }
-    let initalResult = SearchByNames.searchByNames(intialString.citizenID,"","","","","","",1);
-    return initalResult;
+    let initialResult = SearchByNames.searchByNames(initialString.citizenID,"","","","","","",1);
+    return initialResult;
 }
 
 // JsonToStringName({"citizenID": "","forenames": "Stuart", "surname": "White", "homeAddress": "46 FRENSHAM CLOSE, SOUTHALL, UB1 2YG","dateOfBirth": "1948-10-02", "placeOfBirth": "STANMORE", "sex": "Male" })
