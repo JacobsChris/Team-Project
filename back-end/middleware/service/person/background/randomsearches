@@ -1,0 +1,86 @@
+
+
+function findPersonsMobile(forenames, surname, DoB, Addr, limit) {
+    let sqlSearchString = "SELECT phoneNumber FROM mobile WHERE forenames LIKE \'" + forenames + "\' AND surname LIKE \'" + surname + "\' AND address LIKE \'" + Addr + "\' AND dateOfBirth LIKE \'" + DoB + "\' LIMIT " + limit;
+    SQLauthenticate(sqlSearchString)
+}
+
+function findInComingCalls(phoneNumber, limit) {
+    let sqlSearchString = "SELECT callerNumber, COUNT(*) FROM mobileCallRecords WHERE receiverNumber LIKE \'" + phoneNumber + "\' GROUP BY receiverNumber ORDER BY COUNT(*) DESC LIMIT " + limit;
+    SQLauthenticate(sqlSearchString)
+}
+
+function findOutGoingCalls(phoneNumber, limit) {
+    let sqlSearchString = "SELECT receiverNumber, COUNT(*) FROM mobileCallRecords WHERE callerNumber LIKE \'" + phoneNumber + "\' GROUP BY callerNumber ORDER BY COUNT(*) DESC LIMIT " + limit;
+    SQLauthenticate(sqlSearchString)
+}
+
+function findPersonByMobile(phoneNumber, limit) {
+    let sqlSearchString = "SELECT * FROM mobiles WHERE phoneNumber LIKE \'" + phoneNumber + "\' LIMIT " + limit;
+    SQLauthenticate(sqlSearchString)
+}
+
+function findPersonsBankAccount(forenames, surname, DoB, Addr, limit) {
+    let sqlSearchString = "SELECT * FROM peoplebankaccount WHERE forenames LIKE \'" + forenames + "\' AND surname LIKE \'" + surname + "\' AND address LIKE \'" + Addr + "\' AND dateOfBirth LIKE \'" + DoB + "\' LIMIT " + limit;
+    SQLauthenticate(sqlSearchString)
+    // returns a persons bank account
+}
+
+function findBankCard(bankAccountId, limit) {
+    let sqlSearchString = "SELECT * FROM bankcard WHERE bankAccountID LIKE \'" + bankAccountId + "\' LIMIT " + limit;
+    SQLauthenticate(sqlSearchString)
+}
+
+function findATMTransactions(cardNumber, limit) {
+    let sqlSearchString = "SELECT * FROM atmTransaction WHERE bankCardNumber LIKE \'" + cardNumber + "\' LIMIT " + limit;
+    SQLauthenticate(sqlSearchString)
+}
+
+function findEPOSTransactions(cardNumber, limit) {
+    let sqlSearchString = "SELECT * FROM eposTransactions WHERE bankCardNumber LIKE \'" + cardNumber + "\' LIMIT " + limit;
+    SQLauthenticate(sqlSearchString)
+}
+
+function findEPOSTerminal(eposId, limit) {
+    let sqlSearchString = "SELECT * FROM eposTerminals WHERE id LIKE \'" + eposId + "\' LIMIT " + limit;
+    SQLauthenticate(sqlSearchString)
+}
+
+function findATMPoint(atmId, limit) {
+    let sqlSearchString = "SELECT * FROM atmpoint WHERE atmId LIKE \'" + atmId + "\' LIMIT " + limit;
+    SQLauthenticate(sqlSearchString)
+}
+
+function findPersonsVehicle(forenames, surname, DoB, Addr, limit) {
+    let sqlSearchString = "SELECT * FROM vehicleRegistration WHERE forenames IS \'" + forenames + "\' AND surname IS \'" + surname + "\' AND address IS \'" + Addr + "\' AND dateOfBirth IS \'" + DoB + "\' LIMIT " + limit;
+    SQLauthenticate(sqlSearchString)
+}
+
+function searchByNames(forenames, surname, limit) {
+    if ((typeof forenames != 'string') || (typeof surname != 'string')) {
+        console.log("Not string error");
+    } else {
+        forenames = addWildStr(forenames);
+        surname = addWildStr(surname);
+        let sqlSearchString = "SELECT * FROM citizen WHERE forenames LIKE " + forenames + " AND surname LIKE " + surname + " LIMIT " + limit;
+
+        SQLauthenticate(sqlSearchString)
+    }
+}
+
+function searchByCamerasArea(inputLatitude, inputLongitude, Radius, limit) {
+    let searchCameras = "select * from anprcamera where (((latitude - " + inputLatitude + ")*(latitude - " + inputLatitude + ") + (longitude - " + inputLongitude + ")*(longitude - " + inputLongitude + ")) < " + Radius + ") LIMIT" + limit;
+    SQLauthenticate(searchCameras);
+}
+
+
+function searchByVehicleReg(vehicleReg, limit) {
+    if (licencePlateValidator(vehicleReg)) {
+        vehicleReg = addWildStr(vehicleReg.toUpperCase());
+        let sqlSearchString = "SELECT * FROM vehicleRegistration WHERE vehicleRegistrationNo LIKE" + vehicleReg + " LIMIT " + limit;
+        SQLauthenticate(sqlSearchString)
+    } else {
+        console.log("invalid reg")
+    }
+}
+
