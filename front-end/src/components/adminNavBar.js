@@ -5,7 +5,7 @@ class AdminNavBar extends React.Component {
 
     render(){
         return (
-            <Navbar bg="dark" variant="dark" expand="md">
+            <Navbar bg="dark" variant="dark" expand="md" className='main-nav'>
                 <Navbar.Brand href="/admin/home">REDSHIFT</Navbar.Brand>
                 <Navbar.Toggle aria-controls="collapse"/>
                     <Navbar.Collapse id="collapse">
