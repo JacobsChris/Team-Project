@@ -225,7 +225,6 @@ export default class SearchPeople extends React.Component {
                                 <FormInput name='birthPlace' value={this.state.birthPlace} handleChange={this.handleChange}/>
                                 {errors.birthPlace.length > 0 && 
                                 <span className='error'>{errors.birthPlace}</span>}
-                               
                             </div>
                             <div className='houseNumber'>
                                 <label htmlFor="houseNumber">House Number</label>
