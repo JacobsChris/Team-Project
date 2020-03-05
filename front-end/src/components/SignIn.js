@@ -1,6 +1,6 @@
 import React from 'react';
 import FormInput from './FormInput';
-import Axios from 'axios';
+import axios from 'axios';
 
 export default class SignIn extends React.Component {
     constructor(props){
@@ -16,13 +16,18 @@ export default class SignIn extends React.Component {
     }
 
     submit = () => {
-        
+        axios.post('http://localhost:3003/login/login')
+        .then(res => {
+            console.log(res);
+        }).catch(err => {
+            console.log(err);
+        });
     }
 
     render(){
         return(
             <div>
-                <form>
+                <form onSubmit={this.submit()}>
                     <fieldset>
                         <legend>
                             Sign In
@@ -35,7 +40,7 @@ export default class SignIn extends React.Component {
                             <label></label>
                             <FormInput name='password' value={this.state.password} handleChange={this.handleChange}/>
                         </div>
-                        <button onClick={this.submit}>Sign In</button>
+                        <button>Sign In</button>
                     </fieldset>
                 </form>
             </div>
