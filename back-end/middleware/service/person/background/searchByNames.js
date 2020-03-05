@@ -15,7 +15,14 @@ module.exports = {
             homeAddress = wildStr.addWildStr(homeAddress);
             dateOfBirth = wildStr.addWildStr(dateOfBirth);
             placeOfBirth = wildStr.addWildStr(placeOfBirth);
-            sex = wildStr.addWildStr(sex);
+            
+            if (sex == ""){
+                sex = wildStr.addWildStr(sex);
+            }
+            else {
+                sex = exactStr.addExactStr(sex);
+            }
+
 
             let sqlSearchString = "SELECT * FROM citizen WHERE " +
                 "citizenID LIKE " + citizenID +
