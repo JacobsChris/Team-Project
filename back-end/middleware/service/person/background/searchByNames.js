@@ -1,7 +1,7 @@
 const {Sequelize} = require('sequelize');
 const wildStr = require('./wildStr.js');
-const exactStr = require('./exactStr')
-const auth = require('./sqlauth.js')
+const exactStr = require('./exactStr');
+const auth = require('./sqlauth.js');
 const {QueryTypes} = require('sequelize');
 
 module.exports = {
