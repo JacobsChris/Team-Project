@@ -40,10 +40,7 @@ function findEPOSTerminal(eposId, limit) {
     SQLauthenticate(sqlSearchString)
 }
 
-function findATMPoint(atmId, limit) {
-    let sqlSearchString = "SELECT * FROM atmpoint WHERE atmId LIKE \'" + atmId + "\' LIMIT " + limit;
-    SQLauthenticate(sqlSearchString)
-}
+
 
 function searchByNames(forenames, surname, limit) {
     if ((typeof forenames != 'string') || (typeof surname != 'string')) {
@@ -57,10 +54,7 @@ function searchByNames(forenames, surname, limit) {
     }
 }
 
-function searchByCamerasArea(inputLatitude, inputLongitude, Radius, limit) {
-    let searchCameras = "select * from anprcamera where (((latitude - " + inputLatitude + ")*(latitude - " + inputLatitude + ") + (longitude - " + inputLongitude + ")*(longitude - " + inputLongitude + ")) < " + Radius + ") LIMIT" + limit;
-    SQLauthenticate(searchCameras);
-}
+
 
 
 
