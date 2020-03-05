@@ -1,11 +1,9 @@
 const { Sequelize, DataTypes } = require("sequelize");
+const rawdata = require('./config.json');
 
-const sequelize = new Sequelize("userDB", "dbuser", "password", {
-    host: "localhost",
-    dialect: "mysql"
-});
+const sequelize = new Sequelize(rawdata);
 
-const UserModel = sequelize.define("user",
+const UserModel = sequelize.define("Users",
     {
         username: {
             type: DataTypes.STRING,
@@ -23,8 +21,9 @@ const UserModel = sequelize.define("user",
     }
 );
 
-UserModel.sync({force: true})
+UserModel.sync()
     .then(() => {
+        UserModel.create({ username: "admin", password: "mypass" });
         console.log(`Database & tables created!`);
     });
 

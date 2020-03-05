@@ -5,6 +5,7 @@ const passport = require("passport");
 
 const person = require("./routes/person");
 const login = require("./routes/login");
+const home = require("./routes/home");
 const vehicle = require("./routes/vehicle");
 const locationEvent = require("./routes/locationEvent");
 const port = 3000;
@@ -22,6 +23,7 @@ passport.serializeUser( function(user, done) {
 app.use(bodyParser.json());
 
 app.use("/login", login);
+app.use("/", home);
 app.use("/back-end/person", person);
 app.use("/back-end/vehicle", vehicle);
 app.use("/back-end/locationEvent", locationEvent);
