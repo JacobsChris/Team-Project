@@ -33,7 +33,8 @@ module.exports = {
                 " AND placeOfBirth LIKE " + placeOfBirth +
                 " AND sex LIKE " + sex +
                 " LIMIT " + limit;
-            auth.SQLauthenticate(sqlSearchString)
+            // console.log("3",auth.SQLauthenticate(sqlSearchString));
+            return auth.SQLauthenticate(sqlSearchString)
         }
     }
 };
