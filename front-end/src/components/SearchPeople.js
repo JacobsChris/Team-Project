@@ -1,9 +1,10 @@
 import React from 'react';
 import FormInput from './FormInput.js';
-import '../styles/SignIn.css';
+import '../styles/searchPeople.css';
 import DatePicker from './DateSelector.js';
 import "react-datepicker/dist/react-datepicker.css";
 import Validation from './Validation.js';
+import { Form, Container, Button } from 'react-bootstrap';
 
 
 // const validEmailRegex = RegExp(/^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i);
@@ -79,15 +80,15 @@ export default class SearchPeople extends React.Component {
         switch (name) {
           case 'forename': 
             errors.forename = 
-              (!value.length === 0 && value.length < 2)
+              value.length < 2
                 ? 'First Name must be at least 2 characters long!'
                 : '';
             break;
             case 'surname': 
             errors.surname = 
             (value.length === 0 || nameRegex.test(value))
-                ? ''
-                : 'Surname must be at least 2 characters long!';
+                ? 'Surname must be at least 2 characters long!'
+                : '';
             break;
             case 'dob': 
             errors.dob = 
@@ -199,70 +200,69 @@ export default class SearchPeople extends React.Component {
         const {errors, formValid} = this.state;
 
         return(
-            <div className='wrapper'>
-                <div className='form-wrapper'>
-                    <form>
-                        <fieldset>
-                            <legend>Search People</legend>
-                            <div className='forename'>
-                                <label htmlFor="forename">First Name</label>
-                                <FormInput name='forename' value={this.state.forename} handleChange={this.handleChange}/>
-                                {errors.forename.length > 0 && 
-                                <span className='error'>{errors.forename}</span>}
-                            </div>
-                            <div className='surname'>
-                                <label htmlFor="surname">Last Name</label>
-                                <FormInput name='surname' value={this.state.surname} handleChange={this.handleChange}/>
-                            </div>
-                            <div className='dob'>
-                                <label htmlFor="dob">Date of Birth</label>
-                                    <DatePicker name='dob' value={this.state.dob}  handleChange={this.handleDateChange}/>
-                                {errors.dob.length > 0 && 
-                                <span className='error'>{errors.dob}</span>}
-                            </div>
-                            <div className='birthPlace'>
-                                <label htmlFor="birthplace">Place of Birth</label>
-                                <FormInput name='birthPlace' value={this.state.birthPlace} handleChange={this.handleChange}/>
-                                {errors.birthPlace.length > 0 && 
-                                <span className='error'>{errors.birthPlace}</span>}
-                               
-                            </div>
-                            <div className='houseNumber'>
-                                <label htmlFor="houseNumber">House Number</label>
-                                <FormInput name='houseNumber' value={this.state.houseNumber} handleChange={this.handleChange}/>
-                                {errors.houseNumber.length > 0 && 
-                                <span className='error'>{errors.houseNumber}</span>}
-                            </div>
-                            <div className='houseName'>
-                                <label htmlFor="houseName">House Name</label>
-                                <FormInput name='houseName' value={this.state.houseName} handleChange={this.handleChange}/>
-                                {errors.houseName.length > 0 && 
-                                <span className='error'>{errors.houseName}</span>}
-                            </div>
-                            <div className='street'>
-                                <label htmlFor="street">Street Name</label>
-                                <FormInput name='street' value={this.state.street} handleChange={this.handleChange}/>
-                                {errors.street.length > 0 && 
-                                <span className='error'>{errors.street}</span>}
-                            </div>
-                            <div className='town'>
-                                <label htmlFor="town">Town</label>
-                                <FormInput name='town' value={this.state.town} handleChange={this.handleChange}/>
-                                {errors.town.length > 0 && 
-                                <span className='error'>{errors.town}</span>}
-                            </div>
-                            <div className='postcode'>
-                                <label htmlFor="postcode">Postcode</label>
-                                <FormInput name='postcode' value={this.state.postcode} handleChange={this.handleChange}/>
-                                {errors.postcode.length > 0 && 
-                                <span className='error'>{errors.postcode}</span>}
-                            </div>
-                        <button >Submit</button>
+            <div className='form-size'>
+            <Form>
+                <h2 className='form-header'>Search People</h2>
+                <br/>
+                <h5 className='form-header'>Please fill out one or more fields</h5>
+                <br/>
+                    <Form.Group className='forename'>
+                        <Form.Label htmlFor="forename">First Name</Form.Label>
+                            <FormInput name='forename' value={this.state.forename} handleChange={this.handleChange}/>
+                            {errors.forename.length > 0 && 
+                            <span className='error'>{errors.forename}</span>}
+                    </Form.Group>
+                    <Form.Group className='surname'>
+                        <Form.Label htmlFor="surname">Last Name</Form.Label>
+                        <FormInput name='surname' value={this.state.surname} handleChange={this.handleChange}/>
+                    </Form.Group>
+                    <Form.Group className='dob'>
+                        <Form.Label htmlFor="dob">Date of Birth</Form.Label>
+                        <DatePicker name='dob' value={this.state.dob}  handleChange={this.handleDateChange}/>
+                        {errors.dob.length > 0 && 
+                        <span className='error'>{errors.dob}</span>}
+                    </Form.Group>
+                    <Form.Group className='birthPlace'>
+                        <Form.Label htmlFor="birthplace">Place of Birth</Form.Label>
+                        <FormInput name='birthPlace' value={this.state.birthPlace} handleChange={this.handleChange}/>
+                        {errors.birthPlace.length > 0 && 
+                        <span className='error'>{errors.birthPlace}</span>}                              
+                    </Form.Group>
+                    <Form.Group className='houseNumber'>
+                        <Form.Label htmlFor="houseNumber">House Number</Form.Label>
+                        <FormInput name='houseNumber' value={this.state.houseNumber} handleChange={this.handleChange}/>
+                        {errors.houseNumber.length > 0 && 
+                        <span className='error'>{errors.houseNumber}</span>}
+                    </Form.Group>
+                    <Form.Group className='houseName'>
+                        <Form.Label htmlFor="houseName">House Name</Form.Label>
+                        <FormInput name='houseName' value={this.state.houseName} handleChange={this.handleChange}/>
+                        {errors.houseName.length > 0 && 
+                        <span className='error'>{errors.houseName}</span>}
+                    </Form.Group>
+                    <Form.Group className='street'>
+                        <Form.Label htmlFor="street">Street Name</Form.Label>
+                        <FormInput name='street' value={this.state.street} handleChange={this.handleChange}/>
+                        {errors.street.length > 0 && 
+                        <span className='error'>{errors.street}</span>}
+                    </Form.Group>
+                    <Form.Group className='town'>
+                        <Form.Label htmlFor="town">Town</Form.Label>
+                        <FormInput name='town' value={this.state.town} handleChange={this.handleChange}/>
+                        {errors.town.length > 0 && 
+                        <span className='error'>{errors.town}</span>}
+                    </Form.Group>
+                    <Form.Group className='postcode'>
+                        <Form.Label htmlFor="postcode">Postcode</Form.Label>
+                        <FormInput name='postcode' value={this.state.postcode} handleChange={this.handleChange}/>
+                        {errors.postcode.length > 0 && 
+                        <span className='error'>{errors.postcode}</span>}
+                    </Form.Group>
+                        <Button variant='dark' id='submit-button'>Submit</Button>
                         {/* <Modal /> */}
-                        {this.state.errorCount !== null ? <p className="form-status">Form is {formValid ? 'valid ✅' : 'invalid ❌'}</p> : 'Form not submitted'}
-                    </fieldset>
-                    </form>
-                </div>
+                        <br/>
+                        {this.state.errorCount !== null ? <p className="form-status">Form is {formValid ? 'valid ✅' : 'invalid ❌'}</p> : <p className="form-status">Form not submitted</p>}
+                </Form>
             </div>
         );
     }
