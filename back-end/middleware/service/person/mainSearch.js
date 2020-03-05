@@ -1,4 +1,8 @@
-const SearchByNames = require('./searchByPeople/searchByNames.js');
 
-//need to do something with this
-SearchByNames.searchByNames("", "", 10);
+const SearchByNames = require('./background/searchByNames.js');
+const searchByVehicleReg = require('./background/searchByVehicleReg.js');
+const findDetailsByName = require('./background/findDetailsByName.js');
+
+SearchByNames.searchByNames("", "","","","","Male", 10);
+// findDetailsByName.findDetailsByName("", "","","","","Male", 10);
+// searchByVehicleReg.searchByVehicleReg("____ ___",10);

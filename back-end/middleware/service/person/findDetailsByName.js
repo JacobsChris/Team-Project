@@ -5,7 +5,7 @@ const auth = require('./sqlauth.js')
 const {QueryTypes} = require('sequelize');
 
 module.exports = {
-    searchByNames: function searchByNames(forenames, surname, homeAddress,dateOfBirth,placeOfBirth, sex, limit) {
+    findDetailsByName: function findDetailsByName(forenames, surname, homeAddress,dateOfBirth,placeOfBirth, sex, limit) {
         if ((typeof forenames != 'string')||(typeof surname != 'string')||(typeof homeAddress != 'string')||(typeof placeOfBirth != 'string')||(typeof sex != 'string')) {
             console.log("Not string error");
         } else {
