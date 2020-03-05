@@ -5,5 +5,5 @@ const findDetailsByName = require('./background/find_citi_details/findDetailsByN
 
 
 
-// SearchByNames.searchByNames("", "","","","","Male", 10);
-findDetailsByName.findDetailsByName("Stuart", "White","46 FRENSHAM CLOSE, SOUTHALL, UB1 2YG","1948-10-02","STANMORE","Male", 5);
+SearchByNames.searchByNames("", "","","","","Male", 10);
+// findDetailsByName.findDetailsByName("Stuart", "White","46 FRENSHAM CLOSE, SOUTHALL, UB1 2YG","1948-10-02","STANMORE","Male", 5);
