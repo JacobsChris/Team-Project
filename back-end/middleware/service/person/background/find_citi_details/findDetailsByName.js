@@ -1,7 +1,7 @@
 const {Sequelize} = require('sequelize');
 const wildStr = require('../wildStr.js');
 const exactStr = require('../exactStr');
-const sendToAsyncCitizen = require('./sendToAsyncDetails.js');
+const sendToAsyncCitizen = require('../sqlauth.js');
 const {QueryTypes} = require('sequelize');
 
 module.exports = {
@@ -14,7 +14,7 @@ module.exports = {
             homeAddress = wildStr.addWildStr(homeAddress);
             dateOfBirth = wildStr.addWildStr(dateOfBirth);
             placeOfBirth = wildStr.addWildStr(placeOfBirth);
-            sex = exactStr.addExactStr(sex);
+            sex = wildStr.addWildStr(sex);
 
             let sqlSearchStringCitizen = "SELECT * FROM citizen WHERE " +
                 "forenames LIKE " + forenames +
@@ -22,7 +22,7 @@ module.exports = {
                 " AND homeAddress LIKE " + homeAddress +
                 " AND dateOfBirth LIKE " + dateOfBirth +
                 " AND placeOfBirth LIKE " + placeOfBirth +
-                " AND sex=" + sex +
+                " AND sex LIKE " + sex +
                 " LIMIT " + limit;
 
             let sqlSearchStringBankAccounts = "SELECT * FROM peoplebankaccount WHERE " +

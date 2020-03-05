@@ -10,7 +10,11 @@ module.exports = {
         let SearchQuery = sequelize.query(Input, {type: QueryTypes.SELECT})
         sequelize.authenticate().then(() => {
             console.log('Connection established successfully.');
-            async.asyncCall(SearchQuery);
+            return new Promise(resolve => {
+                setTimeout(() => {
+                    resolve(async.asyncCall(SearchQuery));
+                }, 2000);
+            });
         }).catch(err => {
             console.error('Unable to connect to the database:', err);
         }).finally(() => {

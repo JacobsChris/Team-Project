@@ -23,7 +23,7 @@ Team-Project.iml
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-/back-end/middleware/service/person/config.json
+/back-end/middleware/service/person/background/config.json
 
 ### node packages ###
 /*/node_modules
