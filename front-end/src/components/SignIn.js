@@ -19,9 +19,9 @@ export default class SignIn extends React.Component {
         event.preventDefault();
         let data = {
             username: this.state.username,
-            password: this.state.password
-            
+            password: this.state.password            
         }
+
 
         console.log(data);
         axios.post('http://localhost:3003/login/login', data)
