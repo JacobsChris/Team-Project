@@ -5,9 +5,9 @@ const auth = require('./sqlauth.js');
 const {QueryTypes} = require('sequelize');
 
 module.exports = {
-    searchByNames: function searchByNames(citizenID, forenames, surname, homeAddress, dateOfBirth, placeOfBirth, sex, limit) {
-        if ((typeof forenames != 'string') || (typeof surname != 'string') || (typeof homeAddress != 'string') || (typeof placeOfBirth != 'string') || (typeof sex != 'string')) {
-            console.log("One of the Key value pairs is not a string or you have not included/misspelled the key value pair");
+    searchByNames: function searchByNames(citizenID,forenames, surname, homeAddress,dateOfBirth,placeOfBirth, sex, limit) {
+        if ((typeof forenames != 'string')||(typeof surname != 'string')||(typeof homeAddress != 'string')||(typeof placeOfBirth != 'string')||(typeof sex != 'string')) {
+            console.log("Not string error");
         } else {
             citizenID = wildStr.addWildStr(citizenID);
             forenames = wildStr.addWildStr(forenames);
@@ -16,9 +16,10 @@ module.exports = {
             dateOfBirth = wildStr.addWildStr(dateOfBirth);
             placeOfBirth = wildStr.addWildStr(placeOfBirth);
 
-            if (sex == "") {
+            if (sex == ""){
                 sex = wildStr.addWildStr(sex);
-            } else {
+            }
+            else {
                 sex = exactStr.addExactStr(sex);
             }
 

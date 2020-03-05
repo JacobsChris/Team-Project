@@ -10,14 +10,15 @@ const locationEvent = require("./routes/locationEvent");
 const port = 3000;
 
 
-///////////////
+app.use(express.json());
 app.use(passport.initialize());
 
 passport.serializeUser( function(user, done) {
     done(null, user);
 });
 
-////////////////////
+
+
 
 app.use(bodyParser.json());
 
