@@ -65,6 +65,14 @@ export default class SearchPeople extends React.Component {
         }
     }
 
+    handleDateChange = date => {
+        console.log(date);
+        this.setState({
+            dob: date
+        });
+        console.log(this.state.dob);
+    }
+
     handleChange = ({ target: {value, name}}) => {
         let errors = this.state.errors;
   
@@ -217,7 +225,7 @@ export default class SearchPeople extends React.Component {
                                 <FormInput name='birthPlace' value={this.state.birthPlace} handleChange={this.handleChange}/>
                                 {errors.birthPlace.length > 0 && 
                                 <span className='error'>{errors.birthPlace}</span>}
-                                <Validation value={this.state.forename} name='birthPlace'/>
+                               
                             </div>
                             <div className='houseNumber'>
                                 <label htmlFor="houseNumber">House Number</label>
@@ -249,7 +257,8 @@ export default class SearchPeople extends React.Component {
                                 {errors.postcode.length > 0 && 
                                 <span className='error'>{errors.postcode}</span>}
                             </div>
-                        <button onClick={this.submit}>Submit</button>
+                        <button >Submit</button>
+                        {/* <Modal /> */}
                         {this.state.errorCount !== null ? <p className="form-status">Form is {formValid ? 'valid ✅' : 'invalid ❌'}</p> : 'Form not submitted'}
                     </fieldset>
                     </form>
