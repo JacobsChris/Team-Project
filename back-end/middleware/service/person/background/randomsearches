@@ -25,10 +25,7 @@ function findBankCard(bankAccountId, limit) {
     SQLauthenticate(sqlSearchString)
 }
 
-function findATMTransactions(cardNumber, limit) {
-    let sqlSearchString = "SELECT * FROM atmTransaction WHERE bankCardNumber LIKE \'" + cardNumber + "\' LIMIT " + limit;
-    SQLauthenticate(sqlSearchString)
-}
+
 
 
 
