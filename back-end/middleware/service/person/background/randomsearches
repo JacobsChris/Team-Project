@@ -63,13 +63,5 @@ function searchByCamerasArea(inputLatitude, inputLongitude, Radius, limit) {
 }
 
 
-function searchByVehicleReg(vehicleReg, limit) {
-    if (licencePlateValidator(vehicleReg)) {
-        vehicleReg = addWildStr(vehicleReg.toUpperCase());
-        let sqlSearchString = "SELECT * FROM vehicleRegistration WHERE vehicleRegistrationNo LIKE" + vehicleReg + " LIMIT " + limit;
-        SQLauthenticate(sqlSearchString)
-    } else {
-        console.log("invalid reg")
-    }
-}
+
 
