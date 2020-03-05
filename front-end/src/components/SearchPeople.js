@@ -1,9 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import FormInput from './FormInput.js';
 import '../styles/SignIn.css';
 import DatePicker from './DateSelector.js';
 import "react-datepicker/dist/react-datepicker.css";
-import Modal from './ValidModal.js';
 import Validation from './Validation.js';
 
 
@@ -66,27 +65,19 @@ export default class SearchPeople extends React.Component {
         }
     }
 
-    handleDateChange = date => {
-        console.log(date);
-        this.setState({
-            dob: date
-        });
-        console.log(this.state.dob);
-    }
-
     handleChange = ({ target: {value, name}}) => {
         let errors = this.state.errors;
   
         switch (name) {
           case 'forename': 
             errors.forename = 
-              (!value.length == 0 && value.length < 2)
+              (!value.length === 0 && value.length < 2)
                 ? 'First Name must be at least 2 characters long!'
                 : '';
             break;
             case 'surname': 
             errors.surname = 
-            (value.length == 0 || nameRegex.test(value))
+            (value.length === 0 || nameRegex.test(value))
                 ? ''
                 : 'Surname must be at least 2 characters long!';
             break;
@@ -104,7 +95,7 @@ export default class SearchPeople extends React.Component {
             break;
             case 'houseNumber': 
             errors.houseNumber = 
-            (value.length == 0 || houseNumberRegex.test(value))
+            (value.length === 0 || houseNumberRegex.test(value))
                 ? ''
                 : 'House Number is not valid';
             break;
@@ -214,15 +205,10 @@ export default class SearchPeople extends React.Component {
                             <div className='surname'>
                                 <label htmlFor="surname">Last Name</label>
                                 <FormInput name='surname' value={this.state.surname} handleChange={this.handleChange}/>
-                                {errors.surname.length > 0 && 
-                                <span className='error'>{errors.surname}</span>}
-                                <Validation value={this.state.errors.forename} field='surname'/>
                             </div>
                             <div className='dob'>
                                 <label htmlFor="dob">Date of Birth</label>
-                                {/* <FormInput name='dob' value={this.state.dob} handleChange={this.handleChange} */}
                                     <DatePicker name='dob' value={this.state.dob}  handleChange={this.handleDateChange}/>
-                                {/* /> */}
                                 {errors.dob.length > 0 && 
                                 <span className='error'>{errors.dob}</span>}
                             </div>
@@ -231,7 +217,7 @@ export default class SearchPeople extends React.Component {
                                 <FormInput name='birthPlace' value={this.state.birthPlace} handleChange={this.handleChange}/>
                                 {errors.birthPlace.length > 0 && 
                                 <span className='error'>{errors.birthPlace}</span>}
-                                <Validation value={this.state.forename} field='birthPlace'/>
+                                <Validation value={this.state.forename} name='birthPlace'/>
                             </div>
                             <div className='houseNumber'>
                                 <label htmlFor="houseNumber">House Number</label>
@@ -263,8 +249,7 @@ export default class SearchPeople extends React.Component {
                                 {errors.postcode.length > 0 && 
                                 <span className='error'>{errors.postcode}</span>}
                             </div>
-                        <button onClick={this.handleShow}>Submit</button>
-                        {/* <Modal /> */}
+                        <button onClick={this.submit}>Submit</button>
                         {this.state.errorCount !== null ? <p className="form-status">Form is {formValid ? 'valid ✅' : 'invalid ❌'}</p> : 'Form not submitted'}
                     </fieldset>
                     </form>
