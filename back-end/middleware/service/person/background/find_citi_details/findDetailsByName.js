@@ -1,6 +1,6 @@
 const {Sequelize} = require('sequelize');
-const wildStr = require('../wildStr.js');
-const exactStr = require('../exactStr');
+const wildStr = require('../inputvalidation/wildStr.js');
+const exactStr = require('../inputvalidation/exactStr');
 const sendToAsyncCitizen = require('../sqlauth.js');
 const {QueryTypes} = require('sequelize');
 
