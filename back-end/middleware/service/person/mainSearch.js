@@ -12,9 +12,11 @@ const findDetailsByName = require('./background/find_citi_details/findDetailsByN
 
 
 
-function JsonToStringName(input){
-    return SearchByNames.searchByNames(input.citizenID,input.forenames,input.surname,input.homeAddress,input.dateOfBirth,input.placeOfBirth,input.sex, 5);
-}
+module.exports = {
+    JsonToStringName: function JsonToStringName(input){
+        return SearchByNames.searchByNames(input.citizenID,input.forenames,input.surname,input.homeAddress,input.dateOfBirth,input.placeOfBirth,input.sex, 5);
+    }
+};
 
 async function JsonToStringDetails(input){
     let initialString = "";
@@ -37,5 +39,4 @@ JsonToStringName({"citizenID": "","forenames": "Stuart", "surname": "White", "ho
 // let initRes = JsonToStringDetails({"citizenID": "1125143125"});
 
 
-// findDetailsByName.findDetailsByName("", "White","46 FRENSHAM CLOSE, SOUTHALL, UB1 2YG","1948-10-02","STANMORE","Male", 5);
-// searchByVehicleReg.searchByVehicleReg("____ ___",10);
+

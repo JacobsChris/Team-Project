@@ -15,7 +15,7 @@ module.exports = {
             homeAddress = wildStr.addWildStr(homeAddress);
             dateOfBirth = wildStr.addWildStr(dateOfBirth);
             placeOfBirth = wildStr.addWildStr(placeOfBirth);
-            
+
             if (sex == ""){
                 sex = wildStr.addWildStr(sex);
             }
