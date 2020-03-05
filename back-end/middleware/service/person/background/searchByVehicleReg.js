@@ -1,5 +1,6 @@
 import {SQLauthenticate} from "./sqlauth";
 import {addWildStr} from "./inputvalidation/wildStr";
+import {licencePlateValidator} from "./inputvalidation/licencePlateValidator";
 
 const {Sequelize} = require('sequelize');
 const wildStr = require('./inputvalidation/wildStr.js');
