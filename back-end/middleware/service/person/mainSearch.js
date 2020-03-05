@@ -36,6 +36,8 @@ JsonToStringName({"citizenID": "","forenames": "Stuart", "surname": "White", "ho
         initRes = res;
         console.log("init res = ", JSON.stringify(initRes));
     })
+
+
 // let initRes = JsonToStringDetails({"citizenID": "1125143125"});
 
 
