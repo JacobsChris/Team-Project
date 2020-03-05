@@ -1,12 +1,12 @@
 const {Sequelize} = require('sequelize');
-const wildStr = require('./wildStr.js');
-const exactStr = require('./exactStr')
-const auth = require('./sqlauth.js')
+const wildStr = require('./inputvalidation/wildStr.js');
+const exactStr = require('./inputvalidation/exactStr');
+const auth = require('./sqlauth.js');
 const {QueryTypes} = require('sequelize');
 
 module.exports = {
-    searchByNames: function searchByNames(citizenID,forenames, surname, homeAddress,dateOfBirth,placeOfBirth, sex, limit) {
-        if ((typeof forenames != 'string')||(typeof surname != 'string')||(typeof homeAddress != 'string')||(typeof placeOfBirth != 'string')||(typeof sex != 'string')) {
+    searchByNames: function searchByNames(citizenID, forenames, surname, homeAddress, dateOfBirth, placeOfBirth, sex, limit) {
+        if ((typeof forenames != 'string') || (typeof surname != 'string') || (typeof homeAddress != 'string') || (typeof placeOfBirth != 'string') || (typeof sex != 'string')) {
             console.log("Not string error");
         } else {
             citizenID = wildStr.addWildStr(citizenID);
@@ -16,10 +16,9 @@ module.exports = {
             dateOfBirth = wildStr.addWildStr(dateOfBirth);
             placeOfBirth = wildStr.addWildStr(placeOfBirth);
 
-            if (sex == ""){
+            if (sex == "") {
                 sex = wildStr.addWildStr(sex);
-            }
-            else {
+            } else {
                 sex = exactStr.addExactStr(sex);
             }
 

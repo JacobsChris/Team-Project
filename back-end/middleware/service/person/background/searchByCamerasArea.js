@@ -1,4 +1,3 @@
-import {addWildStr} from "./wildStr";
 import {SQLauthenticate} from "./sqlauth";
 
 

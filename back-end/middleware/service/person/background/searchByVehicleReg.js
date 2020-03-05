@@ -1,10 +1,11 @@
 import {SQLauthenticate} from "./sqlauth";
-import {addWildStr} from "./wildStr";
+import {addWildStr} from "./inputvalidation/wildStr";
 
 const {Sequelize} = require('sequelize');
-const wildStr = require('./wildStr.js');
-const auth = require('./sqlauth.js')
+const wildStr = require('./inputvalidation/wildStr.js');
+const auth = require('./sqlauth.js');
 const {QueryTypes} = require('sequelize');
+
 
 module.exports = {
     searchByVehicleReg: function searchByVehicleReg(vehicleReg, limit) {
