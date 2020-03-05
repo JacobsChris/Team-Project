@@ -5,8 +5,8 @@ class NavBar extends React.Component {
 
     render(){
         return (
-            <Navbar bg="dark" variant="dark" expand="md">
-                <Navbar.Brand href="/user/home">REDSHIFT</Navbar.Brand>
+            <Navbar bg="dark" variant="dark" expand="md" className='main-nav'>
+                <Nav.Link id='brand' className='mr-auto' href="/user/home">REDSHIFT</Nav.Link>
                 <Navbar.Toggle aria-controls="collapse"/>
                     <Navbar.Collapse id="collapse">
                         <Nav className='ml-auto'>

@@ -3,6 +3,7 @@ import React from 'react';
 import SearchPeople from './SearchPeople';
 import { Container, Card, Row, Col} from 'react-bootstrap';
 import '../styles/peopleResults.css';
+import { MdPerson } from 'react-icons/md';
 
 export default class PeopleResultsPage extends React.Component{
 
@@ -59,10 +60,11 @@ export default class PeopleResultsPage extends React.Component{
                 <Card className='flex-item' id='small-person-card'>
                     <Row>
                         <Col>
-                            <Card.Img></Card.Img>     
+                            <MdPerson className='person-icon'/>    
                         </Col>
                         <Col>
-                            <h3>{person.forename} {person.surname}</h3>
+                            <br/>
+                            <h3 className='card-title'>{person.forename} {person.surname}</h3>
                         </Col>
                     </Row>
                 </Card>
@@ -76,10 +78,11 @@ export default class PeopleResultsPage extends React.Component{
                     <Card className='flex-item' id='person-card'>
                         <Row>
                             <Col>
-                                <Card.Img></Card.Img>     
+                                <MdPerson className='large-person-icon'/>      
                             </Col>
                             <Col>
-                                <h1>{person.forename} {person.surname}</h1>
+                                <br/>
+                                <h1 className='card-title'>{person.forename} {person.surname}</h1>
                             </Col>
                         </Row>
                         <Card.Body>

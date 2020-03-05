@@ -3,7 +3,7 @@
 }
 
 #person-card {
-    margin-top: 100px;
+    margin-top: 50px;
     margin-bottom: 100px;
 }
 
@@ -19,4 +19,20 @@
 
 #small-person-card {
     height: 100px;
+}
+
+.person-icon {
+    width: 100px;
+    height: 100px;
+    margin-left: 50px;
+}
+
+.card-title {
+    margin-right: 50px;
+}
+
+.large-person-icon {
+    width: 150px;
+    height: 150px;
+    margin-left: 50px;
 }

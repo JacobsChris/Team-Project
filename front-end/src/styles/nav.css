@@ -1,0 +1,17 @@
+#search-nav {
+    margin: 5px;
+    max-height: 40px;
+}
+
+.main-nav {
+    min-height: 100px;
+    font-size: 25px;
+}
+
+#search-nav-item {
+    padding-left: 100px;
+}
+
+#brand {
+    color: white;
+}
