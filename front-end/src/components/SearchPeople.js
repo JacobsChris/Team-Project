@@ -2,15 +2,11 @@ import React from 'react';
 import FormInput from './FormInput.js';
 import '../styles/SignIn.css';
 import DatePicker from './DateSelector.js';
-import "react-datepicker/dist/react-datepicker.css";
-import Validation from './Validation.js';
+import "react-datepicker/dist/react-datepicker.css"
 
 
 // const validEmailRegex = RegExp(/^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i);
 // const validEmailRegex = RegExp(/[A-Za-z0-9.]+@[A-Za-z.]+\.[A-Za-z]{2,3}$/);
-const postcodeRegex = RegExp(/^(([gG][iI][rR] {0,}0[aA]{2})|(([aA][sS][cC][nN]|[sS][tT][hH][lL]|[tT][dD][cC][uU]|[bB][bB][nN][dD]|[bB][iI][qQ][qQ]|[fF][iI][qQ][qQ]|[pP][cC][rR][nN]|[sS][iI][qQ][qQ]|[iT][kK][cC][aA]) {0,}1[zZ]{2})|((([a-pr-uwyzA-PR-UWYZ][a-hk-yxA-HK-XY]?[0-9][0-9]?)|(([a-pr-uwyzA-PR-UWYZ][0-9][a-hjkstuwA-HJKSTUW])|([a-pr-uwyzA-PR-UWYZ][a-hk-yA-HK-Y][0-9][abehmnprv-yABEHMNPRV-Y]))) {0,}[0-9][abd-hjlnp-uw-zABD-HJLNP-UW-Z]{2}))$/);
-const houseNumberRegex = RegExp(/^[0-9]+[A-Za-z]?$/);
-const nameRegex = RegExp(/^(([A-Za-z]{2,})|([A-Za-z]{2,})+[-]?([A-Za-z]{2,})|([A-Za-z]{2,})+[-]?([A-Za-z]{2,})+[-]?([A-Za-z]{2,}))$/);
 
 const validateForm = (errors) => {
   let valid = true;
@@ -58,19 +54,8 @@ export default class SearchPeople extends React.Component {
             date: {
                 startDate: '',
                 setStartDate: ''
-            },
-            modal: {
-                open: false
             }
         }
-    }
-
-    handleDateChange = date => {
-        console.log(date);
-        this.setState({
-            dob: date
-        });
-        console.log(this.state.dob);
     }
 
     handleChange = ({ target: {value, name}}) => {
@@ -79,15 +64,15 @@ export default class SearchPeople extends React.Component {
         switch (name) {
           case 'forename': 
             errors.forename = 
-              (!value.length === 0 && value.length < 2)
+              value.length < 2
                 ? 'First Name must be at least 2 characters long!'
                 : '';
             break;
             case 'surname': 
             errors.surname = 
-            (value.length === 0 || nameRegex.test(value))
-                ? ''
-                : 'Surname must be at least 2 characters long!';
+              value.length < 2
+                ? 'Surname must be at least 2 characters long!'
+                : '';
             break;
             case 'dob': 
             errors.dob = 
@@ -103,9 +88,9 @@ export default class SearchPeople extends React.Component {
             break;
             case 'houseNumber': 
             errors.houseNumber = 
-            (value.length === 0 || houseNumberRegex.test(value))
-                ? ''
-                : 'House Number is not valid';
+              value.length < 2
+                ? 'House Number'
+                : '';
             break;
             case 'houseName': 
             errors.houseName = 
@@ -127,10 +112,16 @@ export default class SearchPeople extends React.Component {
             break;
             case 'postcode': 
             errors.postcode = 
-              postcodeRegex.test(value)
-                ? ''
-                : 'Postcode is not valid';
+              value.length < 2
+                ? 'Postcode'
+                : '';
             break;
+          // case 'email': 
+          //   errors.email = 
+          //     validEmailRegex.test(value)
+          //       ? ''
+          //       : 'Email is not valid!';
+          //   break;
           default:
             break;
         }
@@ -145,13 +136,19 @@ export default class SearchPeople extends React.Component {
         
         if(this.state.formValid){
             console.log(`First Name: ${this.state.forename}`);
+            console.log(`Surname: ${this.state.surname}`);
             console.log(`DOB: ${this.state.dob}`);
+            console.log(`Place of Birth: ${this.state.birthPlace}`);
+            console.log(`House No:: ${this.state.houseNumber}`);
+            console.log(`House Name: ${this.state.houseName}`);
+            console.log(`Street: ${this.state.street}`);
+            console.log(`Town: ${this.state.town}`);
+            console.log(`Postcode: ${this.state.postcode}`);
             if(event.target.name === 'forename'){
                 this.setState({
                     forename: event.target.value
                 })
-            } 
-            else if(event.target.name === 'surname'){
+            } else if(event.target.name === 'surname'){
                 this.setState({
                     surname: event.target.value
                 })
@@ -197,13 +194,13 @@ export default class SearchPeople extends React.Component {
 
     render(){
         const {errors, formValid} = this.state;
-
+        const {startDate, setStartDate} = this.state.date;
         return(
             <div className='wrapper'>
                 <div className='form-wrapper'>
                     <form>
                         <fieldset>
-                            <legend>Search People</legend>
+                            <legend>Sign In</legend>
                             <div className='forename'>
                                 <label htmlFor="forename">First Name</label>
                                 <FormInput name='forename' value={this.state.forename} handleChange={this.handleChange}/>
@@ -213,10 +210,14 @@ export default class SearchPeople extends React.Component {
                             <div className='surname'>
                                 <label htmlFor="surname">Last Name</label>
                                 <FormInput name='surname' value={this.state.surname} handleChange={this.handleChange}/>
+                                {errors.surname.length > 0 && 
+                                <span className='error'>{errors.surname}</span>}
                             </div>
                             <div className='dob'>
                                 <label htmlFor="dob">Date of Birth</label>
-                                    <DatePicker name='dob' value={this.state.dob}  handleChange={this.handleDateChange}/>
+                                {/* <FormInput name='dob' value={this.state.dob} handleChange={this.handleChange} */}
+                                    <DatePicker onChange={this.handleChange}/>
+                                {/* /> */}
                                 {errors.dob.length > 0 && 
                                 <span className='error'>{errors.dob}</span>}
                             </div>
@@ -256,8 +257,7 @@ export default class SearchPeople extends React.Component {
                                 {errors.postcode.length > 0 && 
                                 <span className='error'>{errors.postcode}</span>}
                             </div>
-                        <button >Submit</button>
-                        {/* <Modal /> */}
+                        <button onClick={this.submit}>Submit</button>
                         {this.state.errorCount !== null ? <p className="form-status">Form is {formValid ? 'valid ✅' : 'invalid ❌'}</p> : 'Form not submitted'}
                     </fieldset>
                     </form>
