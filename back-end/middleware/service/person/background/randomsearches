@@ -30,10 +30,7 @@ function findATMTransactions(cardNumber, limit) {
     SQLauthenticate(sqlSearchString)
 }
 
-function findEPOSTransactions(cardNumber, limit) {
-    let sqlSearchString = "SELECT * FROM eposTransactions WHERE bankCardNumber LIKE \'" + cardNumber + "\' LIMIT " + limit;
-    SQLauthenticate(sqlSearchString)
-}
+
 
 
 
