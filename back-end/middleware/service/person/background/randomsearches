@@ -6,25 +6,13 @@ function findPersonsBankAccount(forenames, surname, DoB, Addr, limit) {
     // returns a persons bank account
 }
 
-function findBankCard(bankAccountId, limit) {
-    let sqlSearchString = "SELECT * FROM bankcard WHERE bankAccountID LIKE \'" + bankAccountId + "\' LIMIT " + limit;
-    SQLauthenticate(sqlSearchString)
-}
 
-function findATMTransactions(cardNumber, limit) {
-    let sqlSearchString = "SELECT * FROM atmTransaction WHERE bankCardNumber LIKE \'" + cardNumber + "\' LIMIT " + limit;
-    SQLauthenticate(sqlSearchString)
-}
 
-function findEPOSTransactions(cardNumber, limit) {
-    let sqlSearchString = "SELECT * FROM eposTransactions WHERE bankCardNumber LIKE \'" + cardNumber + "\' LIMIT " + limit;
-    SQLauthenticate(sqlSearchString)
-}
 
-function findEPOSTerminal(eposId, limit) {
-    let sqlSearchString = "SELECT * FROM eposTerminals WHERE id LIKE \'" + eposId + "\' LIMIT " + limit;
-    SQLauthenticate(sqlSearchString)
-}
+
+
+
+
 
 function findATMPoint(atmId, limit) {
     let sqlSearchString = "SELECT * FROM atmpoint WHERE atmId LIKE \'" + atmId + "\' LIMIT " + limit;
