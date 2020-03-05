@@ -39,4 +39,3 @@ function JsonToStringDetails(input){
 
 findDetailsByName.findDetailsByName("", "White","46 FRENSHAM CLOSE, SOUTHALL, UB1 2YG","1948-10-02","STANMORE","Male", 5);
 // searchByVehicleReg.searchByVehicleReg("____ ___",10);
-
