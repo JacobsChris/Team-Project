@@ -1,4 +1,4 @@
-import {SQLauthenticate} from "./sqlauth";
+import {SQLauthenticate} from "../sqlauth";
 
 
 module.exports = {

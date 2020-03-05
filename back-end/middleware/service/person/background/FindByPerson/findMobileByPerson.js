@@ -1,4 +1,4 @@
-import {SQLauthenticate} from "./sqlauth";
+import {SQLauthenticate} from "../sqlauth";
 
 module.exports = {
     findMobileByPerson: function findMobileByPerson(forenames, surname, DoB, Addr, limit) {
