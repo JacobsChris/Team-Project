@@ -6,7 +6,7 @@ const findDetailsByName = require('./background/find_citi_details/findDetailsByN
 
 module.exports = {
     JsonToStringName: function JsonToStringName(input){
-        return SearchByNames.searchByNames(input.citizenID,input.forenames,input.surname,input.homeAddress,input.dateOfBirth,input.placeOfBirth,input.sex, 5);
+        return SearchByNames.searchByNames(input.citizenID,input.forenames,input.surname,input.homeAddress,input.dateOfBirth,input.placeOfBirth,input.sex);
     },
     JsonToStringDetails: function JsonToStringDetails(input){
         return SearchByNames.searchByNames(initialString.citizenID, "", "", "", "", "", "", 1);
