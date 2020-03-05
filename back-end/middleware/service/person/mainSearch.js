@@ -17,11 +17,11 @@ module.exports = {
 
 let initRes = [];
 
-// JsonToStringName({"citizenID": "","forenames": "Stuart", "surname": "White", "homeAddress": "46 FRENSHAM CLOSE, SOUTHALL, UB1 2YG","dateOfBirth": "1948-10-02", "placeOfBirth": "STANMORE", "sex": "Male" })
-//     .then(res => {
-//         initRes = res;
-//         console.log("init res = ", JSON.stringify(initRes));
-//     })
+JsonToStringName({"citizenID": "","forenames": "Stuart", "surname": "White", "homeAddress": "46 FRENSHAM CLOSE, SOUTHALL, UB1 2YG","dateOfBirth": "1948-10-02", "placeOfBirth": "STANMORE", "sex": "Male" })
+    .then(res => {
+        initRes = res;
+        console.log("init res = ", JSON.stringify(initRes));
+    })
 
 
 // JsonToStringDetails({"citizenID": "1125143125"})
