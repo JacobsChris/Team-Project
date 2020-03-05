@@ -15,10 +15,19 @@ export default class SignIn extends React.Component {
         this.setState({[name]: value})
     }
 
-    submit = () => {
-        axios.post('http://localhost:3003/login/login')
+    submit = (event) => {
+        event.preventDefault();
+        let data = {
+            username: this.state.username,
+            password: this.state.password
+            
+        }
+
+        console.log(data);
+        axios.post('http://localhost:3003/login/login', data)
         .then(res => {
             console.log(res);
+            this.props.history.push("/user/home");
         }).catch(err => {
             console.log(err);
         });
@@ -27,7 +36,7 @@ export default class SignIn extends React.Component {
     render(){
         return(
             <div>
-                <form onSubmit={this.submit()}>
+                <form onSubmit={this.submit}>
                     <fieldset>
                         <legend>
                             Sign In
@@ -38,9 +47,9 @@ export default class SignIn extends React.Component {
                         </div>
                         <div className='password'>
                             <label></label>
-                            <FormInput name='password' value={this.state.password} handleChange={this.handleChange}/>
+                            <FormInput name='password' type="password" value={this.state.password} handleChange={this.handleChange}/>
                         </div>
-                        <button>Sign In</button>
+                        <input type="submit" value="Sign In" />
                     </fieldset>
                 </form>
             </div>
