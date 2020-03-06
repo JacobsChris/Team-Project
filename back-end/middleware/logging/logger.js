@@ -8,7 +8,7 @@ morgan.token('user', function (req, res) {
 
 
 morgan.token('request', function (req, res) {
-    return JSON.stringify(req.query);
+    return JSON.stringify(req.body);
 });
 
 
