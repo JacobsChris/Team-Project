@@ -7,8 +7,8 @@ const jwtStrategy =  passportJWT.Strategy;
 const extractJWT = passportJWT.ExtractJwt;
 const parameters = {
     jwtFromRequest: extractJWT.fromAuthHeaderWithScheme("JWT"),
-    secretOrKey : jwtConfig.secret
-}
+    secretOrKey: jwtConfig.secret
+};
 
 const endpointAuth = passport.use(new jwtStrategy(parameters, 
     function(jwtPayload, done) {
