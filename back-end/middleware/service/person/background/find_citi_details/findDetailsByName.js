@@ -49,10 +49,11 @@ module.exports = {
                 " AND dateOfBirth LIKE " + dateOfBirth +
                 " LIMIT " + limit;
 
-            let obj = [];
-            // obj.push(sendToAsyncCitizen.SQLauthenticate(sqlSearchStringCitizen));
-            // obj.push(bankAccount.findBankAccountByPerson(forenames,surname,dateOfBirth,homeAddress));
-            return sendToAsyncCitizen.SQLauthenticate(sqlSearchStringBankAccount);
+
+            return Promise.all([sendToAsyncCitizen.SQLauthenticate(sqlSearchStringCitizen),
+                sendToAsyncCitizen.SQLauthenticate(sqlSearchStringBankAccount)]);
+
+            // return sendToAsyncCitizen.SQLauthenticate(sqlSearchStringBankAccount);
             // sendToAsyncCitizen.SQLauthenticate(sqlSearchStringMobiles);
             // sendToAsyncCitizen.SQLauthenticate(sqlSearchStringvehicleRegistration);
         }

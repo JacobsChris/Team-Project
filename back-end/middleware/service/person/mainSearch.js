@@ -30,12 +30,10 @@ JsonToStringDetails(
     "placeOfBirth": "STANMORE",
     "sex": "Male"
     }
-).then(res => {
-        initRes = res;
-        console.log("init res = ", JSON.stringify(initRes));
-}).then(
-     intitRes = res.push()
-);
+).then(([first, second]) => {
+        // initRes = res;
+        console.log("init res = ", first, second);
+});
 
 // JsonToStringDetails({
 //     "citizenID": "",
