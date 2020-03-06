@@ -3,30 +3,56 @@ const searchByVehicleReg = require('./background/searchByVehicleReg.js');
 const findDetailsByName = require('./background/find_citi_details/findDetailsByName.js');
 
 
-// function searchByCamerasArea(inputLatitude, inputLongitude, Radius, limit){
-//     let searchCameras = "select * from anprcamera where (((latitude - " + inputLatitude +  ")*(latitude - " + inputLatitude + ") + (longitude - " + inputLongitude + ")*(longitude - " + inputLongitude + ")) < " + Radius + ") LIMIT" +  limit;
-//     SQLauthenticate(searchCameras);
-// }
-
-
 module.exports = {
     JsonToStringName: function JsonToStringName(input) {
         return SearchByNames.searchByNames(input.citizenID, input.forenames, input.surname, input.homeAddress, input.dateOfBirth, input.placeOfBirth, input.sex, 5);
+    },
+    JsonToStringDetails: function JsonToStringDetails(input) {
+        return SearchByNames.searchByNames(input.citizenID, input.forenames, input.surname, input.homeAddress, input.dateOfBirth, input.placeOfBirth, input.sex, 5);
+
     }
 };
 
-async function JsonToStringDetails(input) {
-    let initialString = "";
-    try {
-        initialString = JSON.parse(input);
-    } catch (e) {
-        initialString = input;
-    }
-    return SearchByNames.searchByNames(initialString.citizenID, "", "", "", "", "", "", 1);
+let initRes = [];
+
+function JsonToStringDetails(input) {
+    return findDetailsByName.findDetailsByName(input.citizenID, input.forenames, input.surname, input.homeAddress, input.dateOfBirth, input.placeOfBirth, input.sex, 5);
 
 }
 
+JsonToStringDetails(
+    {
+    "citizenID": "",
+    "forenames": "Stuart",
+    "surname": "White",
+    "homeAddress": "46 FRENSHAM CLOSE, SOUTHALL, UB1 2YG",
+    "dateOfBirth": "1948-10-02",
+    "placeOfBirth": "STANMORE",
+    "sex": "Male"
+    }
+).then(res => {
+        initRes = res;
+        console.log("init res = ", JSON.stringify(initRes));
+}).then(
+     intitRes = res.push()
+);
 
-
-
+// JsonToStringDetails({
+//     "citizenID": "",
+//     "forenames": "Stuart",
+//     "surname": "White",
+//     "homeAddress": "46 FRENSHAM CLOSE, SOUTHALL, UB1 2YG",
+//     "dateOfBirth": "1948-10-02",
+//     "placeOfBirth": "STANMORE",
+//     "sex": "Male"
+// })
+//     .then(result =>
+//         new Promise(resolve => {
+//             resolve(result.data)
+//         })
+//     );
+//
+// Promise.all(initRes).then(res => {
+//     console.log("init res = ", JSON.stringify(initRes));
+// });
 
