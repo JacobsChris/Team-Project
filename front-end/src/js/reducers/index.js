@@ -1,8 +1,11 @@
 const initialState = {
-    articles: []
+    token: []
   };
   
   function rootReducer(state = initialState, action) {
+    if (action.type === ADD_TOKEN) {
+        state.articles.push(action.payload);
+      }
     return state;
   };
   
