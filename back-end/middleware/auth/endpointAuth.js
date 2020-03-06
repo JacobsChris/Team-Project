@@ -10,7 +10,7 @@ const parameters = {
     secretOrKey : jwtConfig.secret
 }
 
-const endpointAuth = passport.use("jwt", new jwtStrategy(parameters, 
+const endpointAuth = passport.use(new jwtStrategy(parameters, 
     function(jwtPayload, done) {
         userModel.findOne({ where: { username: jwtPayload.id }})
             .then(user => {
