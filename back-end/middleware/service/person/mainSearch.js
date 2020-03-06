@@ -30,9 +30,9 @@ JsonToStringDetails(
     "placeOfBirth": "STANMORE",
     "sex": "Male"
     }
-).then(([first, second]) => {
+).then(([Citizen, BankAccount,Mobiles,vehicle]) => {
         // initRes = res;
-        console.log("init res = ", first, second);
+        console.log("init res = ", Citizen, BankAccount,Mobiles,vehicle);
 });
 
 // JsonToStringDetails({

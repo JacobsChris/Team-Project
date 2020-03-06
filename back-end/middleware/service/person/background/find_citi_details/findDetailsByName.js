@@ -51,7 +51,9 @@ module.exports = {
 
 
             return Promise.all([sendToAsyncCitizen.SQLauthenticate(sqlSearchStringCitizen),
-                sendToAsyncCitizen.SQLauthenticate(sqlSearchStringBankAccount)]);
+                sendToAsyncCitizen.SQLauthenticate(sqlSearchStringBankAccount),
+                sendToAsyncCitizen.SQLauthenticate(sqlSearchStringMobiles),
+                sendToAsyncCitizen.SQLauthenticate(sqlSearchStringvehicleRegistration)]);
 
             // return sendToAsyncCitizen.SQLauthenticate(sqlSearchStringBankAccount);
             // sendToAsyncCitizen.SQLauthenticate(sqlSearchStringMobiles);
