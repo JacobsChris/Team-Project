@@ -1,5 +1,6 @@
 const express = require("express");
 const app = express();
+const bodyParser = require("body-parser");
 const passport = require("passport");
 
 const login = require("./routes/login");
@@ -14,6 +15,7 @@ passport.serializeUser( function(user, done) {
 });
 
 
+app.use(bodyParser.json());
 
 app.use("/back-end", dataAccess);
 app.use("/login", login);
