@@ -77,28 +77,29 @@ module.exports = {
 //         , citizen);
 // });
 
-// function JsonToStringDetails(input) {
-//     return findDetailsByName.findDetailsByName(input.citizenID, input.forenames, input.surname, input.homeAddress, input.dateOfBirth, input.placeOfBirth, input.sex, 5);
-//
-// }
-//
-// JsonToStringDetails(
-//     {
-//         "citizenID": "",
-//         "forenames": "Stuart",
-//         "surname": "white",
-//         "homeAddress": "",
-//         "dateOfBirth": "",
-//         "placeOfBirth": "",
-//         "sex": "Male"
-//     }
-// ).then(([Citizen, BankAccount, Mobiles, vehicle]) => {
-//     console.log("Advanced Detail Search in order of citizen"
-//         , Citizen,
-//         "Advanced Detail Search BankAccount", BankAccount,
-//         "Advanced Detail Search Mobile", Mobiles
-//         ,"Advanced Detail Search vehicle", vehicle);
-// });
+function JsonToStringDetails(input) {
+    return findDetailsByName.findDetailsByName(input.citizenID, input.forenames, input.surname, input.homeAddress, input.dateOfBirth, input.placeOfBirth, input.sex, 5);
+
+}
+
+JsonToStringDetails(
+    {
+        "citizenID": "",
+        "forenames": "Jordan",
+        "surname": "Little",
+        "homeAddress": "",
+        "dateOfBirth": "",
+        "placeOfBirth": "",
+        "sex": "Male"
+    }
+).then(([Citizen, BankAccount, Mobiles, vehicle]) => {
+    console.log("Advanced Detail Search in order of citizen"
+        , Citizen,
+        "Advanced Detail Search BankAccount", BankAccount,
+        "Advanced Detail Search Mobile", Mobiles
+        , "Advanced Detail Search vehicle", vehicle);
+});
+
 // function JsonToStringBankDetails(input) {
 //     return findBankCardByAccountId.findBankCardByAccountId(input.bankAccountId,input.accountNumber,input.bank,input.forenames,input.forenames,input.dateOfBirth,input.homeAddress,5)
 // }
