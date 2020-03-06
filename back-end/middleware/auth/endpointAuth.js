@@ -6,7 +6,7 @@ const userModel = require('../../database/sequelize');
 const jwtStrategy =  passportJWT.Strategy;
 const extractJWT = passportJWT.ExtractJwt;
 const parameters = {
-    jwtFromRequest: extractJWT.fromUrlQueryParameter('token'),
+    jwtFromRequest: extractJWT.fromAuthHeaderWithScheme("JWT"),
     secretOrKey : jwtConfig.secret
 }
 
