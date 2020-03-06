@@ -1,9 +1,9 @@
-import {SQLauthenticate} from "../sqlauth";
+const auth = require('../sqlauth.js');
 
 module.exports = {
     findIncomingCalls: function findInComingCalls(phoneNumber, limit) {
         let sqlSearchString = "SELECT callerNumber, COUNT(*) FROM mobileCallRecords WHERE receiverNumber LIKE \'" + phoneNumber + "\' GROUP BY receiverNumber ORDER BY COUNT(*) DESC LIMIT " + limit;
-        SQLauthenticate(sqlSearchString)
+        return auth.SQLauthenticate(sqlSearchString)
     }
 };
 
