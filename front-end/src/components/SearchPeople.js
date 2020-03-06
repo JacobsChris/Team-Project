@@ -9,9 +9,6 @@ import { Form, Button } from 'react-bootstrap';
 
 // const validEmailRegex = RegExp(/^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i);
 // const validEmailRegex = RegExp(/[A-Za-z0-9.]+@[A-Za-z.]+\.[A-Za-z]{2,3}$/);
-const postcodeRegex = RegExp(/^(([gG][iI][rR] {0,}0[aA]{2})|(([aA][sS][cC][nN]|[sS][tT][hH][lL]|[tT][dD][cC][uU]|[bB][bB][nN][dD]|[bB][iI][qQ][qQ]|[fF][iI][qQ][qQ]|[pP][cC][rR][nN]|[sS][iI][qQ][qQ]|[iT][kK][cC][aA]) {0,}1[zZ]{2})|((([a-pr-uwyzA-PR-UWYZ][a-hk-yxA-HK-XY]?[0-9][0-9]?)|(([a-pr-uwyzA-PR-UWYZ][0-9][a-hjkstuwA-HJKSTUW])|([a-pr-uwyzA-PR-UWYZ][a-hk-yA-HK-Y][0-9][abehmnprv-yABEHMNPRV-Y]))) {0,}[0-9][abd-hjlnp-uw-zABD-HJLNP-UW-Z]{2}))$/);
-const houseNumberRegex = RegExp(/^[0-9]+[A-Za-z]?$/);
-const nameRegex = RegExp(/^(([A-Za-z]{2,})|([A-Za-z]{2,})+[-]?([A-Za-z]{2,})|([A-Za-z]{2,})+[-]?([A-Za-z]{2,})+[-]?([A-Za-z]{2,}))$/);
 
 const validateForm = (errors) => {
   let valid = true;
@@ -59,19 +56,8 @@ export default class SearchPeople extends React.Component {
             date: {
                 startDate: '',
                 setStartDate: ''
-            },
-            modal: {
-                open: false
             }
         }
-    }
-
-    handleDateChange = date => {
-        console.log(date);
-        this.setState({
-            dob: date
-        });
-        console.log(this.state.dob);
     }
 
     handleChange = ({ target: {value, name}}) => {
@@ -104,9 +90,9 @@ export default class SearchPeople extends React.Component {
             break;
             case 'houseNumber': 
             errors.houseNumber = 
-            (value.length === 0 || houseNumberRegex.test(value))
-                ? ''
-                : 'House Number is not valid';
+              value.length < 2
+                ? 'House Number'
+                : '';
             break;
             case 'houseName': 
             errors.houseName = 
@@ -128,9 +114,9 @@ export default class SearchPeople extends React.Component {
             break;
             case 'postcode': 
             errors.postcode = 
-              postcodeRegex.test(value)
-                ? ''
-                : 'Postcode is not valid';
+              value.length < 2
+                ? 'Postcode'
+                : '';
             break;
           default:
             break;
@@ -146,6 +132,7 @@ export default class SearchPeople extends React.Component {
         
         if(this.state.formValid){
             console.log(`First Name: ${this.state.forename}`);
+            console.log(`Surname: ${this.state.surname}`);
             console.log(`DOB: ${this.state.dob}`);
             this.setState({
                 [event.target.name]: event.target.value
@@ -155,7 +142,7 @@ export default class SearchPeople extends React.Component {
 
     render(){
         const {errors, formValid} = this.state;
-
+        const {startDate, setStartDate} = this.state.date;
         return(
             <div className='form-size'>
             <Form>
