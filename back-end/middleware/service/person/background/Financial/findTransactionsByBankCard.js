@@ -3,7 +3,7 @@ const findEPOSTransactions = require('./findEPOSTransactionsByBankCard');
 const findATMTransactions = require('./findATMTransactionsByBankCard');
 
 module.exports = {
-    findTransactionsByBankCard: function findTransactionsByBankCard(cardNumber, limit) {
+    findTransactionsByBankCard: function findTransactionsByBankCard(bankcardId,cardNumber,sortCode,bankAccountId,accountNumber,bank,limit) {
         if (typeof cardNumber != 'string') {
             console.log("Not string error");
         } else {

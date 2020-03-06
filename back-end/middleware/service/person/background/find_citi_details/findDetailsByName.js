@@ -18,7 +18,7 @@ module.exports = {
             homeAddress = wildStr.addWildStr(homeAddress);
             dateOfBirth = wildStr.addWildStr(dateOfBirth);
             placeOfBirth = wildStr.addWildStr(placeOfBirth);
-            sex = exactStr.addExactStr(sex);
+            sex = wildStr.addWildStr(sex);
 
             return Promise.all([person.findPersonByPerson(citizenID,forenames, surname, homeAddress, dateOfBirth,placeOfBirth,sex, limit),
                 bankAccount.findBankAccountByPerson(forenames,surname,homeAddress,dateOfBirth,limit),

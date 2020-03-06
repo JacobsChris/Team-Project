@@ -5,7 +5,7 @@ const bankCard = require('./findBankCardByBankAccount');
 
 
 module.exports = {
-    findBankCardByAccountId: function findBankCardByAccountId(bankAccountId, limit) {
+    findBankCardByAccountId: function findBankCardByAccountId(bankAccountId,accountNumber,bank,forenames,forenames,dateOfBirth,homeAddress,limit) {
         if (typeof bankAccountId != 'string') {
             console.log("Not string error");
         } else {

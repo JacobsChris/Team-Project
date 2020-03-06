@@ -2,8 +2,7 @@ const SearchByNames = require('./background/searchByNames.js');
 const searchByVehicleReg = require('./background/searchByVehicleReg.js');
 const findDetailsByName = require('./background/find_citi_details/findDetailsByName.js');
 const findBankCardByAccountId = require('./background/Financial/findDetailsByBankAccount');
-const findBankCardByBankCard = require('./background/Financial/findDetailsByBankCard.js');
-const findEPOSTransactions = require('./background/Financial/findDetailsByATMId.js');
+const findTransactionsByBankCard = require('./background/Financial/findTransactionsByBankCard.js');
 const findATMPointByATMId = require('./background/Financial/findDetailsByATMId.js');
 
 
@@ -44,7 +43,11 @@ module.exports = {
      *  @requires this at the end to get @return }).then(([findEPOSTransactions,findATMTransactions]) => { console.log("Advanced Detail findEPOSTransactions" , findEPOSTransactions, "Advanced Detail findATMTransactions",findATMTransactions);})
      *  */
     JsonToStringTransactions: function JsonToStringTransactions(input){
-        return findBankCardByBankCard.findBankCardByBankCard(input.bankcardId,input.cardNumber,input.sortCode,input.bankAccountId,input.accountNumber,input.bank,5)
+        return findTransactionsByBankCard.findTransactionsByBankCard(input.bankcardId,input.cardNumber,input.sortCode,input.bankAccountId,input.accountNumber,input.bank,5)
+    },
+
+    JsonToStringATM: function JsonToStringATM(input){
+        return findATMPointByATMId.findATMPointByATMId(input.timestamp,input.atmId,input.bankCardNumber,input.type,input.amount,5)
     }
 };
 
@@ -84,13 +87,13 @@ module.exports = {
 // }
 // JsonToStringDetails(
 //     {
-//         "citizenID": "",
-//         "forenames": "Jordan",
-//         "surname": "Little",
+//         "citizenID": "1135544248",
+//         "forenames": "",
+//         "surname": "",
 //         "homeAddress": "",
 //         "dateOfBirth": "",
 //         "placeOfBirth": "",
-//         "sex": "Male"
+//         "sex": ""
 //     }
 // ).then(([Citizen, BankAccount, Mobiles, vehicle]) => {
 //     console.log("Advanced Detail Search in order of citizen"
@@ -101,7 +104,7 @@ module.exports = {
 // });
 
 // function JsonToStringBankDetails(input) {
-//     return findBankCardByAccountId.findBankCardByAccountId(input.bankAccountId,input.accountNumber,input.bank,input.forenames,input.forenames,input.dateOfBirth,input.homeAddress,5)
+//     return findBankCardByAccountId.findBankCardByAccountId(input.bankAccountId,input.accountNumber,input.bank,input.forenames,input.forenames,input.dateOfBirth,input.homeAddress,"5")
 // }
 // JsonToStringBankDetails({
 //     "bankAccountId": "84038",
@@ -117,7 +120,7 @@ module.exports = {
 // });
 
 // function JsonToStringTransactions(input){
-//     return findBankCardByBankCard.findBankCardByBankCard(input.bankcardId,input.cardNumber,input.sortCode,input.bankAccountId,input.accountNumber,input.bank,5)
+//     return findTransactionsByBankCard.findTransactionsByBankCard(input.bankcardId,input.cardNumber,input.sortCode,input.bankAccountId,input.accountNumber,input.bank,5)
 // }
 //
 // JsonToStringTransactions({
@@ -131,14 +134,14 @@ module.exports = {
 //     console.log("Advanced Detail findEPOSTransactions" , findEPOSTransactions, "Advanced Detail findATMTransactions",findATMTransactions);
 // })
 
-function JsonToStringATM(input){
-    return findATMPointByATMId.findATMPointByATMId(input.timestamp,input.atmId,input.bankCardNumber,input.type,input.amount,5)
-}
-JsonToStringATM({ "timestamp": "2015-05-01T14:37:23.000Z",
-    "atmId": "5436",
-    "bankCardNumber": "4722912624353299",
-    "type": "Cash Withdrawal",
-    "amount": "120"
-}).then(([ATMPoint]) => {
-    console.log("Advanced Detail ATMPoint" , ATMPoint);
-});
+// function JsonToStringATM(input){
+//     return findATMPointByATMId.findATMPointByATMId(input.timestamp,input.atmId,input.bankCardNumber,input.type,input.amount,5)
+// }
+// JsonToStringATM({ "timestamp": "2015-05-01T14:37:23.000Z",
+//     "atmId": "5436",
+//     "bankCardNumber": "4722912624353299",
+//     "type": "Cash Withdrawal",
+//     "amount": "120"
+// }).then(([ATMPoint]) => {
+//     console.log("Advanced Detail ATMPoint" , ATMPoint);
+// });
