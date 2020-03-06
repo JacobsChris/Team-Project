@@ -4,6 +4,8 @@ const exactStr = require('../inputvalidation/exactStr');
 const sendToAsyncCitizen = require('../sqlauth.js');
 const {QueryTypes} = require('sequelize');
 const bankAccount = require('../FindByPerson/findBankAccountByPerson.js')
+const mobilePhone = require('../FindByPerson/findMobileByPerson.js')
+const veheicleReg = require('../FindByPerson/findVehicleByPerson.js')
 
 module.exports = {
     findDetailsByName: function findDetailsByName(citizenID,forenames, surname, homeAddress,dateOfBirth,placeOfBirth, sex, limit) {
@@ -28,13 +30,6 @@ module.exports = {
                 " AND sex LIKE " + sex +
                 " LIMIT " + limit;
 
-            let sqlSearchStringMobiles = "SELECT * FROM mobiles WHERE " +
-                "forenames LIKE " + forenames +
-                " AND surname LIKE " + surname +
-                " AND address LIKE " + homeAddress +
-                " AND dateOfBirth LIKE " + dateOfBirth +
-                " LIMIT " + limit;
-
             let sqlSearchStringvehicleRegistration = "SELECT * FROM vehicleRegistration WHERE " +
                 "forenames LIKE " + forenames +
                 " AND surname LIKE " + surname +
@@ -42,18 +37,10 @@ module.exports = {
                 " AND dateOfBirth LIKE " + dateOfBirth +
                 " LIMIT " + limit;
 
-            let sqlSearchStringBankAccount = "SELECT * FROM peoplebankaccount WHERE" +
-                " forenames LIKE " + forenames +
-                " AND surname LIKE " + surname +
-                " AND homeAddress LIKE " + homeAddress +
-                " AND dateOfBirth LIKE " + dateOfBirth +
-                " LIMIT " + limit;
-
-
             return Promise.all([sendToAsyncCitizen.SQLauthenticate(sqlSearchStringCitizen),
-                sendToAsyncCitizen.SQLauthenticate(sqlSearchStringBankAccount),
-                sendToAsyncCitizen.SQLauthenticate(sqlSearchStringMobiles),
-                sendToAsyncCitizen.SQLauthenticate(sqlSearchStringvehicleRegistration)]);
+                bankAccount.findBankAccountByPerson(forenames,surname,homeAddress,dateOfBirth,limit),
+                mobilePhone.findMobileByPerson(forenames,surname,homeAddress,dateOfBirth,limit),
+                veheicleReg.findVehicleByPerson(forenames,surname,homeAddress,dateOfBirth,limit)]);
         }
     }
 };
