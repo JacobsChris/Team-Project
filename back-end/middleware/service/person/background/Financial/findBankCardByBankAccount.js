@@ -1,8 +1,10 @@
-import {SQLauthenticate} from "../sqlauth";
+const auth = require('../sqlauth.js');
 
 module.exports = {
     findBankCard: function findBankCard(bankAccountId, limit) {
-        let sqlSearchString = "SELECT * FROM bankcard WHERE bankAccountID LIKE \'" + bankAccountId + "\' LIMIT " + limit;
-        SQLauthenticate(sqlSearchString)
+        let sqlSearchString = "SELECT * FROM bankcard WHERE " +
+            "bankAccountId LIKE " + bankAccountId +
+            " LIMIT " + limit;
+        return auth.SQLauthenticate(sqlSearchString)
     }
 };
