@@ -25,11 +25,3 @@ const loginAuth = passport.use("login", new LocalStrategy(
 ));
 
 module.exports = loginAuth;
-
-// bcrypt.compare(password, user.password)
-//                     .then(result => {
-//                         if (!result) {
-//                             return done(null, false, {message: "Incorrect password."});
-//                         }
-//                         return done(null, user);
-//                 });
