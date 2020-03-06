@@ -25,7 +25,7 @@ module.exports = {
         ,"Advanced Detail Search vehicle", vehicle); });
      * */
     JsonToStringDetails: function JsonToStringDetails(input) {
-        return SearchByNames.searchByNames(input.citizenID, input.forenames, input.surname, input.homeAddress, input.dateOfBirth, input.placeOfBirth, input.sex, 5);
+        return findDetailsByName.findDetailsByName(input.citizenID, input.forenames, input.surname, input.homeAddress, input.dateOfBirth, input.placeOfBirth, input.sex, 5);
 
     },
     /**
