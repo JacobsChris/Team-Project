@@ -3,8 +3,8 @@ import FormInput from './FormInput.js';
 import '../styles/searchPeople.css';
 import DatePicker from './DateSelector.js';
 import "react-datepicker/dist/react-datepicker.css";
-import Validation from './Validation.js';
-import { Form, Container, Button } from 'react-bootstrap';
+// import Validation from './Validation.js';
+import { Form, Button } from 'react-bootstrap';
 
 
 // const validEmailRegex = RegExp(/^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i);
@@ -147,53 +147,10 @@ export default class SearchPeople extends React.Component {
         if(this.state.formValid){
             console.log(`First Name: ${this.state.forename}`);
             console.log(`DOB: ${this.state.dob}`);
-            if(event.target.name === 'forename'){
-                this.setState({
-                    forename: event.target.value
-                })
-            } 
-            else if(event.target.name === 'surname'){
-                this.setState({
-                    surname: event.target.value
-                })
-            }
-            else if(event.target.name === 'dob'){
-                this.setState({
-                    dob: event.target.value
-                })
-            }
-            else if(event.target.name === 'birthPlace'){
-                this.setState({
-                    birthPlace: event.target.value
-                })
-            }
-            else if(event.target.name === 'houseNumber'){
-                this.setState({
-                    houseNumber: event.target.value
-                })
-            }
-            else if(event.target.name === 'houseName'){
-                this.setState({
-                    houseName: event.target.value
-                })
-            }
-            else if(event.target.name === 'street'){
-                this.setState({
-                    street: event.target.value
-                })
-            }
-            else if(event.target.name === 'town'){
-                this.setState({
-                    town: event.target.value
-                })
-            }
-            else if(event.target.name === 'postcode'){
-                this.setState({
-                    postcode: event.target.value
-                })
-            }
+            this.setState({
+                [event.target.name]: event.target.value
+            });
         }
-
     }
 
     render(){
@@ -208,9 +165,10 @@ export default class SearchPeople extends React.Component {
                 <br/>
                     <Form.Group className='forename'>
                         <Form.Label htmlFor="forename">First Name</Form.Label>
-                            <FormInput name='forename' value={this.state.forename} handleChange={this.handleChange}/>
+                            <FormInput name='forename' Placeholder='Forename' value={this.state.forename} handleChange={this.handleChange}/>
                             {errors.forename.length > 0 && 
                             <span className='error'>{errors.forename}</span>}
+                            {/* <span className='error'><Validation /></span> */}
                     </Form.Group>
                     <Form.Group className='surname'>
                         <Form.Label htmlFor="surname">Last Name</Form.Label>
@@ -259,7 +217,6 @@ export default class SearchPeople extends React.Component {
                         <span className='error'>{errors.postcode}</span>}
                     </Form.Group>
                         <Button variant='dark' id='submit-button'>Submit</Button>
-                        {/* <Modal /> */}
                         <br/>
                         {this.state.errorCount !== null ? <p className="form-status">Form is {formValid ? 'valid ✅' : 'invalid ❌'}</p> : <p className="form-status">Form not submitted</p>}
                 </Form>
