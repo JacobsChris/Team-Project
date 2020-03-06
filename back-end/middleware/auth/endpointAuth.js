@@ -6,11 +6,11 @@ const userModel = require('../../database/sequelize');
 const jwtStrategy =  passportJWT.Strategy;
 const extractJWT = passportJWT.ExtractJwt;
 const parameters = {
-    jwtFromRequest: extractJWT.fromUrlQueryParameter('token'),
+    jwtFromRequest: extractJWT.fromAuthHeaderWithScheme('JWT'),
     secretOrKey : jwtConfig.secret
 }
 
-const endpointAuth = passport.use("jwt", new jwtStrategy(parameters, 
+const endpointAuth = passport.use(new jwtStrategy(parameters, 
     function(jwtPayload, done) {
         userModel.findOne({ where: { username: jwtPayload.id }})
             .then(user => {
