@@ -1,7 +1,7 @@
 
 module.exports = {
     addExactStr: function addExactStr(inputString) {
-        inputString =  "'"+inputString+"'" ;
+        inputString =  ""+inputString+"" ;
         return inputString
     }
 };
