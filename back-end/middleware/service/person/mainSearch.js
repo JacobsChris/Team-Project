@@ -13,7 +13,6 @@ module.exports = {
     }
 };
 
-let initRes = [];
 
 function JsonToStringDetails(input) {
     return findDetailsByName.findDetailsByName(input.citizenID, input.forenames, input.surname, input.homeAddress, input.dateOfBirth, input.placeOfBirth, input.sex, 5);
@@ -22,35 +21,16 @@ function JsonToStringDetails(input) {
 
 JsonToStringDetails(
     {
-    "citizenID": "",
-    "forenames": "Stuart",
-    "surname": "White",
-    "homeAddress": "46 FRENSHAM CLOSE, SOUTHALL, UB1 2YG",
-    "dateOfBirth": "1948-10-02",
-    "placeOfBirth": "STANMORE",
-    "sex": "Male"
+        "citizenID": "",
+        "forenames": "Stuart",
+        "surname": "White",
+        "homeAddress": "46 FRENSHAM CLOSE, SOUTHALL, UB1 2YG",
+        "dateOfBirth": "1948-10-02",
+        "placeOfBirth": "STANMORE",
+        "sex": "Male"
     }
-).then(([Citizen, BankAccount,Mobiles,vehicle]) => {
-        // initRes = res;
-        console.log("init res = ", Citizen, BankAccount,Mobiles,vehicle);
+).then(([Citizen, BankAccount, Mobiles, vehicle]) => {
+    console.log("Advanced Detail Search in order of citizen, bank account, mobile and vehicle = ", Citizen, BankAccount, Mobiles, vehicle);
 });
 
-// JsonToStringDetails({
-//     "citizenID": "",
-//     "forenames": "Stuart",
-//     "surname": "White",
-//     "homeAddress": "46 FRENSHAM CLOSE, SOUTHALL, UB1 2YG",
-//     "dateOfBirth": "1948-10-02",
-//     "placeOfBirth": "STANMORE",
-//     "sex": "Male"
-// })
-//     .then(result =>
-//         new Promise(resolve => {
-//             resolve(result.data)
-//         })
-//     );
-//
-// Promise.all(initRes).then(res => {
-//     console.log("init res = ", JSON.stringify(initRes));
-// });
 

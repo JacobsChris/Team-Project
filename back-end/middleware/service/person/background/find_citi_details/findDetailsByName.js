@@ -54,10 +54,6 @@ module.exports = {
                 sendToAsyncCitizen.SQLauthenticate(sqlSearchStringBankAccount),
                 sendToAsyncCitizen.SQLauthenticate(sqlSearchStringMobiles),
                 sendToAsyncCitizen.SQLauthenticate(sqlSearchStringvehicleRegistration)]);
-
-            // return sendToAsyncCitizen.SQLauthenticate(sqlSearchStringBankAccount);
-            // sendToAsyncCitizen.SQLauthenticate(sqlSearchStringMobiles);
-            // sendToAsyncCitizen.SQLauthenticate(sqlSearchStringvehicleRegistration);
         }
     }
 };
