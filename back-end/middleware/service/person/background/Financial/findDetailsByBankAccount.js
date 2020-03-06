@@ -1,7 +1,7 @@
 
 const wildStr = require('../inputvalidation/wildStr.js');
 const exactStr = require('../inputvalidation/exactStr');
-const bankCard = require('./findBankCardbyBankAccount')
+const bankCard = require('./findBankCardByBankAccount')
 
 
 
