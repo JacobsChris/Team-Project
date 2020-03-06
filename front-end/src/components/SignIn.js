@@ -24,7 +24,7 @@ export default class SignIn extends React.Component {
         }
 
         console.log(data);
-        axios.post('http://localhost:3003/login/login', data)
+        axios.post('http://localhost:3000/login/login', data)
         .then(res => {
             console.log(res);
             this.props.history.push("/user/home");
