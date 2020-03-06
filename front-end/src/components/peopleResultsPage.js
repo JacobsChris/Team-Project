@@ -18,8 +18,8 @@ export default class PeopleResultsPage extends React.Component {
 
     componentDidMount() {
         let data = {
-            citizenID: "", forenames: "Stuart", surname: "White", homeAddress: "46 FRENSHAM CLOSE, SOUTHALL, UB1 2YG",
-            dateOfBirth: "1948-10-02", placeOfBirth: "STANMORE", sex: "Male"
+            citizenID: "", forenames: "Stuart", surname: "", homeAddress: "",
+            dateOfBirth: "", placeOfBirth: "", sex: "Male"
         };
         axios.get('http://localhost:3000/back-end/person/getData?' + stringify(encodeQueryParams({
             citizenID: StringParam, forenames: StringParam, surname: StringParam, homeAddress: StringParam,
@@ -33,17 +33,25 @@ export default class PeopleResultsPage extends React.Component {
             })
     };
 
-    // handleClick(id){
-    //     axios.get()
-    //     .then((response) => {
-    //       this.setState({
-    //         personDetails: this.state.personDetails.concat(response),                 
-    //       })
-    //       console.log(this.state.personDetails);
-    //     })
-    // };
-
-
+    handleClick(id, forename, surname, address, dob, pob, gender){
+        this.setState({
+            personDetails: []
+        })
+        let data = {
+            citizenID: id, forenames: forename, surname: surname, homeAddress: address,
+            dateOfBirth: dob, placeOfBirth: pob, sex: gender
+        };  
+        axios.get('http://localhost:3000/back-end/person/getData?' + stringify(encodeQueryParams({
+            citizenID: StringParam, forenames: StringParam, surname: StringParam, homeAddress: StringParam,
+            dateOfBirth: StringParam, placeOfBirth: StringParam, sex: StringParam
+        }, data)))
+        .then((response) => {
+          this.setState({
+            personDetails: this.state.personDetails.concat(response),                 
+          })
+          console.log(this.state.personDetails);
+        })
+    };
 
     render() {
         return (
@@ -57,8 +65,10 @@ export default class PeopleResultsPage extends React.Component {
                         </Row>
                         <Row>
                             <Container className='flex-container' id='person-list'>
-                                {this.state.results.map(person =>
-                                    <Card className='flex-item' id='small-person-card'>
+                                {this.state.results.map(results => results.data.map(person =>
+                                    <Card onClick={() => this.handleClick(person.citizenID, person.forenames, person.surname,
+                                        person.homeAddress, person.dateOfBirth, person.placeOfBirth, person.sex )} 
+                                        className='flex-item' id='small-person-card'>
                                         <Row>
                                             <Col>
                                                 <MdPerson className='person-icon' />
@@ -69,26 +79,31 @@ export default class PeopleResultsPage extends React.Component {
                                             </Col>
                                         </Row>
                                     </Card>
-                                )}
+                                ))}
                             </Container>
                         </Row>
                     </Col>
                     <Col>
                         <Container className='flex-container'>
-                            {this.state.personDetails.map(person =>
-                                <Card className='flex-item' id='person-card'>
+                            {this.state.personDetails.map(results => results.data.map(person =>
+                                <Card className='flex-item' id='person-card' >
                                     <Row>
                                         <Col>
                                             <MdPerson className='large-person-icon' />
                                         </Col>
                                         <Col>
                                             <br />
-                                            <h1 className='card-title'>{person.forename} {person.surname}</h1>
+                                            <h1 className='card-title'>{person.forenames} {person.surname}</h1>
                                         </Col>
                                     </Row>
                                     <Card.Body>
                                         <ul class="list-group list-group-flush">
-                                            <li class="list-group-item"><h5>Home Address</h5>{[person.address]}</li>
+                                            <li class="list-group-item">
+                                                <h5>Gender</h5>{
+                                                    [person.sex]}</li>
+                                            <li class="list-group-item">
+                                                <h5>Home Address</h5>{
+                                                    [person.homeAddress]}</li>
                                             <li class="list-group-item">
                                                 <h5>Date of Birth</h5>
                                                 {[person.dateOfBirth]}</li>
@@ -104,7 +119,7 @@ export default class PeopleResultsPage extends React.Component {
                                         </ul>
                                     </Card.Body>
                                 </Card>
-                            )}
+                            ))}
                         </Container>
                     </Col>
                 </Row>
