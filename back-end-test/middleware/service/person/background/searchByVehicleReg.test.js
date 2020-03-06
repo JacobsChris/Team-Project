@@ -1,4 +1,4 @@
-const {searchByVehicleReg} = require("../../../../back-end/middleware/service/person/background/searchByVehicleReg");
+const {searchByVehicleReg} = require("../../../../../back-end/middleware/service/person/background/searchByVehicleReg");
 
 test('takes in an invalid string and searches for vehicles', () => {
     expect(searchByVehicleReg("G561 VLR")).toBe("Invalid Reg No");
