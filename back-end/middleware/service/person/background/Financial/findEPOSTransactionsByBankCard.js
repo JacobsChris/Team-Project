@@ -1,8 +1,10 @@
-import {SQLauthenticate} from "../sqlauth";
+const auth = require('../sqlauth.js');
 
 module.exports = {
     findEPOSTransactions: function findEPOSTransactions(cardNumber, limit) {
-        let sqlSearchString = "SELECT * FROM eposTransactions WHERE bankCardNumber LIKE \'" + cardNumber + "\' LIMIT " + limit;
-        SQLauthenticate(sqlSearchString)
+        let sqlSearchString = "SELECT * FROM eposTransactions WHERE "+
+            " bankCardNumber LIKE " + cardNumber +
+            " LIMIT " + limit;
+        return auth.SQLauthenticate(sqlSearchString)
     }
 };

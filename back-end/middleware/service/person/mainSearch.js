@@ -1,7 +1,8 @@
 const SearchByNames = require('./background/searchByNames.js');
 const searchByVehicleReg = require('./background/searchByVehicleReg.js');
 const findDetailsByName = require('./background/find_citi_details/findDetailsByName.js');
-const findBankCardByAccountId = require('./background/Financial/findDetailsByBankAccount')
+const findBankCardByAccountId = require('./background/Financial/findDetailsByBankAccount');
+const findBankCardByBankCard = require('./background/Financial/findDetailsByBankCard.js');
 
 
 module.exports = {
@@ -43,9 +44,9 @@ module.exports = {
 
 
 
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////  Debugging Zone  ////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////  Debugging Zone  /////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // function JsonToStringName(input) {
 //     return SearchByNames.searchByNames(input.citizenID, input.forenames, input.surname, input.homeAddress, input.dateOfBirth, input.placeOfBirth, input.sex, 5);
@@ -101,4 +102,20 @@ module.exports = {
 //     console.log("Advanced Detail Search in order of citizen"
 //         , bankaccount);
 // });
+
+function JsonToStringTransactions(input){
+    return findBankCardByBankCard.findBankCardByBankCard(input.bankcardId,input.cardNumber,input.sortCode,input.bankAccountId,input.accountNumber,input.bank,5)
+}
+
+JsonToStringTransactions({
+    "bankcardId": "353",
+    "cardNumber": "",
+    "sortCode": "",
+    "bankAccountId": "",
+    "accountNumber": "",
+    "bank": ""
+}).then(([findEPOSTransactions,findATMTransactions]) => {
+    console.log("Advanced Detail findEPOSTransactions" , findEPOSTransactions, "Advanced Detail findATMTransactions",findATMTransactions);
+})
+
 
