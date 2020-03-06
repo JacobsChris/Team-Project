@@ -2,7 +2,7 @@ const SearchByNames = require('./background/searchByNames.js');
 const searchByVehicleReg = require('./background/searchByVehicleReg.js');
 const findDetailsByName = require('./background/find_citi_details/findDetailsByName.js');
 const findBankCardByAccountId = require('./background/Financial/findDetailsByBankAccount');
-const findBankCardByBankCard = require('./background/Financial/findDetailsByBankCard.js');
+const findBankCardByBankCard = require('./background/Financial/findTransactionsByBankCard.js');
 
 
 module.exports = {
@@ -33,7 +33,7 @@ module.exports = {
      * @requires this at the end to get @return }).then(([bankaccount]) => {console.log("Advanced Detail Search in order of citizen" , bankaccount); });
      * */
     JsonToStringBankDetails: function JsonToStringBankDetails(input) {
-        return findBankCardByAccountId.findBankCardByAccountId(input.bankAccountId,input.accountNumber,input.bank,input.forenames,input.forenames,input.dateOfBirth,input.homeAddress)
+        return findBankCardByAccountId.findBankCardByAccountId(input.bankAccountId, 5)
     },
 
     /**
@@ -42,7 +42,7 @@ module.exports = {
      *  @requires this at the end to get @return }).then(([findEPOSTransactions,findATMTransactions]) => { console.log("Advanced Detail findEPOSTransactions" , findEPOSTransactions, "Advanced Detail findATMTransactions",findATMTransactions);})
      *  */
     JsonToStringTransactions: function JsonToStringTransactions(input){
-        return findBankCardByBankCard.findBankCardByBankCard(input.bankcardId,input.cardNumber,input.sortCode,input.bankAccountId,input.accountNumber,input.bank,5)
+        return findBankCardByBankCard.findTransactionsByBankCard(input.cardNumber, 5)
     }
 };
 
@@ -71,35 +71,35 @@ module.exports = {
 //     "homeAddress": "",
 //     "dateOfBirth": "",
 //     "placeOfBirth": "",
-//     "sex": "Male"
+//     "sex": "Male"https://trello.com/c/03teVj5i/1-search-people
 // }).then(([citizen]) => {
 //     console.log("Advanced Detail Search in order of citizen"
 //         , citizen);
 // });
-
-function JsonToStringDetails(input) {
-    return findDetailsByName.findDetailsByName(input.citizenID, input.forenames, input.surname, input.homeAddress, input.dateOfBirth, input.placeOfBirth, input.sex, 5);
-
-}
-
-JsonToStringDetails(
-    {
-        "citizenID": "",
-        "forenames": "Jordan",
-        "surname": "Little",
-        "homeAddress": "",
-        "dateOfBirth": "",
-        "placeOfBirth": "",
-        "sex": "Male"
-    }
-).then(([Citizen, BankAccount, Mobiles, vehicle]) => {
-    console.log("Advanced Detail Search in order of citizen"
-        , Citizen,
-        "Advanced Detail Search BankAccount", BankAccount,
-        "Advanced Detail Search Mobile", Mobiles
-        , "Advanced Detail Search vehicle", vehicle);
-});
-
+//
+// function JsonToStringDetails(input) {
+//     return findDetailsByName.findDetailsByName(input.citizenID, input.forenames, input.surname, input.homeAddress, input.dateOfBirth, input.placeOfBirth, input.sex, 5);
+//
+// }
+//
+// JsonToStringDetails(
+//     {
+//         "citizenID": "",
+//         "forenames": "Jordan",
+//         "surname": "Little",
+//         "homeAddress": "",
+//         "dateOfBirth": "",
+//         "placeOfBirth": "",
+//         "sex": "Male"
+//     }
+// ).then(([Citizen, BankAccount, Mobiles, vehicle]) => {
+//     console.log("Advanced Detail Search in order of citizen"
+//         , Citizen,
+//         "Advanced Detail Search BankAccount", BankAccount,
+//         "Advanced Detail Search Mobile", Mobiles
+//         , "Advanced Detail Search vehicle", vehicle);
+// });
+//
 // function JsonToStringBankDetails(input) {
 //     return findBankCardByAccountId.findBankCardByAccountId(input.bankAccountId,input.accountNumber,input.bank,input.forenames,input.forenames,input.dateOfBirth,input.homeAddress,5)
 // }
@@ -117,7 +117,7 @@ JsonToStringDetails(
 // });
 
 // function JsonToStringTransactions(input){
-//     return findBankCardByBankCard.findBankCardByBankCard(input.bankcardId,input.cardNumber,input.sortCode,input.bankAccountId,input.accountNumber,input.bank,5)
+//     return findTransactionsByBankCard.findTransactionsByBankCard(input.bankcardId,input.cardNumber,input.sortCode,input.bankAccountId,input.accountNumber,input.bank,5)
 // }
 //
 // JsonToStringTransactions({
