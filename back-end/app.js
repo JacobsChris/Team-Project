@@ -5,7 +5,7 @@ const passport = require("passport");
 
 const login = require("./routes/login");
 const dataAccess = require("./routes/dataAccess");
-const port = 3000;
+const port = 8080;
 
 
 app.use(passport.initialize());
