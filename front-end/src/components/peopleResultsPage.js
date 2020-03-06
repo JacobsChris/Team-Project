@@ -21,7 +21,7 @@ export default class PeopleResultsPage extends React.Component {
             citizenID: "", forenames: "Stuart", surname: "", homeAddress: "",
             dateOfBirth: "", placeOfBirth: "", sex: "Male"
         };
-        axios.get('http://localhost:3000/back-end/person/getData?' + stringify(encodeQueryParams({
+        axios.get('http://localhost:8080/back-end/person/getData?' + stringify(encodeQueryParams({
             citizenID: StringParam, forenames: StringParam, surname: StringParam, homeAddress: StringParam,
             dateOfBirth: StringParam, placeOfBirth: StringParam, sex: StringParam
         }, data)))
@@ -41,7 +41,7 @@ export default class PeopleResultsPage extends React.Component {
             citizenID: id, forenames: forename, surname: surname, homeAddress: address,
             dateOfBirth: dob, placeOfBirth: pob, sex: gender
         };  
-        axios.get('http://localhost:3000/back-end/person/getData?' + stringify(encodeQueryParams({
+        axios.get('http://localhost:8080/back-end/person/getData?' + stringify(encodeQueryParams({
             citizenID: StringParam, forenames: StringParam, surname: StringParam, homeAddress: StringParam,
             dateOfBirth: StringParam, placeOfBirth: StringParam, sex: StringParam
         }, data)))
