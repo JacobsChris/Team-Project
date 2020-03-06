@@ -6,6 +6,10 @@ const findBankCardByAccountId = require('./background/Financial/findDetailsByBan
 
 module.exports = {
 
+    /**
+     * @return an array like Advanced Detail Search in order of citizen { citizenID: 1125143125, forenames: 'Stuart', surname: 'White', homeAddress: '46 FRENSHAM CLOSE, SOUTHALL, UB1 2YG', dateOfBirth: '1948-10-02', placeOfBirth: 'STANMORE',sex: 'Male' }
+     * @requires this at the end of the function to get @return .then(([citizen]) => { console.log("Advanced Detail Search in order of citizen" , citizen); });
+     * */
     JsonToStringName: function JsonToStringName(input) {
         return SearchByNames.searchByNames(input.citizenID, input.forenames, input.surname, input.homeAddress, input.dateOfBirth, input.placeOfBirth, input.sex, 5);
     },
@@ -14,11 +18,10 @@ module.exports = {
      Advanced Detail Search BankAccount []
      Advanced Detail Search Mobile []
      Advanced Detail Search vehicle []
-     @requires this at the end to get @return .then(([Citizen, BankAccount, Mobiles, vehicle]) => { console.log("Advanced Detail Search in order of citizen" , Citizen,
+     *@requires this at the end to get @return .then(([Citizen, BankAccount, Mobiles, vehicle]) => { console.log("Advanced Detail Search in order of citizen" , Citizen,
         "Advanced Detail Search BankAccount", BankAccount,
         "Advanced Detail Search Mobile", Mobiles
-        ,"Advanced Detail Search vehicle", vehicle);
-});
+        ,"Advanced Detail Search vehicle", vehicle); });
      * */
     JsonToStringDetails: function JsonToStringDetails(input) {
         return SearchByNames.searchByNames(input.citizenID, input.forenames, input.surname, input.homeAddress, input.dateOfBirth, input.placeOfBirth, input.sex, 5);
@@ -43,6 +46,23 @@ module.exports = {
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////  Debugging Zone  ////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// function JsonToStringName(input) {
+//     return SearchByNames.searchByNames(input.citizenID, input.forenames, input.surname, input.homeAddress, input.dateOfBirth, input.placeOfBirth, input.sex, 5);
+// }
+//
+// JsonToStringName(    {
+//     "citizenID": "",
+//     "forenames": "Stuart",
+//     "surname": "white",
+//     "homeAddress": "",
+//     "dateOfBirth": "",
+//     "placeOfBirth": "",
+//     "sex": "Male"
+// }).then(([citizen]) => {
+//     console.log("Advanced Detail Search in order of citizen"
+//         , citizen);
+// });
 
 // function JsonToStringDetails(input) {
 //     return findDetailsByName.findDetailsByName(input.citizenID, input.forenames, input.surname, input.homeAddress, input.dateOfBirth, input.placeOfBirth, input.sex, 5);
