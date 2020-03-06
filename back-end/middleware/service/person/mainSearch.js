@@ -34,8 +34,20 @@ module.exports = {
      * */
     JsonToStringBankDetails: function JsonToStringBankDetails(input) {
         return findBankCardByAccountId.findBankCardByAccountId(input.bankAccountId,input.accountNumber,input.bank,input.forenames,input.forenames,input.dateOfBirth,input.homeAddress)
+    },
+
+    /**
+     *  @return an array like Advanced Detail findEPOSTransactions{ timestamp: 2015-05-01T14:37:24.000Z, eposId: 49178, bankCardNumber: 8257821168691391, payeeAccount: 26996565, amount: 59.5 }..and more
+     *          Advanced Detail findATMTransactions {{ timestamp: 2015-05-01T14:37:23.000Z, atmId: 5436, bankCardNumber: 4722912624353299, type: 'Cash Withdrawal', amount: 120 }
+     *  @requires this at the end to get @return }).then(([findEPOSTransactions,findATMTransactions]) => { console.log("Advanced Detail findEPOSTransactions" , findEPOSTransactions, "Advanced Detail findATMTransactions",findATMTransactions);})
+     *  */
+    JsonToStringTransactions: function JsonToStringTransactions(input){
+        return findBankCardByBankCard.findBankCardByBankCard(input.bankcardId,input.cardNumber,input.sortCode,input.bankAccountId,input.accountNumber,input.bank,5)
     }
 };
+
+
+
 
 
 
@@ -103,19 +115,19 @@ module.exports = {
 //         , bankaccount);
 // });
 
-function JsonToStringTransactions(input){
-    return findBankCardByBankCard.findBankCardByBankCard(input.bankcardId,input.cardNumber,input.sortCode,input.bankAccountId,input.accountNumber,input.bank,5)
-}
-
-JsonToStringTransactions({
-    "bankcardId": "353",
-    "cardNumber": "",
-    "sortCode": "",
-    "bankAccountId": "",
-    "accountNumber": "",
-    "bank": ""
-}).then(([findEPOSTransactions,findATMTransactions]) => {
-    console.log("Advanced Detail findEPOSTransactions" , findEPOSTransactions, "Advanced Detail findATMTransactions",findATMTransactions);
-})
+// function JsonToStringTransactions(input){
+//     return findBankCardByBankCard.findBankCardByBankCard(input.bankcardId,input.cardNumber,input.sortCode,input.bankAccountId,input.accountNumber,input.bank,5)
+// }
+//
+// JsonToStringTransactions({
+//     "bankcardId": "353",
+//     "cardNumber": "",
+//     "sortCode": "",
+//     "bankAccountId": "",
+//     "accountNumber": "",
+//     "bank": ""
+// }).then(([findEPOSTransactions,findATMTransactions]) => {
+//     console.log("Advanced Detail findEPOSTransactions" , findEPOSTransactions, "Advanced Detail findATMTransactions",findATMTransactions);
+// })
 
 
