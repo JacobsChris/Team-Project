@@ -11,5 +11,9 @@ const {searchByVehicleReg} = require("../../../../back-end/middleware/service/pe
 //     expect(searchByVehicleReg("GJ61 VLR")).toBe("GJ61 VLR");
 // });
 
-
+let initRes =[];
 searchByVehicleReg("GJ61 VLR", 10);
+searchByVehicleReg("GJ61", 10).then(res =>{
+    intRes = res;
+    console.log(initRes);
+});

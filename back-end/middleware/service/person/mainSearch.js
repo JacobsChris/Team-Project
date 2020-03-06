@@ -14,23 +14,35 @@ module.exports = {
 };
 
 
-function JsonToStringDetails(input) {
-    return findDetailsByName.findDetailsByName(input.citizenID, input.forenames, input.surname, input.homeAddress, input.dateOfBirth, input.placeOfBirth, input.sex, 5);
+// function JsonToStringDetails(input) {
+//     return findDetailsByName.findDetailsByName(input.citizenID, input.forenames, input.surname, input.homeAddress, input.dateOfBirth, input.placeOfBirth, input.sex, 5);
+//
+// }
+//
+// JsonToStringDetails(
+//     {
+//         "citizenID": "",
+//         "forenames": "Stuart",
+//         "surname": "",
+//         "homeAddress": "",
+//         "dateOfBirth": "",
+//         "placeOfBirth": "",
+//         "sex": "Male"
+//     }
+// ).then(([Citizen, BankAccount, Mobiles, vehicle]) => {
+//     console.log("Advanced Detail Search in order of citizen"
+//         , Citizen,
+//         "Advanced Detail Search BankAccount", BankAccount,
+//         "Advanced Detail Search Mobile", Mobiles
+//         ,"Advanced Detail Search vehicle", vehicle);
+// });
 
-}
-
-JsonToStringDetails(
-    {
-        "citizenID": "",
-        "forenames": "Stuart",
-        "surname": "White",
-        "homeAddress": "46 FRENSHAM CLOSE, SOUTHALL, UB1 2YG",
-        "dateOfBirth": "1948-10-02",
-        "placeOfBirth": "STANMORE",
-        "sex": "Male"
-    }
-).then(([Citizen, BankAccount, Mobiles, vehicle]) => {
-    console.log("Advanced Detail Search in order of citizen, bank account, mobile and vehicle = ", Citizen, BankAccount, Mobiles, vehicle);
-});
-
-
+// {
+//     "bankAccountId": "226471",
+//     "accountNumber": "69527899",
+//     "bank": "The Co-operative Bank",
+//     "forenames": "Kevin Stuart",
+//     "surname": "Dixon",
+//     "dateOfBirth": "1957-08-03",
+//     "homeAddress": "26 CHURCH LANE, LOUGHTON, IG10 1PD"
+// }
