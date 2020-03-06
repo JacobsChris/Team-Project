@@ -2,13 +2,11 @@ const express = require("express");
 const router = express.Router();
 
 const mainSearch = require("../middleware/service/person/mainSearch");
-const morgan = require("../middleware/logging/logger");
 
 
-router.use(morgan);
 
 router.get("/getData/", function (req, res, next) {
-    mainSearch.JsonToStringName(req.body["requestData"]).then(response => res.send((response)));
+    mainSearch.JsonToStringName(req.query).then(response => res.send((response)));
 });
 
 router.get("/getMatching/");
