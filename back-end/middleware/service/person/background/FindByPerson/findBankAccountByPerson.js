@@ -9,7 +9,5 @@ module.exports = {
             " AND dateOfBirth LIKE " + DoB +
             " LIMIT " + limit;
         return auth.SQLauthenticate(sqlSearchString);
-
-        // returns a persons bank account
     }
 };

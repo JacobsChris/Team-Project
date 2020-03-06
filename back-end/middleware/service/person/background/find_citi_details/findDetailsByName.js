@@ -1,8 +1,7 @@
-const {Sequelize} = require('sequelize');
+
 const wildStr = require('../inputvalidation/wildStr.js');
 const exactStr = require('../inputvalidation/exactStr');
 const sendToAsyncCitizen = require('../sqlauth.js');
-const {QueryTypes} = require('sequelize');
 const bankAccount = require('../FindByPerson/findBankAccountByPerson.js')
 const mobilePhone = require('../FindByPerson/findMobileByPerson.js')
 const veheicleReg = require('../FindByPerson/findVehicleByPerson.js')
@@ -18,7 +17,7 @@ module.exports = {
             homeAddress = wildStr.addWildStr(homeAddress);
             dateOfBirth = wildStr.addWildStr(dateOfBirth);
             placeOfBirth = wildStr.addWildStr(placeOfBirth);
-            sex = wildStr.addWildStr(sex);
+            sex = exactStr.addExactStr(sex);
 
             let sqlSearchStringCitizen = "SELECT * FROM citizen WHERE " +
                 "citizenID LIKE " + citizenID +
@@ -30,12 +29,6 @@ module.exports = {
                 " AND sex LIKE " + sex +
                 " LIMIT " + limit;
 
-            let sqlSearchStringvehicleRegistration = "SELECT * FROM vehicleRegistration WHERE " +
-                "forenames LIKE " + forenames +
-                " AND surname LIKE " + surname +
-                " AND address LIKE " + homeAddress +
-                " AND dateOfBirth LIKE " + dateOfBirth +
-                " LIMIT " + limit;
 
             return Promise.all([sendToAsyncCitizen.SQLauthenticate(sqlSearchStringCitizen),
                 bankAccount.findBankAccountByPerson(forenames,surname,homeAddress,dateOfBirth,limit),
