@@ -3,6 +3,8 @@ const searchByVehicleReg = require('./background/searchByVehicleReg.js');
 const findDetailsByName = require('./background/find_citi_details/findDetailsByName.js');
 const findBankCardByAccountId = require('./background/Financial/findDetailsByBankAccount');
 const findBankCardByBankCard = require('./background/Financial/findDetailsByBankCard.js');
+const findEPOSTransactions = require('./background/Financial/findDetailsByATMId.js');
+const findATMPointByATMId = require('./background/Financial/findDetailsByATMId.js');
 
 
 module.exports = {
@@ -77,28 +79,26 @@ module.exports = {
 //         , citizen);
 // });
 
-function JsonToStringDetails(input) {
-    return findDetailsByName.findDetailsByName(input.citizenID, input.forenames, input.surname, input.homeAddress, input.dateOfBirth, input.placeOfBirth, input.sex, 5);
-
-}
-
-JsonToStringDetails(
-    {
-        "citizenID": "",
-        "forenames": "Jordan",
-        "surname": "Little",
-        "homeAddress": "",
-        "dateOfBirth": "",
-        "placeOfBirth": "",
-        "sex": "Male"
-    }
-).then(([Citizen, BankAccount, Mobiles, vehicle]) => {
-    console.log("Advanced Detail Search in order of citizen"
-        , Citizen,
-        "Advanced Detail Search BankAccount", BankAccount,
-        "Advanced Detail Search Mobile", Mobiles
-        , "Advanced Detail Search vehicle", vehicle);
-});
+// function JsonToStringDetails(input) {
+//     return findDetailsByName.findDetailsByName(input.citizenID, input.forenames, input.surname, input.homeAddress, input.dateOfBirth, input.placeOfBirth, input.sex, 5);
+// }
+// JsonToStringDetails(
+//     {
+//         "citizenID": "",
+//         "forenames": "Jordan",
+//         "surname": "Little",
+//         "homeAddress": "",
+//         "dateOfBirth": "",
+//         "placeOfBirth": "",
+//         "sex": "Male"
+//     }
+// ).then(([Citizen, BankAccount, Mobiles, vehicle]) => {
+//     console.log("Advanced Detail Search in order of citizen"
+//         , Citizen,
+//         "Advanced Detail Search BankAccount", BankAccount,
+//         "Advanced Detail Search Mobile", Mobiles
+//         , "Advanced Detail Search vehicle", vehicle);
+// });
 
 // function JsonToStringBankDetails(input) {
 //     return findBankCardByAccountId.findBankCardByAccountId(input.bankAccountId,input.accountNumber,input.bank,input.forenames,input.forenames,input.dateOfBirth,input.homeAddress,5)
@@ -131,4 +131,14 @@ JsonToStringDetails(
 //     console.log("Advanced Detail findEPOSTransactions" , findEPOSTransactions, "Advanced Detail findATMTransactions",findATMTransactions);
 // })
 
-
+function JsonToStringATM(input){
+    return findATMPointByATMId.findATMPointByATMId(input.timestamp,input.atmId,input.bankCardNumber,input.type,input.amount,5)
+}
+JsonToStringATM({ "timestamp": "2015-05-01T14:37:23.000Z",
+    "atmId": "5436",
+    "bankCardNumber": "4722912624353299",
+    "type": "Cash Withdrawal",
+    "amount": "120"
+}).then(([ATMPoint]) => {
+    console.log("Advanced Detail ATMPoint" , ATMPoint);
+});
