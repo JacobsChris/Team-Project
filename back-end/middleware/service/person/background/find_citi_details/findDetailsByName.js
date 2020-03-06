@@ -1,4 +1,3 @@
-
 const wildStr = require('../inputvalidation/wildStr.js');
 const exactStr = require('../inputvalidation/exactStr');
 const sendToAsyncCitizen = require('../sqlauth.js');
@@ -21,11 +20,14 @@ module.exports = {
      *  @development there could be an intial execution of finding person, that the results of are then sent to bank, mobile and
      *  vehicle in the form =>
      *      promise.all([person]).then(res => promise.all([findBankAccountByPerson(res)...
+     *
+     *  the type of error needs a more accurate error statement
+     *
      *  @return this function returns an array of JSON objects to be passed up
      *  @require this function to work it requires a JSON object to be passed into JsonToStringDetails()
      *  */
-    findDetailsByName: function findDetailsByName(citizenID,forenames, surname, homeAddress,dateOfBirth,placeOfBirth, sex, limit) {
-        if ((typeof forenames != 'string')||(typeof surname != 'string')||(typeof homeAddress != 'string')||(typeof placeOfBirth != 'string')||(typeof sex != 'string')) {
+    findDetailsByName: function findDetailsByName(citizenID, forenames, surname, homeAddress, dateOfBirth, placeOfBirth, sex, limit) {
+        if ((typeof forenames != 'string') || (typeof surname != 'string') || (typeof homeAddress != 'string') || (typeof placeOfBirth != 'string') || (typeof sex != 'string')) {
             console.log("Not string error");
         } else {
             citizenID = wildStr.addWildStr(citizenID);
@@ -36,10 +38,10 @@ module.exports = {
             placeOfBirth = wildStr.addWildStr(placeOfBirth);
             sex = wildStr.addWildStr(sex);
 
-            return Promise.all([person.findPersonByPerson(citizenID,forenames, surname, homeAddress, dateOfBirth,placeOfBirth,sex, limit),
-                bankAccount.findBankAccountByPerson(forenames,surname,homeAddress,dateOfBirth,limit),
-                mobilePhone.findMobileByPerson(forenames,surname,homeAddress,dateOfBirth,limit),
-                veheicleReg.findVehicleByPerson(forenames,surname,homeAddress,dateOfBirth,limit)]);
+            return Promise.all([person.findPersonByPerson(citizenID, forenames, surname, homeAddress, dateOfBirth, placeOfBirth, sex, limit),
+                bankAccount.findBankAccountByPerson(forenames, surname, homeAddress, dateOfBirth, limit),
+                mobilePhone.findMobileByPerson(forenames, surname, homeAddress, dateOfBirth, limit),
+                veheicleReg.findVehicleByPerson(forenames, surname, homeAddress, dateOfBirth, limit)]);
         }
     }
 };
