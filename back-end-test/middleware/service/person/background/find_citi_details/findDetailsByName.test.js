@@ -1,4 +1,4 @@
-const {findDetailsByName} = require("../../../../../../back-end/middleware/service/person/background/find_citi_details/findDetailsByName");
+const {findDetailsByName} = require("../../../../../../back-end/middleware/service/person/background/find_Citizen_Details_Main_Func/findDetailsByName");
 
 
 let initRes = [];

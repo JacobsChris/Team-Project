@@ -1,6 +1,6 @@
 const SearchByNames = require('./background/searchByNames.js');
 const searchByVehicleReg = require('./background/searchByVehicleReg.js');
-const findDetailsByName = require('./background/find_citi_details/findDetailsByName.js');
+const findDetailsByName = require('./background/find_Citizen_Details_Main_Func/findDetailsByName.js');
 const findBankCardByAccountId = require('./background/Financial/findDetailsByBankAccount');
 const findTransactionsByBankCard = require('./background/Financial/findTransactionsByBankCard.js');
 const findATMPointByATMId = require('./background/Financial/findDetailsByATMId.js');
