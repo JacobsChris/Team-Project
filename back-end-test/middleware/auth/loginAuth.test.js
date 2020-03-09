@@ -3,7 +3,7 @@ const jwtKey = require('../../../back-end/middleware/auth/jwtConfig');
 const app = require('../../../back-end/app');
 const request = require('supertest');
 
-const agent = request.agent(app); 
+const agent = request.agent(app);
 
 const userObj = {
     "username": "admin",
