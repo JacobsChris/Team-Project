@@ -66,6 +66,9 @@ module.exports = {
      * @requires this at the end to get @return .then(([vehicleObs]) => { console.log("Advanced Detail vehicleObs" , vehicleObs); });*/
     JsonToStringVehicleObs: function JsonToStringVehicleObs(input) {
         return findVehicleLocationByVehicleReg.findVehicleLocationByVehicleReg(input.vehicleRegistrationNo)
+    },
+    JsonToStringANPRLocation: function JsonToStringANPRLocation(input) {
+        return findANPRCameraLocation.findANPRCameraLocation(input.ANPRPointId);
     }
 };
 
@@ -174,38 +177,39 @@ module.exports = {
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////// find a vehicle from a vehicle reg full input  ///////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-function JsonToStringVehicleObs(input) {
-    return findVehicleLocationByVehicleReg.findVehicleLocationByVehicleReg(input.vehicleRegistrationNo)
-}
-
-JsonToStringVehicleObs({
-    "registrationID": "",
-    "registrationDate": "",
-    "vehicleRegistrationNo": "JD94 XZB",
-    "make": "",
-    "model": "",
-    "colour": "",
-    "forenames": ' ',
-    "surname": "",
-    "address": "",
-    "dateOfBirth": "",
-    "driverLicenceID": ""
-}).then(([vehicleObs]) => {
-    console.log("Advanced Detail vehicleObs", vehicleObs);
-});
+// function JsonToStringVehicleObs(input) {
+//     return findVehicleLocationByVehicleReg.findVehicleLocationByVehicleReg(input.vehicleRegistrationNo)
+// }
+//
+// JsonToStringVehicleObs({
+//     "registrationID": "",
+//     "registrationDate": "",
+//     "vehicleRegistrationNo": "JD94 XZB",
+//     "make": "",
+//     "model": "",
+//     "colour": "",
+//     "forenames": ' ',
+//     "surname": "",
+//     "address": "",
+//     "dateOfBirth": "",
+//     "driverLicenceID": ""
+// }).then(([vehicleObs]) => {
+//     console.log("Advanced Detail vehicleObs", vehicleObs);
+// });
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////// find a ANPR camera location from a ANPRId full input  ///////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// function JsonToStringANPRLocation(input){
-//     return findANPRCameraLocation.findANPRCameraLocation(input.ANPRPointId, 5);
+// function JsonToStringANPRLocation(input) {
+//     return findANPRCameraLocation.findANPRCameraLocation(input.ANPRPointId);
 // }
 //
 // JsonToStringANPRLocation({
 //     "ANPRPointId": 5544,
 //     "stamptime": "2015-05-01T06:47:57.000Z",
-//     "vehicleRegistrationNumber": 'JD94 XZB' })
+//     "vehicleRegistrationNumber": 'JD94 XZB'
+// })
 //     .then(([ANPRLocations]) => {
-//     console.log("Advanced Detail vehicleObs", ANPRLocations);
-// });
+//         console.log("Advanced Detail vehicleObs", ANPRLocations);
+//     });
 
