@@ -8,6 +8,10 @@ import { encodeQueryParams, stringify, StringParam } from 'serialize-query-param
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
+const mapStateToProps = state => ({
+    results: state.response.results
+});
+
 class PeopleResultsPage extends React.Component {
 
     constructor(props) {
@@ -50,7 +54,7 @@ class PeopleResultsPage extends React.Component {
                         </Row>
                         <Row>
                             <Container className='flex-container' id='person-list'>
-                                {this.state.results.map(results => results.data.map(person =>
+                                {this.props.map.results(results => results.data.map(person =>
                                     <Card onClick={() => this.handleClick(person.citizenID, person.forenames, person.surname,
                                         person.homeAddress, person.dateOfBirth, person.placeOfBirth, person.sex )} 
                                         className='flex-item' id='small-person-card'>
@@ -114,13 +118,9 @@ class PeopleResultsPage extends React.Component {
 }
 
 PeopleResultsPage.propTypes = {
-    resultss: PropTypes.array.isRequired,
+    results: PropTypes.array.isRequired,
 };
 
-const mapStateToProps = state => ({
-    results: state.response.results
-});
-
-export default connect(mapStateToProps,(PeopleResultsPage));
+export default connect(mapStateToProps)(PeopleResultsPage);
 
 

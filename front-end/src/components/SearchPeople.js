@@ -59,6 +59,12 @@ class SearchPeople extends React.Component {
     }
   }
 
+  handleDateChange = (event) => {
+    this.setState({
+        dob: event
+    });
+  }
+
   handleChange = ({ target: { value, name } }) => {
     let errors = this.state.errors;
 
@@ -121,9 +127,9 @@ class SearchPeople extends React.Component {
       sex: this.state.gender
     }
 
-    console.log(data);
-
     this.props.getPeople(data);
+
+    this.props.history.push('/user/home/peopleresults');
   }
 
   render() {
@@ -131,7 +137,7 @@ class SearchPeople extends React.Component {
     const { startDate, setStartDate } = this.state.date;
     return (
       <div className='form-size'>
-        <Form>
+        <Form onSubmit={this.submit}>
           <h2 className='form-header'>Search People</h2>
           <br />
           <h5 className='form-header'>Please fill out one or more fields</h5>
@@ -165,7 +171,7 @@ class SearchPeople extends React.Component {
             {errors.postcode.length > 0 &&
               <span className='error'>{errors.postcode}</span>}
           </Form.Group>
-          <Button variant='dark' id='submit-button'>Submit</Button>
+          <Button variant='dark' id='submit-button' type='submit'>Submit</Button>
           <br />
           {this.state.errorCount !== null ? <p className="form-status">Form is {formValid ? 'valid ✅' : 'invalid ❌'}</p> : <p className="form-status">Form not submitted</p>}
         </Form>
