@@ -28,11 +28,7 @@ module.exports = {
      *  @require this function to work it requires a JSON object to be passed into JsonToStringATM()
      *  */
     findATMPointByATMId: function findATMPointByATMId(timestamp, atmId, bankCardNumber, type, amount, limit) {
-        if ((typeof atmId != 'string')) {
-            console.log("Not string error");
-        } else {
             atmId = wildStr.addWildStr(atmId);
             return Promise.all([atmID.findATMPoint(atmId, limit)]);
-        }
     }
 };
