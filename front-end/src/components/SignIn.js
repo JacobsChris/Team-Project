@@ -1,8 +1,17 @@
 import React from 'react';
 import FormInput from './FormInput';
 import axios from 'axios';
+import { connect } from 'react-redux';
+import { addToken } from '../js/actions/index';
+import App from '../App';
 
-export default class SignIn extends React.Component {
+function  mapDispatchToProps(dispatch){
+    return { 
+        addToken: token => dispatch(addToken(token))
+    };
+}
+
+class SignIn extends React.Component {
     constructor(props){
         super(props);
         this.state = {
@@ -10,6 +19,13 @@ export default class SignIn extends React.Component {
             password: ''
         }
     }
+
+    // mapDispatchToProps(dispatch){
+    //     return { 
+    //         addToken: token => dispatch(addToken(token))
+    //     };
+    // }
+
 
     handleChange = ({target: {value, name}}) => {
         this.setState({[name]: value})
@@ -19,18 +35,21 @@ export default class SignIn extends React.Component {
         event.preventDefault();
         let data = {
             username: this.state.username,
-            password: this.state.password
-            
+            password: this.state.password            
         }
+
 
         console.log(data);
         axios.post('http://localhost:8080/login/', data)
         .then(res => {
             console.log(res);
+            this.props.addToken(res.data.token);
             this.props.history.push("/user/home");
         }).catch(err => {
             console.log(err);
         });
+
+        
     }
 
     render(){
@@ -56,3 +75,7 @@ export default class SignIn extends React.Component {
         );
     }
 }
+
+
+//   const login = 
+  export default connect(null, mapDispatchToProps)(SignIn);
