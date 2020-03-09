@@ -37,7 +37,7 @@ module.exports = {
      * @requires this at the end to get @return }).then(([bankaccount]) => {console.log("Advanced Detail Search in order of citizen" , bankaccount); });
      * */
     JsonToStringBankDetails: function JsonToStringBankDetails(input) {
-        return findBankCardByAccountId.findBankCardByAccountId(input.bankAccountId,input.accountNumber,input.bank,input.forenames,input.forenames,input.dateOfBirth,input.homeAddress)
+        return findBankCardByAccountId.findBankCardByAccountId(input.bankAccountId,input.accountNumber,input.bank,input.forenames,input.surname,input.dateOfBirth,input.homeAddress)
     },
 
     /**
@@ -169,3 +169,24 @@ module.exports = {
 // }).then(([ATMPoint]) => {
 //     console.log("Advanced Detail ATMPoint" , ATMPoint);
 // });
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////// find a vehicle from a vehicle reg full input  ///////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// function  JsonToStringVehicleObs(input) {
+//     return findVehicleByVehicleReg.input(input.registrationID,)
+// }
+//
+// JsonToStringVehicleObs{
+//     "registrationID": "5281",
+//     "registrationDate": "1995-12-02",
+//     "vehicleRegistrationNo": "TM15 WJL",
+//     "make": "Mini",
+//     "model": "One",
+//     "colour": "red",
+//     "forenames": 'Gillian Kathryn',
+//     "surname": "Newton",
+//     "address": "30 CASTLE STREET, GUILDFORD, GU1 3UW",
+//     "dateOfBirth": "1952-03-06",
+//     "driverLicenceID": "NEWTO553062GK9YW 82"
+// }
