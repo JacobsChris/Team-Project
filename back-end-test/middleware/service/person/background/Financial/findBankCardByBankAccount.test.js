@@ -10,7 +10,7 @@ let expectedResult = [{
     "sortCode": "05-26-95"
 }];
 
-let inputPerson = {
+let inputBankAccount = {
     "bankAccountId": "89368",
     "accountNumber": "85482888",
     "bank": "Citibank International",
