@@ -4,6 +4,8 @@ const findDetailsByName = require('./background/find_Citizen_Details_Main_Func/f
 const findBankCardByAccountId = require('./background/Financial/findDetailsByBankAccount');
 const findTransactionsByBankCard = require('./background/Financial/findTransactionsByBankCard.js');
 const findATMPointByATMId = require('./background/Financial/findDetailsByATMId.js');
+const findPersonByMobile = require("./background/PhoneData/findPersonByMobile");
+const findCallHistoryByPhoneNumber = require("./background/PhoneData/findCallHistoryByPhoneNumber");
 
 
 module.exports = {
@@ -68,6 +70,29 @@ module.exports = {
      */
     JsonToVehicleByReg: function JsonToVehicleByReg(input) {
         return searchByVehicleReg.searchByVehicleReg(input.vehicleRegistrationNo, 5)
+    },
+
+    /**
+     * @author Chris & Tony
+     * @param input is a JSON which contains the key phoneNumber
+     * @returns an array object of persons that match the phone number inputted
+     * @requires the following code at the end to access data:
+     *          .then(([Person]) => {console.log("Advanced Detail Search in order of Person", Person);});
+     */
+    JsonToPersonByMobile: function JsonToPersonByMoile(input) {
+        return findPersonByMobile.findPersonByMobile(input.phoneNumber, 5)
+    },
+
+
+    /**
+     * @author Chris & Tony
+     * @param input is a JSON which contains the key phoneNumber
+     * @returns two arrays, first of phone numbers called by the input phone number and second of phone numbers that have called the input phone number  that match the phone number inputted
+     * @requires the following code at the end to access data:
+     *          .then(([OutGoing,InComing]) => {console.log("Advanced Detail Search in order of OutGoing, InComing", OutGoing, InComing);});
+     */
+    JsonToCallHistory: function JsonToCallHistory(input) {
+        return findCallHistoryByPhoneNumber.findCallHistoryByPhoneNumber(input.phoneNumber, 5)
     }
 };
 
