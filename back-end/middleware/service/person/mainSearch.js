@@ -5,6 +5,7 @@ const findBankCardByAccountId = require('./background/Financial/findDetailsByBan
 const findTransactionsByBankCard = require('./background/Financial/findTransactionsByBankCard.js');
 const findATMPointByATMId = require('./background/Financial/findDetailsByATMId.js');
 const findVehicleLocationByVehicleReg = require('./background/vehicle/findVehicleObsByVehicle.js');
+const findANPRCameraLocation = require('./background/vehicle/findANPRCameraLocation.js')
 
 
 module.exports = {
@@ -58,7 +59,7 @@ module.exports = {
     JsonToStringATM: function JsonToStringATM(input) {
         return findATMPointByATMId.findATMPointByATMId(input.timestamp, input.atmId, input.bankCardNumber, input.type, input.amount, 5)
     },
-    
+
     /**
      * @author Anthony Wilkinson & Chris
      * @return an array like Advanced Detail ATMPoint [ { ANPRPointId: 5544, stamptime: 2015-05-01T06:47:57.000Z, vehicleRegistrationNumber: 'JD94 XZB' } ]
@@ -145,8 +146,8 @@ module.exports = {
 // }
 //
 // JsonToStringTransactions({
-//     "bankcardId": "353",
-//     "cardNumber": "",
+//     "bankcardId": "5683",
+//     "cardNumber": "9848712956998436",
 //     "sortCode": "",
 //     "bankAccountId": "",
 //     "accountNumber": "",
@@ -173,22 +174,38 @@ module.exports = {
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////// find a vehicle from a vehicle reg full input  ///////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-function JsonToStringVehicleObs(input) {
-    return findVehicleLocationByVehicleReg.findVehicleLocationByVehicleReg(input.vehicleRegistrationNo, 5)
+// function JsonToStringVehicleObs(input) {
+//     return findVehicleLocationByVehicleReg.findVehicleLocationByVehicleReg(input.vehicleRegistrationNo, 5)
+// }
+//
+// JsonToStringVehicleObs({
+//     "registrationID": "",
+//     "registrationDate": "",
+//     "vehicleRegistrationNo": "JD94 XZB",
+//     "make": "",
+//     "model": "",
+//     "colour": "",
+//     "forenames": ' ',
+//     "surname": "",
+//     "address": "",
+//     "dateOfBirth": "",
+//     "driverLicenceID": ""
+// }).then(([vehicleObs]) => {
+//     console.log("Advanced Detail vehicleObs", vehicleObs);
+// });
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////// find a ANPR camera location from a ANPRId full input  ///////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+function JsonToStringANPRLocation(input){
+    return findANPRCameraLocation.findANPRCameraLocation(input.ANPRPointId, 5);
 }
 
-JsonToStringVehicleObs({
-    "registrationID": "",
-    "registrationDate": "",
-    "vehicleRegistrationNo": "JD94 XZB",
-    "make": "",
-    "model": "",
-    "colour": "",
-    "forenames": ' ',
-    "surname": "",
-    "address": "",
-    "dateOfBirth": "",
-    "driverLicenceID": ""
-}).then(([vehicleObs]) => {
-    console.log("Advanced Detail vehicleObs", vehicleObs);
+JsonToStringANPRLocation({
+    "ANPRPointId": 5544,
+    "stamptime": "2015-05-01T06:47:57.000Z",
+    "vehicleRegistrationNumber": 'JD94 XZB' })
+    .then(([ANPRLocations]) => {
+    console.log("Advanced Detail vehicleObs", ANPRLocations);
 });
+

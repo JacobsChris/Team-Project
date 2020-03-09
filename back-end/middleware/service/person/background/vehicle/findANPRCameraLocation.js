@@ -1,5 +1,6 @@
-const findVehicleObs = require('./SqlConstructorForObs.js');
+const findLocation = require('./SqlConstructorForLocations.js');
 const wildStr = require('../inputvalidation/wildStr.js');
+
 module.exports = {
     // /**
     //  *  @author Anthony Wilkinson & Chris
@@ -26,8 +27,8 @@ module.exports = {
     //  *
     //  *  @require this function to work it requires a JSON object to be passed into JsonToStringATM()
     //  *  */
-    findVehicleLocationByVehicleReg: function findVehicleLocationByVehicleReg(vehicleRegistrationNumber, limit) {
-        vehicleRegistrationNumber = wildStr.addWildStr(vehicleRegistrationNumber);
-            return Promise.all([findVehicleObs.findVehicleObs(vehicleRegistrationNumber, limit)]);
+    findANPRCameraLocation: function findANPRCameraLocation(ANPRPointId, limit) {
+        ANPRPointId = wildStr.addWildStr(ANPRPointId);
+        return Promise.all([findLocation.findLocation(ANPRPointId, limit)]);
     }
 };
