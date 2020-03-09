@@ -46,27 +46,30 @@ module.exports = {
      *          Advanced Detail findATMTransactions {{ timestamp: 2015-05-01T14:37:23.000Z, atmId: 5436, bankCardNumber: 4722912624353299, type: 'Cash Withdrawal', amount: 120 }
      *  @requires this at the end to get @return }).then(([findEPOSTransactions,findATMTransactions]) => { console.log("Advanced Detail findEPOSTransactions" , findEPOSTransactions, "Advanced Detail findATMTransactions",findATMTransactions);})
      *  */
-    JsonToStringTransactions: function JsonToStringTransactions(input){
-        return findTransactionsByBankCard.findTransactionsByBankCard(input.bankcardId,input.cardNumber,input.sortCode,input.bankAccountId,input.accountNumber,input.bank,5)
+    JsonToStringTransactions: function JsonToStringTransactions(input) {
+        return findTransactionsByBankCard.findTransactionsByBankCard(input.bankcardId, input.cardNumber, input.sortCode, input.bankAccountId, input.accountNumber, input.bank, 5)
     },
 
     /**
      * @author Anthony Wilkinson & Chris
      * @return an array like Advanced Detail ATMPoint [ { atmId: 5436, operator: 'Citibank International', streetName: 'Longstone Road', postcode: 'B42 2DU', latitude: 52.5354968066479, longitude: -1.90652676059225 } ]
      * @requires this at teh end to get @return .then(([ATMPoint]) => { console.log("Advanced Detail ATMPoint" , ATMPoint); );*/
-    JsonToStringATM: function JsonToStringATM(input){
-        return findATMPointByATMId.findATMPointByATMId(input.timestamp,input.atmId,input.bankCardNumber,input.type,input.amount,5)
+    JsonToStringATM: function JsonToStringATM(input) {
+        return findATMPointByATMId.findATMPointByATMId(input.timestamp, input.atmId, input.bankCardNumber, input.type, input.amount, 5)
+    },
+
+
+    /**
+     * @author Chris & Tony
+     * @param input is a JSON which contains the key vehicleRegistrationNo
+     * @returns an array object of vehicles that match the vehicle registration number in the input
+     * @requires the following code at the end to access data:
+     *          .then(([vehicle]) => {console.log("Advanced Detail Search in order of vehicle", vehicle);});
+     */
+    JsonToVehicleByReg: function JsonToVehicleByReg(input) {
+        return searchByVehicleReg.searchByVehicleReg(input.vehicleRegistrationNo, 5)
     }
 };
-
-
-
-
-
-
-
-
-
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -76,22 +79,22 @@ module.exports = {
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////  find a citizen on a partial input  ///////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// function JsonToStringName(input) {
-//     return SearchByNames.searchByNames(input.citizenID, input.forenames, input.surname, input.homeAddress, input.dateOfBirth, input.placeOfBirth, input.sex, 5);
-// }
-//
-// JsonToStringName(    {
-//     "citizenID": "",
-//     "forenames": "Stuart",
-//     "surname": "white",
-//     "homeAddress": "",
-//     "dateOfBirth": "",
-//     "placeOfBirth": "",
-//     "sex": "Male"
-// }).then(([citizen]) => {
-//     console.log("Advanced Detail Search in order of citizen"
-//         , citizen);
-// });
+function JsonToStringName(input) {
+    return SearchByNames.searchByNames(input.citizenID, input.forenames, input.surname, input.homeAddress, input.dateOfBirth, input.placeOfBirth, input.sex, 5);
+}
+
+JsonToStringName({
+    "citizenID": "",
+    "forenames": "Gillian",
+    "surname": "Newton",
+    "homeAddress": "",
+    "dateOfBirth": "",
+    "placeOfBirth": "",
+    "sex": ""
+}).then(([citizen]) => {
+    console.log("Advanced Detail Search in order of citizen"
+        , citizen);
+});
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////// find details on a citizen on a full input  ////////////////////////////////////////////////////////////////////////////////////////
@@ -190,3 +193,15 @@ module.exports = {
 //     "dateOfBirth": "1952-03-06",
 //     "driverLicenceID": "NEWTO553062GK9YW 82"
 // }
+
+//
+// let testReg = {"vehicleRegistrationNo": "JL2_ ___"};
+//
+// function JsonToVehicleByReg(input) {
+//     return searchByVehicleReg.searchByVehicleReg(input.vehicleRegistrationNo, 5)
+// }
+//
+// JsonToVehicleByReg(testReg)
+//     .then(([vehicle]) => {
+//         console.log("Advanced Detail Search in order of vehicle", vehicle);
+//     });
