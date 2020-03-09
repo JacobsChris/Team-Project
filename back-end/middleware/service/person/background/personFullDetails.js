@@ -2,34 +2,22 @@ const mainSearch = require("../mainSearch");
 
 module.exports = async function (input) {
 
-    let citizen;
-    let bankAccount;
-    let mobiles;
-    let vehicle;
-    let bankDetails;
-    let transactions;
+        const [[citizen], [bankAccount], [mobiles], [vehicle]] = await mainSearch.JsonToStringDetails(input);
+        const bankDetails = bankAccount && bankAccount.length > 1 ? await mainSearch.JsonToStringBankDetails(bankAccount, 10) : [];
+        const transactions = bankDetails && bankDetails.length > 1 ? await mainSearch.JsonToStringTransactions(bankDetails[0][0]) : [];
+        const calls = mobiles && mobiles.length > 1 ? await mainSearch.JsonToStringMobileCallRecords(mobiles) : [];
+        const callsLocation = calls && calls.length > 1 ? await mainSearch.JsonToStringCellTowerLocation(calls[0], 1) : [];
 
-    await mainSearch.JsonToStringDetails(input).then(([Citizen, BankAccount, Mobiles, Vehicle]) => {
-        citizen = Citizen;
-        bankAccount = BankAccount;
-        mobiles = Mobiles;
-        vehicle = Vehicle;
-    });
+        return {
+            "citizenData": citizen,
+            "bankAccountData": bankAccount,
+            "mobilesData": mobiles,
+            "vehicleData": vehicle,
+            "bankDetailsData": bankDetails,
+            "transactionsData": transactions,
+            "phoneCallsData": calls,
+            "callsLocationData": callsLocation
+        }
 
-    await mainSearch.JsonToStringBankDetails(bankAccount[0]).then((BankDetails) => {
-        bankDetails = BankDetails;
-    });
-
-    await mainSearch.JsonToStringTransactions(bankDetails[0][0]).then((Transactions) => {
-        transactions = Transactions;
-    });
-
-    return {
-        "citizenData": citizen,
-        "bankAccountData": bankAccount,
-        "mobilesData": mobiles,
-        "vehicleData" : vehicle,
-        "bankDetailsData" : bankDetails,
-        "transactionsData" : transactions}
 
 };

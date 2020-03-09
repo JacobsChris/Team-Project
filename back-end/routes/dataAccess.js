@@ -13,7 +13,7 @@ const vehicle = require("./vehicle");
 const locationEvent = require("./locationEvent");
 
 router.use(morgan);
-router.use(passport.authenticate("jwt", {session : false}));
+// router.use(passport.authenticate("jwt", {session : false}));
 
 router.use("/person", person);
 router.use("/vehicle", vehicle);
