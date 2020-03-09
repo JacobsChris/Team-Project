@@ -40,7 +40,7 @@ class SignIn extends React.Component {
 
 
         console.log(data);
-        axios.post('http://localhost:8080/login/login', data)
+        axios.post('http://localhost:8080/login/', data)
         .then(res => {
             console.log(res);
             this.props.addToken(res.data.token);
