@@ -4,6 +4,7 @@ const findDetailsByName = require('./background/find_Citizen_Details_Main_Func/f
 const findBankCardByAccountId = require('./background/Financial/findDetailsByBankAccount');
 const findTransactionsByBankCard = require('./background/Financial/findTransactionsByBankCard.js');
 const findATMPointByATMId = require('./background/Financial/findDetailsByATMId.js');
+const findVehicleLocationByVehicleReg = require('./background/vehicle/findVehicleObsByVehicle.js');
 
 
 module.exports = {
@@ -173,20 +174,22 @@ module.exports = {
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////// find a vehicle from a vehicle reg full input  ///////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// function  JsonToStringVehicleObs(input) {
-//     return findVehicleByVehicleReg.input(input.registrationID,)
-// }
-//
-// JsonToStringVehicleObs{
-//     "registrationID": "5281",
-//     "registrationDate": "1995-12-02",
-//     "vehicleRegistrationNo": "TM15 WJL",
-//     "make": "Mini",
-//     "model": "One",
-//     "colour": "red",
-//     "forenames": 'Gillian Kathryn',
-//     "surname": "Newton",
-//     "address": "30 CASTLE STREET, GUILDFORD, GU1 3UW",
-//     "dateOfBirth": "1952-03-06",
-//     "driverLicenceID": "NEWTO553062GK9YW 82"
-// }
+function  JsonToStringVehicleObs(input) {
+    return findVehicleLocationByVehicleReg.findVehicleLocationByVehicleReg(input.vehicleRegistrationNo, 5)
+}
+
+JsonToStringVehicleObs({
+    "registrationID": "",
+    "registrationDate": "",
+    "vehicleRegistrationNo": "JD94 XZB",
+    "make": "",
+    "model": "",
+    "colour": "",
+    "forenames": ' ',
+    "surname": "",
+    "address": "",
+    "dateOfBirth": "",
+    "driverLicenceID": ""
+}).then(([vehicleObs]) => {
+    console.log("Advanced Detail vehicleObs" , vehicleObs);
+});
