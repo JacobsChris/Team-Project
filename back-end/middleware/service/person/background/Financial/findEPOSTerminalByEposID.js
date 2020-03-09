@@ -1,8 +1,10 @@
-import {SQLauthenticate} from "../sqlauth";
+const auth = require('../sqlauth.js');
 
 module.exports = {
-    searchByVehicleReg: function findEPOSTerminal(eposId, limit) {
-        let sqlSearchString = "SELECT * FROM eposTerminals WHERE id LIKE \'" + eposId + "\' LIMIT " + limit;
-        SQLauthenticate(sqlSearchString)
+    findEPOSTerminal: function findEPOSTerminal(eposId, limit) {
+        let sqlSearchString = "SELECT * FROM eposTerminals WHERE " +
+            "id LIKE " + eposId +
+            " LIMIT " + limit;
+        return auth.SQLauthenticate(sqlSearchString)
     }
 };
