@@ -16,13 +16,12 @@ module.exports = {
      *
      * @requires this function requires string inputs selected from findDetailsByName to function
      * */
-    findBankAccountByPerson: function findPersonsBankAccount(forenames, surname, DoB, Addr, limit) {
+    findBankAccountByPerson: function findPersonsBankAccount(forenames, surname, DoB, Addr) {
         let sqlSearchString = "SELECT * FROM peoplebankaccount WHERE" +
             " forenames LIKE " + forenames +
             " AND surname LIKE " + surname +
             " AND homeAddress LIKE " + Addr +
-            " AND dateOfBirth LIKE " + DoB +
-            " LIMIT " + limit;
+            " AND dateOfBirth LIKE " + DoB;
         return auth.SQLauthenticate(sqlSearchString);
     }
 };

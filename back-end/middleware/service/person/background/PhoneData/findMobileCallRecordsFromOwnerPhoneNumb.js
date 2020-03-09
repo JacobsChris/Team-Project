@@ -1,4 +1,4 @@
-const findVehicleObs = require('./SqlConstructorForObs.js');
+const findCallerRecords = require('./SqlConstructorForRecords');
 const wildStr = require('../inputvalidation/wildStr.js');
 module.exports = {
     // /**
@@ -26,8 +26,8 @@ module.exports = {
     //  *
     //  *  @require this function to work it requires a JSON object to be passed into JsonToStringATM()
     //  *  */
-    findVehicleLocationByVehicleReg: function findVehicleLocationByVehicleReg(vehicleRegistrationNumber) {
-        vehicleRegistrationNumber = wildStr.addWildStr(vehicleRegistrationNumber);
-            return Promise.all([findVehicleObs.findVehicleObs(vehicleRegistrationNumber)]);
+    findMobileCallRecordsFromOwnerPhoneNumb: function findMobileCallRecordsFromOwnerPhoneNumb(PhoneNumber) {
+        PhoneNumber = wildStr.addWildStr(PhoneNumber);
+        return Promise.all([findCallerRecords.findCallerRecords(PhoneNumber)]);
     }
 };

@@ -26,7 +26,7 @@ module.exports = {
      *  @return this function returns an array of JSON objects to be passed up
      *  @require this function to work it requires a JSON object to be passed into JsonToStringDetails()
      *  */
-    findDetailsByName: function findDetailsByName(citizenID, forenames, surname, homeAddress, dateOfBirth, placeOfBirth, sex, limit) {
+    findDetailsByName: function findDetailsByName(citizenID, forenames, surname, homeAddress, dateOfBirth, placeOfBirth, sex) {
         if ((typeof forenames != 'string') || (typeof surname != 'string') || (typeof homeAddress != 'string') || (typeof placeOfBirth != 'string') || (typeof sex != 'string')) {
             console.log("The entered inputs are not a string!" +
                 "please make sure you've entered all the inputs correctly");
@@ -40,10 +40,10 @@ module.exports = {
             placeOfBirth = wildStr.addWildStr(placeOfBirth);
             sex = wildStr.addWildStr(sex);
 
-            return Promise.all([person.findPersonByPerson(citizenID, forenames, surname, homeAddress, dateOfBirth, placeOfBirth, sex, limit),
-                bankAccount.findBankAccountByPerson(forenames, surname, homeAddress, dateOfBirth, limit),
-                mobilePhone.findMobileByPerson(forenames, surname, homeAddress, dateOfBirth, limit),
-                veheicleReg.findVehicleByPerson(forenames, surname, homeAddress, dateOfBirth, limit)]);
+            return Promise.all([person.findPersonByPerson(citizenID, forenames, surname, homeAddress, dateOfBirth, placeOfBirth, sex),
+                bankAccount.findBankAccountByPerson(forenames, surname, homeAddress, dateOfBirth),
+                mobilePhone.findMobileByPerson(forenames, surname, homeAddress, dateOfBirth),
+                veheicleReg.findVehicleByPerson(forenames, surname, homeAddress, dateOfBirth)]);
         }
     }
 };

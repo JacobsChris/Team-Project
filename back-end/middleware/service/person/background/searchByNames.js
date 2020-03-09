@@ -17,7 +17,7 @@ module.exports = {
      *  @return this function returns an JSON object to be passed up
      *  @require this function to work it requires a JSON object to be passed into JsonToStringName()
      *  */
-    searchByNames: function searchByNames(citizenID,forenames, surname, homeAddress,dateOfBirth,placeOfBirth, sex, limit) {
+    searchByNames: function searchByNames(citizenID,forenames, surname, homeAddress,dateOfBirth,placeOfBirth, sex) {
         if ((typeof forenames != 'string')||(typeof surname != 'string')||(typeof homeAddress != 'string')||(typeof placeOfBirth != 'string')||(typeof sex != 'string')) {
             console.log("Not string error");
             throw new Error("Not string error")
@@ -43,8 +43,7 @@ module.exports = {
                 " AND homeAddress LIKE " + homeAddress +
                 " AND dateOfBirth LIKE " + dateOfBirth +
                 " AND placeOfBirth LIKE " + placeOfBirth +
-                " AND sex LIKE " + sex +
-                " LIMIT " + limit;
+                " AND sex LIKE " + sex;
             return auth.SQLauthenticate(sqlSearchString)
         }
     }

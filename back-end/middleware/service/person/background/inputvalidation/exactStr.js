@@ -11,7 +11,7 @@ module.exports = {
      * @requires this function requires an input which is a string
      * */
     addExactStr: function addExactStr(inputString) {
-        inputString = "'" + inputString + "'";
+        inputString =  "'"+inputString+"'" ;
         return inputString
     }
 };

@@ -17,7 +17,7 @@ module.exports = {    /**
      *
      * @requires this function requires string inputs selected from findDetailsByName to function
      * */
-    findPersonByPerson: function findPersonByPerson(citizenID,forenames, surname, homeAddress, dateOfBirth,placeOfBirth,sex, limit) {
+    findPersonByPerson: function findPersonByPerson(citizenID,forenames, surname, homeAddress, dateOfBirth,placeOfBirth,sex) {
         let sqlSearchString = "SELECT * FROM citizen WHERE " +
             "citizenID LIKE " + citizenID +
             " AND forenames LIKE " + forenames +
@@ -25,8 +25,7 @@ module.exports = {    /**
             " AND homeAddress LIKE " + homeAddress +
             " AND dateOfBirth LIKE " + dateOfBirth +
             " AND placeOfBirth LIKE " + placeOfBirth +
-            " AND sex LIKE " + sex +
-            " LIMIT " + limit;
+            " AND sex LIKE " + sex;
         return auth.SQLauthenticate(sqlSearchString);
     }
 };

@@ -4,6 +4,9 @@ const findDetailsByName = require('./background/find_Citizen_Details_Main_Func/f
 const findBankCardByAccountId = require('./background/Financial/findDetailsByBankAccount');
 const findTransactionsByBankCard = require('./background/Financial/findTransactionsByBankCard.js');
 const findATMPointByATMId = require('./background/Financial/findDetailsByATMId.js');
+const findVehicleLocationByVehicleReg = require('./background/vehicle/findVehicleObsByVehicle.js');
+const findANPRCameraLocation = require('./background/vehicle/findANPRCameraLocation.js');
+const findMobileCallRecordsFromOwnerPhoneNumb = require('./background/PhoneData/findMobileCallRecordsFromOwnerPhoneNumb');
 const findPersonByMobile = require("./background/PhoneData/findPersonByMobile");
 const findCallHistoryByPhoneNumber = require("./background/PhoneData/findCallHistoryByPhoneNumber");
 
@@ -49,13 +52,31 @@ module.exports = {
      *  @requires this at the end to get @return }).then(([findEPOSTransactions,findATMTransactions]) => { console.log("Advanced Detail findEPOSTransactions" , findEPOSTransactions, "Advanced Detail findATMTransactions",findATMTransactions);})
      *  */
     JsonToStringTransactions: function JsonToStringTransactions(input) {
-        return findTransactionsByBankCard.findTransactionsByBankCard(input.bankcardId, input.cardNumber, input.sortCode, input.bankAccountId, input.accountNumber, input.bank, 5)
+        return findTransactionsByBankCard.findTransactionsByBankCard(input.bankcardId, input.cardNumber, input.sortCode, input.bankAccountId, input.accountNumber, input.bank)
     },
 
     /**
      * @author Anthony Wilkinson & Chris
      * @return an array like Advanced Detail ATMPoint [ { atmId: 5436, operator: 'Citibank International', streetName: 'Longstone Road', postcode: 'B42 2DU', latitude: 52.5354968066479, longitude: -1.90652676059225 } ]
      * @requires this at teh end to get @return .then(([ATMPoint]) => { console.log("Advanced Detail ATMPoint" , ATMPoint); );*/
+    JsonToStringATM: function JsonToStringATM(input) {
+        return findATMPointByATMId.findATMPointByATMId(input.timestamp, input.atmId, input.bankCardNumber, input.type, input.amount)
+    },
+
+    /**
+     * @author Anthony Wilkinson & Chris
+     * @return an array like Advanced Detail ATMPoint [ { ANPRPointId: 5544, stamptime: 2015-05-01T06:47:57.000Z, vehicleRegistrationNumber: 'JD94 XZB' } ]
+     * @requires this at the end to get @return .then(([vehicleObs]) => { console.log("Advanced Detail vehicleObs" , vehicleObs); });*/
+    JsonToStringVehicleObs: function JsonToStringVehicleObs(input) {
+        return findVehicleLocationByVehicleReg.findVehicleLocationByVehicleReg(input.vehicleRegistrationNo)
+    },
+    JsonToStringANPRLocation: function JsonToStringANPRLocation(input) {
+        return findANPRCameraLocation.findANPRCameraLocation(input.ANPRPointId);
+    },
+    JsonToStringMobileCallRecords: function JsonToStringMobileCallRecords(input) {
+        return findMobileCallRecordsFromOwnerPhoneNumb.findMobileCallRecordsFromOwnerPhoneNumb(input.phoneNumber);
+    },
+
     JsonToStringATM: function JsonToStringATM(input) {
         return findATMPointByATMId.findATMPointByATMId(input.timestamp, input.atmId, input.bankCardNumber, input.type, input.amount, 5)
     },
@@ -81,7 +102,7 @@ module.exports = {
      */
     JsonToPersonByMobile: function JsonToPersonByMoile(input) {
         return findPersonByMobile.findPersonByMobile(input.phoneNumber, 5)
-    },
+    }
 
 
     /**
@@ -108,19 +129,19 @@ module.exports = {
 //     return SearchByNames.searchByNames(input.citizenID, input.forenames, input.surname, input.homeAddress, input.dateOfBirth, input.placeOfBirth, input.sex, 5);
 // }
 //
-// JsonToStringName({
+// JsonToStringName(    {
 //     "citizenID": "",
-//     "forenames": "Gillian",
-//     "surname": "Newton",
+//     "forenames": "Stuart",
+//     "surname": "white",
 //     "homeAddress": "",
 //     "dateOfBirth": "",
 //     "placeOfBirth": "",
-//     "sex": ""
+//     "sex": "Male"
 // }).then(([citizen]) => {
 //     console.log("Advanced Detail Search in order of citizen"
 //         , citizen);
 // });
-//
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////// find details on a citizen on a full input  ////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -218,6 +239,18 @@ module.exports = {
 //     "dateOfBirth": "1952-03-06",
 //     "driverLicenceID": "NEWTO553062GK9YW 82"
 // }
+//
+// JsonToStringMobileCallRecords({
+//     "forenames": "",
+//     "surname": "",
+//     "dateOfBirth": "",
+//     "address": "",
+//     "phoneNumber": "07700 558630",
+//     "network": ""
+// })
+//     .then(([ANPRLocations]) => {
+//         console.log("Advanced Detail vehicleObs", ANPRLocations);
+//     });
 
 //
 // let testReg = {"vehicleRegistrationNo": "JL2_ ___"};
