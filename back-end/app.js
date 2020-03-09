@@ -7,7 +7,7 @@ const person = require("./routes/person");
 const login = require("./routes/login");
 const vehicle = require("./routes/vehicle");
 const locationEvent = require("./routes/locationEvent");
-const port = 3000;
+const port = 8080;
 
 
 app.use(express.json());

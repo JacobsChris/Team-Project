@@ -1,36 +1,35 @@
 const mainSearch = require("../mainSearch");
 
-async function fun(input) {
+module.exports = async function (input) {
 
     let citizen;
     let bankAccount;
     let mobiles;
     let vehicle;
+    let bankDetails;
+    let transactions;
 
     await mainSearch.JsonToStringDetails(input).then(([Citizen, BankAccount, Mobiles, Vehicle]) => {
         citizen = Citizen;
         bankAccount = BankAccount;
         mobiles = Mobiles;
         vehicle = Vehicle;
-
-        //
-        // let bankDetails = mainSearch.JsonToStringBankDetails(personDetails[1]);
-        // console.log(bankDetails);
-        //
-        // let transactions = mainSearch.JsonToStringTransactions(bankDetails[0]);
-        // console.log(transactions);
-
     });
-    console.log(citizen, bankAccount);
-}
 
+    await mainSearch.JsonToStringBankDetails(bankAccount[0]).then((BankDetails) => {
+        bankDetails = BankDetails;
+    });
 
-fun({
-    "citizenID": "",
-    "forenames": "Gillian Kathryn",
-    "surname": "Newton",
-    "homeAddress": "",
-    "dateOfBirth": "",
-    "placeOfBirth": "",
-    "sex": ""
-});
+    await mainSearch.JsonToStringTransactions(bankDetails[0][0]).then((Transactions) => {
+        transactions = Transactions;
+    });
+
+    return {
+        "citizenData": citizen,
+        "bankAccountData": bankAccount,
+        "mobilesData": mobiles,
+        "vehicleData" : vehicle,
+        "bankDetailsData" : bankDetails,
+        "transactionsData" : transactions}
+
+};
