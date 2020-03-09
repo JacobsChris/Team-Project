@@ -3,7 +3,12 @@ module.exports = {
         /**
          * @author Chris
          *
-         * @function this function takes in an input string
+         * @function this function takes in an input string.
+         * The string is stripped of white space,
+         * and then checked against regex pattern matching to ensure it is of the form Letter Letter Number Number Letter Letter.
+         * Underscores are acceptable replacements for unknown characters.
+         * If the string does not conform to this standard, "Invalid reg no." is returned.
+         * If it does match, then a space is inserted after the fourth character.
          *
          * @return this returns the input string with the appropriate syntax
          *
