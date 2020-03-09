@@ -5,6 +5,7 @@ import { Container, Card, Row, Col } from 'react-bootstrap';
 import '../styles/peopleResults.css';
 import { MdPerson } from 'react-icons/md';
 import { encodeQueryParams, stringify, StringParam } from 'serialize-query-params';
+import store from '../js/store';
 export default class PeopleResultsPage extends React.Component {
 
     constructor(props) {
@@ -17,6 +18,7 @@ export default class PeopleResultsPage extends React.Component {
     };
 
     componentDidMount() {
+        console.log(store.getState().token);
         let data = {
             citizenID: "", forenames: "Stuart", surname: "", homeAddress: "",
             dateOfBirth: "", placeOfBirth: "", sex: "Male"
@@ -24,7 +26,11 @@ export default class PeopleResultsPage extends React.Component {
         axios.get('http://localhost:8080/back-end/person/getData?' + stringify(encodeQueryParams({
             citizenID: StringParam, forenames: StringParam, surname: StringParam, homeAddress: StringParam,
             dateOfBirth: StringParam, placeOfBirth: StringParam, sex: StringParam
-        }, data)))
+        }, data)), {
+            headers: {
+                Authorization: sessionStorage.jwt
+              }
+        })
             .then((response) => {
                 this.setState({
                     results: this.state.results.concat(response)
@@ -44,7 +50,11 @@ export default class PeopleResultsPage extends React.Component {
         axios.get('http://localhost:8080/back-end/person/getData?' + stringify(encodeQueryParams({
             citizenID: StringParam, forenames: StringParam, surname: StringParam, homeAddress: StringParam,
             dateOfBirth: StringParam, placeOfBirth: StringParam, sex: StringParam
-        }, data)))
+        }, data)), {
+            headers: {
+                Authorization: sessionStorage.jwt
+              }
+        })
         .then((response) => {
           this.setState({
             personDetails: this.state.personDetails.concat(response),                 
