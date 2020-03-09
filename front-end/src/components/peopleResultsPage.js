@@ -5,32 +5,17 @@ import { Container, Card, Row, Col } from 'react-bootstrap';
 import '../styles/peopleResults.css';
 import { MdPerson } from 'react-icons/md';
 import { encodeQueryParams, stringify, StringParam } from 'serialize-query-params';
-export default class PeopleResultsPage extends React.Component {
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+
+class PeopleResultsPage extends React.Component {
 
     constructor(props) {
         super(props);
 
         this.state = {
-            results: [],
             personDetails: []
         };
-    };
-
-    componentDidMount() {
-        let data = {
-            citizenID: "", forenames: "Stuart", surname: "", homeAddress: "",
-            dateOfBirth: "", placeOfBirth: "", sex: "Male"
-        };
-        axios.get('http://localhost:8080/back-end/person/getData?' + stringify(encodeQueryParams({
-            citizenID: StringParam, forenames: StringParam, surname: StringParam, homeAddress: StringParam,
-            dateOfBirth: StringParam, placeOfBirth: StringParam, sex: StringParam
-        }, data)))
-            .then((response) => {
-                this.setState({
-                    results: this.state.results.concat(response)
-                })
-                console.log(this.state.results);
-            })
     };
 
     handleClick(id, forename, surname, address, dob, pob, gender){
@@ -127,3 +112,15 @@ export default class PeopleResultsPage extends React.Component {
         )
     }
 }
+
+PeopleResultsPage.propTypes = {
+    resultss: PropTypes.array.isRequired,
+};
+
+const mapStateToProps = state => ({
+    results: state.response.results
+});
+
+export default connect(mapStateToProps,(PeopleResultsPage));
+
+
