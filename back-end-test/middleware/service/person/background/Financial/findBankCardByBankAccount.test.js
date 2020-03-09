@@ -1,14 +1,18 @@
 const mainSearch = require("../../../../../../back-end/middleware/service/person/mainSearch");
 
 let initRes = [];
-let expectedResult = [{
-    "accountNumber": 75482888,
-    "bank": "Citibank International",
-    "bankAccountId": 89368,
-    "bankcardId": 5683,
-    "cardNumber": 9848712956998436,
-    "sortCode": "05-26-95"
-}];
+let expectedResult = [
+    [
+        {
+            "accountNumber": 75482888,
+            "bank": "Citibank International",
+            "bankAccountId": 89368,
+            "bankcardId": 5683,
+            "cardNumber": 9848712956998436,
+            "sortCode": "05-26-95"
+        }
+    ]
+];
 
 let inputBankAccount = {
     "bankAccountId": "89368",
@@ -22,12 +26,9 @@ let inputBankAccount = {
 
 
 test('takes in bank details and finds their bank card', (done) => {
-    mainSearch.JsonToStringBankDetails(inputPerson)
-        .then(([citizen]) => {
-            console.log("Advanced Detail Search in order of citizen"
-                , citizen);
-            initRes = citizen;
-            console.log(initRes);
+    mainSearch.JsonToStringBankDetails(inputBankAccount)
+        .then((bankaccount) => {
+            initRes = bankaccount;
             expect(initRes).toStrictEqual(expectedResult);
             done();
         });

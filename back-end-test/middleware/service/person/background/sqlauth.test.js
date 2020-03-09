@@ -1,11 +1,21 @@
 const auth = require("../../../../../back-end/middleware/service/person/background/sqlauth");
-let response = [];
 
-test('Tests SQL Auth..does..something????', () => {
-    auth.SQLauthenticate("SELECT * FROM Users LIMIT 10").then(res => {
-        response.fulfillmentValue = res;
-    });
-    expect(response).toBe("Not this");
+let initRes = [];
+let expectedResult = [{
+    "citizenID": 1111269986,
+    "dateOfBirth": "1966-12-12",
+    "forenames": "Michael",
+    "homeAddress": "75 ARNOLD ROAD, LONDON, N15 4JQ",
+    "placeOfBirth": "DUNSTABLE",
+    "sex": "Male",
+    "surname": "Park",
+}];
 
-    // expect(auth.SQLauthenticate("SELECT * FROM Users LIMIT 10")).toBe("");
+test('tests SQL Auth does stuff', (done) => {
+    auth.SQLauthenticate("SELECT * FROM citizen LIMIT 1")
+        .then(res => {
+            initRes = res;
+            expect(initRes).toStrictEqual(expectedResult);
+            done();
+        });
 });
