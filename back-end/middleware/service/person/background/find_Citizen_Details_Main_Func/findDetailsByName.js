@@ -28,7 +28,8 @@ module.exports = {
      *  */
     findDetailsByName: function findDetailsByName(citizenID, forenames, surname, homeAddress, dateOfBirth, placeOfBirth, sex, limit) {
         if ((typeof forenames != 'string') || (typeof surname != 'string') || (typeof homeAddress != 'string') || (typeof placeOfBirth != 'string') || (typeof sex != 'string')) {
-            console.log("Not string error");
+            console.log("The entered inputs are not a string!" +
+                "please make sure you've entered all the inputs correctly");
         } else {
             citizenID = wildStr.addWildStr(citizenID);
             forenames = wildStr.addWildStr(forenames);
