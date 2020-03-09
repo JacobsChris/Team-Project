@@ -5,9 +5,9 @@ const personFullDetails = require("../middleware/service/person/background/perso
 const mainSearch = require("../middleware/service/person/mainSearch");
 
 
-
 router.get("/getData/", function (req, res) {
     mainSearch.JsonToStringName(req.query).then(data => res.send((data)));
+
 });
 
 router.get("/getMatching/", function (req, res) {
