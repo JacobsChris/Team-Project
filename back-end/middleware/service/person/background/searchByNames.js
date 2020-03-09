@@ -20,6 +20,7 @@ module.exports = {
     searchByNames: function searchByNames(citizenID,forenames, surname, homeAddress,dateOfBirth,placeOfBirth, sex, limit) {
         if ((typeof forenames != 'string')||(typeof surname != 'string')||(typeof homeAddress != 'string')||(typeof placeOfBirth != 'string')||(typeof sex != 'string')) {
             console.log("Not string error");
+            throw new Error("Not string error")
         } else {
             citizenID = wildStr.addWildStr(citizenID);
             forenames = wildStr.addWildStr(forenames);
