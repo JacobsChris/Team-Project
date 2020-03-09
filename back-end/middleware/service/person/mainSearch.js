@@ -102,7 +102,7 @@ module.exports = {
      */
     JsonToPersonByMobile: function JsonToPersonByMoile(input) {
         return findPersonByMobile.findPersonByMobile(input.phoneNumber, 5)
-    }
+    },
 
 
     /**
