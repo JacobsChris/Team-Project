@@ -41,7 +41,7 @@ module.exports = {
      * @requires this at the end to get @return }).then(([bankaccount]) => {console.log("Advanced Detail Search in order of citizen" , bankaccount); });
      * */
     JsonToStringBankDetails: function JsonToStringBankDetails(input) {
-        return findBankCardByAccountId.findBankCardByAccountId(input.bankAccountId, input.accountNumber, input.bank, input.forenames, input.surname, input.dateOfBirth, input.homeAddress)
+        return findBankCardByAccountId.findBankCardByAccountId(input.bankAccountId, input.accountNumber, input.bank, input.forenames, input.surname, input.dateOfBirth, input.homeAddress, 1)
     },
 
     /**
@@ -95,12 +95,12 @@ module.exports = {
 //
 // JsonToStringName(    {
 //     "citizenID": "",
-//     "forenames": "Stuart",
-//     "surname": "white",
+//     "forenames": "",
+//     "surname": "",
 //     "homeAddress": "",
 //     "dateOfBirth": "",
 //     "placeOfBirth": "",
-//     "sex": "Male"
+//     "sex": ""
 // }).then(([citizen]) => {
 //     console.log("Advanced Detail Search in order of citizen"
 //         , citizen);

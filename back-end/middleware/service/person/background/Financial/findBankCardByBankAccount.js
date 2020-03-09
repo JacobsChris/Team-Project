@@ -16,9 +16,10 @@ module.exports = {
      *
      * @requires this function requires a string input selected from findDetailsByBankAccount to function
      * */
-    findBankCard: function findBankCard(bankAccountId) {
+    findBankCard: function findBankCard(bankAccountId,limit) {
         let sqlSearchString = "SELECT * FROM bankcard WHERE " +
-            "bankAccountId LIKE " + bankAccountId;
+            "bankAccountId LIKE " + bankAccountId +
+            "Limit =" + limit;
         return auth.SQLauthenticate(sqlSearchString)
     }
 };
