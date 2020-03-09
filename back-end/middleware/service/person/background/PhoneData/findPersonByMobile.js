@@ -1,6 +1,5 @@
 const auth = require('../sqlauth.js');
 const wildStr = require('../inputvalidation/wildStr.js');
-const exactStr = require('../inputvalidation/exactStr');
 
 module.exports = {
     findPersonByMobile: function findPersonByMobile(phoneNumber, limit) {
