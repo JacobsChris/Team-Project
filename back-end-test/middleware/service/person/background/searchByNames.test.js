@@ -1,4 +1,3 @@
-const {searchByNames} = require("../../../../../back-end/middleware/service/person/background/searchByNames");
 const mainSearch = require("../../../../../back-end/middleware/service/person/mainSearch");
 
 let initRes = [];
