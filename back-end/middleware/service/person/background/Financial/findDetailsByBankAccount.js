@@ -27,7 +27,7 @@ module.exports = {
      *
      *  @require this function to work it requires a JSON object to be passed into JsonToStringBankDetails()
      *  */
-    findBankCardByAccountId: function findBankCardByAccountId(bankAccountId, accountNumber, bank, forenames, forenames, dateOfBirth, homeAddress, limit) {
+    findBankCardByAccountId: function findBankCardByAccountId(bankAccountId, accountNumber, bank, forenames, surname, dateOfBirth, homeAddress, limit) {
         if (typeof bankAccountId != 'string') {
             console.log("Not string error");
         } else {
