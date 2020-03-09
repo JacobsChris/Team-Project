@@ -17,9 +17,9 @@ module.exports = {
      *
      * @requires this function requires a string input selected from findDetailsByATMId to function
      * */
-    findATMPoint: function findATMPoint(atmId) {
-        let sqlSearchString = "SELECT * FROM atmpoint WHERE" +
-            " atmId LIKE " + atmId;
+    findLocation: function findLocation(ANPRPointId) {
+        let sqlSearchString = "SELECT * FROM anprcamera WHERE" +
+            " anprId LIKE " + ANPRPointId;
         return auth.SQLauthenticate(sqlSearchString)
     }
 };

@@ -16,10 +16,9 @@ module.exports = {
      *
      * @requires this function requires a string input selected from findTransactionsByBankCard to function
      * */
-    findATMTransactions: function findATMTransactions(cardNumber, limit) {
+    findATMTransactions: function findATMTransactions(cardNumber) {
         let sqlSearchString = "SELECT * FROM atmTransaction WHERE " +
-            " bankCardNumber LIKE " + cardNumber +
-            " LIMIT " + limit;
+            " bankCardNumber LIKE " + cardNumber;
         return auth.SQLauthenticate(sqlSearchString)
     }
 };

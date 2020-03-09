@@ -16,10 +16,9 @@ module.exports = {
      *
      * @requires this function requires a string input selected from findTransactionsByBankCard to function
      * */
-    findEPOSTransactions: function findEPOSTransactions(cardNumber, limit) {
+    findEPOSTransactions: function findEPOSTransactions(cardNumber) {
         let sqlSearchString = "SELECT * FROM eposTransactions WHERE "+
-            " bankCardNumber LIKE " + cardNumber +
-            " LIMIT " + limit;
+            " bankCardNumber LIKE " + cardNumber;
         return auth.SQLauthenticate(sqlSearchString)
     }
 };

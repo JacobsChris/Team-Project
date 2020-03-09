@@ -21,8 +21,7 @@ module.exports = {
             "forenames LIKE " + forenames +
             " AND surname LIKE " + surname +
             " AND address LIKE " + Addr +
-            " AND dateOfBirth LIKE " + DoB +
-            " LIMIT " + limit;
+            " AND dateOfBirth LIKE " + DoB;
         return auth.SQLauthenticate(sqlSearchString);
     }
 };

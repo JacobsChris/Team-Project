@@ -27,10 +27,9 @@ module.exports = {
      *
      *  @require this function to work it requires a JSON object to be passed into JsonToStringBankDetails()
      *  */
-
-    findBankCardByAccountId: function findBankCardByAccountId(bankAccountId, accountNumber, bank, forenames, forenames, dateOfBirth, homeAddress, limit) {
+    findBankCardByAccountId: function findBankCardByAccountId(bankAccountId, accountNumber, bank, forenames, forenames, dateOfBirth, homeAddress) {
         bankAccountId = wildStr.addWildStr(bankAccountId);
-        return Promise.all([bankCard.findBankCard(bankAccountId, limit)]);
+        return Promise.all([bankCard.findBankCard(bankAccountId)]);
 
     }
 };
