@@ -37,10 +37,6 @@ export default class SearchPeople extends React.Component {
             surname: '',
             dob: '',
             birthPlace: '',
-            houseNumber: '',
-            houseName: '',
-            street: '',
-            town: '',
             postcode: '',
             formValid: false,
             errorCount: null,
@@ -49,10 +45,6 @@ export default class SearchPeople extends React.Component {
                 surname: '',
                 dob: '',
                 birthPlace: '',
-                houseNumber: '',
-                houseName: '',
-                street: '',
-                town: '',
                 postcode: ''
             },
             date: {
@@ -88,30 +80,6 @@ export default class SearchPeople extends React.Component {
             errors.birthPlace = 
               value.length < 2
                 ? 'Place of Birth'
-                : '';
-            break;
-            case 'houseNumber': 
-            errors.houseNumber = 
-              value.length < 2
-                ? 'House Number'
-                : '';
-            break;
-            case 'houseName': 
-            errors.houseName = 
-              value.length < 2
-                ? 'House Name'
-                : '';
-            break;
-            case 'street': 
-            errors.street = 
-              value.length < 2
-                ? 'street'
-                : '';
-            break;
-            case 'town': 
-            errors.town = 
-              value.length < 2
-                ? 'Twon'
                 : '';
             break;
             case 'postcode': 
@@ -154,54 +122,30 @@ export default class SearchPeople extends React.Component {
                 <br/>
                     <Form.Group className='forename'>
                         <Form.Label htmlFor="forename">First Name</Form.Label>
-                            <FormInput name='forename' Placeholder='Forename' value={this.state.forename} handleChange={this.handleChange}/>
+                            <FormInput name='forename' placeholder='Forenames' value={this.state.forename} handleChange={this.handleChange}/>
                             {errors.forename.length > 0 && 
                             <span className='error'>{errors.forename}</span>}
                             {/* <span className='error'><Validation /></span> */}
                     </Form.Group>
                     <Form.Group className='surname'>
                         <Form.Label htmlFor="surname">Last Name</Form.Label>
-                        <FormInput name='surname' value={this.state.surname} handleChange={this.handleChange}/>
+                        <FormInput name='surname' placeholder='Surname' value={this.state.surname} handleChange={this.handleChange}/>
                     </Form.Group>
                     <Form.Group className='dob'>
                         <Form.Label htmlFor="dob">Date of Birth</Form.Label>
-                        <DatePicker name='dob' value={this.state.dob}  handleChange={this.handleDateChange}/>
+                        <DatePicker name='dob' placeholder='Date of Birth' value={this.state.dob}  handleChange={this.handleDateChange}/>
                         {errors.dob.length > 0 && 
                         <span className='error'>{errors.dob}</span>}
                     </Form.Group>
                     <Form.Group className='birthPlace'>
                         <Form.Label htmlFor="birthplace">Place of Birth</Form.Label>
-                        <FormInput name='birthPlace' value={this.state.birthPlace} handleChange={this.handleChange}/>
+                        <FormInput name='birthPlace' placeholder='Place of Birth' value={this.state.birthPlace} handleChange={this.handleChange}/>
                         {errors.birthPlace.length > 0 && 
                         <span className='error'>{errors.birthPlace}</span>}                              
                     </Form.Group>
-                    <Form.Group className='houseNumber'>
-                        <Form.Label htmlFor="houseNumber">House Number</Form.Label>
-                        <FormInput name='houseNumber' value={this.state.houseNumber} handleChange={this.handleChange}/>
-                        {errors.houseNumber.length > 0 && 
-                        <span className='error'>{errors.houseNumber}</span>}
-                    </Form.Group>
-                    <Form.Group className='houseName'>
-                        <Form.Label htmlFor="houseName">House Name</Form.Label>
-                        <FormInput name='houseName' value={this.state.houseName} handleChange={this.handleChange}/>
-                        {errors.houseName.length > 0 && 
-                        <span className='error'>{errors.houseName}</span>}
-                    </Form.Group>
-                    <Form.Group className='street'>
-                        <Form.Label htmlFor="street">Street Name</Form.Label>
-                        <FormInput name='street' value={this.state.street} handleChange={this.handleChange}/>
-                        {errors.street.length > 0 && 
-                        <span className='error'>{errors.street}</span>}
-                    </Form.Group>
-                    <Form.Group className='town'>
-                        <Form.Label htmlFor="town">Town</Form.Label>
-                        <FormInput name='town' value={this.state.town} handleChange={this.handleChange}/>
-                        {errors.town.length > 0 && 
-                        <span className='error'>{errors.town}</span>}
-                    </Form.Group>
                     <Form.Group className='postcode'>
                         <Form.Label htmlFor="postcode">Postcode</Form.Label>
-                        <FormInput name='postcode' value={this.state.postcode} handleChange={this.handleChange}/>
+                        <FormInput name='postcode' placeholder='Postcode' value={this.state.postcode} handleChange={this.handleChange}/>
                         {errors.postcode.length > 0 && 
                         <span className='error'>{errors.postcode}</span>}
                     </Form.Group>
