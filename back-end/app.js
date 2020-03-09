@@ -6,6 +6,7 @@ const passport = require("passport");
 
 const login = require("./routes/login");
 const dataAccess = require("./routes/dataAccess");
+const loginAuthTest = require('../back-end-test/middleware/auth/loginAuth.test'); 
 const port = 8080;
 
 
@@ -22,6 +23,7 @@ app.use(bodyParser.json());
 
 app.use("/back-end", dataAccess);
 app.use("/login", login);
+app.use("/test", loginAuthTest);
 
 
 app.listen(port);
