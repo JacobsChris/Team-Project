@@ -26,8 +26,8 @@ module.exports = {
     //  *
     //  *  @require this function to work it requires a JSON object to be passed into JsonToStringATM()
     //  *  */
-    findVehicleLocationByVehicleReg: function findVehicleLocationByVehicleReg(vehicleRegistrationNumber, limit) {
+    findVehicleLocationByVehicleReg: function findVehicleLocationByVehicleReg(vehicleRegistrationNumber) {
         vehicleRegistrationNumber = wildStr.addWildStr(vehicleRegistrationNumber);
-            return Promise.all([findVehicleObs.findVehicleObs(vehicleRegistrationNumber, limit)]);
+            return Promise.all([findVehicleObs.findVehicleObs(vehicleRegistrationNumber)]);
     }
 };
