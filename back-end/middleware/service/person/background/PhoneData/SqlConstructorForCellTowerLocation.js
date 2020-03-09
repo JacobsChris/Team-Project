@@ -20,7 +20,7 @@ module.exports = {
     findCellTowerLocation: function findCellTowerLocation(cellTowerId,limit) {
         let sqlSearchString = "SELECT * FROM celltower WHERE" +
             " cellTowerId=" + cellTowerId+
-            " Limit =" + limit;
+            " Limit " + limit;
         return auth.SQLauthenticate(sqlSearchString)
     }
 };

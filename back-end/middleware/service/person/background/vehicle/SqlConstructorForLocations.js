@@ -20,7 +20,7 @@ module.exports = {
     findLocation: function findLocation(ANPRPointId,limit) {
         let sqlSearchString = "SELECT * FROM anprcamera WHERE" +
             " anprId LIKE " + ANPRPointId+
-            " Limit =" + limit;
+            " Limit " + limit;
         return auth.SQLauthenticate(sqlSearchString)
     }
 };

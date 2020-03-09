@@ -19,7 +19,7 @@ module.exports = {
     findBankCard: function findBankCard(bankAccountId,limit) {
         let sqlSearchString = "SELECT * FROM bankcard WHERE " +
             "bankAccountId LIKE " + bankAccountId +
-            " Limit =" + limit;
+            " Limit " + limit;
         return auth.SQLauthenticate(sqlSearchString)
     }
 };
