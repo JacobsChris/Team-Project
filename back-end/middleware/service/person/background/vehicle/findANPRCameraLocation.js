@@ -27,8 +27,8 @@ module.exports = {
     //  *
     //  *  @require this function to work it requires a JSON object to be passed into JsonToStringATM()
     //  *  */
-    findANPRCameraLocation: function findANPRCameraLocation(ANPRPointId) {
+    findANPRCameraLocation: function findANPRCameraLocation(ANPRPointId,limit) {
         ANPRPointId = wildStr.addWildStr(ANPRPointId);
-        return Promise.all([findLocation.findLocation(ANPRPointId)]);
+        return Promise.all([findLocation.findLocation(ANPRPointId,limit)]);
     }
 };

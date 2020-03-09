@@ -40,8 +40,8 @@ module.exports = {
      * @return an array like { bankcardId: 353, cardNumber: 4298912572327611.5, sortCode: '36-40-95', bankAccountId: 84038, accountNumber: 89228899, bank: 'Clydesdale Bank' }
      * @requires this at the end to get @return }).then(([bankaccount]) => {console.log("Advanced Detail Search in order of citizen" , bankaccount); });
      * */
-    JsonToStringBankDetails: function JsonToStringBankDetails(input) {
-        return findBankCardByAccountId.findBankCardByAccountId(input.bankAccountId, input.accountNumber, input.bank, input.forenames, input.surname, input.dateOfBirth, input.homeAddress)
+    JsonToStringBankDetails: function JsonToStringBankDetails(input,limit) {
+        return findBankCardByAccountId.findBankCardByAccountId(input.bankAccountId, input.accountNumber, input.bank, input.forenames, input.surname, input.dateOfBirth, input.homeAddress, limit)
     },
 
     /**
@@ -58,8 +58,8 @@ module.exports = {
      * @author Anthony Wilkinson & Chris
      * @return an array like Advanced Detail ATMPoint [ { atmId: 5436, operator: 'Citibank International', streetName: 'Longstone Road', postcode: 'B42 2DU', latitude: 52.5354968066479, longitude: -1.90652676059225 } ]
      * @requires this at teh end to get @return .then(([ATMPoint]) => { console.log("Advanced Detail ATMPoint" , ATMPoint); );*/
-    JsonToStringATM: function JsonToStringATM(input) {
-        return findATMPointByATMId.findATMPointByATMId(input.timestamp, input.atmId, input.bankCardNumber, input.type, input.amount)
+    JsonToStringATM: function JsonToStringATM(input, limit) {
+        return findATMPointByATMId.findATMPointByATMId(input.timestamp, input.atmId, input.bankCardNumber, input.type, input.amount, limit)
     },
 
     /**
@@ -69,14 +69,14 @@ module.exports = {
     JsonToStringVehicleObs: function JsonToStringVehicleObs(input) {
         return findVehicleLocationByVehicleReg.findVehicleLocationByVehicleReg(input.vehicleRegistrationNo)
     },
-    JsonToStringANPRLocation: function JsonToStringANPRLocation(input) {
-        return findANPRCameraLocation.findANPRCameraLocation(input.ANPRPointId);
+    JsonToStringANPRLocation: function JsonToStringANPRLocation(input,limit) {
+        return findANPRCameraLocation.findANPRCameraLocation(input.ANPRPointId,limit);
     },
     JsonToStringMobileCallRecords: function JsonToStringMobileCallRecords(input) {
         return findMobileCallRecordsFromOwnerPhoneNumb.findMobileCallRecordsFromOwnerPhoneNumb(input.phoneNumber);
     },
-    JsonToStringCellTowerLocation: function JsonToStringCellTowerLocation(input) {
-    return findCellTowerLocationBasedOnCellTowerId.findCellTowerLocationBasedOnCellTowerId(input.callCellTowerId);
+    JsonToStringCellTowerLocation: function JsonToStringCellTowerLocation(input,limit) {
+    return findCellTowerLocationBasedOnCellTowerId.findCellTowerLocationBasedOnCellTowerId(input.callCellTowerId,limit);
 }
 };
 
@@ -95,12 +95,12 @@ module.exports = {
 //
 // JsonToStringName(    {
 //     "citizenID": "",
-//     "forenames": "Stuart",
-//     "surname": "white",
+//     "forenames": "",
+//     "surname": "",
 //     "homeAddress": "",
 //     "dateOfBirth": "",
 //     "placeOfBirth": "",
-//     "sex": "Male"
+//     "sex": ""
 // }).then(([citizen]) => {
 //     console.log("Advanced Detail Search in order of citizen"
 //         , citizen);
