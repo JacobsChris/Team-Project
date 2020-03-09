@@ -29,11 +29,7 @@ module.exports = {
      *  @require this function to work it requires a JSON object to be passed into JsonToStringTransactions()
      *  */
     findTransactionsByBankCard: function findTransactionsByBankCard(bankcardId, cardNumber, sortCode, bankAccountId, accountNumber, bank, limit) {
-        if (typeof cardNumber != 'string') {
-            console.log("Not string error");
-        } else {
             cardNumber = wildStr.addWildStr(cardNumber);
             return Promise.all([findEPOSTransactions.findEPOSTransactions(cardNumber, limit), findATMTransactions.findATMTransactions(cardNumber, limit)]);
-        }
     }
 };
