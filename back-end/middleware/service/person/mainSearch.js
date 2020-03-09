@@ -5,7 +5,8 @@ const findBankCardByAccountId = require('./background/Financial/findDetailsByBan
 const findTransactionsByBankCard = require('./background/Financial/findTransactionsByBankCard.js');
 const findATMPointByATMId = require('./background/Financial/findDetailsByATMId.js');
 const findVehicleLocationByVehicleReg = require('./background/vehicle/findVehicleObsByVehicle.js');
-const findANPRCameraLocation = require('./background/vehicle/findANPRCameraLocation.js')
+const findANPRCameraLocation = require('./background/vehicle/findANPRCameraLocation.js');
+const findMobileCallRecordsFromOwnerPhoneNumb = require('./background/PhoneData/findMobileCallRecordsFromOwnerPhoneNumb');
 
 
 module.exports = {
@@ -69,6 +70,9 @@ module.exports = {
     },
     JsonToStringANPRLocation: function JsonToStringANPRLocation(input) {
         return findANPRCameraLocation.findANPRCameraLocation(input.ANPRPointId);
+    },
+    JsonToStringMobileCallRecords: function JsonToStringMobileCallRecords(input) {
+        return findMobileCallRecordsFromOwnerPhoneNumb.findMobileCallRecordsFromOwnerPhoneNumb(input.phoneNumber);
     }
 };
 
@@ -213,3 +217,21 @@ module.exports = {
 //         console.log("Advanced Detail vehicleObs", ANPRLocations);
 //     });
 
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////// find a persons mobile phone records based on their phone numb  ///////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// function JsonToStringMobileCallRecords(input) {
+//     return findMobileCallRecordsFromOwnerPhoneNumb.findMobileCallRecordsFromOwnerPhoneNumb(input.phoneNumber);
+// }
+//
+// JsonToStringMobileCallRecords({
+//     "forenames": "",
+//     "surname": "",
+//     "dateOfBirth": "",
+//     "address": "",
+//     "phoneNumber": "07700 558630",
+//     "network": ""
+// })
+//     .then(([ANPRLocations]) => {
+//         console.log("Advanced Detail vehicleObs", ANPRLocations);
+//     });
