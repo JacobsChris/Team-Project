@@ -2,6 +2,10 @@
   "name": "back-end",
   "version": "0.0.0",
   "private": true,
+  "jest": {
+    "testEnvironment": "node",
+    "coveragePathIgnorePatterns": ["/node_modules"]
+  },
   "scripts": {
     "start": "node ./back-end/app",
     "test": "jest"

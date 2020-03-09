@@ -23,8 +23,7 @@ const UserModel = sequelize.define("Users",
 
 UserModel.sync()
     .then(() => {
-        UserModel.findOrCreate( { where: { username: "admin", password: "mypass" }});
-        console.log(`Database & tables created!`);
+        UserModel.findOrCreate({ where: { username: "admin", password: "mypass" }});
     });
 
 module.exports = UserModel;
