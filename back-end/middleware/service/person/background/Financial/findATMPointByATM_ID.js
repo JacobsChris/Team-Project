@@ -20,7 +20,7 @@ module.exports = {
     findATMPoint: function findATMPoint(atmId,limit) {
         let sqlSearchString = "SELECT * FROM atmpoint WHERE" +
             " atmId LIKE " + atmId+
-            " Limit =" + limit;
+            " Limit " + limit;
         return auth.SQLauthenticate(sqlSearchString)
     }
 };
