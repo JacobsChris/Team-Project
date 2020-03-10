@@ -17,10 +17,9 @@ module.exports = {
      *
      * @requires this function requires a string input selected from findDetailsByATMId to function
      * */
-    findCellTowerLocation: function findCellTowerLocation(cellTowerId,limit) {
+    findCellTowerLocation: function findCellTowerLocation(cellTowerId) {
         let sqlSearchString = "SELECT * FROM celltower WHERE" +
-            " cellTowerId=" + cellTowerId+
-            " Limit " + limit;
+            " cellTowerId=" + cellTowerId;
         return auth.SQLauthenticate(sqlSearchString)
     }
 };
