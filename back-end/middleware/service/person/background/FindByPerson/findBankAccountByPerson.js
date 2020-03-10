@@ -16,7 +16,7 @@ module.exports = {
      *
      * @requires this function requires string inputs selected from findDetailsByName to function
      * */
-    findBankAccountByPerson: function findPersonsBankAccount(forenames, surname, DoB, Addr) {
+    findBankAccountByPerson: function findPersonsBankAccount(forenames, surname, Addr, DoB) {
         let sqlSearchString = "SELECT * FROM peoplebankaccount WHERE" +
             " forenames LIKE " + forenames +
             " AND surname LIKE " + surname +
