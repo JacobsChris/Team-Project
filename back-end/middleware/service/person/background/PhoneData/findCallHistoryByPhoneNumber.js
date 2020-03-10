@@ -4,12 +4,12 @@ const wildStr = require('../inputvalidation/wildStr.js');
 
 
 module.exports = {
-    findCallHistoryByPhoneNumber: function findCallHistoryByPhoneNumber(phoneNumber, limit) {
+    findCallHistoryByPhoneNumber: function findCallHistoryByPhoneNumber(phoneNumber) {
         phoneNumber = wildStr.addWildStr(phoneNumber);
         return Promise.all(
             [
-                findOutGoingCallsByTargetPhoneNUmber.findOutGoingCalls(phoneNumber, limit),
-                findInComingCallsByTargetPhoneNumber.findIncomingCalls(phoneNumber, limit)
+                findOutGoingCallsByTargetPhoneNUmber.findOutGoingCalls(phoneNumber),
+                findInComingCallsByTargetPhoneNumber.findIncomingCalls(phoneNumber)
             ]
         )
     }

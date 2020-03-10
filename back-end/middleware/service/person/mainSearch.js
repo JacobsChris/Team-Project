@@ -121,7 +121,7 @@ module.exports = {
      *          .then(([OutGoing,InComing]) => {console.log("Advanced Detail Search in order of OutGoing, InComing", OutGoing, InComing);});
      */
     JsonToCallHistory: function JsonToCallHistory(input) {
-        return findCallHistoryByPhoneNumber.findCallHistoryByPhoneNumber(input.phoneNumber, 5)
+        return findCallHistoryByPhoneNumber.findCallHistoryByPhoneNumber(input.phoneNumber)
     },
 
     JsonToStringCellTowerLocation: function JsonToStringCellTowerLocation(input,limit) {
