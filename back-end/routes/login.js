@@ -1,11 +1,11 @@
 const express = require('express');
 const jwt = require('jsonwebtoken');
-const jwtKey = require('../middleware/auth/jwtConfig');
+const jwtKey = require('../middleware/auth/jwtConfig.json');
 const loginAuth = require('../middleware/auth/loginAuth');
 const passport = require('passport');
 const userModel = require('../database/sequelize');
-const router = express.Router();
 
+const router = express.Router();
 
 router.post("/", passport.authenticate('login', {session: false}),
 
@@ -18,7 +18,6 @@ router.post("/", passport.authenticate('login', {session: false}),
             }
 
             userModel.findOne({ where: { username: req.user.username }})
-
                 .then(result => {
                     const token = jwt.sign({ id: result.username }, jwtKey.secret, { expiresIn: 1800});
                     res.send({

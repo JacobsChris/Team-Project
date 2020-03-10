@@ -1,25 +1,12 @@
 const morgan = require("morgan");
-const passportJWT = require("passport-jwt");
-const extractJWT = passportJWT.ExtractJwt;
-const jwtConfig = require('../auth/jwtConfig');
-const passport = require('passport');
-const jwtStrategy = passportJWT.Strategy;
-
-
-const parameters = {
-    jwtFromRequest: extractJWT.fromAuthHeaderWithScheme("JWT"),
-    secretOrKey: jwtConfig.secret
-};
+const jwt = require('jsonwebtoken');
+const jwtConfig = require('../auth/jwtConfig.json');
 
 morgan.token('user', function (req, res) {
-    return passport.use(new jwtStrategy(parameters,
-        function (jwtPayload, done) {
-
-            return jwtPayload.id
-
-
-        }))
-
+    //grab token from req header and match to user in auth
+    let jwtPayload = req.header('Authorization').replace("JWT ", "");
+    let userObj = jwt.verify(jwtPayload, jwtConfig.secret);
+    return JSON.stringify(userObj);
 });
 
 

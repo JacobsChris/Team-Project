@@ -1,6 +1,6 @@
 const passport = require('passport');
 const passportJWT = require('passport-jwt');
-const jwtConfig = require('./jwtConfig');
+const jwtConfig = require('./jwtConfig.json');
 const userModel = require('../../database/sequelize');
 
 const jwtStrategy =  passportJWT.Strategy;
