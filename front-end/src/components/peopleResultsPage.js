@@ -43,6 +43,7 @@ class PeopleResultsPage extends React.Component {
     };
 
     render() {
+        console.log('RENDER', this.props);
         return (
             <div>
                 <Row>
@@ -54,7 +55,7 @@ class PeopleResultsPage extends React.Component {
                         </Row>
                         <Row>
                             <Container className='flex-container' id='person-list'>
-                                {this.props.map.results(results => results.data.map(person =>
+                                {this.props.results?.map(results => results.map(person =>
                                     <Card onClick={() => this.handleClick(person.citizenID, person.forenames, person.surname,
                                         person.homeAddress, person.dateOfBirth, person.placeOfBirth, person.sex )} 
                                         className='flex-item' id='small-person-card'>
@@ -69,6 +70,8 @@ class PeopleResultsPage extends React.Component {
                                         </Row>
                                     </Card>
                                 ))}
+
+
                             </Container>
                         </Row>
                     </Col>

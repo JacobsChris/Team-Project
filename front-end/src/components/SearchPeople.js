@@ -117,19 +117,27 @@ class SearchPeople extends React.Component {
       });
     }
 
+    let date = this.state.dob;
+
+    if(this.state.dob){
+      date = `${date.getFullYear()}-${(date.getMonth()+1) < 10?  0+ ((date.getMonth()+1).toString()) : date.getMonth()+1}-${date.getDate()}`;
+    }
+
     const data = {
       citizenID: this.state.citizenID,
       forenames: this.state.forename,
       surname: this.state.surname,
       homeAddress: this.state.postcode,
-      dateOfBirth: this.state.dob,
+      dateOfBirth: date,
       placeOfBirth: this.state.birthPlace,
       sex: this.state.gender
     }
 
     this.props.getPeople(data);
 
-    this.props.history.push('/user/home/peopleresults');
+    if (window.location.pathname != '/user/home/peopleresults'){
+      this.props.history.push('/user/home/peopleresults');
+    }
   }
 
   render() {
@@ -155,7 +163,7 @@ class SearchPeople extends React.Component {
           </Form.Group>
           <Form.Group className='dob'>
             <Form.Label htmlFor="dob">Date of Birth</Form.Label>
-            <DatePicker name='dob' value={this.state.dob} handleChange={this.handleDateChange} />
+            <DatePicker name='dob' value={this.state.dob} handleChange={this.handleDateChange} dateFormat='yyyy-MM-dd'/>
             {errors.dob.length > 0 &&
               <span className='error'>{errors.dob}</span>}
           </Form.Group>

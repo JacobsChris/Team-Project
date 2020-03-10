@@ -5,6 +5,7 @@ export default class DateSelector extends React.Component {
     render(){
     return (
       <DatePicker
+        dateFormat={this.props.dateFormat}
         placeholderText="Click to select a date"
         onChange={this.props.handleChange}
         name={this.props.name || ''}
@@ -13,6 +14,7 @@ export default class DateSelector extends React.Component {
         showMonthDropdown
         showYearDropdown
         dropdownMode="select"
+        value={this.props.value}
       />
     );
     }
