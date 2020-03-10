@@ -29,25 +29,27 @@ let inputVehicleInvalidReg = {
 
 
 test('takes in a valid complete vehicleReg and searches for vehicles', (done) => {
+    jest.setTimeout(10000000);
+    mainSearch.JsonToVehicleByReg(inputVehicleCompleteReg, 1)
+        .then(([vehicle]) => {
+            console.log("Advanced Detail Search in order of vehicle"
+                , vehicle);
+            initRes = vehicle;
+            console.log(initRes);
+            expect(initRes).toContainEqual(expectedResult);
+            done();
+        });
+    // done()
+});
+
+test('takes in a valid incomplete vehicleReg and searches for vehicles', (done) => {
     mainSearch.JsonToVehicleByReg(inputVehicleInCompleteReg)
         .then(([vehicle]) => {
             console.log("Advanced Detail Search in order of vehicle"
                 , vehicle);
             initRes = vehicle;
             console.log(initRes);
-            expect(initRes).toStrictEqual(expectedResult);
-            done();
-        });
-});
-
-test('takes in a valid incomplete vehicleReg and searches for vehicles', (done) => {
-    mainSearch.JsonToVehicleByReg(inputVehicleCompleteReg)
-        .then(([vehicle]) => {
-            console.log("Advanced Detail Search in order of vehicle"
-                , vehicle);
-            initRes = vehicle;
-            console.log(initRes);
-            expect(initRes).toStrictEqual(expectedResult);
+            expect(initRes).toContainEqual(expectedResult);
             done();
         });
 });

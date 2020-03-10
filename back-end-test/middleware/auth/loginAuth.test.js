@@ -1,6 +1,7 @@
 const app = require('../../../back-end/app');
 const request = require('supertest');
 
+
 const goodUser = {
     "username": "admin",
     "password": "mypass"
@@ -19,7 +20,9 @@ const server = app;
 
 describe('login test', function() {
 
+
     afterEach(function(done) {
+
         server.close();
         done();
     });
