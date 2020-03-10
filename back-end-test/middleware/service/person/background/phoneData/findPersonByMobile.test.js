@@ -18,6 +18,7 @@ let inputPhone = {
 
 
 test('takes in a valid string and searches for persons', (done) => {
+    jest.setTimeout(10000000);
     mainSearch.JsonToPersonByMobile(inputPhone)
         .then(([citizen]) => {
             console.log("Advanced Detail Search in order of phone number"

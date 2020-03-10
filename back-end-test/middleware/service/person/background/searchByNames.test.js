@@ -23,6 +23,7 @@ let inputPerson = {
 
 
 test('takes in a valid string and searches for persons', (done) => {
+    jest.setTimeout(10000000);
     mainSearch.JsonToStringName(inputPerson)
         .then(([citizen]) => {
             console.log("Advanced Detail Search in order of citizen"

@@ -63,7 +63,7 @@ let inputPerson = {
 
 
 test('takes in a valid string and searches for a persons details', (done) => {
-    jest.setTimeout(10000);
+    jest.setTimeout(10000000);
     mainSearch.JsonToStringDetails(inputPerson)
         .then(([Citizen, BankAccount, Mobiles, vehicle]) => {
             initRes[0] = Citizen;

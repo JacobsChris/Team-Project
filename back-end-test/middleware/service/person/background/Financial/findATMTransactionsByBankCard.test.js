@@ -15,6 +15,8 @@ let inputBankCard = {
 
 
 test('finds ATM transactions by bank card', (done) => {
+    jest.setTimeout(10000000);
+
     mainSearch.JsonToStringTransactions(inputBankCard)
         .then((findATMTransactions) => {
             initRes = findATMTransactions;

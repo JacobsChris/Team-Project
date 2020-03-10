@@ -49,7 +49,7 @@ test('takes in a valid incomplete vehicleReg and searches for vehicles', (done) 
                 , vehicle);
             initRes = vehicle;
             console.log(initRes);
-            expect(initRes).toStrictEqual(expectedResult);
+            expect(initRes).toContainEqual(expectedResult);
             done();
         });
 });

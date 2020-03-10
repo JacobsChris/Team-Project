@@ -14,6 +14,8 @@ let inputBankCard = {
 
 
 test('takes in their bank card and returns their transactions using that card', (done) => {
+    jest.setTimeout(10000000);
+
     mainSearch.JsonToStringTransactions(inputBankCard)
         .then((findEPOSTransactions) => {
             initRes = findEPOSTransactions;
