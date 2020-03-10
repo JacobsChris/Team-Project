@@ -7,10 +7,11 @@ import AdminNavBar from './components/adminNavBar';
 import SearchNavBar from './components/searchNavBar';
 import PeopleResultsPage from './components/peopleResultsPage';
 import SignIn from './components/SignIn';
+import { Provider } from 'react-redux';
+import store from './store';
 import { connect } from 'react-redux';
 import { GuardProvider, GuardedRoute } from 'react-router-guards';
 import CreateUser from './components/createUser';
-
 
 function App() {
 
@@ -22,7 +23,8 @@ function App() {
   };
 
   return (
-    <BrowserRouter>
+    <Provider store={store}>
+      <BrowserRouter>
       <Route path='/user/' component={NavBar}></Route>
         <GuardProvider guards={[requireLogin]}>
           <GuardedRoute path='/user/home/' component={SearchNavBar}></GuardedRoute>
@@ -33,6 +35,7 @@ function App() {
         </GuardProvider>
       <Route path='/user/home/signin' component={SignIn}></Route>
     </BrowserRouter>
+    </Provider>
   );
 }
 

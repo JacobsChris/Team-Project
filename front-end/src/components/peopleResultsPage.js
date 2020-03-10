@@ -5,40 +5,23 @@ import { Container, Card, Row, Col } from 'react-bootstrap';
 import '../styles/peopleResults.css';
 import { MdPerson } from 'react-icons/md';
 import { encodeQueryParams, stringify, StringParam } from 'serialize-query-params';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import store from '../js/store';
-export default class PeopleResultsPage extends React.Component {
 
+const mapStateToProps = state => ({
+    results: state.response.results
+});
+
+class PeopleResultsPage extends React.Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            results: [],
             personDetails: []
         };
     };
-
-    componentDidMount() {
-        console.log(store.getState().token);
-        let data = {
-            citizenID: "", forenames: "Stuart", surname: "", homeAddress: "",
-            dateOfBirth: "", placeOfBirth: "", sex: "Male"
-        };
-        axios.get('http://localhost:8080/back-end/person/getData?' + stringify(encodeQueryParams({
-            citizenID: StringParam, forenames: StringParam, surname: StringParam, homeAddress: StringParam,
-            dateOfBirth: StringParam, placeOfBirth: StringParam, sex: StringParam
-        }, data)), {
-            headers: {
-                Authorization: sessionStorage.jwt
-              }
-        })
-            .then((response) => {
-                this.setState({
-                    results: this.state.results.concat(response)
-                })
-                console.log(this.state.results);
-            })
-    };
-
+  
     handleClick(id, forename, surname, address, dob, pob, gender){
         this.setState({
             personDetails: []
@@ -64,6 +47,7 @@ export default class PeopleResultsPage extends React.Component {
     };
 
     render() {
+        console.log('RENDER', this.props);
         return (
             <div>
                 <Row>
@@ -75,7 +59,7 @@ export default class PeopleResultsPage extends React.Component {
                         </Row>
                         <Row>
                             <Container className='flex-container' id='person-list'>
-                                {this.state.results.map(results => results.data.map(person =>
+                                {this.props.results?.map(results => results.map(person =>
                                     <Card onClick={() => this.handleClick(person.citizenID, person.forenames, person.surname,
                                         person.homeAddress, person.dateOfBirth, person.placeOfBirth, person.sex )} 
                                         className='flex-item' id='small-person-card'>
@@ -137,3 +121,11 @@ export default class PeopleResultsPage extends React.Component {
         )
     }
 }
+
+PeopleResultsPage.propTypes = {
+    results: PropTypes.array.isRequired,
+};
+
+export default connect(mapStateToProps)(PeopleResultsPage);
+
+
