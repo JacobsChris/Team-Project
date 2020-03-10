@@ -1,17 +1,6 @@
 import React from 'react';
 import FormInput from './FormInput';
 import axios from 'axios';
-import { connect } from 'react-redux';
-import { addToken } from '../js/actions/index';
-import store from '../js/store';
-import App from '../App';
-
-function  mapDispatchToProps(dispatch){
-    console.log('token');
-    return { 
-        addToken: token => dispatch(addToken(token))
-    };
-}
 
 class SignIn extends React.Component {
     constructor(props){
@@ -39,7 +28,6 @@ class SignIn extends React.Component {
         .then(res => {
             console.log(res);
             sessionStorage.setItem('jwt', res.data.token);
-            this.props.addToken(res.data.token);
             this.props.history.push("/user/home/searchpeople");
         }).catch(err => {
             console.log(err);
@@ -70,4 +58,4 @@ class SignIn extends React.Component {
     }
 }
 
-  export default connect(null, mapDispatchToProps)(SignIn);
+  export default SignIn;
