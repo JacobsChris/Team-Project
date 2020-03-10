@@ -1,4 +1,4 @@
-import {SQLauthenticate} from "./sqlauth";
+const auth = require('./sqlauth')
 
 
 module.exports = {
@@ -11,8 +11,8 @@ module.exports = {
      *
      *  @require this function to work it requires a JSON object to be passed into JsonToStringName()
      * */
-    searchCamerasByArea: function searchCamerasByArea(inputLatitude, inputLongitude, Radius, limit) {
-        let searchCameras = "select * from anprcamera where (((latitude - " + inputLatitude + ")*(latitude - " + inputLatitude + ") + (longitude - " + inputLongitude + ")*(longitude - " + inputLongitude + ")) < " + Radius + ") LIMIT" + limit;
-        SQLauthenticate(searchCameras);
+    searchCamerasByArea: function searchCamerasByArea(inputLatitude, inputLongitude, Radius) {
+        let searchCameras = "select * from anprcamera where (((latitude - " + inputLatitude + ")*(latitude - " + inputLatitude + ") + (longitude - " + inputLongitude + ")*(longitude - " + inputLongitude + ")) < " + Radius + ")";
+        auth.SQLauthenticate(searchCameras);
     }
 };
