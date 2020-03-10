@@ -7,7 +7,6 @@ import { MdPerson } from 'react-icons/md';
 import { encodeQueryParams, stringify, StringParam } from 'serialize-query-params';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-// import store from '../js/store';
 
 const mapStateToProps = state => ({
     results: state.response.results

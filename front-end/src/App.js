@@ -8,8 +8,7 @@ import SearchNavBar from './components/searchNavBar';
 import PeopleResultsPage from './components/peopleResultsPage';
 import SignIn from './components/SignIn';
 import { Provider } from 'react-redux';
-import store from './store';
-import { connect } from 'react-redux';
+import store from './redux/store';
 import { GuardProvider, GuardedRoute } from 'react-router-guards';
 import CreateUser from './components/createUser';
 
