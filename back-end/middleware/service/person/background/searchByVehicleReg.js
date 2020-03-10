@@ -19,8 +19,6 @@ module.exports = {
                 " LIMIT " + limit;
             return auth.SQLauthenticate(sqlSearchString);
         } else {
-            // console.log("here");
-            // console.log(vehicleReg);
             return vehicleReg;
         }
     }
