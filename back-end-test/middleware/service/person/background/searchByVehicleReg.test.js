@@ -53,7 +53,6 @@ test('takes in a valid incomplete vehicleReg and searches for vehicles', (done) 
 });
 
 test('takes in an invalid regNo and returns an error', (done) => {
-    // jest.setTimeout(30000);
     expect(() => {
         mainSearch.JsonToVehicleByReg(inputVehicleInvalidReg)
             .then(([vehicle]) => {

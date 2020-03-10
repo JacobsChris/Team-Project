@@ -14,7 +14,7 @@ let inputBankCard = {
 };
 
 
-test('finds ATM transactions by atm', (done) => {
+test('finds ATM transactions by bank card', (done) => {
     mainSearch.JsonToStringTransactions(inputBankCard)
         .then((findATMTransactions) => {
             initRes = findATMTransactions;
