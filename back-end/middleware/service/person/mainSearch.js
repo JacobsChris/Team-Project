@@ -301,7 +301,7 @@ module.exports = {
 
 // function JsonToStringMobileCallRecords(input) {
 //     return findMobileCallRecordsFromOwnerPhoneNumb.findMobileCallRecordsFromOwnerPhoneNumb(input.phoneNumber);
-
+//
 // }
 //
 // JsonToStringMobileCallRecords({
@@ -309,10 +309,10 @@ module.exports = {
 //     "surname": "",
 //     "dateOfBirth": "",
 //     "address": "",
-//     "phoneNumber": "07700 988518",
+//     "phoneNumber": "07700 052181",
 //     "network": ""
 // })
-
+//
 //     .then(([ANPRLocations]) => {
 //         console.log("Advanced Detail vehicleObs", ANPRLocations);
 //     });
@@ -355,20 +355,21 @@ module.exports = {
 ///////////////////////////////////////////////////// find call history of an entered phone number  ///////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-// function JsonToCallHistory(input) {
-//     return findCallHistoryByPhoneNumber.findCallHistoryByPhoneNumber(input.phoneNumber, 5)
-// }
-//
-// JsonToCallHistory({
-//     "forenames": "",
-//     "surname": "",
-//     "dateOfBirth": "",
-//     "address": "",
-//     "phoneNumber": "07700 382747",
-//     "network": ""
-// }).then(([associateNumbs]) => {
-//     console.log("Advanced Detail associate", associateNumbs);
-// });
+function JsonToCallHistory(input) {
+    return findCallHistoryByPhoneNumber.findCallHistoryByPhoneNumber(input.phoneNumber, 5)
+}
+////outgoing call = 07700 846156
+////incoming call = 07700 605601
+JsonToCallHistory({
+    "forenames": "",
+    "surname": "",
+    "dateOfBirth": "",
+    "address": "",
+    "phoneNumber": "07700 605601",
+    "network": ""
+}).then(([associateNumbsOutgoing,associateNumbsInGoing]) => {
+    console.log("Outgoing calls", associateNumbsOutgoing,"Incoming calls", associateNumbsInGoing);
+});
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////// from a phone number find a person  ///////////////////////////////////////////////////////////////////////////////////////
