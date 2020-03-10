@@ -224,17 +224,17 @@ module.exports = {
 /////////////////////////////////////////////// find an ATM from a bank card number full input  ///////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-function JsonToStringATM(input){
-    return findATMPointByATMId.findATMPointByATMId(input.timestamp,input.atmId,input.bankCardNumber,input.type,input.amount)
-}
-JsonToStringATM({ "timestamp": "2015-05-01T14:37:23.000Z",
-    "atmId": "5436",
-    "bankCardNumber": "4722912624353299",
-    "type": "Cash Withdrawal",
-    "amount": "120"
-}).then(([ATMPoint]) => {
-    console.log("Advanced Detail ATMPoint" , ATMPoint);
-});
+// function JsonToStringATM(input){
+//     return findATMPointByATMId.findATMPointByATMId(input.timestamp,input.atmId,input.bankCardNumber,input.type,input.amount)
+// }
+// JsonToStringATM({ "timestamp": "2015-05-01T14:37:23.000Z",
+//     "atmId": "5436",
+//     "bankCardNumber": "4722912624353299",
+//     "type": "Cash Withdrawal",
+//     "amount": "120"
+// }).then(([ATMPoint]) => {
+//     console.log("Advanced Detail ATMPoint" , ATMPoint);
+// });
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////// find a vehicle from a vehicle reg full input  /////////////////////////////////////////////////////////////////////////////////////////
