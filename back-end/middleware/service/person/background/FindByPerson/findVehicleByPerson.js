@@ -16,7 +16,7 @@ module.exports = {
      *
      * @requires this function requires string inputs selected from findDetailsByName to function
      * */
-    findVehicleByPerson: function findVehicleByPerson(forenames, surname, DoB, Addr, limit) {
+    findVehicleByPerson: function findVehicleByPerson(forenames, surname,  Addr, DoB) {
         let sqlSearchString = "SELECT * FROM vehicleRegistration WHERE " +
             "forenames LIKE " + forenames +
             " AND surname LIKE " + surname +
