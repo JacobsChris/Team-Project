@@ -1,5 +1,5 @@
 const wildStr = require('../inputvalidation/wildStr.js');
-const atmID = require('./findATMPointByATM_ID')
+const atmID = require('./findATMPointByATM_ID');
 
 module.exports = {
     /**
@@ -28,7 +28,7 @@ module.exports = {
      *  @require this function to work it requires a JSON object to be passed into JsonToStringATM()
      *  */
     findATMPointByATMId: function findATMPointByATMId(timestamp, atmId, bankCardNumber, type, amount,limit) {
-            atmId = wildStr.addWildStr(atmId);
-            return Promise.all([atmID.findATMPoint(atmIdm,limit)]);
+        // atmId = wildStr.addWildStr(atmId);
+        return Promise.all([atmID.findATMPoint(atmId, limit)]);
     }
 };

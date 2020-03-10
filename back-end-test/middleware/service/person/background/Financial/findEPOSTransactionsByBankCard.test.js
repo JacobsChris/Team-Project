@@ -13,7 +13,7 @@ let inputBankCard = {
 };
 
 
-test('takes in bank details and finds their bank card', (done) => {
+test('takes in their bank card and returns their transactions using that card', (done) => {
     mainSearch.JsonToStringTransactions(inputBankCard)
         .then((findEPOSTransactions) => {
             initRes = findEPOSTransactions;
