@@ -81,13 +81,9 @@ module.exports = {
     JsonToStringMobileCallRecords: function JsonToStringMobileCallRecords(input) {
         return findMobileCallRecordsFromOwnerPhoneNumb.findMobileCallRecordsFromOwnerPhoneNumb(input.phoneNumber);
     },
-
-
     JsonToStringATM: function JsonToStringATM(input) {
         return findATMPointByATMId.findATMPointByATMId(input.timestamp, input.atmId, input.bankCardNumber, input.type, input.amount)
     },
-
-
     /**
      * @author Chris & Tony
      * @param input is a JSON which contains the key vehicleRegistrationNo
@@ -98,7 +94,6 @@ module.exports = {
     JsonToVehicleByReg: function JsonToVehicleByReg(input) {
         return searchByVehicleReg.searchByVehicleReg(input.vehicleRegistrationNo)
     },
-
     /**
      * @author Chris & Tony
      * @param input is a JSON which contains the key phoneNumber
@@ -109,8 +104,6 @@ module.exports = {
     JsonToPersonByMobile: function JsonToPersonByMoile(input) {
         return findPersonByMobile.findPersonByMobile(input.phoneNumber)
     },
-
-
     /**
      * @author Chris & Tony
      * @param input is a JSON which contains the key phoneNumber
@@ -124,8 +117,10 @@ module.exports = {
 
     JsonToStringCellTowerLocation: function JsonToStringCellTowerLocation(input) {
         return findCellTowerLocationBasedOnCellTowerId.findCellTowerLocationBasedOnCellTowerId(input.callCellTowerId);
+    },
+    JsonToStringDetailsFromVehicleReg: function JsonToStringDetailsFromVehicleReg(input) {
+        return findFullDetailsBasedOnAVehcileReg.findDetailsByName(input.forenames, input.surname, input.address, input.dateOfBirth);
     }
-
 };
 
 
@@ -426,6 +421,7 @@ module.exports = {
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////// from a Vehicle reg full details do an advanced search  ///////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 // JsonToStringDetailsFromVehicleReg: function JsonToStringDetailsFromVehicleReg(input) {
 //     return findFullDetailsBasedOnAVehcileReg.findDetailsByName( input.forenames, input.surname, input.address, input.dateOfBirth);
 // }
@@ -452,3 +448,32 @@ module.exports = {
 //         "Advanced Detail Search Mobile", Mobiles
 //         , "Advanced Detail Search vehicle", vehicle);
 // });
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////  End of debuggin zone /////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+                                                    // .''.
+                                                    //     .''.      .        *''*    :_\/_:     .
+                                                    // :_\/_:   _\(/_  .:.*_\/_*   : /\ :  .'.:.'.
+                                                    //     .''.: /\ :    /)\   ':'* /\ *  : '..'.  -=:o:=-
+                                                    // :_\/_:'.:::.  | ' *''*    * '.\'/.'_\(/_'.':'.'
+                                                    // : /\ : :::::  =  *_\/_*     -= o =- /)\    '  *
+                                                    // '..'  ':::' === * /\ *     .'/.\'.  ' ._____
+                                                    // *        |   *..*         :       |.   |' .---"|
+                                                    // *      |     _           .--'|  ||   | _|    |
+                                                    // *      |  .-'|       __  |   |  |    ||      |
+                                                    //     .-----.   |  |' |  ||  |  | |   |  |    ||      |
+                                                    // ___'       ' /"\ |  '-."".    '-'   '-.'    '`      |____
+                                                    // jgs~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+                                                    // &                    ~-~-~-~-~-~-~-~-~-~   /|
+                                                    // ejm97    )      ~-~-~-~-~-~-~-~  /|~       /_|\
+                                                    //         _-H-__  -~-~-~-~-~-~     /_|\    -~======-~
+                                                    // ~-\XXXXXXXXXX/~     ~-~-~-~     /__|_\ ~-~-~-~
+                                                    // ~-~-~-~-~-~    ~-~~-~-~-~-~    ========  ~-~-~-~
