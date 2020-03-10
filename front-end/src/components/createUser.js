@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import FormInput from './FormInput';
-import Axios from 'axios';
+import axios from 'axios';
 
 class CreateUser extends Component {
     constructor(props){
@@ -22,6 +22,7 @@ class CreateUser extends Component {
     submit = (e) => {
         e.preventDefault();
 
+        if(this.state.username === this.state.verUsername && this.state.password === this.state.verPassword) {
         let data = {
             username: this.state.username,
             verUsername: this.state.verUsername,
@@ -29,9 +30,16 @@ class CreateUser extends Component {
             verPassword: this.state.verPassword
         }
 
-        console.log(data);
+        
 
-        // axios.post('http://localhost:8080/', data)
+        axios.post('http://localhost:8080/register/', data)
+        .then(res => {
+            console.log(res);
+        })
+        .catch(err => {
+            console.log(err)
+        })
+    }
     }
 
     render() {
