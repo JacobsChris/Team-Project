@@ -1,4 +1,4 @@
-const auth = require('./sqlauth')
+const auth = require('../sqlauth')
 
 
 module.exports = {
@@ -13,6 +13,6 @@ module.exports = {
      * */
     searchCamerasByArea: function searchCamerasByArea(inputLatitude, inputLongitude, Radius) {
         let searchCameras = "select * from anprcamera where (((latitude - " + inputLatitude + ")*(latitude - " + inputLatitude + ") + (longitude - " + inputLongitude + ")*(longitude - " + inputLongitude + ")) < " + Radius + ")";
-        auth.SQLauthenticate(searchCameras);
+        return auth.SQLauthenticate(searchCameras);
     }
 };
