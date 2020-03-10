@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import FormInput from './FormInput';
+import Axios from 'axios';
 
 class CreateUser extends Component {
     constructor(props){
@@ -18,8 +19,19 @@ class CreateUser extends Component {
         });
     }
 
-    submit = () => {
+    submit = (e) => {
+        e.preventDefault();
 
+        let data = {
+            username: this.state.username,
+            verUsername: this.state.verUsername,
+            password: this.state.password,
+            verPassword: this.state.verPassword
+        }
+
+        console.log(data);
+
+        // axios.post('http://localhost:8080/', data)
     }
 
     render() {
