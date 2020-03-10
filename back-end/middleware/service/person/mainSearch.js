@@ -11,7 +11,7 @@ const findPersonByMobile = require("./background/PhoneData/findPersonByMobile");
 const findCallHistoryByPhoneNumber = require("./background/PhoneData/findCallHistoryByPhoneNumber");
 const findCellTowerLocationBasedOnCellTowerId = require('./background/PhoneData/findCellTowerLocationBasedOnCellTowerId');
 const findFullDetailsBasedOnAVehcileReg = require('./background/vehicle/findDetailsByVehicleRegDetails');
-
+const searchCamerasByArea = require('./background/searchCamerasByArea.js')
 
 module.exports = {
 
@@ -35,7 +35,7 @@ module.exports = {
         ,"Advanced Detail Search vehicle", vehicle); });
      * */
     JsonToStringDetails: function JsonToStringDetails(input) {
-        return findDetailsByName.findDetailsByName(input.citizenID, input.forenames, input.surname, input.homeAddress, input.dateOfBirth, input.placeOfBirth, input.sex, 5);
+        return findDetailsByName.findDetailsByName(input.citizenID, input.forenames, input.surname, input.homeAddress, input.dateOfBirth, input.placeOfBirth, input.sex);
 
     },
     /**
@@ -81,13 +81,9 @@ module.exports = {
     JsonToStringMobileCallRecords: function JsonToStringMobileCallRecords(input) {
         return findMobileCallRecordsFromOwnerPhoneNumb.findMobileCallRecordsFromOwnerPhoneNumb(input.phoneNumber);
     },
-
-
     JsonToStringATM: function JsonToStringATM(input) {
         return findATMPointByATMId.findATMPointByATMId(input.timestamp, input.atmId, input.bankCardNumber, input.type, input.amount)
     },
-
-
     /**
      * @author Chris & Tony
      * @param input is a JSON which contains the key vehicleRegistrationNo
@@ -98,7 +94,6 @@ module.exports = {
     JsonToVehicleByReg: function JsonToVehicleByReg(input) {
         return searchByVehicleReg.searchByVehicleReg(input.vehicleRegistrationNo)
     },
-
     /**
      * @author Chris & Tony
      * @param input is a JSON which contains the key phoneNumber
@@ -109,8 +104,6 @@ module.exports = {
     JsonToPersonByMobile: function JsonToPersonByMoile(input) {
         return findPersonByMobile.findPersonByMobile(input.phoneNumber)
     },
-
-
     /**
      * @author Chris & Tony
      * @param input is a JSON which contains the key phoneNumber
@@ -124,8 +117,10 @@ module.exports = {
 
     JsonToStringCellTowerLocation: function JsonToStringCellTowerLocation(input) {
         return findCellTowerLocationBasedOnCellTowerId.findCellTowerLocationBasedOnCellTowerId(input.callCellTowerId);
+    },
+    JsonToStringDetailsFromVehicleReg: function JsonToStringDetailsFromVehicleReg(input) {
+        return findFullDetailsBasedOnAVehcileReg.findDetailsByName(input.forenames, input.surname, input.address, input.dateOfBirth);
     }
-
 };
 
 
@@ -144,9 +139,9 @@ module.exports = {
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////  find a citizen on a partial input  ///////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
+//
 // function JsonToStringName(input) {
-//     return SearchByNames.searchByNames(input.citizenID, input.forenames, input.surname, input.homeAddress, input.dateOfBirth, input.placeOfBirth, input.sex, 5);
+//     return SearchByNames.searchByNames(input.citizenID, input.forenames, input.surname, input.homeAddress, input.dateOfBirth, input.placeOfBirth, input.sex);
 // }
 //
 // JsonToStringName(    {
@@ -166,27 +161,27 @@ module.exports = {
 /////////////////////////////////////////////////// find details on a citizen on a full input  ////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-// function JsonToStringDetails(input) {
-//     return findDetailsByName.findDetailsByName(input.citizenID, input.forenames, input.surname, input.homeAddress, input.dateOfBirth, input.placeOfBirth, input.sex);
-// }
-//
-// JsonToStringDetails(
-//     {
-//         "citizenID": "",
-//         "forenames": "William",
-//         "surname": "Willis",
-//         "homeAddress": "",
-//         "dateOfBirth": "1958-10-27",
-//         "placeOfBirth": "",
-//         "sex": ""
-//     }
-// ).then(([Citizen, BankAccount, Mobiles, vehicle]) => {
-//     console.log("Advanced Detail Search in order of citizen"
-//         , Citizen,
-//         "Advanced Detail Search BankAccount", BankAccount,
-//         "Advanced Detail Search Mobile", Mobiles
-//         , "Advanced Detail Search vehicle", vehicle);
-// });
+function JsonToStringDetails(input) {
+    return findDetailsByName.findDetailsByName(input.citizenID, input.forenames, input.surname, input.homeAddress, input.dateOfBirth, input.placeOfBirth, input.sex);
+}
+
+JsonToStringDetails(
+    {
+        "citizenID": "",
+        "forenames": "William",
+        "surname": "Willis",
+        "homeAddress": "",
+        "dateOfBirth": "1958-10-27",
+        "placeOfBirth": "",
+        "sex": ""
+    }
+).then(([Citizen, BankAccount, Mobiles, vehicle]) => {
+    console.log("Advanced Detail Search in order of citizen"
+        , Citizen,
+        "Advanced Detail Search BankAccount", BankAccount,
+        "Advanced Detail Search Mobile", Mobiles
+        , "Advanced Detail Search vehicle", vehicle);
+});
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////// find bank card of a citizen on a full input  //////////////////////////////////////////////////////////////////////////////////////
@@ -390,6 +385,9 @@ module.exports = {
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
+
+
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -398,7 +396,14 @@ module.exports = {
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-
+// function JsonToStringSearchCamerasByArea(input) {
+//     return searchCamerasByArea.searchCamerasByArea( input.latitude, input.longitude,input.radius)
+// }
+//
+// JsonToStringSearchCamerasByArea({
+//     latitude: 51.54500551249844,
+//     longitude: -0.13447255196733515,
+//     radius: 2}).then(([Locations]) => {console.log("Advanced Detail Search in order of vehicle", Locations);});
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////// from a Vehicle reg find a person  ///////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -426,6 +431,7 @@ module.exports = {
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////// from a Vehicle reg full details do an advanced search  ///////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 // JsonToStringDetailsFromVehicleReg: function JsonToStringDetailsFromVehicleReg(input) {
 //     return findFullDetailsBasedOnAVehcileReg.findDetailsByName( input.forenames, input.surname, input.address, input.dateOfBirth);
 // }
@@ -452,3 +458,32 @@ module.exports = {
 //         "Advanced Detail Search Mobile", Mobiles
 //         , "Advanced Detail Search vehicle", vehicle);
 // });
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////  End of debuggin zone /////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+                                                    // .''.
+                                                    //     .''.      .        *''*    :_\/_:     .
+                                                    // :_\/_:   _\(/_  .:.*_\/_*   : /\ :  .'.:.'.
+                                                    //     .''.: /\ :    /)\   ':'* /\ *  : '..'.  -=:o:=-
+                                                    // :_\/_:'.:::.  | ' *''*    * '.\'/.'_\(/_'.':'.'
+                                                    // : /\ : :::::  =  *_\/_*     -= o =- /)\    '  *
+                                                    // '..'  ':::' === * /\ *     .'/.\'.  ' ._____
+                                                    // *        |   *..*         :       |.   |' .---"|
+                                                    // *      |     _           .--'|  ||   | _|    |
+                                                    // *      |  .-'|       __  |   |  |    ||      |
+                                                    //     .-----.   |  |' |  ||  |  | |   |  |    ||      |
+                                                    // ___'       ' /"\ |  '-."".    '-'   '-.'    '`      |____
+                                                    // jgs~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+                                                    // &                    ~-~-~-~-~-~-~-~-~-~   /|
+                                                    // ejm97    )      ~-~-~-~-~-~-~-~  /|~       /_|\
+                                                    //         _-H-__  -~-~-~-~-~-~     /_|\    -~======-~
+                                                    // ~-\XXXXXXXXXX/~     ~-~-~-~     /__|_\ ~-~-~-~
+                                                    // ~-~-~-~-~-~    ~-~~-~-~-~-~    ========  ~-~-~-~
