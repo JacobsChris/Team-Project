@@ -2,6 +2,7 @@
   "name": "front-end",
   "version": "0.1.0",
   "private": true,
+  "homepage": "http://localhost:3000/user/signin",
   "dependencies": {
     "@material-ui/icons": "^4.9.1",
     "@testing-library/jest-dom": "^4.2.4",
