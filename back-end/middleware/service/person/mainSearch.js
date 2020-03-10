@@ -76,8 +76,11 @@ module.exports = {
         return findMobileCallRecordsFromOwnerPhoneNumb.findMobileCallRecordsFromOwnerPhoneNumb(input.phoneNumber);
     },
     JsonToStringCellTowerLocation: function JsonToStringCellTowerLocation(input,limit) {
-    return findCellTowerLocationBasedOnCellTowerId.findCellTowerLocationBasedOnCellTowerId(input.callCellTowerId,limit);
-}
+        return findCellTowerLocationBasedOnCellTowerId.findCellTowerLocationBasedOnCellTowerId(input.callCellTowerId, limit);
+    },
+    JsonToStringCellTowerLocation: function JsonToStringVehicleByReg(input) {
+    return searchByVehicleReg.searchByVehicleReg(input.vehicleRegistrationNo)
+    }
 };
 
 
@@ -265,3 +268,46 @@ module.exports = {
 //     console.log("Advanced Detail vehicleObs", CellTowerLocations);
 // });
 
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////// find car details based on a partial or full Reg  ///////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// function JsonToStringVehicleByReg(input) {
+//     return searchByVehicleReg.searchByVehicleReg(input.vehicleRegistrationNo)
+// }
+//
+// JsonToStringVehicleByReg({registrationID: 322,
+//     registrationDate: '1995-06-15',
+//     vehicleRegistrationNo: "JL2_ ___",
+//     make: 'Ford',
+//     model: 'Fiesta',
+//     colour: 'silver',
+//     forenames: 'Glenn Eric',
+//     surname: 'Walters',
+//     address: '54 ELIZABETH ROAD, WEST BROMWICH, B13 8QH',
+//     dateOfBirth: '1984-01-09',
+//     driverLicenceID: 'WALTE801094GE9CT 23'})
+//     .then(([vehicle]) => {
+//         console.log("Advanced Detail Search in order of vehicle", vehicle);
+//     });
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////// find person details based on a partial or vehicle Reg  ///////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// function JsonToStringPersonDetailsFromRegData (input) {
+//
+// }
+//
+// JsonToStringPersonDetailsFromRegData({
+//     registrationID: 322,
+//     registrationDate: '1995-06-15',
+//     vehicleRegistrationNo: 'JL29 NDY',
+//     make: 'Ford',
+//     model: 'Fiesta',
+//     colour: 'silver',
+//     forenames: 'Glenn Eric',
+//     surname: 'Walters',
+//     address: '54 ELIZABETH ROAD, WEST BROMWICH, B13 8QH',
+//     dateOfBirth: '1984-01-09',
+//     driverLicenceID: 'WALTE801094GE9CT 23' })
