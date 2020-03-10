@@ -17,7 +17,6 @@ module.exports = {
         vehicleReg = licencePlateValidator(vehicleReg);
         if (vehicleReg !== "Invalid Reg No") {
 
-            vehicleReg = wildStr.addWildStr(vehicleReg);
             let sqlSearchString = "SELECT * FROM vehicleRegistration WHERE " +
                 "vehicleRegistrationNo LIKE " + vehicleReg;
             return auth.SQLauthenticate(sqlSearchString);
