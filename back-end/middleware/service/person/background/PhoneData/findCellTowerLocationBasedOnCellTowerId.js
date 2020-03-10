@@ -1,6 +1,6 @@
-const findLocation = require('./SqlConstructorForLocations.js');
+const findCellTowerLocation = require('./SqlConstructorForCellTowerLocation');
 const wildStr = require('../inputvalidation/wildStr.js');
-
+const exactStr = require('../inputvalidation/exactStr');
 module.exports = {
     // /**
     //  *  @author Anthony Wilkinson & Chris
@@ -27,8 +27,8 @@ module.exports = {
     //  *
     //  *  @require this function to work it requires a JSON object to be passed into JsonToStringATM()
     //  *  */
-    findANPRCameraLocation: function findANPRCameraLocation(ANPRPointId,limit) {
-        ANPRPointId = wildStr.addWildStr(ANPRPointId);
-        return Promise.all([findLocation.findLocation(ANPRPointId,limit)]);
+    findCellTowerLocationBasedOnCellTowerId: function findCellTowerLocationBasedOnCellTowerId(cellTowerId,limit) {
+        cellTowerId = exactStr.addExactStr(cellTowerId);
+        return Promise.all([findCellTowerLocation.findCellTowerLocation(cellTowerId,limit)]);
     }
 };

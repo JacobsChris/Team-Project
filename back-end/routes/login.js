@@ -6,7 +6,9 @@ const passport = require('passport');
 const userModel = require('../database/sequelize');
 const router = express.Router();
 
-router.post("/login", passport.authenticate('login', { session: false }),
+
+router.post("/", passport.authenticate('login', {session: false}),
+
     function (req, res) {
         req.logIn(req.user, (error) => {
             if (error) {
@@ -14,7 +16,9 @@ router.post("/login", passport.authenticate('login', { session: false }),
             } else if (!req.user) {
                 res.status(401).send("Error, user not found");
             }
+
             userModel.findOne({ where: { username: req.user.username }})
+
                 .then(result => {
                     const token = jwt.sign({ id: result.username }, jwtKey.secret, { expiresIn: 1800});
                     res.send({
