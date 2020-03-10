@@ -22,7 +22,7 @@ module.exports = {
      * @requires this at the end of the function to get @return .then(([citizen]) => { console.log("Advanced Detail Search in order of citizen" , citizen); });
      * */
     JsonToStringName: function JsonToStringName(input) {
-        return SearchByNames.searchByNames(input.citizenID, input.forenames, input.surname, input.homeAddress, input.dateOfBirth, input.placeOfBirth, input.sex, 5);
+        return SearchByNames.searchByNames(input.citizenID, input.forenames, input.surname, input.homeAddress, input.dateOfBirth, input.placeOfBirth, input.sex);
     },
     /**
      * @author Anthony Wilkinson & Chris
@@ -159,27 +159,27 @@ module.exports = {
 /////////////////////////////////////////////////// find details on a citizen on a full input  ////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-function JsonToStringDetails(input) {
-    return findDetailsByName.findDetailsByName(input.citizenID, input.forenames, input.surname, input.homeAddress, input.dateOfBirth, input.placeOfBirth, input.sex);
-}
-
-JsonToStringDetails(
-    {
-        "citizenID": "",
-        "forenames": "William",
-        "surname": "Willis",
-        "homeAddress": "",
-        "dateOfBirth": "1958-10-27",
-        "placeOfBirth": "",
-        "sex": ""
-    }
-).then(([Citizen, BankAccount, Mobiles, vehicle]) => {
-    console.log("Advanced Detail Search in order of citizen"
-        , Citizen,
-        "Advanced Detail Search BankAccount", BankAccount,
-        "Advanced Detail Search Mobile", Mobiles
-        , "Advanced Detail Search vehicle", vehicle);
-});
+// function JsonToStringDetails(input) {
+//     return findDetailsByName.findDetailsByName(input.citizenID, input.forenames, input.surname, input.homeAddress, input.dateOfBirth, input.placeOfBirth, input.sex);
+// }
+//
+// JsonToStringDetails(
+//     {
+//         "citizenID": "",
+//         "forenames": "William",
+//         "surname": "Willis",
+//         "homeAddress": "",
+//         "dateOfBirth": "1958-10-27",
+//         "placeOfBirth": "",
+//         "sex": ""
+//     }
+// ).then(([Citizen, BankAccount, Mobiles, vehicle]) => {
+//     console.log("Advanced Detail Search in order of citizen"
+//         , Citizen,
+//         "Advanced Detail Search BankAccount", BankAccount,
+//         "Advanced Detail Search Mobile", Mobiles
+//         , "Advanced Detail Search vehicle", vehicle);
+// });
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////// find bank card of a citizen on a full input  //////////////////////////////////////////////////////////////////////////////////////
@@ -206,7 +206,7 @@ JsonToStringDetails(
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // function JsonToStringTransactions(input){
-//     return findTransactionsByBankCard.findTransactionsByBankCard(input.bankcardId,input.cardNumber,input.sortCode,input.bankAccountId,input.accountNumber,input.bank,5)
+//     return findTransactionsByBankCard.findTransactionsByBankCard(input.bankcardId,input.cardNumber,input.sortCode,input.bankAccountId,input.accountNumber,input.bank)
 // }
 //
 // JsonToStringTransactions({
@@ -224,17 +224,17 @@ JsonToStringDetails(
 /////////////////////////////////////////////// find an ATM from a bank card number full input  ///////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-// function JsonToStringATM(input){
-//     return findATMPointByATMId.findATMPointByATMId(input.timestamp,input.atmId,input.bankCardNumber,input.type,input.amount,5)
-// }
-// JsonToStringATM({ "timestamp": "2015-05-01T14:37:23.000Z",
-//     "atmId": "5436",
-//     "bankCardNumber": "4722912624353299",
-//     "type": "Cash Withdrawal",
-//     "amount": "120"
-// }).then(([ATMPoint]) => {
-//     console.log("Advanced Detail ATMPoint" , ATMPoint);
-// });
+function JsonToStringATM(input){
+    return findATMPointByATMId.findATMPointByATMId(input.timestamp,input.atmId,input.bankCardNumber,input.type,input.amount)
+}
+JsonToStringATM({ "timestamp": "2015-05-01T14:37:23.000Z",
+    "atmId": "5436",
+    "bankCardNumber": "4722912624353299",
+    "type": "Cash Withdrawal",
+    "amount": "120"
+}).then(([ATMPoint]) => {
+    console.log("Advanced Detail ATMPoint" , ATMPoint);
+});
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////// find a vehicle from a vehicle reg full input  /////////////////////////////////////////////////////////////////////////////////////////
