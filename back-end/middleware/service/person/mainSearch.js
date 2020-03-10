@@ -11,7 +11,7 @@ const findPersonByMobile = require("./background/PhoneData/findPersonByMobile");
 const findCallHistoryByPhoneNumber = require("./background/PhoneData/findCallHistoryByPhoneNumber");
 const findCellTowerLocationBasedOnCellTowerId = require('./background/PhoneData/findCellTowerLocationBasedOnCellTowerId');
 const findFullDetailsBasedOnAVehcileReg = require('./background/vehicle/findDetailsByVehicleRegDetails');
-const searchCamerasByArea = require('./background/searchCamerasByArea.js')
+const searchByLocation = require('./background/LocationSearch/SearchByLocation');
 
 module.exports = {
 
@@ -158,27 +158,27 @@ module.exports = {
 /////////////////////////////////////////////////// find details on a citizen on a full input  ////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-function JsonToStringDetails(input) {
-    return findDetailsByName.findDetailsByName(input.citizenID, input.forenames, input.surname, input.homeAddress, input.dateOfBirth, input.placeOfBirth, input.sex);
-}
-
-JsonToStringDetails(
-    {
-        "citizenID": "",
-        "forenames": "William",
-        "surname": "Willis",
-        "homeAddress": "",
-        "dateOfBirth": "1958-10-27",
-        "placeOfBirth": "",
-        "sex": ""
-    }
-).then(([Citizen, BankAccount, Mobiles, vehicle]) => {
-    console.log("Advanced Detail Search in order of citizen"
-        , Citizen,
-        "Advanced Detail Search BankAccount", BankAccount,
-        "Advanced Detail Search Mobile", Mobiles
-        , "Advanced Detail Search vehicle", vehicle);
-});
+// function JsonToStringDetails(input) {
+//     return findDetailsByName.findDetailsByName(input.citizenID, input.forenames, input.surname, input.homeAddress, input.dateOfBirth, input.placeOfBirth, input.sex);
+// }
+//
+// JsonToStringDetails(
+//     {
+//         "citizenID": "",
+//         "forenames": "William",
+//         "surname": "Willis",
+//         "homeAddress": "",
+//         "dateOfBirth": "1958-10-27",
+//         "placeOfBirth": "",
+//         "sex": ""
+//     }
+// ).then(([Citizen, BankAccount, Mobiles, vehicle]) => {
+//     console.log("Advanced Detail Search in order of citizen"
+//         , Citizen,
+//         "Advanced Detail Search BankAccount", BankAccount,
+//         "Advanced Detail Search Mobile", Mobiles
+//         , "Advanced Detail Search vehicle", vehicle);
+// });
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////// find bank card of a citizen on a full input  //////////////////////////////////////////////////////////////////////////////////////
@@ -381,8 +381,25 @@ JsonToStringDetails(
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+function JsonToStringSearchByLocation(input){
+    return searchByLocation.searchByLocation(input.latitude, input.longitude,input.radius);
+
+}
+
+JsonToStringSearchByLocation({
+    latitude: 51.54500551249844,
+        longitude: -0.13447255196733515,
+        radius: 0.5}).then(([ANPRCameraLocations]) => {console.log("ANPRCameraLocations", ANPRCameraLocations);});
 
 
+// function JsonToStringSearchCamerasByArea(input) {
+//     return searchCamerasByArea.searchCamerasByArea( input.latitude, input.longitude,input.radius)
+// }
+//
+// JsonToStringSearchCamerasByArea({
+//     latitude: 51.54500551249844,
+//     longitude: -0.13447255196733515,
+//     radius: 2}).then(([Locations]) => {console.log("Advanced Detail Search in order of vehicle", Locations);});
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -393,14 +410,7 @@ JsonToStringDetails(
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-// function JsonToStringSearchCamerasByArea(input) {
-//     return searchCamerasByArea.searchCamerasByArea( input.latitude, input.longitude,input.radius)
-// }
-//
-// JsonToStringSearchCamerasByArea({
-//     latitude: 51.54500551249844,
-//     longitude: -0.13447255196733515,
-//     radius: 2}).then(([Locations]) => {console.log("Advanced Detail Search in order of vehicle", Locations);});
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////// from a Vehicle reg find a person  ///////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
