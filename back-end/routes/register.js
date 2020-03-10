@@ -14,7 +14,7 @@ router.post("/", function (req, res) {
             else {
                 bcrypt.hash(req.body.password, saltRounds)
                     .then(result => {
-                        userModel.create({ username: username, password: result });
+                        userModel.create({ username: req.body.username, password: result });
                     });
                 res.status(201).send("user is created");
             }

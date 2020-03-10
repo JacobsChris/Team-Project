@@ -5,16 +5,20 @@ const userModel = require('../../database/sequelize');
 
 
 const loginAuth = passport.use("login", new LocalStrategy(
-
     function(username, password, done) {
         userModel.findOne({ where: { username: username }})
         .then(user => {
             if (!user) {
                 return done(null, false, {message: 'Incorrect username.'});
-            } else if (password !== user.password) {
-                return done(null, false, {message: "Incorrect password"});
-            } else {
-                return done(null, user);
+            } 
+            else {
+                bcrypt.compare(password, user.password)
+                    .then(response => {
+                        if (response !== true) {
+                            return done(null, false, {message: "Incorrect password"});
+                        }
+                        return done(null, user);
+                });
             }
         })
         .catch(error => {
