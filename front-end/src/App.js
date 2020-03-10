@@ -19,7 +19,7 @@ function App() {
     if (sessionStorage.getItem('jwt')) {
       next();
     }
-    next.redirect('/user/home/signin');
+    next.redirect('/user/signin');
   };
 
   return (
@@ -30,10 +30,10 @@ function App() {
           <GuardedRoute path='/user/home/' component={SearchNavBar}></GuardedRoute>
           <GuardedRoute path='/user/home/searchpeople' component={SearchPeople}></GuardedRoute>
           <GuardedRoute path='/admin/' component={AdminNavBar}></GuardedRoute>
-          <Route path='/admin/adduser/' component={CreateUser}></Route>
+          <GuardedRoute path='/admin/adduser/' component={CreateUser}></GuardedRoute>
           <GuardedRoute path='/user/home/peopleresults' component={PeopleResultsPage}></GuardedRoute>
         </GuardProvider>
-      <Route path='/user/home/signin' component={SignIn}></Route>
+      <Route path='/user/signin' component={SignIn}></Route>
     </BrowserRouter>
     </Provider>
   );

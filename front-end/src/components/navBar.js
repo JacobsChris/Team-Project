@@ -3,6 +3,10 @@ import { Nav, Navbar} from 'react-bootstrap';
 
 class NavBar extends React.Component {
 
+    signout = () => {
+        sessionStorage.clear();
+        this.props.history.push("/user/signin");
+    }
     render(){
         return (
             <Navbar bg="dark" variant="dark" expand="md" className='main-nav'>
@@ -12,7 +16,7 @@ class NavBar extends React.Component {
                         <Nav className='ml-auto'>
                             <Nav.Link href="/user/home">HOME</Nav.Link>
                             <Nav.Link href="/user/help">HELP</Nav.Link>
-                            <Nav.Link href="/user/login">SIGN OUT</Nav.Link>
+                            <Nav.Link onClick={this.signout}>SIGN OUT</Nav.Link>
                         </Nav>
                     </Navbar.Collapse>
             </Navbar>
