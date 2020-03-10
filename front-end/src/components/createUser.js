@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import FormInput from './FormInput';
-import Axios from 'axios';
+import axios from 'axios';
 
 class CreateUser extends Component {
     constructor(props){
@@ -31,7 +31,12 @@ class CreateUser extends Component {
 
         console.log(data);
 
-        // axios.post('http://localhost:8080/', data)
+        axios.post('http://localhost:8080/', data)
+        .then(res => {
+            console.log(res);
+        }).catch(err => {
+            
+        });
     }
 
     render() {
