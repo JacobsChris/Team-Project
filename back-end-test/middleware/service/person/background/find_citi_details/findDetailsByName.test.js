@@ -15,7 +15,7 @@ let expectedResult = [
     ],
     [
         {
-            "accountNumber": "75482888",
+            "accountNumber": 75482888,
             "bank": "Citibank International",
             "bankAccountId": 89368,
             "dateOfBirth": "1953-11-07",
@@ -63,6 +63,7 @@ let inputPerson = {
 
 
 test('takes in a valid string and searches for a persons details', (done) => {
+    jest.setTimeout(10000000);
     mainSearch.JsonToStringDetails(inputPerson)
         .then(([Citizen, BankAccount, Mobiles, vehicle]) => {
             initRes[0] = Citizen;

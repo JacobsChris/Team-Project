@@ -1,3 +1,5 @@
+const wildStr = require("./inputvalidation/wildStr");
+
 const auth = require('./sqlauth.js');
 const {licencePlateValidator} = require("../../../../../back-end/middleware/service/person/background/inputvalidation/licencePlateValidator");
 
@@ -13,12 +15,8 @@ module.exports = {
      * */
     searchByVehicleReg: function searchByVehicleReg(vehicleReg) {
         vehicleReg = licencePlateValidator(vehicleReg);
-        if (vehicleReg !== "Invalid Reg No") {
-            let sqlSearchString = "SELECT * FROM vehicleRegistration WHERE " +
-                "vehicleRegistrationNo LIKE " + vehicleReg;
-            return auth.SQLauthenticate(sqlSearchString);
-        } else {
-            return vehicleReg;
-        }
+        let sqlSearchString = "SELECT * FROM vehicleRegistration WHERE " +
+            "vehicleRegistrationNo LIKE " + vehicleReg;
+        return Promise.all([auth.SQLauthenticate(sqlSearchString)]);
     }
 };
