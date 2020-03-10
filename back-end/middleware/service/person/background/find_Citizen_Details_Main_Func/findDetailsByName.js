@@ -27,11 +27,11 @@ module.exports = {
      *  @require this function to work it requires a JSON object to be passed into JsonToStringDetails()
      *  */
     findDetailsByName: function findDetailsByName(citizenID, forenames, surname, homeAddress, dateOfBirth, placeOfBirth, sex) {
-        // if ((typeof forenames != 'string') || (typeof surname != 'string') || (typeof homeAddress != 'string') || (typeof placeOfBirth != 'string') || (typeof sex != 'string')) {
-        //     console.log("The entered inputs are not a string!" +
-        //         "please make sure you've entered all the inputs correctly");
-        //     throw new Error("Not string error")
-        // } else {
+        if ((typeof forenames != 'string') || (typeof surname != 'string') || (typeof homeAddress != 'string') || (typeof placeOfBirth != 'string') || (typeof sex != 'string')) {
+            console.log("The entered inputs are not a string!" +
+                "please make sure you've entered all the inputs correctly");
+            throw new Error("Not string error")
+        } else {
             citizenID = wildStr.addWildStr(citizenID);
             forenames = wildStr.addWildStr(forenames);
             surname = wildStr.addWildStr(surname);
@@ -44,6 +44,6 @@ module.exports = {
                 bankAccount.findBankAccountByPerson(forenames, surname, homeAddress, dateOfBirth),
                 mobilePhone.findMobileByPerson(forenames, surname, homeAddress, dateOfBirth),
                 veheicleReg.findVehicleByPerson(forenames, surname, homeAddress, dateOfBirth)]);
-        // }
+        }
     }
 };
