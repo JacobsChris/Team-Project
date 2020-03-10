@@ -7,11 +7,10 @@ const findATMPointByATMId = require('./background/Financial/findDetailsByATMId.j
 const findVehicleLocationByVehicleReg = require('./background/vehicle/findVehicleObsByVehicle.js');
 const findANPRCameraLocation = require('./background/vehicle/findANPRCameraLocation.js');
 const findMobileCallRecordsFromOwnerPhoneNumb = require('./background/PhoneData/findMobileCallRecordsFromOwnerPhoneNumb');
-
 const findPersonByMobile = require("./background/PhoneData/findPersonByMobile");
 const findCallHistoryByPhoneNumber = require("./background/PhoneData/findCallHistoryByPhoneNumber");
-
 const findCellTowerLocationBasedOnCellTowerId = require('./background/PhoneData/findCellTowerLocationBasedOnCellTowerId');
+const findFullDetailsBasedOnAVehcileReg = require('./background/vehicle/findDetailsByVehicleRegDetails');
 
 
 module.exports = {
@@ -364,7 +363,7 @@ module.exports = {
 // });
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////// from a phone number find a person  ///////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////// from a phone number find a person  //////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // function JsonToStringFindPersonFromNumber(input) {
@@ -391,7 +390,6 @@ module.exports = {
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -405,23 +403,52 @@ module.exports = {
 ///////////////////////////////////////////////////// from a Vehicle reg find a person  ///////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-function JsonToStringVehicleByReg(input) {
-    return searchByVehicleReg.searchByVehicleReg(input.vehicleRegistrationNo)
-}
+// function JsonToStringVehicleByReg(input) {
+//     return searchByVehicleReg.searchByVehicleReg(input.vehicleRegistrationNo)
+// }
+//
+// JsonToStringVehicleByReg({
+//     registrationID: 322,
+//     registrationDate: '1995-06-15',
+//     vehicleRegistrationNo: "JL2_ ___",
+//     make: 'Ford',
+//     model: 'Fiesta',
+//     colour: 'silver',
+//     forenames: 'Glenn Eric',
+//     surname: 'Walters',
+//     address: '54 ELIZABETH ROAD, WEST BROMWICH, B13 8QH',
+//     dateOfBirth: '1984-01-09',
+//     driverLicenceID: 'WALTE801094GE9CT 23'
+// })
+//     .then(([vehicle]) => {
+//         console.log("Advanced Detail Search in order of vehicle", vehicle);});
 
-JsonToStringVehicleByReg({
-    registrationID: 322,
-    registrationDate: '1995-06-15',
-    vehicleRegistrationNo: "JL2_ ___",
-    make: 'Ford',
-    model: 'Fiesta',
-    colour: 'silver',
-    forenames: 'Glenn Eric',
-    surname: 'Walters',
-    address: '54 ELIZABETH ROAD, WEST BROMWICH, B13 8QH',
-    dateOfBirth: '1984-01-09',
-    driverLicenceID: 'WALTE801094GE9CT 23'
-})
-    .then(([vehicle]) => {
-        console.log("Advanced Detail Search in order of vehicle", vehicle);
-    });
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////// from a Vehicle reg full details do an advanced search  ///////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// JsonToStringDetailsFromVehicleReg: function JsonToStringDetailsFromVehicleReg(input) {
+//     return findFullDetailsBasedOnAVehcileReg.findDetailsByName( input.forenames, input.surname, input.address, input.dateOfBirth);
+// }
+//
+//
+// JsonToStringDetailsFromVehicleReg(
+//     {
+//         registrationID: 322,
+//         registrationDate: '1995-06-15',
+//         vehicleRegistrationNo: "JL2_ ___",
+//         make: 'Ford',
+//         model: 'Fiesta',
+//         colour: 'silver',
+//         forenames: 'Glenn Eric',
+//         surname: 'Walters',
+//         address: '54 ELIZABETH ROAD, WEST BROMWICH, B13 8QH',
+//         dateOfBirth: '1984-01-09',
+//         driverLicenceID: 'WALTE801094GE9CT 23'
+//     }
+// ).then(([Citizen, BankAccount, Mobiles, vehicle]) => {
+//     console.log("Advanced Detail Search in order of citizen"
+//         , Citizen,
+//         "Advanced Detail Search BankAccount", BankAccount,
+//         "Advanced Detail Search Mobile", Mobiles
+//         , "Advanced Detail Search vehicle", vehicle);
+// });
