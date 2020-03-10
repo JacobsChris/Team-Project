@@ -26,6 +26,7 @@ module.exports = {    /**
             " AND dateOfBirth LIKE " + dateOfBirth +
             " AND placeOfBirth LIKE " + placeOfBirth +
             " AND sex LIKE " + sex;
+
         return auth.SQLauthenticate(sqlSearchString);
     }
 };
