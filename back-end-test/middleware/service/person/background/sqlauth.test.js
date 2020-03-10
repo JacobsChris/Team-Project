@@ -12,7 +12,7 @@ let expectedResult = [{
 }];
 
 test('tests SQL Auth does stuff', (done) => {
-    auth.SQLauthenticate("SELECT * FROM citizen LIMIT 1")
+    auth.SQLauthenticate("SELECT * FROM citizen WHERE citizenID=(1111269986) LIMIT 1")
         .then(res => {
             initRes = res;
             expect(initRes).toStrictEqual(expectedResult);

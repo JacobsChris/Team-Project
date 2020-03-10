@@ -29,7 +29,8 @@ let inputVehicleInvalidReg = {
 
 
 test('takes in a valid complete vehicleReg and searches for vehicles', (done) => {
-    mainSearch.JsonToVehicleByReg(inputVehicleInCompleteReg)
+    jest.setTimeout(10000000);
+    mainSearch.JsonToVehicleByReg(inputVehicleCompleteReg, 1)
         .then(([vehicle]) => {
             console.log("Advanced Detail Search in order of vehicle"
                 , vehicle);
@@ -42,7 +43,7 @@ test('takes in a valid complete vehicleReg and searches for vehicles', (done) =>
 });
 
 test('takes in a valid incomplete vehicleReg and searches for vehicles', (done) => {
-    mainSearch.JsonToVehicleByReg(inputVehicleCompleteReg)
+    mainSearch.JsonToVehicleByReg(inputVehicleInCompleteReg, 3)
         .then(([vehicle]) => {
             console.log("Advanced Detail Search in order of vehicle"
                 , vehicle);

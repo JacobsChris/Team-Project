@@ -1,6 +1,7 @@
 const app = require('../../../back-end/app');
 const request = require('supertest');
 
+
 const goodUser = {
     "username": "admin",
     "password": "mypass"
@@ -17,11 +18,11 @@ const failure = "unauthorized";
 
 describe('login test', function() {
 
-    afterEach(function(done) {
+    afterEach(function (done) {
         const server = app;
         server.close();
         done();
-    })
+    });
 
     it("takes in correct username and password and should return success message", async () => {
         let res = await request(app)

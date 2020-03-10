@@ -81,9 +81,6 @@ module.exports = {
     JsonToStringMobileCallRecords: function JsonToStringMobileCallRecords(input) {
         return findMobileCallRecordsFromOwnerPhoneNumb.findMobileCallRecordsFromOwnerPhoneNumb(input.phoneNumber);
     },
-    JsonToStringATM: function JsonToStringATM(input) {
-        return findATMPointByATMId.findATMPointByATMId(input.timestamp, input.atmId, input.bankCardNumber, input.type, input.amount)
-    },
     /**
      * @author Chris & Tony
      * @param input is a JSON which contains the key vehicleRegistrationNo
@@ -91,8 +88,8 @@ module.exports = {
      * @requires the following code at the end to access data:
      *          .then(([vehicle]) => {console.log("Advanced Detail Search in order of vehicle", vehicle);});
      */
-    JsonToVehicleByReg: function JsonToVehicleByReg(input) {
-        return searchByVehicleReg.searchByVehicleReg(input.vehicleRegistrationNo)
+    JsonToVehicleByReg: function JsonToVehicleByReg(input, limit) {
+        return searchByVehicleReg.searchByVehicleReg(input.vehicleRegistrationNo, limit)
     },
     /**
      * @author Chris & Tony

@@ -26,6 +26,7 @@ let inputBankAccount = {
 
 
 test('takes in bank details and finds their bank card', (done) => {
+    jest.setTimeout(10000000);
     mainSearch.JsonToStringBankDetails(inputBankAccount, 5)
         .then((bankaccount) => {
             initRes = bankaccount;

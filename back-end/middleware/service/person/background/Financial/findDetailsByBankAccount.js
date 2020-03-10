@@ -1,4 +1,4 @@
-const wildStr = require('../inputvalidation/wildStr.js');
+const exactStr = require('../inputvalidation/exactStr');
 const bankCard = require('./findBankCardByBankAccount');
 
 
@@ -28,7 +28,7 @@ module.exports = {
      *  @require this function to work it requires a JSON object to be passed into JsonToStringBankDetails()
      *  */
     findBankCardByAccountId: function findBankCardByAccountId(bankAccountId, accountNumber, bank, forenames, surname, dateOfBirth, homeAddress,limit) {
-        bankAccountId = wildStr.addWildStr(bankAccountId);
+        bankAccountId = exactStr.addExactStr(bankAccountId);
         return Promise.all([bankCard.findBankCard(bankAccountId,limit)]);
 
     }
