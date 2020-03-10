@@ -8,6 +8,8 @@ module.exports = async function (input) {
         const calls = mobiles && mobiles.length > 1 ? await mainSearch.JsonToStringMobileCallRecords(mobiles) : [];
         const callsLocation = calls && calls.length > 1 ? await mainSearch.JsonToStringCellTowerLocation(calls[0], 1) : [];
 
+
+
         return {
             "citizenData": citizen,
             "bankAccountData": bankAccount,
