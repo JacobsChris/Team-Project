@@ -9,6 +9,7 @@ import PeopleResultsPage from './components/peopleResultsPage';
 import SignIn from './components/SignIn';
 import { connect } from 'react-redux';
 import { GuardProvider, GuardedRoute } from 'react-router-guards';
+import CreateUser from './components/createUser';
 
 
 function App() {
@@ -27,6 +28,7 @@ function App() {
           <GuardedRoute path='/user/home/' component={SearchNavBar}></GuardedRoute>
           <GuardedRoute path='/user/home/searchpeople' component={SearchPeople}></GuardedRoute>
           <GuardedRoute path='/admin/' component={AdminNavBar}></GuardedRoute>
+          <Route path='/admin/adduser/' component={CreateUser}></Route>
           <GuardedRoute path='/user/home/peopleresults' component={PeopleResultsPage}></GuardedRoute>
         </GuardProvider>
       <Route path='/user/home/signin' component={SignIn}></Route>
