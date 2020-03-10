@@ -8,7 +8,11 @@ export const getPeople = (searchData) => dispatch => {
     axios.get('http://localhost:8080/back-end/person/getData?' + stringify(encodeQueryParams({
         citizenID: StringParam, forenames: StringParam, surname: StringParam, homeAddress: StringParam,
         dateOfBirth: StringParam, placeOfBirth: StringParam, sex: StringParam
-    }, searchData)))
+    }, searchData)), {
+        headers: {
+            Authorization: sessionStorage.jwt
+          }
+    })
         .then(response =>
             dispatch({
                 type: GET_PEOPLE,

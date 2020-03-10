@@ -40,7 +40,7 @@ class SignIn extends React.Component {
             console.log(res);
             sessionStorage.setItem('jwt', res.data.token);
             this.props.addToken(res.data.token);
-            this.props.history.push("/user/home");
+            this.props.history.push("/user/home/searchpeople");
         }).catch(err => {
             console.log(err);
         });  
