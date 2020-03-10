@@ -47,7 +47,8 @@ module.exports = {
      * */
 
     JsonToStringBankDetails: function JsonToStringBankDetails(input) {
-        return findBankCardByAccountId.findBankCardByAccountId(input.bankAccountId,input.accountNumber,input.bank,input.forenames,input.surname,input.dateOfBirth,input.homeAddress,5)
+        return findBankCardByAccountId.findBankCardByAccountId(input.bankAccountId, input.accountNumber, input.bank, input.forenames, input.surname, input.dateOfBirth, input.homeAddress, 5)
+    },
 
     JsonToStringBankDetails: function JsonToStringBankDetails(input,limit) {
         return findBankCardByAccountId.findBankCardByAccountId(input.bankAccountId, input.accountNumber, input.bank, input.forenames, input.surname, input.dateOfBirth, input.homeAddress, limit)
@@ -124,7 +125,7 @@ module.exports = {
      */
     JsonToCallHistory: function JsonToCallHistory(input) {
         return findCallHistoryByPhoneNumber.findCallHistoryByPhoneNumber(input.phoneNumber, 5)
-    }
+    },
 
     JsonToStringCellTowerLocation: function JsonToStringCellTowerLocation(input,limit) {
     return findCellTowerLocationBasedOnCellTowerId.findCellTowerLocationBasedOnCellTowerId(input.callCellTowerId,limit);
