@@ -9,6 +9,30 @@ import { connect } from 'react-redux';
 import { getPeople } from '../actions/getAction';
 import PropTypes from 'prop-types';
 
+//loading
+import FadeIn from "react-fade-in";
+import Lottie from "react-lottie";
+import ReactLoading from "react-loading";
+import * as legoData from "../loading/lego-load.json";
+import * as doneData from "../loading/done.json";
+
+const defaultOptions = {
+    loop: true,
+    autoplay: true,
+    animationData: legoData.default,
+    rendererSettings: {
+      preserveAspectRatio: "xMidYMid slice"
+    }
+  };
+  const defaultOptions2 = {
+    loop: false,
+    autoplay: true,
+    animationData: doneData.default,
+    rendererSettings: {
+      preserveAspectRatio: "xMidYMid slice"
+    }
+  };
+
 const postcodeRegex = RegExp(/^(([gG][iI][rR] {0,}0[aA]{2})|(([aA][sS][cC][nN]|[sS][tT][hH][lL]|[tT][dD][cC][uU]|[bB][bB][nN][dD]|[bB][iI][qQ][qQ]|[fF][iI][qQ][qQ]|[pP][cC][rR][nN]|[sS][iI][qQ][qQ]|[iT][kK][cC][aA]) {0,}1[zZ]{2})|((([a-pr-uwyzA-PR-UWYZ][a-hk-yxA-HK-XY]?[0-9][0-9]?)|(([a-pr-uwyzA-PR-UWYZ][0-9][a-hjkstuwA-HJKSTUW])|([a-pr-uwyzA-PR-UWYZ][a-hk-yA-HK-Y][0-9][abehmnprv-yABEHMNPRV-Y]))) {0,}[0-9][abd-hjlnp-uw-zABD-HJLNP-UW-Z]{2}))$/);
 const houseNumberRegex = RegExp(/^[0-9]+[A-Za-z]?$/);
 const nameRegex = RegExp(/^(([A-Za-z]{2,})|([A-Za-z]{2,})+[-]?([A-Za-z]{2,})|([A-Za-z]{2,})+[-]?([A-Za-z]{2,})+[-]?([A-Za-z]{2,}))$/);
@@ -45,6 +69,8 @@ class SearchPeople extends React.Component {
       gender: '',
       formValid: false,
       errorCount: null,
+      done: false,
+      loading: false,
       errors: {
         forename: '',
         surname: '',
@@ -55,7 +81,7 @@ class SearchPeople extends React.Component {
       date: {
         startDate: '',
         setStartDate: ''
-      }
+      }                  
     }
   }
 
@@ -136,6 +162,9 @@ class SearchPeople extends React.Component {
     this.props.getPeople(data);
 
     if (window.location.pathname != '/user/home/peopleresults'){
+        setTimeout(() => {
+            this.setState({ done: true });
+          }, 1000);
       this.props.history.push('/user/home/peopleresults');
     }
   }
@@ -143,8 +172,26 @@ class SearchPeople extends React.Component {
   render() {
     const { errors, formValid } = this.state;
     const { startDate, setStartDate } = this.state.date;
+    console.log(this.state.done);
+    console.log('RENDER', this.props);
     return (
       <div className='form-size'>
+          <div>
+        {!this.state.done ? (
+          <FadeIn>
+            <div>
+              <h1>loading</h1>
+              {!this.state.loading ? (
+                <Lottie options={defaultOptions} height={120} width={120} />
+              ) : (
+                <Lottie options={defaultOptions2} height={120} width={120} />
+              )}
+            </div>
+          </FadeIn>
+        ) : (
+          <h1>hello world</h1>
+        )}
+      </div>
         <Form onSubmit={this.submit}>
           <h2 className='form-header'>Search People</h2>
           <br />
