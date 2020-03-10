@@ -9,21 +9,35 @@ import PeopleResultsPage from './components/peopleResultsPage';
 import SignIn from './components/SignIn';
 import { Provider } from 'react-redux';
 import store from './store';
+import { connect } from 'react-redux';
+import { GuardProvider, GuardedRoute } from 'react-router-guards';
+import CreateUser from './components/createUser';
 
 function App() {
+
+  const requireLogin = (to, from, next) => {
+    if (sessionStorage.getItem('jwt')) {
+      next();
+    }
+    next.redirect('/user/home/signin');
+  };
 
   return (
     <Provider store={store}>
       <BrowserRouter>
-        <Route path='/user/' component={NavBar}></Route>
-        <Route path='/user/home/' component={SearchNavBar}></Route>
-        <Route path='/user/home/searchpeople' component={SearchPeople}></Route>
-        <Route path='/admin/' component={AdminNavBar}></Route>
-        <Route path='/user/home/peopleresults' component={PeopleResultsPage}></Route>
-        <Route path='/user/home/signin' component={SignIn}></Route>
-      </BrowserRouter>
+      <Route path='/user/' component={NavBar}></Route>
+        <GuardProvider guards={[requireLogin]}>
+          <GuardedRoute path='/user/home/' component={SearchNavBar}></GuardedRoute>
+          <GuardedRoute path='/user/home/searchpeople' component={SearchPeople}></GuardedRoute>
+          <GuardedRoute path='/admin/' component={AdminNavBar}></GuardedRoute>
+          <Route path='/admin/adduser/' component={CreateUser}></Route>
+          <GuardedRoute path='/user/home/peopleresults' component={PeopleResultsPage}></GuardedRoute>
+        </GuardProvider>
+      <Route path='/user/home/signin' component={SignIn}></Route>
+    </BrowserRouter>
     </Provider>
   );
 }
 
-export default App;
+
+export default connect ()(App);

@@ -7,13 +7,13 @@ import { MdPerson } from 'react-icons/md';
 import { encodeQueryParams, stringify, StringParam } from 'serialize-query-params';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import store from '../js/store';
 
 const mapStateToProps = state => ({
     results: state.response.results
 });
 
 class PeopleResultsPage extends React.Component {
-
     constructor(props) {
         super(props);
 
@@ -21,7 +21,7 @@ class PeopleResultsPage extends React.Component {
             personDetails: []
         };
     };
-
+  
     handleClick(id, forename, surname, address, dob, pob, gender){
         this.setState({
             personDetails: []
@@ -33,7 +33,11 @@ class PeopleResultsPage extends React.Component {
         axios.get('http://localhost:8080/back-end/person/getData?' + stringify(encodeQueryParams({
             citizenID: StringParam, forenames: StringParam, surname: StringParam, homeAddress: StringParam,
             dateOfBirth: StringParam, placeOfBirth: StringParam, sex: StringParam
-        }, data)))
+        }, data)), {
+            headers: {
+                Authorization: sessionStorage.jwt
+              }
+        })
         .then((response) => {
           this.setState({
             personDetails: this.state.personDetails.concat(response),                 
@@ -70,8 +74,6 @@ class PeopleResultsPage extends React.Component {
                                         </Row>
                                     </Card>
                                 ))}
-
-
                             </Container>
                         </Row>
                     </Col>
