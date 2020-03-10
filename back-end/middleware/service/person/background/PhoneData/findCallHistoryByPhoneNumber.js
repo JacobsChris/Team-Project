@@ -1,11 +1,11 @@
 const findInComingCallsByTargetPhoneNumber = require("./findIncomingCallsByTargetPhoneNumber");
 const findOutGoingCallsByTargetPhoneNUmber = require("./findOutGoingCallsByTargetPhoneNumber");
-const wildStr = require('../inputvalidation/wildStr.js');
+const exactStr = require('../inputvalidation/exactStr');
 
 
 module.exports = {
     findCallHistoryByPhoneNumber: function findCallHistoryByPhoneNumber(phoneNumber) {
-        phoneNumber = wildStr.addWildStr(phoneNumber);
+        phoneNumber = exactStr.addExactStr(phoneNumber);
         return Promise.all(
             [
                 findOutGoingCallsByTargetPhoneNUmber.findOutGoingCalls(phoneNumber),
