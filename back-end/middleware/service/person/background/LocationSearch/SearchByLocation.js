@@ -2,6 +2,8 @@ const wildStr = require('../inputvalidation/wildStr.js');
 const exactStr = require('../inputvalidation/exactStr');
 const sendToAsyncCitizen = require('../sqlauth.js');
 const searchCamerasByArea = require('./searchCamerasByArea');
+const searchATMPointsByArea = require('./searchATMPointByArea.js');
+const rad2Deg = require('./rad2Deg.js');
 
 module.exports = {
     // /**
@@ -24,13 +26,20 @@ module.exports = {
     //  *  @require this function to work it requires a JSON object to be passed into JsonToStringDetails()
     //  *  */
     searchByLocation: function searchByLocation(inputLatitude, inputLongitude, Radius) {
-        Radius = (Radius/111); //Converts from Km to lat and longitudinal coords
+        let earthR = 6371;
+
+
+        let maxLat = inputLatitude + rad2Deg.rad2Deg(Radius/earthR);
+        let minLat = inputLatitude - rad2Deg.rad2Deg(Radius/earthR);
+        let maxLon = inputLongitude + rad2Deg.rad2Deg(Math.asin(Radius/earthR) / Math.cos(rad2Deg.rad2Deg(inputLatitude)));
+        let minLon = inputLongitude - rad2Deg.rad2Deg(Math.asin(Radius/earthR) / Math.cos(rad2Deg.rad2Deg(inputLatitude)));
 
         inputLatitude = exactStr.addExactStr(inputLatitude);
         inputLongitude = exactStr.addExactStr(inputLongitude);
         Radius = exactStr.addExactStr(Radius);
 
-        return Promise.all([searchCamerasByArea.searchCamerasByArea(inputLatitude, inputLongitude, Radius)]);
+        return Promise.all([searchCamerasByArea.searchCamerasByArea(inputLatitude, inputLongitude, Radius,minLat,maxLat,minLon,maxLon),
+            searchATMPointsByArea.searchATMPointsByArea(inputLatitude, inputLongitude, Radius,minLat,maxLat,minLon,maxLon)]);
         // }
     }
 };
