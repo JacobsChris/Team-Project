@@ -3,8 +3,8 @@ const request = require('supertest');
 
 
 const goodUser = {
-    "username": "admin",
-    "password": "mypass"
+    "username": "mynameisadmin",
+    "password": "Mypass123!"
 };
 
 const badUser = {
