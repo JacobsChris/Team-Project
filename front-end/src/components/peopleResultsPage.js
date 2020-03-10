@@ -90,23 +90,23 @@ class PeopleResultsPage extends React.Component {
                                         </Col>
                                     </Row>
                                     <Card.Body>
-                                        <ul class="list-group list-group-flush">
-                                            <li class="list-group-item">
+                                        <ul className="list-group list-group-flush">
+                                            <li className="list-group-item">
                                                 <h5>Gender</h5>{
                                                     [person.sex]}</li>
-                                            <li class="list-group-item">
+                                            <li className="list-group-item">
                                                 <h5>Home Address</h5>{
                                                     [person.homeAddress]}</li>
-                                            <li class="list-group-item">
+                                            <li className="list-group-item">
                                                 <h5>Date of Birth</h5>
                                                 {[person.dateOfBirth]}</li>
-                                            <li class="list-group-item">
+                                            <li className="list-group-item">
                                                 <h5>Place of Birth</h5>
                                                 {[person.placeOfBirth]}</li>
-                                            <li class="list-group-item">
+                                            <li className="list-group-item">
                                                 <h5>Associates</h5>
                                                 {[person.associates]}</li>
-                                            <li class="list-group-item">
+                                            <li className="list-group-item">
                                                 <h5>Vehicles</h5>
                                                 {[person.vehicles]}</li>
                                         </ul>

@@ -10,10 +10,8 @@ import { getPeople } from '../redux/actions/getAction';
 import PropTypes from 'prop-types';
 
 const postcodeRegex = RegExp(/^(([gG][iI][rR] {0,}0[aA]{2})|(([aA][sS][cC][nN]|[sS][tT][hH][lL]|[tT][dD][cC][uU]|[bB][bB][nN][dD]|[bB][iI][qQ][qQ]|[fF][iI][qQ][qQ]|[pP][cC][rR][nN]|[sS][iI][qQ][qQ]|[iT][kK][cC][aA]) {0,}1[zZ]{2})|((([a-pr-uwyzA-PR-UWYZ][a-hk-yxA-HK-XY]?[0-9][0-9]?)|(([a-pr-uwyzA-PR-UWYZ][0-9][a-hjkstuwA-HJKSTUW])|([a-pr-uwyzA-PR-UWYZ][a-hk-yA-HK-Y][0-9][abehmnprv-yABEHMNPRV-Y]))) {0,}[0-9][abd-hjlnp-uw-zABD-HJLNP-UW-Z]{2}))$/);
-const houseNumberRegex = RegExp(/^[0-9]+[A-Za-z]?$/);
 const nameRegex = RegExp(/^(([A-Za-z]{2,})|([A-Za-z]{2,})+[-]?([A-Za-z]{2,})|([A-Za-z]{2,})+[-]?([A-Za-z]{2,})+[-]?([A-Za-z]{2,}))$/);
-// const validEmailRegex = RegExp(/^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i);
-// const validEmailRegex = RegExp(/[A-Za-z0-9.]+@[A-Za-z.]+\.[A-Za-z]{2,3}$/);
+
 
 const validateForm = (errors) => {
   let valid = true;
@@ -66,20 +64,33 @@ class SearchPeople extends React.Component {
   }
 
   handleChange = ({ target: { value, name } }) => {
+    
     let errors = this.state.errors;
 
     switch (name) {
       case 'forename':
-        errors.forename =
-          value.length < 2
-            ? 'First Name must be at least 2 characters long!'
-            : '';
+        errors.forename = '';
+        if (value.length !== 0 && value.length < 2){
+          errors.forename = 'First name must be at least 2 characters long!';
+        }
+        else if (value.length !== 0 && value.length > 50){
+          errors.forename = 'First name must be under 50 charcters';
+        }
+        else if (!nameRegex.test(value) && value.length !== 0){
+          errors.forename = 'First name can only contain letters and hyphens'
+        }
         break;
       case 'surname':
-        errors.surname =
-          (value.length === 0 || nameRegex.test(value))
-            ? 'Surname must be at least 2 characters long!'
-            : '';
+        errors.surname = '';
+        if (value.length !== 0 && value.length < 2){
+          errors.surname = 'Last name must be at least 2 characters long!';
+        }
+        else if (value.length !== 0 && value.length > 50){
+          errors.surname = 'Last name must be under 50 charcters';
+        }
+        else if (value.length !== 0 && !nameRegex.test(value)){
+          errors.surname = 'Last name can only contain letters and hyphens'
+        }
         break;
       case 'dob':
         errors.dob =
@@ -88,28 +99,34 @@ class SearchPeople extends React.Component {
             : '';
         break;
       case 'birthPlace':
-        errors.birthPlace =
-          value.length < 2
-            ? 'Place of Birth'
-            : '';
+        errors.birthPlace = '';
+        if (value.length !== 0 && value.length < 2){
+          errors.birthPlace = 'Place of birth must be at least 2 characters long!';
+        }
+        else if (value.length !== 0 && value.length > 50){
+          errors.birthPlace = 'Place of birth must be under 50 charcters';
+        }
+        else if (value.length !== 0 && !nameRegex.test(value)){
+          errors.birthPlace = 'Place of birth can only contain letters and hyphens';
+        }
         break;
       case 'postcode':
-        errors.postcode =
-          value.length < 2
-            ? 'Postcode'
-            : '';
+        errors.postcode = '';
+        if (value.length !== 0 && !postcodeRegex.test(value)){
+          errors.postcode = 'Please enter a valid postcode';
+        }
         break;
       default:
         break;
     }
 
     this.setState({ errors, [name]: value });
+    this.setState({ formValid: validateForm(this.state.errors) });
+    this.setState({ errorCount: countErrors(this.state.errors) });
   }
 
   submit = (event) => {
     event.preventDefault();
-    this.setState({ formValid: validateForm(this.state.errors) });
-    this.setState({ errorCount: countErrors(this.state.errors) });
 
     if (this.state.formValid) {
       this.setState({
@@ -135,8 +152,10 @@ class SearchPeople extends React.Component {
 
     this.props.getPeople(data);
 
-    if (window.location.pathname != '/user/home/peopleresults'){
-      this.props.history.push('/user/home/peopleresults');
+    if (this.state.formValid){
+      if (window.location.pathname != '/user/home/peopleresults'){
+        this.props.history.push('/user/home/peopleresults');
+      }
     }
   }
 
@@ -155,15 +174,16 @@ class SearchPeople extends React.Component {
             <FormInput name='forename' placeholder='Forenames' value={this.state.forename} handleChange={this.handleChange} />
             {errors.forename.length > 0 &&
               <span className='error'>{errors.forename}</span>}
-            {/* <span className='error'><Validation /></span> */}
           </Form.Group>
           <Form.Group className='surname'>
             <Form.Label htmlFor="surname">Last Name</Form.Label>
             <FormInput name='surname' placeholder='Surname' value={this.state.surname} handleChange={this.handleChange} />
+            {errors.surname.length > 0 &&
+              <span className='error'>{errors.surname}</span>}
           </Form.Group>
           <Form.Group className='dob'>
             <Form.Label htmlFor="dob">Date of Birth</Form.Label>
-            <DatePicker name='dob' value={this.state.dob} handleChange={this.handleDateChange} dateFormat='yyyy-MM-dd'/>
+            <DatePicker name='dob' value={this.state.dob} handleChange={this.handleDateChange} dateFormat='dd-MM-yyyy'/>
             {errors.dob.length > 0 &&
               <span className='error'>{errors.dob}</span>}
           </Form.Group>
