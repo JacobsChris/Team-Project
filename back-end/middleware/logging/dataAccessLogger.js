@@ -5,7 +5,15 @@ const jwtConfig = require('../auth/jwtConfig.json');
 morgan.token('user', function (req, res) {
     //grab token from req header and match to user in auth
     let jwtPayload = req.header('Authorization').replace("JWT ", "");
-    let userObj = jwt.verify(jwtPayload, jwtConfig.secret);
+    let userObj = jwt.verify(jwtPayload, jwtConfig.secret,
+        (error, decoded) => {
+            if (error) {
+                return error;
+            }
+            else {
+                return decoded;
+            }
+    });
     return JSON.stringify(userObj);
 });
 
