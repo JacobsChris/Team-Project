@@ -13,16 +13,10 @@ module.exports = {
      *
      *  @require this function to work it requires a JSON object to be passed into JsonToStringName()
      * */
-    searchByVehicleReg: function searchByVehicleReg(vehicleReg, limit) {
+    searchByVehicleReg: function searchByVehicleReg(vehicleReg) {
         vehicleReg = licencePlateValidator(vehicleReg);
-        if (vehicleReg !== "Invalid Reg No") {
-
-            let sqlSearchString = "SELECT * FROM vehicleRegistration WHERE " +
-                "vehicleRegistrationNo LIKE " + vehicleReg +
-                " LIMIT " + limit;
-            return auth.SQLauthenticate(sqlSearchString);
-        } else {
-            return vehicleReg;
-        }
+        let sqlSearchString = "SELECT * FROM vehicleRegistration WHERE " +
+            "vehicleRegistrationNo LIKE " + vehicleReg;
+        return Promise.all([auth.SQLauthenticate(sqlSearchString)]);
     }
 };

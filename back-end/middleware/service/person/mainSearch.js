@@ -88,8 +88,8 @@ module.exports = {
      * @requires the following code at the end to access data:
      *          .then(([vehicle]) => {console.log("Advanced Detail Search in order of vehicle", vehicle);});
      */
-    JsonToVehicleByReg: function JsonToVehicleByReg(input, limit) {
-        return searchByVehicleReg.searchByVehicleReg(input.vehicleRegistrationNo, limit)
+    JsonToVehicleByReg: function JsonToVehicleByReg(input) {
+        return searchByVehicleReg.searchByVehicleReg(input.vehicleRegistrationNo)
     },
     /**
      * @author Chris & Tony

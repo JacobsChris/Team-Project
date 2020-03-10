@@ -36,14 +36,14 @@ test('takes in a valid complete vehicleReg and searches for vehicles', (done) =>
                 , vehicle);
             initRes = vehicle;
             console.log(initRes);
-            expect(initRes).toStrictEqual(expectedResult);
+            expect(initRes).toContainEqual(expectedResult);
             done();
         });
     // done()
 });
 
 test('takes in a valid incomplete vehicleReg and searches for vehicles', (done) => {
-    mainSearch.JsonToVehicleByReg(inputVehicleInCompleteReg, 3)
+    mainSearch.JsonToVehicleByReg(inputVehicleInCompleteReg)
         .then(([vehicle]) => {
             console.log("Advanced Detail Search in order of vehicle"
                 , vehicle);
