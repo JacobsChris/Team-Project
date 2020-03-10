@@ -27,8 +27,8 @@ module.exports = {
     //  *
     //  *  @require this function to work it requires a JSON object to be passed into JsonToStringATM()
     //  *  */
-    findCellTowerLocationBasedOnCellTowerId: function findCellTowerLocationBasedOnCellTowerId(cellTowerId,limit) {
+    findCellTowerLocationBasedOnCellTowerId: function findCellTowerLocationBasedOnCellTowerId(cellTowerId) {
         cellTowerId = exactStr.addExactStr(cellTowerId);
-        return Promise.all([findCellTowerLocation.findCellTowerLocation(cellTowerId,limit)]);
+        return Promise.all([findCellTowerLocation.findCellTowerLocation(cellTowerId)]);
     }
 };
