@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken');
-const jwtKey = require('../../../back-end/middleware/auth/jwtConfig');
+const jwtKey = require('../../../back-end/middleware/auth/jwtConfig.json');
 const app = require('../../../back-end/app');
 const request = require('supertest');
 

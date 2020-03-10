@@ -33,3 +33,4 @@ yarn-error.log*
 .vscode
 
 config.json
+back-end/middleware/auth/jwtConfig.json
