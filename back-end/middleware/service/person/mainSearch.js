@@ -109,7 +109,7 @@ module.exports = {
      *          .then(([Person]) => {console.log("Advanced Detail Search in order of Person", Person);});
      */
     JsonToPersonByMobile: function JsonToPersonByMoile(input) {
-        return findPersonByMobile.findPersonByMobile(input.phoneNumber, 5)
+        return findPersonByMobile.findPersonByMobile(input.phoneNumber)
     },
 
 
