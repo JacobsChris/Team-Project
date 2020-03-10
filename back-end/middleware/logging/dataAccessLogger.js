@@ -1,8 +1,24 @@
 const morgan = require("morgan");
+const passportJWT = require("passport-jwt");
+const extractJWT = passportJWT.ExtractJwt;
+const jwtConfig = require('../auth/jwtConfig');
+const passport = require('passport');
+const jwtStrategy = passportJWT.Strategy;
 
+
+const parameters = {
+    jwtFromRequest: extractJWT.fromAuthHeaderWithScheme("JWT"),
+    secretOrKey: jwtConfig.secret
+};
 
 morgan.token('user', function (req, res) {
-    //grab token from req header and match to user in auth
+    return passport.use(new jwtStrategy(parameters,
+        function (jwtPayload, done) {
+
+            return jwtPayload.id
+
+
+        }))
 
 });
 
@@ -12,6 +28,6 @@ morgan.token('request', function (req, res) {
 });
 
 
-module.exports = morgan(":remote-addr :request :date[clf] :status");
+module.exports = morgan(":remote-addr :user :request :date[clf] :status");
 
 
