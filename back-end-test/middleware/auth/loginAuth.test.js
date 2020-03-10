@@ -16,7 +16,7 @@ describe('login test', function() {
 
     it("takes in a username and password and should return success message", async (done) => {
         const res = (await request(app))
-            .post("/login/login")
+            .post("/login/")
             .send(userObj)
             .expect(successObj.message);
         done();
