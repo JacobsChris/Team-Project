@@ -17,7 +17,6 @@ morgan.token('user', function (req, res) {
     return JSON.stringify(userObj);
 });
 
-
 morgan.token('request', function (req, res) {
     return JSON.stringify(req.query);
 });
