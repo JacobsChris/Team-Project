@@ -12,6 +12,7 @@ const findCallHistoryByPhoneNumber = require("./background/PhoneData/findCallHis
 const findCellTowerLocationBasedOnCellTowerId = require('./background/PhoneData/findCellTowerLocationBasedOnCellTowerId');
 const findFullDetailsBasedOnAVehcileReg = require('./background/vehicle/findDetailsByVehicleRegDetails');
 const searchByLocation = require('./background/LocationSearch/SearchByLocation');
+const searchLocationsByIdAndTime = require('./background/LocationSearch/searchLocationsByIdAndTime.js');
 
 module.exports = {
 
@@ -399,7 +400,20 @@ module.exports = {
 //                 "CellTowerLocations",CellTowerLocations,
 //                 "EPOSTerminalLocations",EPOSTerminalLocations);});
 
+function JsonToStringSearchByCellTowerAndTime(input) {
+    return searchLocationsByIdAndTime.searchLocationsByIdAndTime(input.cellTowerId,input.anprId,input.atmId,input.intialTimeStamp,input.finalTimeStamp)
+}
 
+JsonToStringSearchByCellTowerAndTime({
+        "cellTowerId": "140391",
+        "anprId": 73,
+        "atmId": 697,
+        "intialTimeStamp": "2014-05-01 09:03:29",
+        "finalTimeStamp": "2016-05-01 09:03:29"
+        })
+    .then(([cellTowers,vehicle]) => {
+    console.log("CellTowers", cellTowers,
+                "vehicles", vehicle);});
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

@@ -38,11 +38,6 @@ module.exports = {
         let maxLon = inputLongitude + rad2Deg.rad2Deg(Math.asin(Radius/earthR) / Math.cos(rad2Deg.rad2Deg(inputLatitude)));
         let minLon = inputLongitude - rad2Deg.rad2Deg(Math.asin(Radius/earthR) / Math.cos(rad2Deg.rad2Deg(inputLatitude)));
 
-        //query the database and get results which reside in the box
-
-
-
-
         inputLatitude = exactStr.addExactStr(inputLatitude);
         inputLongitude = exactStr.addExactStr(inputLongitude);
         Radius = exactStr.addExactStr(Radius);
