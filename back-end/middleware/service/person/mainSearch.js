@@ -411,9 +411,10 @@ JsonToStringSearchByCellTowerAndTime({
         "intialTimeStamp": "2014-05-01 09:03:29",
         "finalTimeStamp": "2016-05-01 09:03:29"
         })
-    .then(([cellTowers,vehicle]) => {
+    .then(([cellTowers,vehicle,atm]) => {
     console.log("CellTowers", cellTowers,
-                "vehicles", vehicle);});
+                "vehicles", vehicle,
+                "atm",atm);});
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
