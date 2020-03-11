@@ -3,6 +3,7 @@ const exactStr = require('../inputvalidation/exactStr');
 const searchGivenACellTowerIdAndTime = require('./idAndTimeStampFinders/searchGivenACellTowerIdAndTime.js');
 const searchGivenASingleANPRIdAndTime = require('./idAndTimeStampFinders/searchGivenASingleANPRIdAndTime.js');
 const searchGivenASingleATMIdAndTime =require('./idAndTimeStampFinders/searchGivenASingleATMIdAndTime.js');
+const searchGivenAEposIdAndTime = require('./idAndTimeStampFinders/searchGivenAEposIdAndTime.js');
 
 module.exports = {
     // /**
@@ -24,12 +25,13 @@ module.exports = {
     //  *  @return this function returns an array of JSON objects to be passed up
     //  *  @require this function to work it requires a JSON object to be passed into JsonToStringDetails()
     //  *  */
-    searchLocationsByIdAndTime: function searchLocationsByIdAndTime(cellTowerId,anprId,atmId,intialTimeStamp, finalTimeStamp) {
+    searchLocationsByIdAndTime: function searchLocationsByIdAndTime(cellTowerId,anprId,atmId,eposId,intialTimeStamp, finalTimeStamp) {
 
 
         cellTowerId = exactStr.addExactStr(cellTowerId);
         anprId = exactStr.addExactStr(anprId);
         atmId = exactStr.addExactStr(atmId);
+        eposId = exactStr.addExactStr(eposId);
         intialTimeStamp = exactStr.addExactStr(intialTimeStamp);
         finalTimeStamp =exactStr.addExactStr(finalTimeStamp);
 
@@ -37,7 +39,8 @@ module.exports = {
         return Promise.all([
             searchGivenACellTowerIdAndTime.searchGivenACellTowerIdAndTime(cellTowerId,intialTimeStamp,finalTimeStamp),
             searchGivenASingleANPRIdAndTime.searchGivenASingleANPRIdAndTime(anprId,intialTimeStamp,finalTimeStamp),
-            searchGivenASingleATMIdAndTime.searchGivenASingleATMIdAndTime(atmId,intialTimeStamp,finalTimeStamp)
+            searchGivenASingleATMIdAndTime.searchGivenASingleATMIdAndTime(atmId,intialTimeStamp,finalTimeStamp),
+            searchGivenAEposIdAndTime.searchGivenAEposIdAndTime(eposId,intialTimeStamp,finalTimeStamp)
         ]);
         // }
     }
