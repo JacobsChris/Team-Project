@@ -6,7 +6,6 @@ const findTransactionsByBankCard = require('./background/Financial/findTransacti
 const findATMPointByATMId = require('./background/Financial/findDetailsByATMId.js');
 const findVehicleLocationByVehicleReg = require('./background/vehicle/findVehicleObsByVehicle.js');
 const findANPRCameraLocation = require('./background/vehicle/findANPRCameraLocation.js');
-const findMobileCallRecordsFromOwnerPhoneNumb = require('./background/PhoneData/findMobileCallRecordsFromOwnerPhoneNumb');
 const findPersonByMobile = require("./background/PhoneData/findPersonByMobile");
 const findCallHistoryByPhoneNumber = require("./background/PhoneData/findCallHistoryByPhoneNumber");
 const findCellTowerLocationBasedOnCellTowerId = require('./background/PhoneData/findCellTowerLocationBasedOnCellTowerId');
@@ -78,9 +77,6 @@ module.exports = {
     JsonToStringANPRLocation: function JsonToStringANPRLocation(input) {
         return findANPRCameraLocation.findANPRCameraLocation(input.ANPRPointId);
     },
-    JsonToStringMobileCallRecords: function JsonToStringMobileCallRecords(input) {
-        return findMobileCallRecordsFromOwnerPhoneNumb.findMobileCallRecordsFromOwnerPhoneNumb(input.phoneNumber);
-    },
     /**
      * @author Chris & Tony
      * @param input is a JSON which contains the key vehicleRegistrationNo
@@ -112,9 +108,14 @@ module.exports = {
         return findCallHistoryByPhoneNumber.findCallHistoryByPhoneNumber(input.phoneNumber)
     },
 
-    JsonToStringCellTowerLocation: function JsonToStringCellTowerLocation(input) {
+    JsonToStringCallCellTowerLocation: function JsonToStringCellTowerLocation(input) {
         return findCellTowerLocationBasedOnCellTowerId.findCellTowerLocationBasedOnCellTowerId(input.callCellTowerId);
     },
+
+    JsonToStringReceiverCellTowerLocation: function JsonToStringCellTowerLocation(input) {
+        return findCellTowerLocationBasedOnCellTowerId.findCellTowerLocationBasedOnCellTowerId(input.receiverTowerId);
+    },
+
     JsonToStringDetailsFromVehicleReg: function JsonToStringDetailsFromVehicleReg(input) {
         return findFullDetailsBasedOnAVehcileReg.findDetailsByName(input.forenames, input.surname, input.address, input.dateOfBirth);
     }
