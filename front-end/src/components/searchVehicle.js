@@ -4,8 +4,11 @@ import DatePicker from './DateSelector.js';
 import "react-datepicker/dist/react-datepicker.css";
 import { Form, Button } from 'react-bootstrap';
 import '../styles/searchVehicle.css';
+import { connect } from 'react-redux';
+import { getVehicle } from '../actions/vehicleAction';
+import PropTypes from 'prop-types';
 
-export default class SearchVehicle extends Component {
+class SearchVehicle extends Component {
     constructor(props){
         super(props);
         this.state = ({
@@ -30,9 +33,35 @@ export default class SearchVehicle extends Component {
         })
     }
 
-    submit = () => {
+    submit = (event) => {
+        event.preventDefault();
 
-    }
+          this.setState({
+            [event.target.name]: event.target.value
+          });
+        
+    
+        let date = this.state.regDate;
+    
+        if(this.state.regDate){
+          date = `${date.getFullYear()}-${(date.getMonth()+1) < 10?  0+ ((date.getMonth()+1).toString()) : date.getMonth()+1}-${date.getDate()}`;
+        }
+    
+        const data = {
+          vehicleRegistrationNo: this.state.reg,
+        //   make: this.state.make,
+        //   model: this.state.model,
+        //   colour: this.state.colour,
+        //   registrationDate: date,
+        //   owner: this.state.owner
+        }
+    
+        this.props.getVehicle(data);
+    
+        if (window.location.pathname != '/user/home/vehicleresults'){
+          this.props.history.push('/user/home/vehicleresults');
+        }
+      }
 
     render() {
         return (
@@ -73,3 +102,10 @@ export default class SearchVehicle extends Component {
         )
     }
 }
+
+
+SearchVehicle.propTypes = {
+    getVehicle: PropTypes.func.isRequired
+  };
+  
+export default connect(null, { getVehicle })(SearchVehicle);
