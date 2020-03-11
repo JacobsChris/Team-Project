@@ -20,12 +20,13 @@ let inputPhone = {
 };
 
 
-test('takes in a valid string and searches for persons', (done) => {
+test('takes in a phone number and searches for a call history', (done) => {
+    jest.setTimeout(1000000);
     mainSearch.JsonToCallHistory(inputPhone)
         .then(([OutGoing, InComing]) => {
             initRes[0] = OutGoing;
             initRes[1] = InComing;
-            expect(initRes.toString()).toBe(expectedResult.toString());
+            expect(initRes.toString()).toContainEqual(expectedResult.toString());
             done();
         });
 });
