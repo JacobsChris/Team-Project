@@ -31,7 +31,6 @@ class CreateUser extends Component {
         }
 
         
-
         axios.post('http://localhost:8080/register/', data)
         .then(res => {
             console.log(res);
