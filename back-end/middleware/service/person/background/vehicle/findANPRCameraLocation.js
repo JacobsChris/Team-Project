@@ -1,5 +1,5 @@
 const findLocation = require('./SqlConstructorForLocations.js');
-const wildStr = require('../inputvalidation/wildStr.js');
+const exactStr = require('../inputvalidation/exactStr');
 
 module.exports = {
     // /**
@@ -28,7 +28,7 @@ module.exports = {
     //  *  @require this function to work it requires a JSON object to be passed into JsonToStringATM()
     //  *  */
     findANPRCameraLocation: function findANPRCameraLocation(ANPRPointId) {
-        ANPRPointId = wildStr.addWildStr(ANPRPointId);
+        ANPRPointId = exactStr.addExactStr(ANPRPointId);
         return Promise.all([findLocation.findLocation(ANPRPointId)]);
     }
 };

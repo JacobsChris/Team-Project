@@ -18,9 +18,6 @@ let inputReg = {
     "vehicleRegistrationNo": "IU22 HFF"
 };
 
-let inValidInputReg = {
-    "vehicleRegistrationNo": "IU2"
-};
 
 let inCompleteInputReg = {
     "vehicleRegistrationNo": "IU22 HF_"
@@ -37,12 +34,16 @@ test("takes in a valid complete vehicle reg and returns all observations of that
         })
 });
 
-test("takes in an invalid complete vehicle reg and returns all observations of that vehicle", (done) => {
-    jest.setTimeout(1000000);
-    expect(() => {
-        mainSearch.JsonToStringVehicleObs(inValidInputReg)
-    }).toThrow("Not a valid vehicle registration number")
-});
+
+// let inValidInputReg = {
+//     "vehicleRegistrationNo": "IU2"
+// };
+// test("takes in an invalid complete vehicle reg and returns all observations of that vehicle", (done) => {
+//     jest.setTimeout(1000000);
+//     expect(() => {
+//         mainSearch.JsonToStringVehicleObs(inValidInputReg)
+//     }).toThrow("Not a valid vehicle registration number")
+// });
 
 test("takes in a valid incomplete vehicle reg and returns all observations of that vehicle", (done) => {
     jest.setTimeout(1000000);
