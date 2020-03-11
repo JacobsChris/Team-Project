@@ -28,13 +28,13 @@ module.exports = {
      *  @require this function to work it requires a JSON object to be passed into JsonToStringDetails()
      *  */
     findDetailsByName: function findDetailsByName(citizenID, forenames, surname, homeAddress, dateOfBirth, placeOfBirth, sex) {
-        stringChecker.stringChecker(citizenID);
-        stringChecker.stringChecker(forenames);
-        stringChecker.stringChecker(surname);
-        stringChecker.stringChecker(homeAddress);
-        stringChecker.stringChecker(dateOfBirth);
-        stringChecker.stringChecker(placeOfBirth);
-        stringChecker.stringChecker(sex);
+        citizenID = stringChecker.stringChecker(citizenID);
+        forenames = stringChecker.stringChecker(forenames);
+        surname = stringChecker.stringChecker(surname);
+        homeAddress = stringChecker.stringChecker(homeAddress);
+        dateOfBirth = stringChecker.stringChecker(dateOfBirth);
+        placeOfBirth = stringChecker.stringChecker(placeOfBirth);
+        sex = stringChecker.stringChecker(sex);
 
 
         return Promise.all([person.findPersonByPerson(citizenID, forenames, surname, homeAddress, dateOfBirth, placeOfBirth, sex),

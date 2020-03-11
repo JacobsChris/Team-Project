@@ -6,7 +6,8 @@ module.exports = {
         if (typeof inputStr != 'string') {
             throw new Error("Not a string error")
         } else {
-            inputStr = wildStr.addWildStr(inputStr)
+            inputStr = wildStr.addWildStr(inputStr);
+            return inputStr;
         }
     }
 };

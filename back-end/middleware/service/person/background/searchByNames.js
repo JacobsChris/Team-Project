@@ -19,12 +19,12 @@ module.exports = {
      *  @require this function to work it requires a JSON object to be passed into JsonToStringName()
      *  */
     searchByNames: function searchByNames(citizenID, forenames, surname, homeAddress, dateOfBirth, placeOfBirth, sex) {
-        stringChecker.stringChecker(citizenID);
-        stringChecker.stringChecker(forenames);
-        stringChecker.stringChecker(surname);
-        stringChecker.stringChecker(homeAddress);
-        stringChecker.stringChecker(dateOfBirth);
-        stringChecker.stringChecker(placeOfBirth);
+        citizenID = stringChecker.stringChecker(citizenID);
+        forenames = stringChecker.stringChecker(forenames);
+        surname = stringChecker.stringChecker(surname);
+        homeAddress = stringChecker.stringChecker(homeAddress);
+        dateOfBirth = stringChecker.stringChecker(dateOfBirth);
+        placeOfBirth = stringChecker.stringChecker(placeOfBirth);
 
         if (sex === "") {
             sex = wildStr.addWildStr(sex);

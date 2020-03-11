@@ -43,12 +43,12 @@ let badInputPerson = {
 };
 
 
-test('takes in an valid input and expects a thrown error', async () => {
+test('takes in an invalid input and expects a thrown error', async () => {
     try {
         await mainSearch.JsonToStringName(badInputPerson);
         throw 'This shouldn\'t have gotten here';
     } catch (err) {
         expect(err).toBeTruthy();
-        expect(err.message).toEqual('Not string error');
+        expect(err.message).toEqual('Not a string error');
     }
 });
