@@ -12,6 +12,7 @@ import store from './store';
 import { connect } from 'react-redux';
 import { GuardProvider, GuardedRoute } from 'react-router-guards';
 import CreateUser from './components/createUser';
+import SearchVehicle from './components/searchVehicle';
 
 function App() {
 
@@ -29,6 +30,7 @@ function App() {
         <GuardProvider guards={[requireLogin]}>
           <GuardedRoute path='/user/home/' component={SearchNavBar}></GuardedRoute>
           <GuardedRoute path='/user/home/searchpeople' component={SearchPeople}></GuardedRoute>
+          <GuardedRoute path='/user/home/searchvehicle' component={SearchVehicle}></GuardedRoute>
           <GuardedRoute path='/admin/' component={AdminNavBar}></GuardedRoute>
           <GuardedRoute path='/admin/adduser/' component={CreateUser}></GuardedRoute>
           <GuardedRoute path='/user/home/peopleresults' component={PeopleResultsPage}></GuardedRoute>

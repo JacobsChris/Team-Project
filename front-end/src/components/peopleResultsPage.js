@@ -40,14 +40,13 @@ class PeopleResultsPage extends React.Component {
         })
         .then((response) => {
           this.setState({
-            personDetails: this.state.personDetails.concat(response),                 
+            personDetails: this.state.personDetails.concat(response)                 
           })
           console.log(this.state.personDetails);
         })
     };
 
     render() {
-        console.log('RENDER', this.props);
         return (
             <div>
                 <Row>
