@@ -1,5 +1,5 @@
 const findVehicleObs = require('./SqlConstructorForObs.js');
-const wildStr = require('../inputvalidation/wildStr.js');
+const licencePlateValidator = require('../inputvalidation/licencePlateValidator');
 module.exports = {
     // /**
     //  *  @author Anthony Wilkinson & Chris
@@ -27,7 +27,7 @@ module.exports = {
     //  *  @require this function to work it requires a JSON object to be passed into JsonToStringATM()
     //  *  */
     findVehicleLocationByVehicleReg: function findVehicleLocationByVehicleReg(vehicleRegistrationNumber) {
-        vehicleRegistrationNumber = wildStr.addWildStr(vehicleRegistrationNumber);
+        vehicleRegistrationNumber = licencePlateValidator.licencePlateValidator(vehicleRegistrationNumber);
             return Promise.all([findVehicleObs.findVehicleObs(vehicleRegistrationNumber)]);
     }
 };

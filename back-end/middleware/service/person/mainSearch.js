@@ -6,11 +6,9 @@ const findTransactionsByBankCard = require('./background/Financial/findTransacti
 const findATMPointByATMId = require('./background/Financial/findDetailsByATMId.js');
 const findVehicleLocationByVehicleReg = require('./background/vehicle/findVehicleObsByVehicle.js');
 const findANPRCameraLocation = require('./background/vehicle/findANPRCameraLocation.js');
-const findMobileCallRecordsFromOwnerPhoneNumb = require('./background/PhoneData/findMobileCallRecordsFromOwnerPhoneNumb');
 const findPersonByMobile = require("./background/PhoneData/findPersonByMobile");
 const findCallHistoryByPhoneNumber = require("./background/PhoneData/findCallHistoryByPhoneNumber");
 const findCellTowerLocationBasedOnCellTowerId = require('./background/PhoneData/findCellTowerLocationBasedOnCellTowerId');
-const findFullDetailsBasedOnAVehcileReg = require('./background/vehicle/findDetailsByVehicleRegDetails');
 const searchByLocation = require('./background/LocationSearch/SearchByLocation');
 
 module.exports = {
@@ -78,9 +76,6 @@ module.exports = {
     JsonToStringANPRLocation: function JsonToStringANPRLocation(input) {
         return findANPRCameraLocation.findANPRCameraLocation(input.ANPRPointId);
     },
-    JsonToStringMobileCallRecords: function JsonToStringMobileCallRecords(input) {
-        return findMobileCallRecordsFromOwnerPhoneNumb.findMobileCallRecordsFromOwnerPhoneNumb(input.phoneNumber);
-    },
     /**
      * @author Chris & Tony
      * @param input is a JSON which contains the key vehicleRegistrationNo
@@ -112,12 +107,14 @@ module.exports = {
         return findCallHistoryByPhoneNumber.findCallHistoryByPhoneNumber(input.phoneNumber)
     },
 
-    JsonToStringCellTowerLocation: function JsonToStringCellTowerLocation(input) {
+    JsonToStringCallCellTowerLocation: function JsonToStringCellTowerLocation(input) {
         return findCellTowerLocationBasedOnCellTowerId.findCellTowerLocationBasedOnCellTowerId(input.callCellTowerId);
     },
-    JsonToStringDetailsFromVehicleReg: function JsonToStringDetailsFromVehicleReg(input) {
-        return findFullDetailsBasedOnAVehcileReg.findDetailsByName(input.forenames, input.surname, input.address, input.dateOfBirth);
-    }
+
+    JsonToStringReceiverCellTowerLocation: function JsonToStringCellTowerLocation(input) {
+        return findCellTowerLocationBasedOnCellTowerId.findCellTowerLocationBasedOnCellTowerId(input.receiverTowerId);
+    },
+
 };
 
 
@@ -390,7 +387,7 @@ module.exports = {
 //     latitude: 51.54500551249844,
 //         longitude: -0.13447255196733515,
 //         radius: 1}).then(([ANPRCameraLocations,ATMPointLocations]) => {console.log("ANPRCameraLocations", ANPRCameraLocations,"ATMPointLocations",ATMPointLocations);});
-//
+
 
 // function JsonToStringSearchCamerasByArea(input) {
 //     return searchCamerasByArea.searchCamerasByArea( input.latitude, input.longitude,input.radius)

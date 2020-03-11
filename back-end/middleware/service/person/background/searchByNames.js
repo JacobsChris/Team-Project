@@ -1,6 +1,7 @@
 const {Sequelize} = require('sequelize');
 const wildStr = require('./inputvalidation/wildStr.js');
 const exactStr = require('./inputvalidation/exactStr');
+const stringChecker = require("./inputvalidation/stringChecker");
 const auth = require('./sqlauth.js');
 const {QueryTypes} = require('sequelize');
 
@@ -17,34 +18,29 @@ module.exports = {
      *  @return this function returns an JSON object to be passed up
      *  @require this function to work it requires a JSON object to be passed into JsonToStringName()
      *  */
-    searchByNames: function searchByNames(citizenID,forenames, surname, homeAddress,dateOfBirth,placeOfBirth, sex) {
-        if ((typeof forenames != 'string')||(typeof surname != 'string')||(typeof homeAddress != 'string')||(typeof placeOfBirth != 'string')||(typeof sex != 'string')) {
-            console.log("Not string error");
-            throw new Error("Not string error")
+    searchByNames: function searchByNames(citizenID, forenames, surname, homeAddress, dateOfBirth, placeOfBirth, sex) {
+        citizenID = stringChecker.stringChecker(citizenID);
+        forenames = stringChecker.stringChecker(forenames);
+        surname = stringChecker.stringChecker(surname);
+        homeAddress = stringChecker.stringChecker(homeAddress);
+        dateOfBirth = stringChecker.stringChecker(dateOfBirth);
+        placeOfBirth = stringChecker.stringChecker(placeOfBirth);
+
+        if (sex === "") {
+            sex = wildStr.addWildStr(sex);
         } else {
-            citizenID = wildStr.addWildStr(citizenID);
-            forenames = wildStr.addWildStr(forenames);
-            surname = wildStr.addWildStr(surname);
-            homeAddress = wildStr.addWildStr(homeAddress);
-            dateOfBirth = wildStr.addWildStr(dateOfBirth);
-            placeOfBirth = wildStr.addWildStr(placeOfBirth);
-
-            if (sex == ""){
-                sex = wildStr.addWildStr(sex);
-            }
-            else {
-                sex = exactStr.addExactStr(sex);
-            }
-
-            let sqlSearchString = "SELECT * FROM citizen WHERE " +
-                "citizenID LIKE " + citizenID +
-                " AND forenames LIKE " + forenames +
-                " AND surname LIKE " + surname +
-                " AND homeAddress LIKE " + homeAddress +
-                " AND dateOfBirth LIKE " + dateOfBirth +
-                " AND placeOfBirth LIKE " + placeOfBirth +
-                " AND sex LIKE " + sex;
-            return auth.SQLauthenticate(sqlSearchString)
+            sex = exactStr.addExactStr(sex);
         }
+
+        let sqlSearchString = "SELECT * FROM citizen WHERE " +
+            "citizenID LIKE " + citizenID +
+            " AND forenames LIKE " + forenames +
+            " AND surname LIKE " + surname +
+            " AND homeAddress LIKE " + homeAddress +
+            " AND dateOfBirth LIKE " + dateOfBirth +
+            " AND placeOfBirth LIKE " + placeOfBirth +
+            " AND sex LIKE " + sex;
+        return auth.SQLauthenticate(sqlSearchString)
+
     }
 };
