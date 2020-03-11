@@ -27,15 +27,14 @@ function App() {
     <Provider store={store}>
       <BrowserRouter>
       <Route path='/user/' component={NavBar}></Route>
-        <GuardProvider guards={[requireLogin]}>
-          <GuardedRoute path='/user/home/' component={SearchNavBar}></GuardedRoute>
-          <GuardedRoute path='/user/home/searchpeople' component={SearchPeople}></GuardedRoute>
-          <GuardedRoute path='/user/home/searchvehicle' component={SearchVehicle}></GuardedRoute>
-          <GuardedRoute path='/admin/' component={AdminNavBar}></GuardedRoute>
-          <GuardedRoute path='/admin/adduser/' component={CreateUser}></GuardedRoute>
-          <GuardedRoute path='/user/home/peopleresults' component={PeopleResultsPage}></GuardedRoute>
-          <GuardedRoute path='/user/home/vehicleresults' component={VehicleResultsPage}></GuardedRoute>
-        </GuardProvider>
+        {/* <GuardProvider guards={[requireLogin]}> */}
+          <Route path='/user/home/' component={SearchNavBar} />
+          <Route path='/user/home/searchpeople' component={SearchPeople} />
+          <Route path='/user/home/searchvehicle' component={SearchVehicle} />
+          <Route path='/admin/' component={AdminNavBar} />
+          <Route path='/user/home/peopleresults' component={PeopleResultsPage} />
+          <Route path='/user/home/vehicleresults' component={VehicleResultsPage} />
+        {/* </GuardProvider> */}
       <Route path='/user/signin' component={SignIn}></Route>
     </BrowserRouter>
     </Provider>

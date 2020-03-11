@@ -8,7 +8,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 const mapStateToProps = state => ({
-    results: state.response.results,
+    results: state.vehicle.results,
     resultsLoading: state.response.resultsLoading
 });
 
@@ -19,16 +19,21 @@ class VehicleResultsPage extends React.Component {
         this.state = {
             vehicleDetails: []
         };
+        console.log(this.props);
     };
 
     handleClick(reg, make, model, colour, regDate) {
-        this.setState({
-            vehicleDetails: []
-        })
+        if(this.state.vehicleDetails.length < 1){
+            console.log(this.state.vehicleDetails.length);
+        // this.setState({
+        //     vehicleDetails: []
+        // })
         let data = {
             vehicleRegistrationNo: reg, make: make, model: model, colour: colour,
             registrationDate: regDate
         };
+        console.log(data.vehicleRegistrationNo.length);
+        if(this.state.vehicleDetails.vehicleRegistrationNo != reg){
         axios.post('http://localhost:8080/back-end/vehicle/getData', data, {
             headers: {
                 Authorization: sessionStorage.jwt
@@ -39,11 +44,15 @@ class VehicleResultsPage extends React.Component {
             vehicleDetails: this.state.vehicleDetails.concat(response)                 
           })
           console.log(this.state.vehicleDetails);
-        })
+        });
+    }
+    }
     };
 
     render() {
+        // console.log(this.props.results)
         return (
+            
             <div>
                 {!this.props.resultsLoading ? (this.props.results.length === 0 ? (<h3>No results found</h3>) : (
                     <Row>
@@ -53,8 +62,8 @@ class VehicleResultsPage extends React.Component {
                                     <SearchVehicle />
                                 </Container>
                             </Row>
-                            <Row>
-                                <Container className='flex-container' id='person-list'>
+                            <Row>                            
+                                <Container className='flex-container' id='person-list'>                                    
                                     {this.props.results?.map(vehicle =>
                                         <Card onClick={() => this.handleClick(vehicle.vehicleRegistrationNo, vehicle.make, vehicle.model,
                                             vehicle.colour, vehicle.registrationDate)}
@@ -71,6 +80,7 @@ class VehicleResultsPage extends React.Component {
                                         </Card>
                                     )}
                                 </Container>
+                                
                             </Row>
                         </Col>
                         <Col>

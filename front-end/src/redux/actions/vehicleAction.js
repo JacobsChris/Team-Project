@@ -3,7 +3,7 @@ import axios from 'axios';
 
 export const getVehicle = (searchData) => dispatch => {
 
-    console.log(searchData);
+    // console.log(searchData);
     axios.post('http://localhost:8080/back-end/vehicle/getData/', searchData, {
         headers: {
             Authorization: sessionStorage.jwt

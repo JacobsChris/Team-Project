@@ -10,7 +10,7 @@ export default function(state = initialState, action){
             console.log(action.payload.data);
             return {
                 ...state,
-                results: [action.payload.data]
+                results: [...action.payload.data]
             };
         default:
             return state;
