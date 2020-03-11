@@ -26,7 +26,7 @@ test('takes in a phone number and searches for a call history', (done) => {
         .then(([OutGoing, InComing]) => {
             initRes[0] = OutGoing;
             initRes[1] = InComing;
-            expect(initRes.toString()).toContainEqual(expectedResult.toString());
+            expect(initRes.toString()).toContain(expectedResult.toString());
             done();
         });
 });
