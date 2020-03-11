@@ -120,11 +120,11 @@ module.exports = {
     JsonToStringDetailsFromVehicleReg: function JsonToStringDetailsFromVehicleReg(input) {
         return findFullDetailsBasedOnAVehcileReg.findDetailsByName(input.forenames, input.surname, input.address, input.dateOfBirth);
     },
-    JsonToStringSearchByLocation: function JsonToStringSearchByLocation(input){
-    return searchByLocation.searchByLocation(input.latitude, input.longitude,input.radius);
+    JsonToStringSearchByLocation: function JsonToStringSearchByLocation(input) {
+        return searchByLocation.searchByLocation(input.latitude, input.longitude, input.radius);
     },
-    JsonToStringSearchByCellTowerAndTime: function JsonToStringSearchByCellTowerAndTime(input) {
-    return searchLocationsByIdAndTime.searchLocationsByIdAndTime(input.cellTowerId,input.anprId,input.atmId,input.eposId,input.intialTimeStamp,input.finalTimeStamp)
+    JsonToStringSearchByCellTowerAndTime: function JsonToStringSearchByCellTowerAndTime(input, intialTimeStamp, finalTimeStamp) {
+    return searchLocationsByIdAndTime.searchLocationsByIdAndTime(input.cellTowerId, input.anprId, input.atmId, input.eposId, intialTimeStamp.intialTimeStamp, finalTimeStamp.finalTimeStamp)
     }
 };
 
@@ -393,44 +393,48 @@ module.exports = {
 ///////////////////////////////////////////////////// from a things given lat, long and an input radius  ////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-//
-// function JsonToStringSearchByLocation(input){
-//     return searchByLocation.searchByLocation(input.latitude, input.longitude,input.radius);
-//
-// }
-//
-// JsonToStringSearchByLocation({
-//     latitude: 51.54500551249844,
-//     longitude: -0.13447255196733515,
-//     radius: 0.25})
-// .then(([ANPRCameraLocations,ATMPointLocations,CellTowerLocations, EPOSTerminalLocations]) => {
-//             console.log("ANPRCameraLocations", ANPRCameraLocations,
-//                 "ATMPointLocations",ATMPointLocations,
-//                 "CellTowerLocations",CellTowerLocations,
-//                 "EPOSTerminalLocations",EPOSTerminalLocations);});
+
+function JsonToStringSearchByLocation(input){
+    return searchByLocation.searchByLocation(input.latitude, input.longitude,input.radius);
+
+}
+
+JsonToStringSearchByLocation({
+    latitude: 51.54500551249844,
+    longitude: -0.13447255196733515,
+    radius: 0.25})
+.then(([ANPRCameraLocations,ATMPointLocations,CellTowerLocations, EPOSTerminalLocations]) => {
+            console.log("ANPRCameraLocations", ANPRCameraLocations,
+                "ATMPointLocations",ATMPointLocations,
+                "CellTowerLocations",CellTowerLocations,
+                "EPOSTerminalLocations",EPOSTerminalLocations);});
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////// from a things given an Id and timestamp  ////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-// function JsonToStringSearchByCellTowerAndTime(input) {
-//     return searchLocationsByIdAndTime.searchLocationsByIdAndTime(input.cellTowerId,input.anprId,input.atmId,input.eposId,input.intialTimeStamp,input.finalTimeStamp)
-// }
+function JsonToStringSearchByCellTowerAndTime(input, intialTimeStamp, finalTimeStamp) {
+    return searchLocationsByIdAndTime.searchLocationsByIdAndTime(input.cellTowerId, input.anprId, input.atmId, input.eposId, intialTimeStamp.intialTimeStamp, finalTimeStamp.finalTimeStamp)
+}
 //
 // JsonToStringSearchByCellTowerAndTime({
 //         "cellTowerId": "140391",
 //         "anprId": 73,
 //         "atmId": 697,
-//         "eposId": 696,
-//         "intialTimeStamp": "2014-05-01 09:03:29",
+//         "eposId": 696
+//     },
+//     {
+//         "intialTimeStamp": "2014-05-01 09:03:29"
+//     }, {
 //         "finalTimeStamp": "2016-05-01 09:03:29"
-//         })
-//     .then(([cellTowers,vehicle,atm,epos]) => {
-//     console.log("CellTowers", cellTowers,
-//                 "vehicles", vehicle,
-//                 "atm",atm,
-//                 "epos",epos);});
+//     })
+//     .then(([cellTowers, vehicle, atm, epos]) => {
+//         console.log("CellTowers", cellTowers,
+//             "vehicles", vehicle,
+//             "atm", atm,
+//             "epos", epos);
+//     });
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -507,21 +511,21 @@ module.exports = {
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-                                                    // .''.
-                                                    //     .''.      .        *''*    :_\/_:     .
-                                                    // :_\/_:   _\(/_  .:.*_\/_*   : /\ :  .'.:.'.
-                                                    //     .''.: /\ :    /)\   ':'* /\ *  : '..'.  -=:o:=-
-                                                    // :_\/_:'.:::.  | ' *''*    * '.\'/.'_\(/_'.':'.'
-                                                    // : /\ : :::::  =  *_\/_*     -= o =- /)\    '  *
-                                                    // '..'  ':::' === * /\ *     .'/.\'.  ' ._____
-                                                    // *        |   *..*         :       |.   |' .---"|
-                                                    // *      |     _           .--'|  ||   | _|    |
-                                                    // *      |  .-'|       __  |   |  |    ||      |
-                                                    //     .-----.   |  |' |  ||  |  | |   |  |    ||      |
-                                                    // ___'       ' /"\ |  '-."".    '-'   '-.'    '`      |____
-                                                    // jgs~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-                                                    // &                    ~-~-~-~-~-~-~-~-~-~   /|
-                                                    // ejm97    )      ~-~-~-~-~-~-~-~  /|~       /_|\
-                                                    //         _-H-__  -~-~-~-~-~-~     /_|\    -~======-~
-                                                    // ~-\XXXXXXXXXX/~     ~-~-~-~     /__|_\ ~-~-~-~
-                                                    // ~-~-~-~-~-~    ~-~~-~-~-~-~    ========  ~-~-~-~
+// .''.
+//     .''.      .        *''*    :_\/_:     .
+// :_\/_:   _\(/_  .:.*_\/_*   : /\ :  .'.:.'.
+//     .''.: /\ :    /)\   ':'* /\ *  : '..'.  -=:o:=-
+// :_\/_:'.:::.  | ' *''*    * '.\'/.'_\(/_'.':'.'
+// : /\ : :::::  =  *_\/_*     -= o =- /)\    '  *
+// '..'  ':::' === * /\ *     .'/.\'.  ' ._____
+// *        |   *..*         :       |.   |' .---"|
+// *      |     _           .--'|  ||   | _|    |
+// *      |  .-'|       __  |   |  |    ||      |
+//     .-----.   |  |' |  ||  |  | |   |  |    ||      |
+// ___'       ' /"\ |  '-."".    '-'   '-.'    '`      |____
+// jgs~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// &                    ~-~-~-~-~-~-~-~-~-~   /|
+// ejm97    )      ~-~-~-~-~-~-~-~  /|~       /_|\
+//         _-H-__  -~-~-~-~-~-~     /_|\    -~======-~
+// ~-\XXXXXXXXXX/~     ~-~-~-~     /__|_\ ~-~-~-~
+// ~-~-~-~-~-~    ~-~~-~-~-~-~    ========  ~-~-~-~
