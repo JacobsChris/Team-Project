@@ -13,7 +13,8 @@ module.exports = {
                 let latitude = cam[i].latitude;
                 let longitude = cam[i].longitude;
                 if (geolib.isPointWithinRadius({latitude: latitude, longitude: longitude}, center, rad)) {
-                    camIds.push(cam[i].anprId)
+                    camIds.push(cam[i])
+
                 }
             }
         }
@@ -24,7 +25,7 @@ module.exports = {
                 let latitude = atm[i].latitude;
                 let longitude = atm[i].longitude;
                 if (geolib.isPointWithinRadius({latitude: latitude, longitude: longitude}, center, rad)) {
-                    atmIds.push(atm[i].atmId)
+                    atmIds.push(atm[i])
                 }
             }
         }
@@ -35,7 +36,7 @@ module.exports = {
                 let latitude = cell[i].latitude;
                 let longitude = cell[i].longitude;
                 if (geolib.isPointWithinRadius({latitude: latitude, longitude: longitude}, center, rad)) {
-                    cellIds.push(cell[i].cellTowerId)
+                    cellIds.push(cell[i])
                 }
             }
         }
@@ -46,11 +47,11 @@ module.exports = {
                 let latitude = epos[i].latitude;
                 let longitude = epos[i].longitude;
                 if (geolib.isPointWithinRadius({latitude: latitude, longitude: longitude}, center, rad))
-                    eposIds.push(epos[i].id)
+                    eposIds.push(epos[i])
             }
         }
 
-        return [camIds, atmIds, cellIds, eposIds]
+        return {anprId: camIds, atmId: atmIds, cellTowerID: cellIds, eposId: eposIds}
 
     }
 
