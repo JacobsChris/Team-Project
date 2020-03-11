@@ -3,7 +3,6 @@ import FormInput from './FormInput.js';
 import '../styles/searchPeople.css';
 import DatePicker from './DateSelector.js';
 import "react-datepicker/dist/react-datepicker.css";
-// import Validation from './Validation.js';
 import { Form, Button } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { getPeople } from '../redux/actions/getAction';
@@ -11,7 +10,7 @@ import PropTypes from 'prop-types';
 
 const postcodeRegex = RegExp(/^(([gG][iI][rR] {0,}0[aA]{2})|(([aA][sS][cC][nN]|[sS][tT][hH][lL]|[tT][dD][cC][uU]|[bB][bB][nN][dD]|[bB][iI][qQ][qQ]|[fF][iI][qQ][qQ]|[pP][cC][rR][nN]|[sS][iI][qQ][qQ]|[iT][kK][cC][aA]) {0,}1[zZ]{2})|((([a-pr-uwyzA-PR-UWYZ][a-hk-yxA-HK-XY]?[0-9][0-9]?)|(([a-pr-uwyzA-PR-UWYZ][0-9][a-hjkstuwA-HJKSTUW])|([a-pr-uwyzA-PR-UWYZ][a-hk-yA-HK-Y][0-9][abehmnprv-yABEHMNPRV-Y]))) {0,}[0-9][abd-hjlnp-uw-zABD-HJLNP-UW-Z]{2}))$/);
 const nameRegex = RegExp(/^(([A-Za-z]{2,})|([A-Za-z]{2,})+[-]?([A-Za-z]{2,})|([A-Za-z]{2,})+[-]?([A-Za-z]{2,})+[-]?([A-Za-z]{2,}))$/);
-
+const dobRegex = RegExp(/^(0[1-9]|1[0-2])-(0[1-9]|1\d|2\d|3[01])-(19|20)\d{2}$/);
 
 const validateForm = (errors) => {
   let valid = true;
@@ -59,60 +58,63 @@ class SearchPeople extends React.Component {
 
   handleDateChange = (event) => {
     this.setState({
-        dob: event
+      dob: event
     });
   }
 
   handleChange = ({ target: { value, name } }) => {
-    
+
     let errors = this.state.errors;
 
     switch (name) {
       case 'forename':
         errors.forename = '';
-        if (value.length !== 0 && value.length < 2){
+        if (value.length !== 0 && value.length < 2) {
           errors.forename = 'First name must be at least 2 characters long!';
         }
-        else if (value.length !== 0 && value.length > 50){
+        else if (value.length !== 0 && value.length > 50) {
           errors.forename = 'First name must be under 50 charcters';
         }
-        else if (!nameRegex.test(value) && value.length !== 0){
+        else if (!nameRegex.test(value) && value.length !== 0) {
           errors.forename = 'First name can only contain letters and hyphens'
         }
         break;
       case 'surname':
         errors.surname = '';
-        if (value.length !== 0 && value.length < 2){
+        if (value.length !== 0 && value.length < 2) {
           errors.surname = 'Last name must be at least 2 characters long!';
         }
-        else if (value.length !== 0 && value.length > 50){
+        else if (value.length !== 0 && value.length > 50) {
           errors.surname = 'Last name must be under 50 charcters';
         }
-        else if (value.length !== 0 && !nameRegex.test(value)){
+        else if (value.length !== 0 && !nameRegex.test(value)) {
           errors.surname = 'Last name can only contain letters and hyphens'
         }
         break;
       case 'dob':
-        errors.dob =
-          value.length < 2
-            ? 'DOB'
-            : '';
+        errors.dob = '';
+        if (value.length !== 0 && !dobRegex.test(value)) {
+          errors.dob = 'Dates must be in the format DD/MM/YYYY';
+        }
+        else if (value.length > 10) {
+          errors.dob = 'Dates must be in the format DD/MM/YYYY';
+        }
         break;
       case 'birthPlace':
         errors.birthPlace = '';
-        if (value.length !== 0 && value.length < 2){
+        if (value.length !== 0 && value.length < 2) {
           errors.birthPlace = 'Place of birth must be at least 2 characters long!';
         }
-        else if (value.length !== 0 && value.length > 50){
+        else if (value.length !== 0 && value.length > 50) {
           errors.birthPlace = 'Place of birth must be under 50 charcters';
         }
-        else if (value.length !== 0 && !nameRegex.test(value)){
+        else if (value.length !== 0 && !nameRegex.test(value)) {
           errors.birthPlace = 'Place of birth can only contain letters and hyphens';
         }
         break;
       case 'postcode':
         errors.postcode = '';
-        if (value.length !== 0 && !postcodeRegex.test(value)){
+        if (value.length !== 0 && !postcodeRegex.test(value)) {
           errors.postcode = 'Please enter a valid postcode';
         }
         break;
@@ -136,8 +138,13 @@ class SearchPeople extends React.Component {
 
     let date = this.state.dob;
 
-    if(this.state.dob){
-      date = `${date.getFullYear()}-${(date.getMonth()+1) < 10?  0+ ((date.getMonth()+1).toString()) : date.getMonth()+1}-${date.getDate()}`;
+    if (this.state.dob) {
+      date = `${date.getFullYear()}-${(date.getMonth() + 1) < 10 ? 0 + ((date.getMonth() + 1).toString()) : date.getMonth() + 1}-${date.getDate()}`;
+    }
+
+    let getEmpty = () => {
+      let length = this.state.forename.length + this.state.surname.length + this.state.dob.length + this.state.birthPlace.length + this.state.postcode.length;
+      return length;
     }
 
     const data = {
@@ -150,10 +157,9 @@ class SearchPeople extends React.Component {
       sex: this.state.gender
     }
 
-    this.props.getPeople(data);
-
-    if (this.state.formValid){
-      if (window.location.pathname != '/user/home/peopleresults'){
+    if (this.state.formValid && getEmpty) {
+      this.props.getPeople(data);
+      if (window.location.pathname != '/user/home/peopleresults') {
         this.props.history.push('/user/home/peopleresults');
       }
     }
@@ -183,7 +189,7 @@ class SearchPeople extends React.Component {
           </Form.Group>
           <Form.Group className='dob'>
             <Form.Label htmlFor="dob">Date of Birth</Form.Label>
-            <DatePicker name='dob' value={this.state.dob} handleChange={this.handleDateChange} dateFormat='dd-MM-yyyy'/>
+            <DatePicker name='dob' value={this.state.dob} handleChange={this.handleDateChange} dateFormat='dd-MM-yyyy' />
             {errors.dob.length > 0 &&
               <span className='error'>{errors.dob}</span>}
           </Form.Group>
