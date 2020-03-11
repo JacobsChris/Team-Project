@@ -18,15 +18,24 @@ router.post("/", passport.authenticate('login', {session: false}),
             } else if (!req.user) {
                 res.status(401).send("Error, user not found");
             }
-
             userModel.findOne({ where: { username: req.user.username }})
                 .then(result => {
-                    const token = jwt.sign({ id: result.username }, jwtKey.secret, { expiresIn: 1800 });
-                    res.send({
-                        auth: true,
-                        token: "JWT" + " " + token,
-                        message: "user logged in"
-                    });
+                    if (result.admin === 1) {
+                        const token = jwt.sign({ id: result.username, aud: 1 }, jwtKey.secret, { expiresIn: 1800 });
+                        res.send({
+                            auth: true,
+                            token: "JWT" + " " + token,
+                            message: "user logged in"
+                        });
+                    }
+                    else {
+                        const token = jwt.sign({ id: result.username }, jwtKey.secret, { expiresIn: 1800 });
+                        res.send({
+                            auth: true,
+                            token: "JWT" + " " + token,
+                            message: "user logged in"
+                        });
+                    }
             });   
         });
     }
