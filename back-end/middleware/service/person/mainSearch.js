@@ -9,7 +9,7 @@ const findANPRCameraLocation = require('./background/vehicle/findANPRCameraLocat
 const findPersonByMobile = require("./background/PhoneData/findPersonByMobile");
 const findCallHistoryByPhoneNumber = require("./background/PhoneData/findCallHistoryByPhoneNumber");
 const findCellTowerLocationBasedOnCellTowerId = require('./background/PhoneData/findCellTowerLocationBasedOnCellTowerId');
-const searchByLocation = require('./background/LocationSearch/SearchByLocation');
+// const searchByLocation = require('./background/LocationSearch/SearchByLocation');
 
 module.exports = {
 
@@ -107,6 +107,16 @@ module.exports = {
         return findCallHistoryByPhoneNumber.findCallHistoryByPhoneNumber(input.phoneNumber)
     },
 
+    /**
+     * The functions below are pretty much identical.
+     * All work the same way.
+     * Difference is which cell tower they search through in Mobile Call Records:
+     *  one searches through Caller Cell Tower and the other through Receiver Cell Tower.  Third one takes in generic ID.
+     * @param input is a JSON object with a key-pair called callCellTowerId or receiverTowerId or cellTowerId
+     * @returns promised location of a cell tower with given ID.  Use below code to access tje results
+     * .then(([cellTower]) => {console.log("Advanced Detail Search ", cellTower);});
+     * @constructor
+     */
     JsonToStringCallCellTowerLocation: function JsonToStringCellTowerLocation(input) {
         return findCellTowerLocationBasedOnCellTowerId.findCellTowerLocationBasedOnCellTowerId(input.callCellTowerId);
     },
@@ -114,6 +124,11 @@ module.exports = {
     JsonToStringReceiverCellTowerLocation: function JsonToStringCellTowerLocation(input) {
         return findCellTowerLocationBasedOnCellTowerId.findCellTowerLocationBasedOnCellTowerId(input.receiverTowerId);
     },
+
+    JsonToStringCellTowerLocation: function JsonToStringCellTowerLocation(input) {
+        return findCellTowerLocationBasedOnCellTowerId.findCellTowerLocationBasedOnCellTowerId(input.cellTowerId);
+    },
+
 
 };
 
@@ -473,21 +488,21 @@ module.exports = {
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-                                                    // .''.
-                                                    //     .''.      .        *''*    :_\/_:     .
-                                                    // :_\/_:   _\(/_  .:.*_\/_*   : /\ :  .'.:.'.
-                                                    //     .''.: /\ :    /)\   ':'* /\ *  : '..'.  -=:o:=-
-                                                    // :_\/_:'.:::.  | ' *''*    * '.\'/.'_\(/_'.':'.'
-                                                    // : /\ : :::::  =  *_\/_*     -= o =- /)\    '  *
-                                                    // '..'  ':::' === * /\ *     .'/.\'.  ' ._____
-                                                    // *        |   *..*         :       |.   |' .---"|
-                                                    // *      |     _           .--'|  ||   | _|    |
-                                                    // *      |  .-'|       __  |   |  |    ||      |
-                                                    //     .-----.   |  |' |  ||  |  | |   |  |    ||      |
-                                                    // ___'       ' /"\ |  '-."".    '-'   '-.'    '`      |____
-                                                    // jgs~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-                                                    // &                    ~-~-~-~-~-~-~-~-~-~   /|
-                                                    // ejm97    )      ~-~-~-~-~-~-~-~  /|~       /_|\
-                                                    //         _-H-__  -~-~-~-~-~-~     /_|\    -~======-~
-                                                    // ~-\XXXXXXXXXX/~     ~-~-~-~     /__|_\ ~-~-~-~
-                                                    // ~-~-~-~-~-~    ~-~~-~-~-~-~    ========  ~-~-~-~
+// .''.
+//     .''.      .        *''*    :_\/_:     .
+// :_\/_:   _\(/_  .:.*_\/_*   : /\ :  .'.:.'.
+//     .''.: /\ :    /)\   ':'* /\ *  : '..'.  -=:o:=-
+// :_\/_:'.:::.  | ' *''*    * '.\'/.'_\(/_'.':'.'
+// : /\ : :::::  =  *_\/_*     -= o =- /)\    '  *
+// '..'  ':::' === * /\ *     .'/.\'.  ' ._____
+// *        |   *..*         :       |.   |' .---"|
+// *      |     _           .--'|  ||   | _|    |
+// *      |  .-'|       __  |   |  |    ||      |
+//     .-----.   |  |' |  ||  |  | |   |  |    ||      |
+// ___'       ' /"\ |  '-."".    '-'   '-.'    '`      |____
+// jgs~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// &                    ~-~-~-~-~-~-~-~-~-~   /|
+// ejm97    )      ~-~-~-~-~-~-~-~  /|~       /_|\
+//         _-H-__  -~-~-~-~-~-~     /_|\    -~======-~
+// ~-\XXXXXXXXXX/~     ~-~-~-~     /__|_\ ~-~-~-~
+// ~-~-~-~-~-~    ~-~~-~-~-~-~    ========  ~-~-~-~
