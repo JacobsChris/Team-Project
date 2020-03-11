@@ -1,5 +1,5 @@
 const { Sequelize, DataTypes } = require("sequelize");
-const rawdata = require('../middleware/service/person/background/config.json');
+const rawdata = require('../middleware/service/person/background/configProd.json');
 
 const sequelize = new Sequelize(rawdata);
 
