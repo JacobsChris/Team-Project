@@ -17,42 +17,49 @@ class PeopleResultsPage extends React.Component {
         super(props);
 
         this.state = {
-            personDetails: []
+            personDetails: {
+                citizenData: [],
+                bankAccountData: [],
+                mobilesData: []
+            }
         };
     };
 
     handleClick(id, forename, surname, address, dob, pob, gender) {
-        this.setState({
-            personDetails: []
-        })
         let data = {
             citizenID: id, forenames: forename, surname: surname, homeAddress: address,
             dateOfBirth: dob, placeOfBirth: pob, sex: gender
         };
-        axios.post('http://localhost:8080/back-end/person/getData', data, {
+        axios.post('http://localhost:8080/back-end/person/getMatching', data, {
             headers: {
                 Authorization: sessionStorage.jwt
             }
         })
-        .then((response) => {
-          this.setState({
-            personDetails: this.state.personDetails.concat(response)                 
-          })
-          console.log(this.state.personDetails);
-        })
+            .then((response) => {
+                console.log(response);
+                this.setState({
+                    personDetails: response.data
+                })
+
+            })
     };
 
     render() {
+        console.log('PD', this.state.personDetails);
+
+        const { citizenData: person } = this.state.personDetails;
+        const { bankAccountData: personBank } = this.state.personDetails;
+        const { mobilesData: personMobile } = this.state.personDetails;
         return (
             <div>
                 {!this.props.resultsLoading ? (this.props.results.length === 0 ? (<h3>No results found</h3>) : (
                     <Row>
                         <Col>
-                            <Row>
+                            {/* <Row>
                                 <Container className='flex-container' id='small-search'>
                                     <SearchPeople />
                                 </Container>
-                            </Row>
+                            </Row> */}
                             <Row>
                                 <Container className='flex-container' id='person-list'>
                                     {this.props.results?.map(person =>
@@ -65,7 +72,8 @@ class PeopleResultsPage extends React.Component {
                                                 </Col>
                                                 <Col>
                                                     <br />
-                                                    <h3 className='card-title'>{person.forenames} {person.surname}</h3>
+                                                    <h4 className='card-title'>{person.forenames} {person.surname}</h4>
+                                                    <p>Click for details</p>
                                                 </Col>
                                             </Row>
                                         </Card>
@@ -75,46 +83,38 @@ class PeopleResultsPage extends React.Component {
                         </Col>
                         <Col>
                             <Container className='flex-container'>
-                                {this.state.personDetails.map(results => results.data.map(person =>
-                                    <Card className='flex-item' id='person-card' >
-                                        <Row>
-                                            <Col>
-                                                <MdPerson className='large-person-icon' />
-                                            </Col>
-                                            <Col>
-                                                <br />
-                                                <h1 className='card-title'>{person.forenames} {person.surname}</h1>
-                                            </Col>
-                                        </Row>
-                                        <Card.Body>
-                                            <ul className="list-group list-group-flush">
-                                                <li className="list-group-item">
-                                                    <h5>Gender</h5>{
-                                                        [person.sex]}</li>
-                                                <li className="list-group-item">
-                                                    <h5>Home Address</h5>{
-                                                        [person.homeAddress]}</li>
-                                                <li className="list-group-item">
-                                                    <h5>Date of Birth</h5>
-                                                    {[person.dateOfBirth]}</li>
-                                                <li className="list-group-item">
-                                                    <h5>Place of Birth</h5>
-                                                    {[person.placeOfBirth]}</li>
-                                                <li className="list-group-item">
-                                                    <h5>Associates</h5>
-                                                    {[person.associates]}</li>
-                                                <li className="list-group-item">
-                                                    <h5>Vehicles</h5>
-                                                    {[person.vehicles]}</li>
-                                            </ul>
-                                        </Card.Body>
-                                    </Card>
-                                ))}
+                                <Card className='flex-item' id='person-card' >
+                                    <Row>
+                                        <Col>
+                                            <MdPerson className='large-person-icon' />
+                                        </Col>
+                                        <Col>
+                                            <br />
+                                            <h1 className='card-title'>{person.forenames} {person.surname}</h1>
+                                        </Col>
+                                    </Row>
+                                    <Card.Body>
+                                        <ul className="list-group list-group-flush">
+                                            <li className="list-group-item">Gender: {person.sex}</li>
+                                            <li className="list-group-item">Home Address: {person.homeAddress}</li>
+                                            <li className="list-group-item">Date of Birth: {person.dateOfBirth}</li>
+                                            <li className="list-group-item">Place of Birth: {person.placeOfBirth}</li>
+                                            <li className="list-group-item">Bank: {personBank !== undefined ?
+                                                personBank.bank : 'none'}</li>
+                                            <li className="list-group-item">Account Number: {personBank !== undefined ?
+                                                personBank.accountNumber : 'none'}</li>
+                                            <li className="list-group-item">Mobile Number: {personMobile !== undefined ? 
+                                                personMobile.phoneNumber : 'none'}</li>
+                                            <li className="list-group-item">Associates: {person.associates}</li>
+                                            <li className="list-group-item">Vehicles: {person.vehicles}</li>
+                                        </ul>
+                                    </Card.Body>
+                                </Card>
                             </Container>
                         </Col>
                     </Row>
                 )
-                ): (<h3>Loading</h3>)};
+                ) : (<h3>Loading</h3>)};
             </div>
 
         )
