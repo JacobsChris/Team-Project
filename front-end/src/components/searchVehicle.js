@@ -5,7 +5,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import { Form, Button } from 'react-bootstrap';
 import '../styles/searchVehicle.css';
 import { connect } from 'react-redux';
-import { getVehicle } from '../actions/vehicleAction';
+import { getVehicle } from '../redux/actions/vehicleAction';
 import PropTypes from 'prop-types';
 
 class SearchVehicle extends Component {

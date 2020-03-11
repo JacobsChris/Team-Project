@@ -37,7 +37,6 @@ class PeopleResultsPage extends React.Component {
             headers: {
                 Authorization: sessionStorage.jwt
             }
-              }
         })
         .then((response) => {
           this.setState({
