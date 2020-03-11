@@ -4,7 +4,6 @@ import SearchPeople from './SearchPeople';
 import { Container, Card, Row, Col } from 'react-bootstrap';
 import '../styles/peopleResults.css';
 import { MdPerson } from 'react-icons/md';
-import { encodeQueryParams, stringify, StringParam } from 'serialize-query-params';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
@@ -30,14 +29,10 @@ class PeopleResultsPage extends React.Component {
             citizenID: id, forenames: forename, surname: surname, homeAddress: address,
             dateOfBirth: dob, placeOfBirth: pob, sex: gender
         };
-        axios.get('http://localhost:8080/back-end/person/getData?' + stringify(encodeQueryParams({
-            citizenID: StringParam, forenames: StringParam, surname: StringParam, homeAddress: StringParam,
-            dateOfBirth: StringParam, placeOfBirth: StringParam, sex: StringParam
-        }, data)), {
+        axios.post('http://localhost:8080/back-end/person/getData', data, {
             headers: {
                 Authorization: sessionStorage.jwt
             }
-              }
         })
         .then((response) => {
           this.setState({
