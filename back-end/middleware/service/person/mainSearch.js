@@ -173,10 +173,10 @@ module.exports = {
 // JsonToStringDetails(
 //     {
 //         "citizenID": "",
-//         "forenames": "William",
-//         "surname": "Willis",
+//         "forenames": "lucy mandy",
+//         "surname": "Price",
 //         "homeAddress": "",
-//         "dateOfBirth": "1958-10-27",
+//         "dateOfBirth": "1968-02-15",
 //         "placeOfBirth": "",
 //         "sex": ""
 //     }
@@ -393,7 +393,7 @@ module.exports = {
 ///////////////////////////////////////////////////// from a things given lat, long and an input radius  ////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-
+//
 // function JsonToStringSearchByLocation(input){
 //     return searchByLocation.searchByLocation(input.latitude, input.longitude,input.radius);
 //
@@ -414,28 +414,28 @@ module.exports = {
 ///////////////////////////////////////////////////// from a things given an Id and timestamp  ////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-// function JsonToStringSearchByCellTowerAndTime(input, intialTimeStamp, finalTimeStamp) {
-//     return searchLocationsByIdAndTime.searchLocationsByIdAndTime(input.cellTowerId, input.anprId, input.atmId, input.eposId, intialTimeStamp.intialTimeStamp, finalTimeStamp.finalTimeStamp)
-// }
-//
-// JsonToStringSearchByCellTowerAndTime({
-//         "cellTowerId": "140391",
-//         "anprId": 73,
-//         "atmId": 697,
-//         "eposId": 696
-//     },
-//     {
-//         "intialTimeStamp": "2014-05-01 09:03:29"
-//     }, {
-//         "finalTimeStamp": "2016-05-01 09:03:29"
-//     })
-//     .then(([cellTowers, vehicle, atm, epos]) => {
-//         console.log("CellTowers", cellTowers,
-//             "vehicles", vehicle,
-//             "atm", atm,
-//             "epos", epos);
-//     });
+function JsonToStringSearchByCellTowerAndTime(input, intialTimeStamp, finalTimeStamp) {
+    return searchLocationsByIdAndTime.searchLocationsByIdAndTime(input.cellTowerId, input.anprId, input.atmId, input.eposId, intialTimeStamp.intialTimeStamp, finalTimeStamp.finalTimeStamp)
+}
 
+JsonToStringSearchByCellTowerAndTime({
+        "anprId": 73,
+    },
+    {
+        "intialTimeStamp": "2015-05-01 09:03:29"
+    }, {
+        "finalTimeStamp": "2015-05-01 09:13:29"
+    })
+    .then(({output1, output2}) => {
+        debugger;
+        console.log("output1", output1, 'output2', output2);
+    });
+
+// numbers to test this function with :)
+// "cellTowerId": 140391,
+//     "anprId": 73,
+//     "atmId": 697,
+//     "eposId": 696
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

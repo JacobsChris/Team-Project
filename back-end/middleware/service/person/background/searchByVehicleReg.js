@@ -17,6 +17,6 @@ module.exports = {
         vehicleReg = licencePlateValidator(vehicleReg);
         let sqlSearchString = "SELECT * FROM vehicleRegistration WHERE " +
             "vehicleRegistrationNo LIKE " + vehicleReg;
-        return Promise.all([auth.SQLauthenticate(sqlSearchString)]);
+        return auth.SQLauthenticate(sqlSearchString);
     }
 };
