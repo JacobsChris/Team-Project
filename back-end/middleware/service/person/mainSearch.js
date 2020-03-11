@@ -117,6 +117,9 @@ module.exports = {
     },
     JsonToStringDetailsFromVehicleReg: function JsonToStringDetailsFromVehicleReg(input) {
         return findFullDetailsBasedOnAVehcileReg.findDetailsByName(input.forenames, input.surname, input.address, input.dateOfBirth);
+    },
+    JsonToStringSearchByLocation: function JsonToStringSearchByLocation(input){
+    return searchByLocation.searchByLocation(input.latitude, input.longitude,input.radius);
     }
 };
 
@@ -381,25 +384,22 @@ module.exports = {
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-function JsonToStringSearchByLocation(input){
-    return searchByLocation.searchByLocation(input.latitude, input.longitude,input.radius);
-
-}
-
-JsonToStringSearchByLocation({
-    latitude: 51.54500551249844,
-        longitude: -0.13447255196733515,
-        radius: 1}).then(([ANPRCameraLocations,ATMPointLocations]) => {console.log("ANPRCameraLocations", ANPRCameraLocations,"ATMPointLocations",ATMPointLocations);});
-
-
-// function JsonToStringSearchCamerasByArea(input) {
-//     return searchCamerasByArea.searchCamerasByArea( input.latitude, input.longitude,input.radius)
+// function JsonToStringSearchByLocation(input){
+//     return searchByLocation.searchByLocation(input.latitude, input.longitude,input.radius);
+//
 // }
 //
-// JsonToStringSearchCamerasByArea({
+// JsonToStringSearchByLocation({
 //     latitude: 51.54500551249844,
 //     longitude: -0.13447255196733515,
-//     radius: 2}).then(([Locations]) => {console.log("Advanced Detail Search in order of vehicle", Locations);});
+//     radius: 0.25})
+// .then(([ANPRCameraLocations,ATMPointLocations,CellTowerLocations, EPOSTerminalLocations]) => {
+//             console.log("ANPRCameraLocations", ANPRCameraLocations,
+//                 "ATMPointLocations",ATMPointLocations,
+//                 "CellTowerLocations",CellTowerLocations,
+//                 "EPOSTerminalLocations",EPOSTerminalLocations);});
+
+
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
