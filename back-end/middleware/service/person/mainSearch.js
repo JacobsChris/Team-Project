@@ -9,7 +9,6 @@ const findANPRCameraLocation = require('./background/vehicle/findANPRCameraLocat
 const findPersonByMobile = require("./background/PhoneData/findPersonByMobile");
 const findCallHistoryByPhoneNumber = require("./background/PhoneData/findCallHistoryByPhoneNumber");
 const findCellTowerLocationBasedOnCellTowerId = require('./background/PhoneData/findCellTowerLocationBasedOnCellTowerId');
-const findFullDetailsBasedOnAVehcileReg = require('./background/vehicle/findDetailsByVehicleRegDetails');
 const searchByLocation = require('./background/LocationSearch/SearchByLocation');
 
 module.exports = {
@@ -116,9 +115,6 @@ module.exports = {
         return findCellTowerLocationBasedOnCellTowerId.findCellTowerLocationBasedOnCellTowerId(input.receiverTowerId);
     },
 
-    JsonToStringDetailsFromVehicleReg: function JsonToStringDetailsFromVehicleReg(input) {
-        return findFullDetailsBasedOnAVehcileReg.findDetailsByName(input.forenames, input.surname, input.address, input.dateOfBirth);
-    }
 };
 
 
