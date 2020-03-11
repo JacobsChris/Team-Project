@@ -6,7 +6,7 @@ export default class DateSelector extends React.Component {
     return (
       <DatePicker
         dateFormat={this.props.dateFormat}
-        placeholderText="Click to select a date"
+        placeholderText="DD/MM/YYYY"
         onChange={this.props.handleChange}
         name={this.props.name || ''}
         selected={this.props.value || ''} 

@@ -1,0 +1,3 @@
+export const GET_PEOPLE = 'GET_PEOPLE';
+export const SET_RESULTS_LOADING = 'SET_RESULTS_LOADING';
+
