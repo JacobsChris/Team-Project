@@ -32,7 +32,7 @@ function App() {
           <GuardedRoute path='/user/home/searchpeople' component={SearchPeople} />
           <GuardedRoute path='/user/home/searchvehicle' component={SearchVehicle} />
           <GuardedRoute path='/admin/' component={AdminNavBar} />
-          <GuardedRoute path='/admin/' component={CreateUser} />
+          <GuardedRoute path='/admin/adduser' component={CreateUser} />
           <GuardedRoute path='/user/home/peopleresults' component={PeopleResultsPage} />
           <GuardedRoute path='/user/home/vehicleresults' component={VehicleResultsPage} />
         </GuardProvider>
