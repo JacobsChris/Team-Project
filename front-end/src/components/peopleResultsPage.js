@@ -37,18 +37,17 @@ class PeopleResultsPage extends React.Component {
             headers: {
                 Authorization: sessionStorage.jwt
             }
+              }
         })
-            .then((response) => {
-                this.setState({
-                    personDetails: this.state.personDetails.concat(response),
-                })
-                console.log(this.state.personDetails);
-            })
+        .then((response) => {
+          this.setState({
+            personDetails: this.state.personDetails.concat(response)                 
+          })
+          console.log(this.state.personDetails);
+        })
     };
 
     render() {
-        console.log('RENDER', this.props);
-        console.log(this.props.results.length);
         return (
             <div>
                 {!this.props.resultsLoading ? (this.props.results.length === 0 ? (<h3>No results found</h3>) : (

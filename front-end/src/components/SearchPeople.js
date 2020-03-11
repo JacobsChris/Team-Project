@@ -42,6 +42,8 @@ class SearchPeople extends React.Component {
       gender: '',
       formValid: false,
       errorCount: null,
+      done: false,
+      loading: false,
       errors: {
         forename: '',
         surname: '',
@@ -52,7 +54,7 @@ class SearchPeople extends React.Component {
       date: {
         startDate: '',
         setStartDate: ''
-      }
+      }                  
     }
   }
 
@@ -167,7 +169,7 @@ class SearchPeople extends React.Component {
 
   render() {
     const { errors, formValid } = this.state;
-    const { startDate, setStartDate } = this.state.date;
+
     return (
       <div className='form-size'>
         <Form onSubmit={this.submit}>

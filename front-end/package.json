@@ -2,6 +2,7 @@
   "name": "front-end",
   "version": "0.1.0",
   "private": true,
+  "homepage": "http://localhost:3000/user/signin",
   "dependencies": {
     "@material-ui/icons": "^4.9.1",
     "@testing-library/jest-dom": "^4.2.4",
@@ -13,7 +14,10 @@
     "react-bootstrap": "^1.0.0-beta.17",
     "react-datepicker": "^2.13.0",
     "react-dom": "^16.13.0",
+    "react-fade-in": "^0.1.8",
     "react-icons": "^3.9.0",
+    "react-loading": "^2.0.3",
+    "react-lottie": "^1.2.3",
     "react-router-dom": "^5.1.2",
     "react-router-guards": "^1.0.1",
     "react-scripts": "3.4.0",
