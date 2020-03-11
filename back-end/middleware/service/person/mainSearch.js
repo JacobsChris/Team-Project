@@ -381,16 +381,16 @@ module.exports = {
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-function JsonToStringSearchByLocation(input){
-    return searchByLocation.searchByLocation(input.latitude, input.longitude,input.radius);
-
-}
-
-JsonToStringSearchByLocation({
-    latitude: 51.54500551249844,
-        longitude: -0.13447255196733515,
-        radius: 1}).then(([ANPRCameraLocations,ATMPointLocations]) => {console.log("ANPRCameraLocations", ANPRCameraLocations,"ATMPointLocations",ATMPointLocations);});
-
+// function JsonToStringSearchByLocation(input){
+//     return searchByLocation.searchByLocation(input.latitude, input.longitude,input.radius);
+//
+// }
+//
+// JsonToStringSearchByLocation({
+//     latitude: 51.54500551249844,
+//         longitude: -0.13447255196733515,
+//         radius: 1}).then(([ANPRCameraLocations,ATMPointLocations]) => {console.log("ANPRCameraLocations", ANPRCameraLocations,"ATMPointLocations",ATMPointLocations);});
+//
 
 // function JsonToStringSearchCamerasByArea(input) {
 //     return searchCamerasByArea.searchCamerasByArea( input.latitude, input.longitude,input.radius)
