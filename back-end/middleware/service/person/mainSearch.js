@@ -389,7 +389,7 @@ function JsonToStringSearchByLocation(input){
 JsonToStringSearchByLocation({
     latitude: 51.54500551249844,
         longitude: -0.13447255196733515,
-        radius: 0.5}).then(([ANPRCameraLocations]) => {console.log("ANPRCameraLocations", ANPRCameraLocations);});
+        radius: 1}).then(([ANPRCameraLocations,ATMPointLocations]) => {console.log("ANPRCameraLocations", ANPRCameraLocations,"ATMPointLocations",ATMPointLocations);});
 
 
 // function JsonToStringSearchCamerasByArea(input) {
