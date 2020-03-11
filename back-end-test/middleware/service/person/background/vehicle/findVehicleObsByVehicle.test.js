@@ -35,15 +35,18 @@ test("takes in a valid complete vehicle reg and returns all observations of that
 });
 
 
-// let inValidInputReg = {
-//     "vehicleRegistrationNo": "IU2"
-// };
-// test("takes in an invalid complete vehicle reg and returns all observations of that vehicle", (done) => {
-//     jest.setTimeout(1000000);
-//     expect(() => {
-//         mainSearch.JsonToStringVehicleObs(inValidInputReg)
-//     }).toThrow("Not a valid vehicle registration number")
-// });
+let inValidInputReg = {
+    "vehicleRegistrationNo": "IU2"
+};
+test("takes in an invalid complete vehicle reg and returns all observations of that vehicle", async () => {
+    try {
+        await mainSearch.JsonToStringVehicleObs(inValidInputReg);
+        throw "this shouldn't have got here"
+    } catch (err) {
+        expect(err).toBeTruthy();
+        expect(err.message).toEqual("Not a valid vehicle registration number")
+    }
+});
 
 test("takes in a valid incomplete vehicle reg and returns all observations of that vehicle", (done) => {
     jest.setTimeout(1000000);
