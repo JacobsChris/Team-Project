@@ -14,7 +14,8 @@ class CreateUser extends Component {
         }
     }
 
-    handleChange = ({target: {name, value}}) => {
+    handleChange = ({target: {name, value, checked}}) => {
+        value = name === 'isAdmin' ? checked : value;
         this.setState({
             [name]: value
         });
@@ -26,12 +27,11 @@ class CreateUser extends Component {
         if(this.state.username === this.state.verUsername && this.state.password === this.state.verPassword) {
         let data = {
             username: this.state.username,
-            verUsername: this.state.verUsername,
             password: this.state.password,
-            verPassword: this.state.verPassword
+            isAdmin: this.state.isAdmin
         }
 
-        
+        console.log(data);
 
 
         axios.post('http://localhost:8080/register/', data)
@@ -67,6 +67,12 @@ class CreateUser extends Component {
                         <div className='password'>
                             <label></label>
                             <FormInput name='verPassword' type="password" value={this.state.verPassword} handleChange={this.handleChange}/>
+                        </div>
+                        <div className='admin'>
+                            <label>
+                                Make Admin:
+                                    <input name="isAdmin" type="checkbox" onChange={this.handleChange}/>
+                            </label>
                         </div>
                         <input type="submit" value="Create User" />
                     </fieldset>
