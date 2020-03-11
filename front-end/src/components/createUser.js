@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import FormInput from './FormInput';
-import axios from 'axios';
+import { connect } from 'react-redux';
+import { getUser } from '../redux/actions/userAction';
+import PropTypes from 'prop-types';
 
 class CreateUser extends Component {
     constructor(props){
@@ -33,14 +35,9 @@ class CreateUser extends Component {
 
         console.log(data);
 
-
-        axios.post('http://localhost:8080/register/', data)
-        .then(res => {
-            console.log(res);
-        })
-        .catch(err => {
-            console.log(err)
-        })
+        this.props.getUser(data);
+    
+        this.props.history.push('/admin');
     }
     }
 
@@ -82,4 +79,8 @@ class CreateUser extends Component {
     }
 }
 
-export default CreateUser;
+CreateUser.propTypes = {
+    getUser: PropTypes.func.isRequired
+  };
+  
+export default connect(null, { getUser })(CreateUser);
