@@ -9,7 +9,8 @@ class CreateUser extends Component {
             username: '',
             verUsername: '',
             password: '',
-            verPassword: ''
+            verPassword: '',
+            isAdmin: false
         }
     }
 

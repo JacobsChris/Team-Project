@@ -1,4 +1,4 @@
-import { GET_VEHICLE } from '../actions/types';
+import { GET_USER } from '../actions/types';
 
 const initialState = {
     results: [],
@@ -6,11 +6,11 @@ const initialState = {
 
 export default function(state = initialState, action){
     switch(action.type){
-        case GET_VEHICLE:
+        case GET_USER:
             console.log(action.payload.data);
             return {
                 ...state,
-                results: [...action.payload.data]
+                results: [action.payload.data]
             };
         default:
             return state;
