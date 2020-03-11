@@ -1,5 +1,4 @@
 import { GET_PEOPLE, SET_RESULTS_LOADING } from './types';
-import { encodeQueryParams, stringify, StringParam } from 'serialize-query-params';
 import axios from 'axios';
 
 export const getPeople = (searchData) => dispatch => {
@@ -10,19 +9,16 @@ export const getPeople = (searchData) => dispatch => {
         type: SET_RESULTS_LOADING,
         payload: true
     });
-    axios.get('http://localhost:8080/back-end/person/getData?' + stringify(encodeQueryParams({
-        citizenID: StringParam, forenames: StringParam, surname: StringParam, homeAddress: StringParam,
-        dateOfBirth: StringParam, placeOfBirth: StringParam, sex: StringParam
-    }, searchData)), {
+    axios.post('http://localhost:8080/back-end/person/getData', searchData, {
         headers: {
             Authorization: sessionStorage.jwt
-          }
+        }
     })
         .then(response =>
-            dispatch({
-                type: GET_PEOPLE,
-                payload: response
-            }))
+        dispatch({
+            type: GET_PEOPLE,
+            payload: response
+        }))
 };
 
 

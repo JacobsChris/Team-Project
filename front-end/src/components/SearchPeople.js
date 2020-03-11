@@ -161,7 +161,7 @@ class SearchPeople extends React.Component {
 
     if (this.state.formValid && getEmpty) {
       this.props.getPeople(data);
-      if (window.location.pathname != '/user/home/peopleresults') {
+      if (window.location.pathname !== '/user/home/peopleresults') {
         this.props.history.push('/user/home/peopleresults');
       }
     }
