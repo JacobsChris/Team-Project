@@ -393,21 +393,21 @@ module.exports = {
 ///////////////////////////////////////////////////// from a things given lat, long and an input radius  ////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-
-function JsonToStringSearchByLocation(input){
-    return searchByLocation.searchByLocation(input.latitude, input.longitude,input.radius);
-
-}
-
-JsonToStringSearchByLocation({
-    latitude: 51.54500551249844,
-    longitude: -0.13447255196733515,
-    radius: 0.25})
-.then(([ANPRCameraLocations,ATMPointLocations,CellTowerLocations, EPOSTerminalLocations]) => {
-            console.log("ANPRCameraLocations", ANPRCameraLocations,
-                "ATMPointLocations",ATMPointLocations,
-                "CellTowerLocations",CellTowerLocations,
-                "EPOSTerminalLocations",EPOSTerminalLocations);});
+//
+// function JsonToStringSearchByLocation(input){
+//     return searchByLocation.searchByLocation(input.latitude, input.longitude,input.radius);
+//
+// }
+//
+// JsonToStringSearchByLocation({
+//     latitude: 51.54500551249844,
+//     longitude: -0.13447255196733515,
+//     radius: 0.25})
+// .then(([ANPRCameraLocations,ATMPointLocations,CellTowerLocations, EPOSTerminalLocations]) => {
+//             console.log("ANPRCameraLocations", ANPRCameraLocations,
+//                 "ATMPointLocations",ATMPointLocations,
+//                 "CellTowerLocations",CellTowerLocations,
+//                 "EPOSTerminalLocations",EPOSTerminalLocations);});
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
