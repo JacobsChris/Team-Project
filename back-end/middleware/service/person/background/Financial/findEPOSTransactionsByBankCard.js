@@ -18,7 +18,7 @@ module.exports = {
      * */
     findEPOSTransactions: function findEPOSTransactions(cardNumber) {
         let sqlSearchString = "SELECT * FROM eposTransactions WHERE "+
-            " bankCardNumber LIKE " + cardNumber;
+            " bankCardNumber =(" + cardNumber + ")";
         return auth.SQLauthenticate(sqlSearchString)
     }
 };

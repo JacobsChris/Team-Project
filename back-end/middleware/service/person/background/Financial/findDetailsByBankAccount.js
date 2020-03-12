@@ -29,7 +29,7 @@ module.exports = {
      *  */
     findBankCardByAccountId: function findBankCardByAccountId(bankAccountId, accountNumber, bank, forenames, surname, dateOfBirth, homeAddress,limit) {
         bankAccountId = exactStr.addExactStr(bankAccountId);
-        return Promise.all([bankCard.findBankCard(bankAccountId,limit)]);
+        return Promise.all([bankCard.findBankCard(bankAccountId)]);
 
     }
 };
