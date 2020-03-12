@@ -21,11 +21,22 @@ router.post("/", passport.authenticate('login', {session: false}),
             userModel.findOne({ where: { username: req.body.username }})
                 .then(result => {
                     const token = jwt.sign({ id: result.username, admin: result.admin}, jwtKey.secret, { expiresIn: 1800 });
-                    res.send({
-                        auth: true,
-                        token: "JWT" + " " + token,
-                        message: "user logged in"
-                    }); 
+                    if (result.admin) {
+                        res.send({
+                            auth: true,
+                            admin: true,
+                            token: "JWT" + " " + token,
+                            message: "user logged in"
+                        }); 
+                    }
+                    else {
+                        res.send({
+                            auth: true,
+                            admin: false,
+                            token: "JWT" + " " + token,
+                            message: "user logged in"
+                        }); 
+                    }
             });   
         });
     }
