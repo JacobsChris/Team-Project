@@ -419,12 +419,12 @@ function JsonToStringSearchByCellTowerAndTime(input, intialTimeStamp, finalTimeS
 }
 
 JsonToStringSearchByCellTowerAndTime({
-        "anprId": 73,
+        "atmId": 697,
     },
     {
-        "intialTimeStamp": "2015-05-01 09:03:29"
+        "intialTimeStamp": "2015-05-01 14:03:29"
     }, {
-        "finalTimeStamp": "2015-05-01 09:13:29"
+        "finalTimeStamp": "2015-05-01 16:33:29"
     })
     .then(({output1, output2}) => {
         debugger;
@@ -436,6 +436,9 @@ JsonToStringSearchByCellTowerAndTime({
 //     "anprId": 73,
 //     "atmId": 697,
 //     "eposId": 696
+
+//atm time around 1400
+// the rest around 0930
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

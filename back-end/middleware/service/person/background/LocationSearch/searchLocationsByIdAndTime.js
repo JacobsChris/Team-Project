@@ -5,7 +5,10 @@ const searchGivenASingleANPRIdAndTime = require('./idAndTimeStampFinders/searchG
 const searchGivenASingleATMIdAndTime =require('./idAndTimeStampFinders/searchGivenASingleATMIdAndTime.js');
 const searchGivenAEposIdAndTime = require('./idAndTimeStampFinders/searchGivenAEposIdAndTime.js');
 const findPersonByMobile = require('../PhoneData/findPersonByMobile.js');
-const searchByVehicleReg = require('../searchByVehicleReg.js')
+const searchByVehicleReg = require('../searchByVehicleReg.js');
+const findBankCardByAtmId = require('../Financial/findBankCardByAtmId.js');
+const findBankAccountIdGivenACardNumber = require('../Financial/findBankAccountIdGivenACardNumber.js');
+const findDetailsFromABankAccountId = require('../Financial/findDetailsFromABankAccountId.js');
 
 module.exports = {
     /**
@@ -38,12 +41,10 @@ module.exports = {
                 const output2 = [];
                 cellTowerId = exactStr.addExactStr(cellTowerId);
                 const output1 = await searchGivenACellTowerIdAndTime.searchGivenACellTowerIdAndTime(cellTowerId, intialTimeStamp, finalTimeStamp);
-                console.log(output1)
 
                 for (let mob of output1) {
                     output2.push(await findPersonByMobile.findPersonByMobile(mob.callerNumber));
                 }
-            console.log(output2)
                 return {
                     output1,
                     output2
@@ -52,19 +53,34 @@ module.exports = {
                 const output2 = [];
                 anprId = exactStr.addExactStr(anprId);
                 const output1 = await searchGivenASingleANPRIdAndTime.searchGivenASingleANPRIdAndTime(anprId, intialTimeStamp, finalTimeStamp);
-                console.log(output1)
                 for (let cam of output1) {
                     output2.push(await searchByVehicleReg.searchByVehicleReg(cam.vehicleRegistrationNumber));
                 }
-                console.log(output2);
                 return {
                     output1,
                     output2
                 };
 
             } else if (atmId !== undefined) {
+                const output2 = [];
                 atmId = exactStr.addExactStr(atmId);
-                return Promise.all([searchGivenASingleATMIdAndTime.searchGivenASingleATMIdAndTime(atmId, intialTimeStamp, finalTimeStamp)])
+               const output1 = await searchGivenASingleATMIdAndTime.searchGivenASingleATMIdAndTime(atmId, intialTimeStamp, finalTimeStamp);
+               for (let atm of output1){
+                   let cardNumber = await findBankCardByAtmId.findBankCardByAtmId(atm.atmId);
+                   let bankCardNumber = exactStr.addExactStr(cardNumber.bankCardNumber);
+                   for (let bankcard of cardNumber) {
+                       let bankaccountid = await findBankAccountIdGivenACardNumber.findBankAccountIdGivenACardNumber(bankcard.bankCardNumber);
+                       console.log(bankaccountid);
+                       for (let id of bankaccountid){
+                           output2.push(await findDetailsFromABankAccountId.findDetailsFromABankAccountId(id.bankcardId));
+                           console.log(output2)
+                       }
+                   }
+               }
+               return {
+                   output1,
+                   output2
+               };
             } else if (eposId !== undefined) {
                 eposId = exactStr.addExactStr(eposId);
                 return Promise.all([searchGivenAEposIdAndTime.searchGivenAEposIdAndTime(eposId, intialTimeStamp, finalTimeStamp)])
