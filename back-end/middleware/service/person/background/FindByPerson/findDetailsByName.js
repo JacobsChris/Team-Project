@@ -2,7 +2,7 @@
 const person = require('./findPersonByPerson.js');
 const bankAccount = require('./findBankAccountByPerson.js');
 const mobilePhone = require('./findMobileByPerson.js');
-const veheicleReg = require('./findVehicleByPerson.js');
+const vehicleReg = require('./findVehicleByPerson.js');
 
 module.exports =
     /**
@@ -29,6 +29,6 @@ module.exports =
         return Promise.all([person(input),
             bankAccount(input),
             mobilePhone(input),
-            veheicleReg(input)]);
+            vehicleReg(input)]);
 
     }
