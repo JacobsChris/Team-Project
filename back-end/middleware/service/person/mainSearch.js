@@ -10,6 +10,7 @@ const findPersonByMobile = require("./background/PhoneData/findPersonByMobile");
 const findCallHistoryByPhoneNumber = require("./background/PhoneData/findCallHistoryByPhoneNumber");
 const findCellTowerLocationBasedOnCellTowerId = require('./background/PhoneData/findCellTowerLocationBasedOnCellTowerId');
 // const searchByLocation = require('./background/LocationSearch/SearchByLocation');
+const searchLocationsByIdAndTime = require('./background/LocationSearch/searchLocationsByIdAndTime.js');
 
 module.exports = {
 
@@ -76,6 +77,9 @@ module.exports = {
     JsonToStringANPRLocation: function JsonToStringANPRLocation(input) {
         return findANPRCameraLocation.findANPRCameraLocation(input.ANPRPointId);
     },
+    JsonToStringMobileCallRecords: function JsonToStringMobileCallRecords(input) {
+        return findMobileCallRecordsFromOwnerPhoneNumb.findMobileCallRecordsFromOwnerPhoneNumb(input.phoneNumber);
+    },
     /**
      * @author Chris & Tony
      * @param input is a JSON which contains the key vehicleRegistrationNo
@@ -111,19 +115,18 @@ module.exports = {
         return findCallHistoryByPhoneNumber.findCallHistoryByPhoneNumber(input.phoneNumber)
     },
 
-    /**
-     * The functions below are pretty much identical.
-     * All work the same way.
-     * Difference is which cell tower they search through in Mobile Call Records:
-     *  one searches through Caller Cell Tower and the other through Receiver Cell Tower.  Third one takes in generic ID.
-     * @param input is a JSON object with a key-pair called callCellTowerId or receiverTowerId or cellTowerId
-     * @returns promised location of a cell tower with given ID.  Use below code to access tje results
-     * .then(([cellTower]) => {console.log("Advanced Detail Search ", cellTower);});
-     * @constructor
-     */
-    JsonToStringCallCellTowerLocation: function JsonToStringCellTowerLocation(input) {
+    JsonToStringCellTowerLocation: function JsonToStringCellTowerLocation(input) {
         return findCellTowerLocationBasedOnCellTowerId.findCellTowerLocationBasedOnCellTowerId(input.callCellTowerId);
     },
+    JsonToStringDetailsFromVehicleReg: function JsonToStringDetailsFromVehicleReg(input) {
+        return findFullDetailsBasedOnAVehcileReg.findDetailsByName(input.forenames, input.surname, input.address, input.dateOfBirth);
+    },
+    JsonToStringSearchByLocation: function JsonToStringSearchByLocation(input) {
+        return searchByLocation.searchByLocation(input.latitude, input.longitude, input.radius);
+    },
+    JsonToStringSearchByCellTowerAndTime: function JsonToStringSearchByCellTowerAndTime(input, intialTimeStamp, finalTimeStamp) {
+    return searchLocationsByIdAndTime.searchLocationsByIdAndTime(input.cellTowerId, input.anprId, input.atmId, input.eposId, intialTimeStamp.intialTimeStamp, finalTimeStamp.finalTimeStamp)
+    }
 
     JsonToStringReceiverCellTowerLocation: function JsonToStringCellTowerLocation(input) {
         return findCellTowerLocationBasedOnCellTowerId.findCellTowerLocationBasedOnCellTowerId(input.receiverTowerId);
@@ -492,21 +495,21 @@ module.exports = {
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-// .''.
-//     .''.      .        *''*    :_\/_:     .
-// :_\/_:   _\(/_  .:.*_\/_*   : /\ :  .'.:.'.
-//     .''.: /\ :    /)\   ':'* /\ *  : '..'.  -=:o:=-
-// :_\/_:'.:::.  | ' *''*    * '.\'/.'_\(/_'.':'.'
-// : /\ : :::::  =  *_\/_*     -= o =- /)\    '  *
-// '..'  ':::' === * /\ *     .'/.\'.  ' ._____
-// *        |   *..*         :       |.   |' .---"|
-// *      |     _           .--'|  ||   | _|    |
-// *      |  .-'|       __  |   |  |    ||      |
-//     .-----.   |  |' |  ||  |  | |   |  |    ||      |
-// ___'       ' /"\ |  '-."".    '-'   '-.'    '`      |____
-// jgs~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-// &                    ~-~-~-~-~-~-~-~-~-~   /|
-// ejm97    )      ~-~-~-~-~-~-~-~  /|~       /_|\
-//         _-H-__  -~-~-~-~-~-~     /_|\    -~======-~
-// ~-\XXXXXXXXXX/~     ~-~-~-~     /__|_\ ~-~-~-~
-// ~-~-~-~-~-~    ~-~~-~-~-~-~    ========  ~-~-~-~
+                                                    // .''.
+                                                    //     .''.      .        *''*    :_\/_:     .
+                                                    // :_\/_:   _\(/_  .:.*_\/_*   : /\ :  .'.:.'.
+                                                    //     .''.: /\ :    /)\   ':'* /\ *  : '..'.  -=:o:=-
+                                                    // :_\/_:'.:::.  | ' *''*    * '.\'/.'_\(/_'.':'.'
+                                                    // : /\ : :::::  =  *_\/_*     -= o =- /)\    '  *
+                                                    // '..'  ':::' === * /\ *     .'/.\'.  ' ._____
+                                                    // *        |   *..*         :       |.   |' .---"|
+                                                    // *      |     _           .--'|  ||   | _|    |
+                                                    // *      |  .-'|       __  |   |  |    ||      |
+                                                    //     .-----.   |  |' |  ||  |  | |   |  |    ||      |
+                                                    // ___'       ' /"\ |  '-."".    '-'   '-.'    '`      |____
+                                                    // jgs~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+                                                    // &                    ~-~-~-~-~-~-~-~-~-~   /|
+                                                    // ejm97    )      ~-~-~-~-~-~-~-~  /|~       /_|\
+                                                    //         _-H-__  -~-~-~-~-~-~     /_|\    -~======-~
+                                                    // ~-\XXXXXXXXXX/~     ~-~-~-~     /__|_\ ~-~-~-~
+                                                    // ~-~-~-~-~-~    ~-~~-~-~-~-~    ========  ~-~-~-~
