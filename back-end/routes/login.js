@@ -4,11 +4,12 @@ const jwtKey = require('../middleware/auth/jwtConfig.json');
 const loginAuth = require('../middleware/auth/loginAuth');
 const passport = require('passport');
 const userModel = require('../database/sequelize');
-const morgan = require('../middleware/auth/authLogger');
+const morgan = require('../middleware/logging/authLogger');
 
 const router = express.Router();
 
 router.use(morgan);
+passport.use("login", loginAuth);
 
 router.post("/", passport.authenticate('login', {session: false}), 
     function (req, res) {

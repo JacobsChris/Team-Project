@@ -1,4 +1,5 @@
 const express = require('express');
+const bcrypt = require('bcryptjs');
 const userModel = require('../database/sequelize');
 
 const router = express.Router();
@@ -7,14 +8,20 @@ router.post("/", function (req, res) {
         
     const isAdmin = req.body.isAdmin;
 
-    if (req.body.username === undefined) {
+    if (req.body.username === undefined && req.body.password === undefined) {
         res.status(400).send("Bad Request, username and password required");
     }
     userModel.findOne({where: {username: req.body.username}})
-        .then(user => {
-            if (user) {
-                res.status(202).send("username already taken");
+        .then(result => {
+            let comparison = bcrypt.compareSync(req.body.password, result.password);
+            if (comparison === false || req.body.password !== result.password) {
+                let hashedPassword = userModel.passwordHash(req.body.password);
+                userModel.update({password: hashedPassword}, {where: {username: req.body.username}});
+                res.send("user updated");
             } 
+            else if (result.username && comparison === true) {
+                res.status(202).send("username already taken");
+            }
             else {
                 if (req.body.password.match(/[a-z]/g) && req.body.password.match(
                     /[A-Z]/g) && req.body.password.match(
