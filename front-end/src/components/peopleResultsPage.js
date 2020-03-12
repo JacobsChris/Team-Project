@@ -1,6 +1,5 @@
 import React from 'react';
 import axios from 'axios';
-import SearchPeople from './SearchPeople';
 import { Container, Card, Row, Col } from 'react-bootstrap';
 import '../styles/peopleResults.css';
 import { MdPerson } from 'react-icons/md';
@@ -21,11 +20,20 @@ class PeopleResultsPage extends React.Component {
                 citizenData: [],
                 bankAccountData: [],
                 mobilesData: []
-            }
+            },
+            detailsLoaded: true
         };
     };
 
     handleClick(id, forename, surname, address, dob, pob, gender) {
+        this.setState({
+            personDetails: {
+                citizenData: [],
+                bankAccountData: [],
+                mobilesData: []
+            },
+            detailsLoaded: false
+        });
         let data = {
             citizenID: id, forenames: forename, surname: surname, homeAddress: address,
             dateOfBirth: dob, placeOfBirth: pob, sex: gender
@@ -38,7 +46,8 @@ class PeopleResultsPage extends React.Component {
             .then((response) => {
                 console.log(response);
                 this.setState({
-                    personDetails: response.data
+                    personDetails: response.data,
+                    detailsLoaded: true
                 })
 
             })
@@ -86,7 +95,8 @@ class PeopleResultsPage extends React.Component {
                                 <Card className='flex-item' id='person-card' >
                                     <Row>
                                         <Col>
-                                            <MdPerson className='large-person-icon' />
+                                        {this.state.detailsLoaded ? (<MdPerson className='large-person-icon' />) :
+                                        (<h3>Loading</h3>)}                         
                                         </Col>
                                         <Col>
                                             <br />
@@ -107,6 +117,7 @@ class PeopleResultsPage extends React.Component {
                                                 personMobile.phoneNumber : 'none'}</li>
                                             <li className="list-group-item">Associates: {person.associates}</li>
                                             <li className="list-group-item">Vehicles: {person.vehicles}</li>
+                                            <li className="list-group-item">Recent locations: </li>
                                         </ul>
                                     </Card.Body>
                                 </Card>
