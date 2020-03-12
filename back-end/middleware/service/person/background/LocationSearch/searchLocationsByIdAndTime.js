@@ -56,6 +56,7 @@ module.exports =
                 for (let cam of output1) {
                     output2.push(await searchByVehicleReg(cam.vehicleRegistrationNumber));
                 }
+
                 return {
                     output1,
                     output2
