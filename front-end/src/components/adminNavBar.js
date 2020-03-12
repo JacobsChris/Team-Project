@@ -15,6 +15,8 @@ class AdminNavBar extends React.Component {
                         <Nav className='ml-auto'>
                             <Nav.Link href="admin/home">HOME</Nav.Link>
                             <Nav.Link href="admin/adduser">ADD USER</Nav.Link>
+                            <Nav.Link href="admin/adduser">VIEW USERS</Nav.Link>
+                            <Nav.Link href="admin/changepassword">CHANGE PASSWORD</Nav.Link>
                             <Nav.Link href="admin/help">HELP</Nav.Link>
                             <Nav.Link onClick={this.signout}>SIGN OUT</Nav.Link>
                         </Nav>

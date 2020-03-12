@@ -1,11 +1,16 @@
 import React from 'react';
 import { Nav, Navbar} from 'react-bootstrap';
+import store from '../redux/store';
 
 class NavBar extends React.Component {
 
     signout = () => {
-        sessionStorage.clear();
-        this.props.history.push("/user/signin");
+        console.log('signOut')
+        store.dispatch({
+            type: 'SIGN_OUT',
+          value: ''
+        });
+        this.props.history.push('./signin')
     }
     render(){
         return (

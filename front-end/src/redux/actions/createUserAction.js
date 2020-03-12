@@ -1,17 +1,17 @@
-import { GET_USER } from './types';
+import { CREATE_USER } from './types';
 import axios from 'axios';
 
-export const getUser = (searchData) => dispatch => {
+export const createUser = (user) => dispatch => {
 
-    console.log(searchData);
-    axios.post('http://localhost:8080/register/', searchData, {
+    console.log(user);
+    axios.post('http://localhost:8080/register/', user, {
         headers: {
             Authorization: sessionStorage.jwt
           }
     })
         .then(response =>
             dispatch({
-                type: GET_USER,
+                type: CREATE_USER,
                 payload: response
             }))
 };
