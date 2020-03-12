@@ -6,8 +6,8 @@ const passport = require("passport");
 const port = 8080;
 
 const login = require("./routes/login");
-const register = require("./routes/register");
 const dataAccess = require("./routes/dataAccess");
+const adminRoutes = require("./routes/adminRoutes");
 
 app.use(cors());
 app.use(express.json());
@@ -23,7 +23,7 @@ app.use(bodyParser.json());
 
 app.use("/back-end", dataAccess);
 app.use("/login", login);
-app.use("/register", register);
+app.use("/admin", adminRoutes);
 
 const server = app.listen(port, function() {
     console.log(`app is listening on ${server.address().port}`);

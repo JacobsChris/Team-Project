@@ -10,7 +10,7 @@ const parameters = {
     secretOrKey: jwtConfig.secret
 };
 
-const registerAuth = passport.use("register", new jwtStrategy(parameters, 
+const adminAuth = passport.use("admin", new jwtStrategy(parameters, 
     function(jwtPayload, done) {
         userModel.findOne({ where: { username: jwtPayload.id, admin: jwtPayload.admin }})
             .then(user => {
@@ -26,4 +26,4 @@ const registerAuth = passport.use("register", new jwtStrategy(parameters,
     }
 ));
 
-module.exports = registerAuth;
+module.exports = adminAuth;
