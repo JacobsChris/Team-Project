@@ -126,7 +126,7 @@ module.exports = {
     },
     JsonToStringSearchByCellTowerAndTime: function JsonToStringSearchByCellTowerAndTime(input, intialTimeStamp, finalTimeStamp) {
     return searchLocationsByIdAndTime.searchLocationsByIdAndTime(input.cellTowerId, input.anprId, input.atmId, input.eposId, intialTimeStamp.intialTimeStamp, finalTimeStamp.finalTimeStamp)
-    }
+    },
 
     JsonToStringReceiverCellTowerLocation: function JsonToStringCellTowerLocation(input) {
         return findCellTowerLocationBasedOnCellTowerId.findCellTowerLocationBasedOnCellTowerId(input.receiverTowerId);
