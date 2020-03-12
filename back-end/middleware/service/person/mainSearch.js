@@ -43,8 +43,8 @@ module.exports = {
      * */
 
 
-    JsonToStringBankDetails: function JsonToStringBankDetails(input, limit) {
-        return findBankCardByAccountId.findBankCardByAccountId(input.bankAccountId, input.accountNumber, input.bank, input.forenames, input.surname, input.dateOfBirth, input.homeAddress, limit)
+    JsonToStringBankDetails: function JsonToStringBankDetails(input) {
+        return findBankCardByAccountId.findBankCardByAccountId(input.bankAccountId, input.accountNumber, input.bank, input.forenames, input.surname, input.dateOfBirth, input.homeAddress)
 
     },
 
@@ -93,8 +93,12 @@ module.exports = {
      * @requires the following code at the end to access data:
      *          .then(([Person]) => {console.log("Advanced Detail Search in order of Person", Person);});
      */
-    JsonToPersonByMobile: function JsonToPersonByMoile(input) {
-        return findPersonByMobile.findPersonByMobile(input.phoneNumber)
+    JsonToPersonByMobile: function JsonToPersonByMoile(input, person) {
+        if (input.receiverNumber == person.phoneNumber) {
+            return findPersonByMobile.findPersonByMobile(input.callerNumber);
+        }else {
+            return findPersonByMobile.findPersonByMobile(input.receiverNumber);
+        }
     },
     /**
      * @author Chris & Tony
