@@ -1,7 +1,7 @@
 const auth = require('../../sqlauth')
 
 
-module.exports = {
+module.exports =
     /**
      * @author  Anthony
      *
@@ -11,8 +11,8 @@ module.exports = {
      *
      *  @require this function to work it requires a JSON object to be passed into JsonToStringName()
      * */
-    searchGivenASingleANPRIdAndTime: function searchGivenASingleANPRIdAndTime(anprId,intialTimeStamp,finalTimeStamp) {
+     function searchGivenASingleANPRIdAndTime(anprId,intialTimeStamp,finalTimeStamp) {
         let searchCameras = "select * from vehicleObservations where (timestamp Between " + intialTimeStamp + " And " + finalTimeStamp +") AND ANPRPointId="+ anprId + ";";
         return auth.SQLauthenticate(searchCameras);
-    }
+
 };

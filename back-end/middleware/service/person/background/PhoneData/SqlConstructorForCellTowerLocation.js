@@ -1,7 +1,7 @@
 const auth = require('../sqlauth.js');
 
 
-module.exports = {
+module.exports =
     /**
      * @author Anthony Wilkinson & Chris
      *
@@ -17,9 +17,9 @@ module.exports = {
      *
      * @requires this function requires a string input selected from findDetailsByATMId to function
      * */
-    findCellTowerLocation: function findCellTowerLocation(cellTowerId) {
+     function findCellTowerLocation(cellTowerId) {
         let sqlSearchString = "SELECT * FROM celltower WHERE" +
             " cellTowerId=" + cellTowerId;
         return auth.SQLauthenticate(sqlSearchString)
-    }
+
 };

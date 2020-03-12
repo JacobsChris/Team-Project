@@ -2,12 +2,12 @@ const wildStr = require('../inputvalidation/wildStr.js');
 const stringChecker = require('../inputvalidation/stringChecker');
 const exactStr = require('../inputvalidation/exactStr');
 const sendToAsyncCitizen = require('../sqlauth.js');
-const person = require('../FindByPerson/findPersonByPerson.js');
-const bankAccount = require('../FindByPerson/findBankAccountByPerson.js');
-const mobilePhone = require('../FindByPerson/findMobileByPerson.js');
-const veheicleReg = require('../FindByPerson/findVehicleByPerson.js');
+const person = require('./findPersonByPerson.js');
+const bankAccount = require('./findBankAccountByPerson.js');
+const mobilePhone = require('./findMobileByPerson.js');
+const veheicleReg = require('./findVehicleByPerson.js');
 
-module.exports = {
+module.exports =
     /**
      *  @author Anthony Wilkinson & Chris
      *  @function this function obtains an input originally from a JSON, deconstructs the incomming data into citizenID,
@@ -27,20 +27,11 @@ module.exports = {
      *  @return this function returns an array of JSON objects to be passed up
      *  @require this function to work it requires a JSON object to be passed into JsonToStringDetails()
      *  */
-    findDetailsByName: function findDetailsByName(citizenID, forenames, surname, homeAddress, dateOfBirth, placeOfBirth, sex) {
-        citizenID = stringChecker.stringChecker(citizenID);
-        forenames = stringChecker.stringChecker(forenames);
-        surname = stringChecker.stringChecker(surname);
-        homeAddress = stringChecker.stringChecker(homeAddress);
-        dateOfBirth = stringChecker.stringChecker(dateOfBirth);
-        placeOfBirth = stringChecker.stringChecker(placeOfBirth);
-        sex = stringChecker.stringChecker(sex);
+    function findDetailsByName(input) {
 
-
-        return Promise.all([person.findPersonByPerson(citizenID, forenames, surname, homeAddress, dateOfBirth, placeOfBirth, sex),
-            bankAccount.findBankAccountByPerson(forenames, surname, homeAddress, dateOfBirth),
-            mobilePhone.findMobileByPerson(forenames, surname, homeAddress, dateOfBirth),
-            veheicleReg.findVehicleByPerson(forenames, surname, homeAddress, dateOfBirth)]);
+        return Promise.all([person(input),
+            bankAccount(input),
+            mobilePhone(input),
+            veheicleReg(input)]);
 
     }
-};

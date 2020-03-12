@@ -1,7 +1,7 @@
 const auth = require('../sqlauth.js');
 
 
-module.exports = {
+module.exports =
     /**
      * @author Anthony Wilkinson & Chris
      *
@@ -17,9 +17,8 @@ module.exports = {
      *
      * @requires this function requires a string input selected from findDetailsByATMId to function
      * */
-    findVehicleObs: function findVehicleObs(vehicleRegistrationNumber) {
+     function findVehicleObs(vehicleRegistrationNumber) {
         let sqlSearchString = "SELECT * FROM vehicleObservations WHERE" +
             " vehicleRegistrationNumber LIKE " + vehicleRegistrationNumber;
-        return auth.SQLauthenticate(sqlSearchString)
-    }
+        return auth.SQLauthenticate(sqlSearchString);
 };

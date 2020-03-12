@@ -5,7 +5,7 @@ const stringChecker = require("./inputvalidation/stringChecker");
 const auth = require('./sqlauth.js');
 const {QueryTypes} = require('sequelize');
 
-module.exports = {
+module.exports =
     /**
      *  @author Anthony Wilkinson & Chris
      *  @function this function obtains an input originally from a JSON, deconstructs the incomming data into citizenID,
@@ -18,13 +18,13 @@ module.exports = {
      *  @return this function returns an JSON object to be passed up
      *  @require this function to work it requires a JSON object to be passed into JsonToStringName()
      *  */
-    searchByNames: function searchByNames(citizenID, forenames, surname, homeAddress, dateOfBirth, placeOfBirth, sex) {
-        citizenID = stringChecker.stringChecker(citizenID);
-        forenames = stringChecker.stringChecker(forenames);
-        surname = stringChecker.stringChecker(surname);
-        homeAddress = stringChecker.stringChecker(homeAddress);
-        dateOfBirth = stringChecker.stringChecker(dateOfBirth);
-        placeOfBirth = stringChecker.stringChecker(placeOfBirth);
+    function searchByNames(citizenID, forenames, surname, homeAddress, dateOfBirth, placeOfBirth, sex) {
+        citizenID = stringChecker(citizenID);
+        forenames = stringChecker(forenames);
+        surname = stringChecker(surname);
+        homeAddress = stringChecker(homeAddress);
+        dateOfBirth = stringChecker(dateOfBirth);
+        placeOfBirth = stringChecker(placeOfBirth);
 
         if (sex === "") {
             sex = wildStr.addWildStr(sex);
@@ -42,5 +42,5 @@ module.exports = {
             " AND sex LIKE " + sex;
         return auth.SQLauthenticate(sqlSearchString)
 
-    }
+
 };

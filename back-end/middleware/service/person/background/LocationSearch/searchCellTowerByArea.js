@@ -1,6 +1,6 @@
 const auth = require('../sqlauth');
 
-module.exports = {
+module.exports =
     /**
      * @author  Anthony
      *
@@ -10,14 +10,14 @@ module.exports = {
      *
      *  @require this function to work it requires a JSON object to be passed into JsonToStringName()
      * */
-    searchCellTowerByArea: function searchCellTowerByArea(inputLatitude, inputLongitude, Radius,minLat,maxLat,minLon,maxLon) {
+     function searchCellTowerByArea(inputLatitude, inputLongitude, Radius,minLat,maxLat,minLon,maxLon) {
         let searchCameras = "select * from celltower where (latitude Between "
             + minLat +
             " And " +
             maxLat +
             ") And (longitude Between " + minLon + " And " + maxLon +");";
         return auth.SQLauthenticate(searchCameras);
-    }
+
 };
 
 

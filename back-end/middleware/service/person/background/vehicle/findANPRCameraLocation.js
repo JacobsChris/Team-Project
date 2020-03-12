@@ -1,14 +1,13 @@
 const findLocation = require('./SqlConstructorForLocations.js');
 const exactStr = require('../inputvalidation/exactStr');
 
-module.exports = {
+module.exports =
     /**
      *
      * @param ANPRPointId
      * @returns promised information about a given ANPR Camera of given ANPR Camera input
      */
-    findANPRCameraLocation: function findANPRCameraLocation(ANPRPointId) {
+     function findANPRCameraLocation(ANPRPointId) {
         ANPRPointId = exactStr.addExactStr(ANPRPointId);
         return Promise.all([findLocation.findLocation(ANPRPointId)]);
-    }
 };

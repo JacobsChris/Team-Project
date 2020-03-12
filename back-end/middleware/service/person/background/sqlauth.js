@@ -1,12 +1,11 @@
 const {Sequelize} = require('sequelize');
 //RDS authentication
-const rawdata = require('./config.json');
-const sequelize = new Sequelize(rawdata);
+const rawData = require('./config.json');
+const sequelize = new Sequelize(rawData);
 const {QueryTypes} = require('sequelize');
 
 
-
-module.exports = {
+module.exports =
     /**
      *  @author Anthony Wilkinson & Chris
      *  @function this function searches the database using sequelize and config.json in tandem using a queryType of select it
@@ -18,7 +17,6 @@ module.exports = {
      *  used in a variety of ways and is why it is reused for the multiple functions
      *  @require this function to work meerly needs an input in a MYSQL syntax to search the database
      *  */
-    SQLauthenticate: function SQLauthenticate(Input) {
+    function SQLauthenticate(Input) {
         return sequelize.query(Input, {type: QueryTypes.SELECT});
-    }
-};
+    };

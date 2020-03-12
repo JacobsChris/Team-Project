@@ -1,6 +1,7 @@
 const auth = require('../sqlauth.js');
 
-module.exports = {    /**
+module.exports =
+    /**
      * @author Anthony Wilkinson & Chris
      *
      * @function this function takes an input from the function findDetailsByName comprised of which is the forenames,
@@ -17,12 +18,12 @@ module.exports = {    /**
      *
      * @requires this function requires string inputs selected from findDetailsByName to function
      * */
-    findPersonByPerson: function findPersonByPerson(forenames, surname, address, dateOfBirth) {
+     function findPersonByPerson(forenames, surname, address, dateOfBirth) {
         let sqlSearchString = "SELECT * FROM citizen WHERE " +
             " forenames LIKE " + forenames +
             " AND surname LIKE " + surname +
             " AND homeAddress LIKE " + address +
             " AND dateOfBirth LIKE " + dateOfBirth;
         return auth.SQLauthenticate(sqlSearchString);
-    }
+
 };

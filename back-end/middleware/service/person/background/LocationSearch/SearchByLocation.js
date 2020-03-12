@@ -9,7 +9,7 @@ const searchEposTerminalByArea = require('./searchEposTerminalsByLocation.js');
 
 
 
-module.exports = {
+module.exports =
     // /**
     //  *  @author Anthony Wilkinson & Chris
     //  *  @function this function obtains an input originally from a JSON, deconstructs the incomming data into citizenID,
@@ -29,7 +29,7 @@ module.exports = {
     //  *  @return this function returns an array of JSON objects to be passed up
     //  *  @require this function to work it requires a JSON object to be passed into JsonToStringDetails()
     //  *  */
-    searchByLocation: function searchByLocation(inputLatitude, inputLongitude, Radius) {
+     function searchByLocation(inputLatitude, inputLongitude, Radius) {
         let earthR = 6371;
 
         //create a box defined by the input query
@@ -49,15 +49,4 @@ module.exports = {
             searchCellTowerByArea.searchCellTowerByArea(inputLatitude, inputLongitude, Radius,minLat,maxLat,minLon,maxLon),
             searchEposTerminalByArea.searchEposTerminalByArea(inputLatitude, inputLongitude, Radius,minLat,maxLat,minLon,maxLon)
         ]);
-        // }
-    }
 };
-
-// let working1 = 6371 * (Math.acos ( Math.cos ( rad2Deg.deg2Rad(inputLatitude) )* Math.cos( rad2Deg.deg2Rad( inputLatitude-2 ) )* Math.cos( rad2Deg.deg2Rad( inputLongitude-2 ) - rad2Deg.deg2Rad(inputLongitude ) )+ Math.sin ( rad2Deg.deg2Rad(inputLatitude) ) * Math.sin( rad2Deg.deg2Rad( inputLatitude-2 ) )));
-//
-// let working2 = (2*6371)*(Math.asin(Math.sqrt(((Math.sin(rad2Deg.deg2Rad((inputLatitude-2)-(inputLatitude))/2))**2) + (Math.cos(rad2Deg.deg2Rad(inputLatitude)) * (Math.cos(rad2Deg.deg2Rad(inputLatitude-2))) * (Math.sin(rad2Deg.deg2Rad((inputLongitude-2)-(inputLongitude))/2)) )**2 ));
-//
-// console.log("input lat",inputLatitude,"input long", inputLongitude);
-// console.log("test lat", inputLatitude-2, "test long", inputLongitude-2);
-// console.log("distance between points",working1);
-

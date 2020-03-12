@@ -1,6 +1,8 @@
 const auth = require('../sqlauth.js');
+const wildStr = require("../inputvalidation/wildStr");
+const exactStr = require("../inputvalidation/exactStr");
 
-module.exports = {    /**
+module.exports =    /**
      * @author Anthony Wilkinson & Chris
      *
      * @function this function takes an input from the function findDetailsByName comprised of which is the forenames,
@@ -17,16 +19,16 @@ module.exports = {    /**
      *
      * @requires this function requires string inputs selected from findDetailsByName to function
      * */
-    findPersonByPerson: function findPersonByPerson(citizenID,forenames, surname, homeAddress, dateOfBirth,placeOfBirth,sex) {
+     function findPersonByPerson(input) {
         let sqlSearchString = "SELECT * FROM citizen WHERE " +
-            "citizenID LIKE " + citizenID +
-            " AND forenames LIKE " + forenames +
-            " AND surname LIKE " + surname +
-            " AND homeAddress LIKE " + homeAddress +
-            " AND dateOfBirth LIKE " + dateOfBirth +
-            " AND placeOfBirth LIKE " + placeOfBirth +
-            " AND sex LIKE " + sex;
+            "citizenID LIKE " + exactStr(input.citizenID) +
+            " AND forenames LIKE " + wildStr(input.forenames) +
+            " AND surname LIKE " + wildStr(input.surname) +
+            " AND homeAddress LIKE " + wildStr(input.homeAddress) +
+            " AND dateOfBirth LIKE " + wildStr(input.dateOfBirth) +
+            " AND placeOfBirth LIKE " + wildStr(input.placeOfBirth) +
+            " AND sex LIKE " + wildStr(input.sex);
 
-        return auth.SQLauthenticate(sqlSearchString);
-    }
+        return auth(sqlSearchString);
+
 };

@@ -3,19 +3,19 @@ const findOutGoingCallsByTargetPhoneNUmber = require("./findOutGoingCallsByTarge
 const exactStr = require('../inputvalidation/exactStr');
 
 
-module.exports = {
+module.exports =
     /**
      *
      * @param phoneNumber is the phone number you want the call history of
      * @returns promised arrays of the incoming and outgoing pone calls of the specified phone number
      */
-    findCallHistoryByPhoneNumber: function findCallHistoryByPhoneNumber(phoneNumber) {
-        phoneNumber = exactStr.addExactStr(phoneNumber);
+     function findCallHistoryByPhoneNumber(phoneNumber) {
+        phoneNumber = exactStr(phoneNumber);
         return Promise.all(
             [
-                findOutGoingCallsByTargetPhoneNUmber.findOutGoingCalls(phoneNumber),
-                findInComingCallsByTargetPhoneNumber.findIncomingCalls(phoneNumber)
+                findOutGoingCallsByTargetPhoneNUmber(phoneNumber),
+                findInComingCallsByTargetPhoneNumber(phoneNumber)
             ]
         )
-    }
+
 };

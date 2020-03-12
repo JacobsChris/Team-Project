@@ -1,7 +1,8 @@
 const findEPOSTransactions = require('./findEPOSTransactionsByBankCard');
 const findATMTransactions = require('./findATMTransactionsByBankCard');
 
-const func =   /**
+module.exports =
+ /**
  *  @author Anthony Wilkinson & Chris
  *  @function this function obtains an input originally from a JSON, deconstructs the incoming data into bankcardId,
  *  cardNumber, sortCode, bankAccountId, accountNumber, bank and a Limit which is hardcoded for the time being
@@ -12,8 +13,6 @@ const func =   /**
  *
  *  @require this function to work it requires a JSON object to be passed into JsonToStringTransactions()
  *  */
-function (bankcardId, cardNumber) {
-    return Promise.all([findEPOSTransactions.findEPOSTransactions(cardNumber), findATMTransactions.findATMTransactions(cardNumber)]);
-}
-
-module.exports = func;
+function (input) {
+    return Promise.all([findEPOSTransactions(input), findATMTransactions(input)]);
+};

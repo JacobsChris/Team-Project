@@ -1,9 +1,7 @@
-const wildStr = require("./inputvalidation/wildStr");
+const auth = require('../sqlauth.js');
+const {licencePlateValidator} = require("../inputvalidation/licencePlateValidator");
 
-const auth = require('./sqlauth.js');
-const {licencePlateValidator} = require("../../../../../back-end/middleware/service/person/background/inputvalidation/licencePlateValidator");
-
-module.exports = {
+module.exports =
     /**
      * @author  chris
      *
@@ -13,10 +11,10 @@ module.exports = {
      *
      *  @require this function to work it requires a JSON object to be passed into JsonToStringName()
      * */
-    searchByVehicleReg: function searchByVehicleReg(vehicleReg) {
+    function searchByVehicleReg(vehicleReg) {
         vehicleReg = licencePlateValidator(vehicleReg);
         let sqlSearchString = "SELECT * FROM vehicleRegistration WHERE " +
             "vehicleRegistrationNo LIKE " + vehicleReg;
         return Promise.all([auth.SQLauthenticate(sqlSearchString)]);
-    }
-};
+
+    };

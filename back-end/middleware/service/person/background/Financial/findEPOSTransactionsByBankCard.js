@@ -1,6 +1,7 @@
 const auth = require('../sqlauth.js');
 
-module.exports = {
+
+module.exports =
     /**
      * @author Anthony Wilkinson & Chris
      *
@@ -16,9 +17,9 @@ module.exports = {
      *
      * @requires this function requires a string input selected from findTransactionsByBankCard to function
      * */
-    findEPOSTransactions: function findEPOSTransactions(cardNumber) {
+     function findEPOSTransactions(input) {
         let sqlSearchString = "SELECT * FROM eposTransactions WHERE "+
-            " bankCardNumber =(" + cardNumber + ")";
-        return auth.SQLauthenticate(sqlSearchString)
-    }
+            " bankCardNumber =(" + input.cardNumber + ")";
+        return auth(sqlSearchString)
+
 };
