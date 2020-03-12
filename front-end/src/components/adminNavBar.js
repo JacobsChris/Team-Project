@@ -2,7 +2,10 @@ import React from 'react';
 import { Nav, Navbar} from 'react-bootstrap';
 
 class AdminNavBar extends React.Component {
-
+    signout = () => {
+        sessionStorage.clear();
+        this.props.history.push("/user/signin");
+    }
     render(){
         return (
             <Navbar bg="dark" variant="dark" expand="md" className='main-nav'>
@@ -13,7 +16,7 @@ class AdminNavBar extends React.Component {
                             <Nav.Link href="admin/home">HOME</Nav.Link>
                             <Nav.Link href="admin/adduser">ADD USER</Nav.Link>
                             <Nav.Link href="admin/help">HELP</Nav.Link>
-                            <Nav.Link href="admin/login">SIGN OUT</Nav.Link>
+                            <Nav.Link onClick={this.signout}>SIGN OUT</Nav.Link>
                         </Nav>
                     </Navbar.Collapse>
             </Navbar>

@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import FormInput from './FormInput';
-import axios from 'axios';
+import { connect } from 'react-redux';
+import { getUser } from '../redux/actions/userAction';
+import PropTypes from 'prop-types';
 
 class CreateUser extends Component {
     constructor(props){
@@ -14,7 +16,8 @@ class CreateUser extends Component {
         }
     }
 
-    handleChange = ({target: {name, value}}) => {
+    handleChange = ({target: {name, value, checked}}) => {
+        value = name === 'isAdmin' ? checked : value;
         this.setState({
             [name]: value
         });
@@ -26,21 +29,15 @@ class CreateUser extends Component {
         if(this.state.username === this.state.verUsername && this.state.password === this.state.verPassword) {
         let data = {
             username: this.state.username,
-            verUsername: this.state.verUsername,
             password: this.state.password,
-            verPassword: this.state.verPassword
+            isAdmin: this.state.isAdmin
         }
 
-        
+        console.log(data);
 
-
-        axios.post('http://localhost:8080/register/', data)
-        .then(res => {
-            console.log(res);
-        })
-        .catch(err => {
-            console.log(err)
-        })
+        this.props.getUser(data);
+    
+        this.props.history.push('/admin');
     }
     }
 
@@ -68,6 +65,12 @@ class CreateUser extends Component {
                             <label></label>
                             <FormInput name='verPassword' type="password" value={this.state.verPassword} handleChange={this.handleChange}/>
                         </div>
+                        <div className='admin'>
+                            <label>
+                                Make Admin:
+                                    <input name="isAdmin" type="checkbox" onChange={this.handleChange}/>
+                            </label>
+                        </div>
                         <input type="submit" value="Create User" />
                     </fieldset>
                 </form>
@@ -76,4 +79,8 @@ class CreateUser extends Component {
     }
 }
 
-export default CreateUser;
+CreateUser.propTypes = {
+    getUser: PropTypes.func.isRequired
+  };
+  
+export default connect(null, { getUser })(CreateUser);
