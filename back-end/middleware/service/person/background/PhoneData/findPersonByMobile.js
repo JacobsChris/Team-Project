@@ -4,7 +4,8 @@ const wildStr = require('../inputvalidation/wildStr.js');
 module.exports =
     /**
      *
-     * @param phoneNumber
+     * @param input
+     * @param mobiles
      * @returns promised information about the owner of a given phone number
      */
     function findPersonByMobile(input, mobiles) {
