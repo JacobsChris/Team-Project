@@ -1,4 +1,4 @@
-const auth = require('../sqlauth.js');
+const SQLauthenticate = require('../sqlauth.js');
 
 
 module.exports =
@@ -20,5 +20,5 @@ module.exports =
      function findLocation(ANPRPointId) {
         let sqlSearchString = "SELECT * FROM anprcamera WHERE" +
             " anprId LIKE " + ANPRPointId;
-        return auth.SQLauthenticate(sqlSearchString)
+        return SQLauthenticate(sqlSearchString)
 };

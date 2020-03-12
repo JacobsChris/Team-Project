@@ -14,11 +14,14 @@ let expectedResult = [
     }
 ];
 
-let inputReg = "IU22 HFF";
+let inputReg = {
+    "vehicleRegistrationNo": "IU22 HFF"
+};
 
 
-let inCompleteInputReg =
-    "IU22 HF_";
+let inCompleteInputReg = {
+    "vehicleRegistrationNo": "IU22 HF_"
+};
 
 
 test("takes in a valid complete vehicle reg and returns all observations of that vehicle", (done) => {
@@ -32,7 +35,9 @@ test("takes in a valid complete vehicle reg and returns all observations of that
 });
 
 
-let inValidInputReg = "IU2";
+let inValidInputReg = {
+    "vehicleRegistrationNo": "IU2"
+};
 test("takes in an invalid complete vehicle reg and returns all observations of that vehicle", async () => {
     try {
         await findVehicleObsByVehicle(inValidInputReg);

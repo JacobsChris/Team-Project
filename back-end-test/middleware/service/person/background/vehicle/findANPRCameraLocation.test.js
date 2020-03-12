@@ -1,4 +1,4 @@
-const mainSearch = require("../../../../../../back-end/middleware/service/person/mainSearch");
+const findANPRCameraLocation = require("../../../../../../back-end/middleware/service/person/background/vehicle/findANPRCameraLocation");
 
 let initRes = [];
 let expectedRes = [{
@@ -14,7 +14,7 @@ let inputVal = {
 ;
 
 test("Takes in an object with ANPR ID as a keypair, and returns information about the ANPR Camera of that ID", (done) => {
-    mainSearch.JsonToStringANPRLocation(inputVal)
+    findANPRCameraLocation(inputVal)
         .then(([ANPRCamLoc]) => {
             initRes = ANPRCamLoc;
             expect(initRes).toStrictEqual(expectedRes);
