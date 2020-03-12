@@ -31,15 +31,15 @@ module.exports =
      *  @return this function returns an array of JSON objects to be passed up
      *  @require this function to work it requires a JSON object to be passed into JsonToStringDetails()
      *  */
-        async function searchLocationsByIdAndTime(cellTowerId, anprId, atmId, eposId, intialTimeStamp, finalTimeStamp) {
-        intialTimeStamp = exactStr(intialTimeStamp);
-        finalTimeStamp = exactStr(finalTimeStamp);
+        async function searchLocationsByIdAndTime(input) {
+        const intialTimeStamp = exactStr(input.intialTimeStamp);
+        const finalTimeStamp = exactStr(input.finalTimeStamp);
 
 
         try {
-            if (cellTowerId !== undefined) {
+            if (input.cellTowerId !== undefined) {
                 const output2 = [];
-                cellTowerId = exactStr(cellTowerId);
+                const cellTowerId = exactStr(input.cellTowerId);
                 const output1 = await searchGivenACellTowerIdAndTime(cellTowerId, intialTimeStamp, finalTimeStamp);
 
                 for (let mob of output1) {
@@ -49,9 +49,9 @@ module.exports =
                     output1,
                     output2
                 };
-            } else if (anprId !== undefined) {
+            } else if (input.anprId !== undefined) {
                 const output2 = [];
-                anprId = exactStr(anprId);
+                const anprId = exactStr(input.anprId);
                 const output1 = await searchGivenASingleANPRIdAndTime(anprId, intialTimeStamp, finalTimeStamp);
                 for (let cam of output1) {
                     output2.push(await searchByVehicleReg(cam.vehicleRegistrationNumber));
@@ -62,9 +62,9 @@ module.exports =
                     output2
                 };
 
-            } else if (atmId !== undefined) {
+            } else if (input.atmId !== undefined) {
                 const output2 = [];
-                atmId = exactStr(atmId);
+                const atmId = exactStr(input.atmId);
                 const output1 = await searchGivenASingleATMIdAndTime(atmId, intialTimeStamp, finalTimeStamp);
                 for (let atm of output1) {
                     let cardNumber = await findBankCardByAtmId(atm.atmId);
@@ -80,9 +80,9 @@ module.exports =
                     output1,
                     output2
                 };
-            } else if (eposId !== undefined) {
+            } else if (input.eposId !== undefined) {
                 const output2 = [];
-                eposId = exactStr(eposId);
+                const eposId = exactStr(input.eposId);
                 const output1 = await (searchGivenAEposIdAndTime(eposId, intialTimeStamp, finalTimeStamp));
                 for (let epos of output1) {
                     let cardNumber = await findBankCardByEposId(epos.eposId);

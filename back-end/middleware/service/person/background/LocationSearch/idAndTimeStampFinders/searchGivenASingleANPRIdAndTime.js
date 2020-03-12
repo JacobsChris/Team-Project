@@ -13,6 +13,6 @@ module.exports =
      * */
      function searchGivenASingleANPRIdAndTime(anprId,intialTimeStamp,finalTimeStamp) {
         let searchCameras = "select * from vehicleObservations where (timestamp Between " + intialTimeStamp + " And " + finalTimeStamp +") AND ANPRPointId="+ anprId + ";";
-        return auth.SQLauthenticate(searchCameras);
+        return auth(searchCameras);
 
 };

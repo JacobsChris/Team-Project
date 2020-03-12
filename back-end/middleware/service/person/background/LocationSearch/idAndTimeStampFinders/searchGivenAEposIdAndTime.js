@@ -13,5 +13,5 @@ module.exports =
      * */
     function searchGivenAEposIdAndTime(eposId, intialTimeStamp, finalTimeStamp) {
         let searchCameras = "select * from eposTransactions where (timestamp Between " + intialTimeStamp + " And " + finalTimeStamp + ") AND eposId=" + eposId + ";";
-        return auth.SQLauthenticate(searchCameras);
+        return auth(searchCameras);
     };

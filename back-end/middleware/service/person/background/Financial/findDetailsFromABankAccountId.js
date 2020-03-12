@@ -25,5 +25,5 @@ module.exports =
         let sqlSearchString = "SELECT * FROM peoplebankaccount WHERE " +
             "bankAccountId LIKE " + bankAccountId +
             " Limit " + limit;
-        return auth.SQLauthenticate(sqlSearchString)
+        return auth(sqlSearchString)
     };
