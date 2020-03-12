@@ -16,9 +16,16 @@ module.exports = {
      *
      * @requires this function requires a string input selected from findTransactionsByBankCard to function
      * */
-    findBankCardByAtmId: function findBankCardByAtmId(atmId) {
+    findBankCardByAtmId: function findBankCardByAtmId(atmId,limit) {
+        if (limit !==undefined) {
+        }
+        else {
+            limit = 10;
+        }
         let sqlSearchString = "SELECT * FROM atmTransaction WHERE " +
-            " atmId=" +"'"+atmId+"'";
+            " atmId=" +"'"+atmId+"'"+
+            " order by timestamp desc"+
+            " Limit " + limit;
         return auth.SQLauthenticate(sqlSearchString)
     }
 };
