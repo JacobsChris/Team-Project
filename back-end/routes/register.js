@@ -9,12 +9,20 @@ const saltRounds = 5;
 
 router.post("/", passport.authenticate('register', {session: false}), 
     function (req, res) {
+        
         const isAdmin = req.body.isAdmin;
+
+        if (req.body.username === undefined) {
+            res.status(400).send("Bad Request, username and password required");
+        }
+        
         userModel.findOne({where: {username: req.body.username}})
             .then(user => {
                 if (user) {
                     res.status(202).send("username already taken");
-                } else {
+                } 
+                else {
+                    
                     if (req.body.password.match(/[a-z]/g) && req.body.password.match(
                         /[A-Z]/g) && req.body.password.match(
                         /[0-9]/g) && req.body.password.match(

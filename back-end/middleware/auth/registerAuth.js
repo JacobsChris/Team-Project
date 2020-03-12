@@ -12,17 +12,16 @@ const parameters = {
 
 const registerAuth = passport.use("register", new jwtStrategy(parameters, 
     function(jwtPayload, done) {
-        userModel.findOne({ where: { username: jwtPayload.id, admin: jwtPayload.aud }})
+        userModel.findOne({ where: { username: jwtPayload.id, admin: jwtPayload.admin }})
             .then(user => {
-                if (user.admin === 0) {
+                if (user.admin === false) {
                     return done(null, false, { message: "invalid token, user does not have admin rights"})
                 }
-                else if (!user) {
-                    return done(null, false, { message: "invalid toekn, user not authenticated"});
-                }
-                else {
+                else if (user.admin === true) {
                     return done(null, user, { message: "user authenticated"});
                 }
+                return done(null, false, { message: "invalid token, user not authenticated"});
+
         });
     }
 ));
