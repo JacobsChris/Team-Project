@@ -8,7 +8,7 @@ let inputVal= {
 let initRes = [];
 
 test("pop", (done) => {
-    jest.setTimeout(15000)
+    jest.setTimeout(35000)
     searchLocationsByIdAndTime(inputVal)
         .then(([output1, output2]) => {
             initRes = [output1,output2];

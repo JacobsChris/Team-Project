@@ -11,10 +11,21 @@ module.exports =
      *
      *  @require this function to work it requires a JSON object to be passed into JsonToStringName()
      * */
-    function searchByVehicleReg(input) {
-        input = licencePlateValidator(input.vehicleRegistrationNo);
-        let sqlSearchString = "SELECT * FROM vehicleRegistration WHERE " +
-            "vehicleRegistrationNo LIKE " + input;
-        return Promise.all([auth(sqlSearchString)]);
+    async function searchByVehicleReg(input) {
+        console.log(input)
+        if (input.vehicleRegistrationNo) {
+            input = licencePlateValidator(input.vehicleRegistrationNo);
+        } else if (input.vehicleRegistrationNumber) {
+            input = licencePlateValidator(input.vehicleRegistrationNumber);
+        }
+        if (input !== undefined) {
+            let sqlSearchString = "SELECT * FROM vehicleRegistration WHERE " +
+                "vehicleRegistrationNo LIKE " + input;
+            return await auth(sqlSearchString);
+        } else {
+            return [];
+        }
 
-    };
+
+    }
+;

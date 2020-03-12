@@ -4,7 +4,7 @@ const searchGivenACellTowerIdAndTime = require('./idAndTimeStampFinders/searchGi
 const searchGivenASingleANPRIdAndTime = require('./idAndTimeStampFinders/searchGivenASingleANPRIdAndTime.js');
 const searchGivenASingleATMIdAndTime = require('./idAndTimeStampFinders/searchGivenASingleATMIdAndTime.js');
 const searchGivenAEposIdAndTime = require('./idAndTimeStampFinders/searchGivenAEposIdAndTime.js');
-const findPersonByMobile = require('../PhoneData/findPersonByMobile.js');
+const findPersonByMobileForLocation = require('../PhoneData/findPersonByMobileForLocation');
 const searchByVehicleReg = require('../vehicle/searchByVehicleReg');
 const findBankCardByAtmId = require('../Financial/findBankCardByAtmId.js');
 const findBankAccountIdGivenACardNumber = require('../Financial/findBankAccountIdGivenACardNumber.js');
@@ -43,7 +43,7 @@ module.exports =
                 const output1 = await searchGivenACellTowerIdAndTime(cellTowerId, intialTimeStamp, finalTimeStamp);
 
                 for (let mob of output1) {
-                    output2.push(await findPersonByMobile(mob.callerNumber));
+                    output2.push(await findPersonByMobileForLocation(mob.callerNumber));
                 }
                 return {
                     output1,
@@ -54,9 +54,9 @@ module.exports =
                 const anprId = exactStr(input.anprId);
                 const output1 = await searchGivenASingleANPRIdAndTime(anprId, intialTimeStamp, finalTimeStamp);
                 for (let cam of output1) {
-                    output2.push(await searchByVehicleReg(cam.vehicleRegistrationNumber));
+                    output2.push(await searchByVehicleReg(cam));
                 }
-
+                console.log("output1",output1,"output2",output2);
                 return {
                     output1,
                     output2
