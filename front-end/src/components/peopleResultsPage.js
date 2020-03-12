@@ -14,7 +14,7 @@ const mapStateToProps = state => ({
 class PeopleResultsPage extends React.Component {
     constructor(props) {
         super(props);
-
+        console.log('prp props:', props);
         this.state = {
             personDetails: {
                 citizenData: [],
@@ -25,7 +25,7 @@ class PeopleResultsPage extends React.Component {
         };
     };
 
-    handleClick(id, forename, surname, address, dob, pob, gender) {
+    handleClick = (person) => {
         this.setState({
             personDetails: {
                 citizenData: [],
@@ -34,17 +34,13 @@ class PeopleResultsPage extends React.Component {
             },
             detailsLoaded: false
         });
-        let data = {
-            citizenID: id, forenames: forename, surname: surname, homeAddress: address,
-            dateOfBirth: dob, placeOfBirth: pob, sex: gender
-        };
-        axios.post('http://localhost:8080/back-end/person/getMatching', data, {
+        axios.post('http://localhost:8080/back-end/person/getMatching', person, {
             headers: {
                 Authorization: sessionStorage.jwt
             }
         })
             .then((response) => {
-                console.log(response);
+                console.log('Post ', response.data);
                 this.setState({
                     personDetails: response.data,
                     detailsLoaded: true
@@ -56,24 +52,18 @@ class PeopleResultsPage extends React.Component {
     render() {
         console.log('PD', this.state.personDetails);
 
-        const { citizenData: person } = this.state.personDetails;
-        const { bankAccountData: personBank } = this.state.personDetails;
-        const { mobilesData: personMobile } = this.state.personDetails;
+        const { citizenData: [ citizen = {} ] } = this.state.personDetails;
+        const { bankAccountData: [ personBank = {} ] } = this.state.personDetails;
+        const { mobilesData: [ personMobile = {} ] } = this.state.personDetails;
         return (
             <div>
                 {!this.props.resultsLoading ? (this.props.results.length === 0 ? (<h3>No results found</h3>) : (
                     <Row>
                         <Col>
-                            {/* <Row>
-                                <Container className='flex-container' id='small-search'>
-                                    <SearchPeople />
-                                </Container>
-                            </Row> */}
                             <Row>
                                 <Container className='flex-container' id='person-list'>
                                     {this.props.results?.map(person =>
-                                        <Card onClick={() => this.handleClick(person.citizenID, person.forenames, person.surname,
-                                            person.homeAddress, person.dateOfBirth, person.placeOfBirth, person.sex)}
+                                        <Card onClick={() => this.handleClick(person)}
                                             className='flex-item' id='small-person-card'>
                                             <Row>
                                                 <Col>
@@ -100,23 +90,23 @@ class PeopleResultsPage extends React.Component {
                                         </Col>
                                         <Col>
                                             <br />
-                                            <h1 className='card-title'>{person.forenames} {person.surname}</h1>
+                                            <h1 className='card-title'>{citizen.forenames} {citizen.surname}</h1>
                                         </Col>
                                     </Row>
                                     <Card.Body>
                                         <ul className="list-group list-group-flush">
-                                            <li className="list-group-item">Gender: {person.sex}</li>
-                                            <li className="list-group-item">Home Address: {person.homeAddress}</li>
-                                            <li className="list-group-item">Date of Birth: {person.dateOfBirth}</li>
-                                            <li className="list-group-item">Place of Birth: {person.placeOfBirth}</li>
+                                            <li className="list-group-item">Gender: {citizen.sex}</li>
+                                            <li className="list-group-item">Home Address: {citizen.homeAddress}</li>
+                                            <li className="list-group-item">Date of Birth: {citizen.dateOfBirth}</li>
+                                            <li className="list-group-item">Place of Birth: {citizen.placeOfBirth}</li>
                                             <li className="list-group-item">Bank: {personBank !== undefined ?
                                                 personBank.bank : 'none'}</li>
                                             <li className="list-group-item">Account Number: {personBank !== undefined ?
                                                 personBank.accountNumber : 'none'}</li>
                                             <li className="list-group-item">Mobile Number: {personMobile !== undefined ? 
                                                 personMobile.phoneNumber : 'none'}</li>
-                                            <li className="list-group-item">Associates: {person.associates}</li>
-                                            <li className="list-group-item">Vehicles: {person.vehicles}</li>
+                                            <li className="list-group-item">Associates: {citizen.associates}</li>
+                                            <li className="list-group-item">Vehicles: {citizen.vehicles}</li>
                                             <li className="list-group-item">Recent locations: </li>
                                         </ul>
                                     </Card.Body>
