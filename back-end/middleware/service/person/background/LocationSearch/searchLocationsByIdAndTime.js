@@ -5,7 +5,7 @@ const searchGivenASingleANPRIdAndTime = require('./idAndTimeStampFinders/searchG
 const searchGivenASingleATMIdAndTime = require('./idAndTimeStampFinders/searchGivenASingleATMIdAndTime.js');
 const searchGivenAEposIdAndTime = require('./idAndTimeStampFinders/searchGivenAEposIdAndTime.js');
 const findPersonByMobile = require('../PhoneData/findPersonByMobile.js');
-const searchByVehicleReg = require('../searchByVehicleReg.js');
+const searchByVehicleReg = require('../vehicle/searchByVehicleReg');
 const findBankCardByAtmId = require('../Financial/findBankCardByAtmId.js');
 const findBankAccountIdGivenACardNumber = require('../Financial/findBankAccountIdGivenACardNumber.js');
 const findDetailsFromABankAccountId = require('../Financial/findDetailsFromABankAccountId.js');
@@ -39,7 +39,7 @@ module.exports =
         try {
             if (cellTowerId !== undefined) {
                 const output2 = [];
-                cellTowerId = exactStr.addExactStr(cellTowerId);
+                cellTowerId = exactStr.(cellTowerId);
                 const output1 = await searchGivenACellTowerIdAndTime.(cellTowerId, intialTimeStamp, finalTimeStamp);
 
                 for (let mob of output1) {
@@ -51,7 +51,7 @@ module.exports =
                 };
             } else if (anprId !== undefined) {
                 const output2 = [];
-                anprId = exactStr.addExactStr(anprId);
+                anprId = exactStr(anprId);
                 const output1 = await searchGivenASingleANPRIdAndTime.(anprId, intialTimeStamp, finalTimeStamp);
                 for (let cam of output1) {
                     output2.push(await searchByVehicleReg.searchByVehicleReg(cam.vehicleRegistrationNumber));
@@ -63,11 +63,11 @@ module.exports =
 
             } else if (atmId !== undefined) {
                 const output2 = [];
-                atmId = exactStr.addExactStr(atmId);
+                atmId = exactStr(atmId);
                 const output1 = await searchGivenASingleATMIdAndTime.searchGivenASingleATMIdAndTime(atmId, intialTimeStamp, finalTimeStamp);
                 for (let atm of output1) {
                     let cardNumber = await findBankCardByAtmId.findBankCardByAtmId(atm.atmId);
-                    let bankCardNumber = exactStr.addExactStr(cardNumber.bankCardNumber);
+                    let bankCardNumber = exactStr(cardNumber.bankCardNumber);
                     for (let bankcard of cardNumber) {
                         let bankaccountid = await findBankAccountIdGivenACardNumber.(bankcard.bankCardNumber);
                         for (let id of bankaccountid) {
@@ -81,11 +81,11 @@ module.exports =
                 };
             } else if (eposId !== undefined) {
                 const output2 = [];
-                eposId = exactStr.addExactStr(eposId);
+                eposId = exactStr.(eposId);
                 const output1 = await (searchGivenAEposIdAndTime.(eposId, intialTimeStamp, finalTimeStamp));
                 for (let epos of output1) {
                     let cardNumber = await findBankCardByEposId.(epos.eposId);
-                    let bankCardNumber = exactStr.addExactStr(cardNumber.bankCardNumber);
+                    let bankCardNumber = exactStr.(cardNumber.bankCardNumber);
                     for (let bankcard of cardNumber) {
                         let bankaccountid = await findBankAccountIdGivenACardNumber.(bankcard.bankCardNumber);
                         for (let id of bankaccountid) {
