@@ -1,4 +1,4 @@
-const auth = require('../sqlauth.js');
+const SQLauthenticate = require('../sqlauth.js');
 
 
 module.exports =
@@ -20,6 +20,6 @@ module.exports =
      function findCellTowerLocation(cellTowerId) {
         let sqlSearchString = "SELECT * FROM celltower WHERE" +
             " cellTowerId=" + cellTowerId;
-        return auth.SQLauthenticate(sqlSearchString)
+        return SQLauthenticate(sqlSearchString)
 
 };
