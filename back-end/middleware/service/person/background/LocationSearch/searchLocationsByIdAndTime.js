@@ -40,3 +40,75 @@ module.exports =
             searchGivenAEposIdAndTime.searchGivenAEposIdAndTime(eposId, intialTimeStamp, finalTimeStamp)
         ]);
     };
+
+// try {
+//     if (cellTowerId !== undefined) {
+//         const output2 = [];
+//         cellTowerId = exactStr.addExactStr(cellTowerId);
+//         const output1 = await searchGivenACellTowerIdAndTime.searchGivenACellTowerIdAndTime(cellTowerId, intialTimeStamp, finalTimeStamp);
+//
+//         for (let mob of output1) {
+//             output2.push(await findPersonByMobile.findPersonByMobile(mob.callerNumber));
+//         }
+//         return {
+//             output1,
+//             output2
+//         };
+//     } else if (anprId !== undefined) {
+//         const output2 = [];
+//         anprId = exactStr.addExactStr(anprId);
+//         const output1 = await searchGivenASingleANPRIdAndTime.searchGivenASingleANPRIdAndTime(anprId, intialTimeStamp, finalTimeStamp);
+//         for (let cam of output1) {
+//             output2.push(await searchByVehicleReg.searchByVehicleReg(cam.vehicleRegistrationNumber));
+//         }
+//         return {
+//             output1,
+//             output2
+//         };
+//
+//     } else if (atmId !== undefined) {
+//         const output2 = [];
+//         atmId = exactStr.addExactStr(atmId);
+//         const output1 = await searchGivenASingleATMIdAndTime.searchGivenASingleATMIdAndTime(atmId, intialTimeStamp, finalTimeStamp);
+//         for (let atm of output1) {
+//             let cardNumber = await findBankCardByAtmId.findBankCardByAtmId(atm.atmId);
+//             let bankCardNumber = exactStr.addExactStr(cardNumber.bankCardNumber);
+//             for (let bankcard of cardNumber) {
+//                 let bankaccountid = await findBankAccountIdGivenACardNumber.findBankAccountIdGivenACardNumber(bankcard.bankCardNumber);
+//                 for (let id of bankaccountid) {
+//                     output2.push(await findDetailsFromABankAccountId.findDetailsFromABankAccountId(id.bankcardId));
+//                 }
+//             }
+//         }
+//         return {
+//             output1,
+//             output2
+//         };
+//     } else if (eposId !== undefined) {
+//         const output2 = [];
+//         eposId = exactStr.addExactStr(eposId);
+//         const output1 = await (searchGivenAEposIdAndTime.searchGivenAEposIdAndTime(eposId, intialTimeStamp, finalTimeStamp));
+//         for (let epos of output1) {
+//             let cardNumber = await findBankCardByEposId.findBankCardByEposId(epos.eposId);
+//             let bankCardNumber = exactStr.addExactStr(cardNumber.bankCardNumber);
+//             for (let bankcard of cardNumber) {
+//                 let bankaccountid = await findBankAccountIdGivenACardNumber.findBankAccountIdGivenACardNumber(bankcard.bankCardNumber);
+//                 for (let id of bankaccountid) {
+//                     output2.push(await findDetailsFromABankAccountId.findDetailsFromABankAccountId(id.bankcardId));
+//                 }
+//             }
+//         }
+//         return {
+//             output1,
+//             output2
+//         };
+//     } else {
+//         return "error encountered, the correct Id was not supplied to searchLocationsByIdAndTime function"
+//     }
+// } catch (err) {
+//     console.log(err.name);
+//     console.log(err.message);
+//     throw "error encountered at function searchLocationsByIdAndTime";
+// }
+// }
+// };
