@@ -1,26 +1,31 @@
-const mainSearch = require("../../../../../../back-end/middleware/service/person/mainSearch");
+const findATMTransactionsByBankCard = require("../../../../../../back-end/middleware/service/person/background/Financial/findATMTransactionsByBankCard");
 
-let initRes = [];
-let expectedResult = [[], []];
+let expectedResult = [{
+    "amount": "50",
+    "atmId": "3839",
+    "bankCardNumber": "1262814734991535",
+    "timestamp": "2015-05-03T16:38:20.000Z",
+    "type": "Cash Withdrawal",
+}];
 
 
 let inputBankCard = {
-    "accountNumber": "75482888",
-    "bank": "Citibank International",
-    "bankAccountId": "89368",
-    "bankcardId": "5683",
-    "cardNumber": "9848712956998436",
-    "sortCode": "05-26-95"
+    "accountNumber": "",
+    "bank": "",
+    "bankAccountId": "",
+    "bankcardId": "",
+    "cardNumber": "1262814734991535",
+    "sortCode": ""
 };
 
 
 test('finds ATM transactions by bank card', (done) => {
     jest.setTimeout(10000000);
 
-    mainSearch.JsonToStringTransactions(inputBankCard)
+    findATMTransactionsByBankCard(inputBankCard)
         .then((findATMTransactions) => {
-            initRes = findATMTransactions;
-            expect(initRes).toStrictEqual(expectedResult);
+            findATMTransactions;
+            expect(findATMTransactions.toString()).toStrictEqual(expectedResult.toString());
             done();
         });
 });

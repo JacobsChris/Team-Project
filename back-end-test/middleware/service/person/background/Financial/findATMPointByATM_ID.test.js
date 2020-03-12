@@ -1,34 +1,23 @@
-const mainSearch = require("../../../../../../back-end/middleware/service/person/mainSearch");
+const findATMPointByATM_ID = require("../../../../../../back-end/middleware/service/person/background/Financial/findATMPointByATM_ID");
 
-let initRes = [];
 let expectedResult = [
-    [
-        {
-            "atmId": 4,
-            "latitude": 51.7045445304116,
-            "longitude": -0.612916592575059,
-            "operator": "Clydesdale Bank",
-            "postcode": "HP5 1FE",
-            "streetName": "East Street"
-        }
-    ]
+    {
+        "atmId": 4,
+        "latitude": 51.7045445304116,
+        "longitude": -0.612916592575059,
+        "operator": "Clydesdale Bank",
+        "postcode": "HP5 1FE",
+        "streetName": "East Street"
+    }
 ];
 
-let inputTransaction = {
-    "timestamp": "",
-    "atmId": "4",
-    "bankcardNumber": "",
-    "type": "",
-    "amount": ""
-};
+let inputVal = 4;
 
 
 test('finds ATM transactions by bank card', (done) => {
-    mainSearch.JsonToStringATM(inputTransaction)
+    findATMPointByATM_ID(inputVal)
         .then((ATMPoint) => {
-            initRes = ATMPoint;
-            expect(initRes).toStrictEqual(expectedResult);
-            console.log("Advanced Detail ATMPoint", ATMPoint);
+            expect(ATMPoint).toStrictEqual(expectedResult);
             done();
         });
 });
