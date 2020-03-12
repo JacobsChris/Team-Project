@@ -55,8 +55,8 @@ module.exports = {
      *          Advanced Detail findATMTransactions {{ timestamp: 2015-05-01T14:37:23.000Z, atmId: 5436, bankCardNumber: 4722912624353299, type: 'Cash Withdrawal', amount: 120 }
      *  @requires this at the end to get @return }).then(([findEPOSTransactions,findATMTransactions]) => { console.log("Advanced Detail findEPOSTransactions" , findEPOSTransactions, "Advanced Detail findATMTransactions",findATMTransactions);})
      *  */
-    JsonToStringTransactions: function JsonToStringTransactions(input) {
-        return findTransactionsByBankCard.findTransactionsByBankCard(input.bankcardId, input.cardNumber, input.sortCode, input.bankAccountId, input.accountNumber, input.bank)
+    JsonToStringTransactions: function({bankcardId, cardNumber}) {
+        return findTransactionsByBankCard(bankcardId, cardNumber);
     },
 
     /**

@@ -18,7 +18,7 @@ module.exports = {
      * */
     findATMTransactions: function findATMTransactions(cardNumber) {
         let sqlSearchString = "SELECT * FROM atmTransaction WHERE " +
-            " bankCardNumber =(" + cardNumber+")";
+            " bankCardNumber =(" + cardNumber + ")";
         return auth.SQLauthenticate(sqlSearchString)
     }
 };
