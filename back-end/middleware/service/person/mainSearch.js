@@ -68,7 +68,7 @@ module.exports = {
 
     /**
      * @author Anthony Wilkinson & Chris
-     * @return an array like Advanced Detail ATMPoint [ { ANPRPointId: 5544, stamptime: 2015-05-01T06:47:57.000Z, vehicleRegistrationNumber: 'JD94 XZB' } ]
+     * @return returns promised array like Advanced Detail ATMPoint [ { ANPRPointId: 5544, stamptime: 2015-05-01T06:47:57.000Z, vehicleRegistrationNumber: 'JD94 XZB' } ]
      * @requires this at the end to get @return .then(([vehicleObs]) => { console.log("Advanced Detail vehicleObs" , vehicleObs); });*/
     JsonToStringVehicleObs: function JsonToStringVehicleObs(input) {
         return findVehicleLocationByVehicleReg.findVehicleLocationByVehicleReg(input.vehicleRegistrationNo)
@@ -88,15 +88,16 @@ module.exports = {
     },
     /**
      * @author Chris & Tony
-     * @param input is a JSON which contains the key phoneNumber
-     * @returns an array object of persons that match the phone number inputted
+     * @param input is a JSON which contains the keys receiverNumber and callerNumber
+     * @param person is a JSON which contains the key phoneNumber
+     * @returns promised array object of persons that match the phone number inputted
      * @requires the following code at the end to access data:
      *          .then(([Person]) => {console.log("Advanced Detail Search in order of Person", Person);});
      */
     JsonToPersonByMobile: function JsonToPersonByMoile(input, person) {
-        if (input.receiverNumber == person.phoneNumber) {
+        if (input.receiverNumber === person.phoneNumber) {
             return findPersonByMobile.findPersonByMobile(input.callerNumber);
-        }else {
+        } else {
             return findPersonByMobile.findPersonByMobile(input.receiverNumber);
         }
     },
