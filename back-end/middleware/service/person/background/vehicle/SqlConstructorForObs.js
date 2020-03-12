@@ -1,4 +1,4 @@
-const auth = require('../sqlauth.js');
+const SQLauthenticate = require('../sqlauth.js');
 
 
 module.exports =
@@ -20,5 +20,5 @@ module.exports =
      function findVehicleObs(vehicleRegistrationNumber) {
         let sqlSearchString = "SELECT * FROM vehicleObservations WHERE" +
             " vehicleRegistrationNumber LIKE " + vehicleRegistrationNumber;
-        return auth.SQLauthenticate(sqlSearchString);
+        return SQLauthenticate(sqlSearchString);
 };

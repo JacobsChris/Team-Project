@@ -1,4 +1,4 @@
-const mainSearch = require("../../../../../../back-end/middleware/service/person/mainSearch");
+const findVehicleObsByVehicle = require("../../../../../../back-end/middleware/service/person/background/vehicle/findVehicleObsByVehicle");
 
 let initRes = [];
 let expectedResult = [
@@ -14,19 +14,16 @@ let expectedResult = [
     }
 ];
 
-let inputReg = {
-    "vehicleRegistrationNo": "IU22 HFF"
-};
+let inputReg = "IU22 HFF";
 
 
-let inCompleteInputReg = {
-    "vehicleRegistrationNo": "IU22 HF_"
-};
+let inCompleteInputReg =
+    "IU22 HF_";
 
 
 test("takes in a valid complete vehicle reg and returns all observations of that vehicle", (done) => {
     jest.setTimeout(1000000);
-    mainSearch.JsonToStringVehicleObs(inputReg)
+    findVehicleObsByVehicle(inputReg)
         .then(([observations]) => {
             initRes = observations;
             expect(initRes.toString()).toContain(expectedResult.toString());
@@ -35,12 +32,10 @@ test("takes in a valid complete vehicle reg and returns all observations of that
 });
 
 
-let inValidInputReg = {
-    "vehicleRegistrationNo": "IU2"
-};
+let inValidInputReg = "IU2";
 test("takes in an invalid complete vehicle reg and returns all observations of that vehicle", async () => {
     try {
-        await mainSearch.JsonToStringVehicleObs(inValidInputReg);
+        await findVehicleObsByVehicle(inValidInputReg);
         throw "this shouldn't have got here"
     } catch (err) {
         expect(err).toBeTruthy();
@@ -50,7 +45,7 @@ test("takes in an invalid complete vehicle reg and returns all observations of t
 
 test("takes in a valid incomplete vehicle reg and returns all observations of that vehicle", (done) => {
     jest.setTimeout(1000000);
-    mainSearch.JsonToStringVehicleObs(inCompleteInputReg)
+    findVehicleObsByVehicle(inCompleteInputReg)
         .then(([observations]) => {
             initRes = observations;
             expect(initRes.toString()).toContain(expectedResult.toString());
