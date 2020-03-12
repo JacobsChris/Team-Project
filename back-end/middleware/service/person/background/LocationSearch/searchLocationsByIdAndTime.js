@@ -2,13 +2,14 @@ const wildStr = require('../inputvalidation/wildStr.js');
 const exactStr = require('../inputvalidation/exactStr');
 const searchGivenACellTowerIdAndTime = require('./idAndTimeStampFinders/searchGivenACellTowerIdAndTime.js');
 const searchGivenASingleANPRIdAndTime = require('./idAndTimeStampFinders/searchGivenASingleANPRIdAndTime.js');
-const searchGivenASingleATMIdAndTime =require('./idAndTimeStampFinders/searchGivenASingleATMIdAndTime.js');
+const searchGivenASingleATMIdAndTime = require('./idAndTimeStampFinders/searchGivenASingleATMIdAndTime.js');
 const searchGivenAEposIdAndTime = require('./idAndTimeStampFinders/searchGivenAEposIdAndTime.js');
 const findPersonByMobile = require('../PhoneData/findPersonByMobile.js');
 const searchByVehicleReg = require('../searchByVehicleReg.js');
 const findBankCardByAtmId = require('../Financial/findBankCardByAtmId.js');
 const findBankAccountIdGivenACardNumber = require('../Financial/findBankAccountIdGivenACardNumber.js');
 const findDetailsFromABankAccountId = require('../Financial/findDetailsFromABankAccountId.js');
+const findBankCardByEposId = require('../Financial/findBankCardByEposId.js');
 
 module.exports = {
     /**
@@ -30,10 +31,9 @@ module.exports = {
      *  @return this function returns an array of JSON objects to be passed up
      *  @require this function to work it requires a JSON object to be passed into JsonToStringDetails()
      *  */
-    searchLocationsByIdAndTime: async function searchLocationsByIdAndTime(cellTowerId,anprId,atmId,eposId,intialTimeStamp, finalTimeStamp) {
+    searchLocationsByIdAndTime: async function searchLocationsByIdAndTime(cellTowerId, anprId, atmId, eposId, intialTimeStamp, finalTimeStamp) {
         intialTimeStamp = exactStr.addExactStr(intialTimeStamp);
-        finalTimeStamp =exactStr.addExactStr(finalTimeStamp);
-
+        finalTimeStamp = exactStr.addExactStr(finalTimeStamp);
 
 
         try {
@@ -64,34 +64,46 @@ module.exports = {
             } else if (atmId !== undefined) {
                 const output2 = [];
                 atmId = exactStr.addExactStr(atmId);
-               const output1 = await searchGivenASingleATMIdAndTime.searchGivenASingleATMIdAndTime(atmId, intialTimeStamp, finalTimeStamp);
-               for (let atm of output1){
-                   let cardNumber = await findBankCardByAtmId.findBankCardByAtmId(atm.atmId);
-                   let bankCardNumber = exactStr.addExactStr(cardNumber.bankCardNumber);
-                   for (let bankcard of cardNumber) {
-                       let bankaccountid = await findBankAccountIdGivenACardNumber.findBankAccountIdGivenACardNumber(bankcard.bankCardNumber);
-                       console.log(bankaccountid);
-                       for (let id of bankaccountid){
-                           output2.push(await findDetailsFromABankAccountId.findDetailsFromABankAccountId(id.bankcardId));
-                           console.log(output2)
-                       }
-                   }
-               }
-               return {
-                   output1,
-                   output2
-               };
+                const output1 = await searchGivenASingleATMIdAndTime.searchGivenASingleATMIdAndTime(atmId, intialTimeStamp, finalTimeStamp);
+                for (let atm of output1) {
+                    let cardNumber = await findBankCardByAtmId.findBankCardByAtmId(atm.atmId);
+                    let bankCardNumber = exactStr.addExactStr(cardNumber.bankCardNumber);
+                    for (let bankcard of cardNumber) {
+                        let bankaccountid = await findBankAccountIdGivenACardNumber.findBankAccountIdGivenACardNumber(bankcard.bankCardNumber);
+                        for (let id of bankaccountid) {
+                            output2.push(await findDetailsFromABankAccountId.findDetailsFromABankAccountId(id.bankcardId));
+                        }
+                    }
+                }
+                return {
+                    output1,
+                    output2
+                };
             } else if (eposId !== undefined) {
+                const output2 = [];
                 eposId = exactStr.addExactStr(eposId);
-                return Promise.all([searchGivenAEposIdAndTime.searchGivenAEposIdAndTime(eposId, intialTimeStamp, finalTimeStamp)])
+                const output1 = await (searchGivenAEposIdAndTime.searchGivenAEposIdAndTime(eposId, intialTimeStamp, finalTimeStamp));
+                for (let epos of output1) {
+                    let cardNumber = await findBankCardByEposId.findBankCardByEposId(epos.eposId);
+                    let bankCardNumber = exactStr.addExactStr(cardNumber.bankCardNumber);
+                    for (let bankcard of cardNumber) {
+                        let bankaccountid = await findBankAccountIdGivenACardNumber.findBankAccountIdGivenACardNumber(bankcard.bankCardNumber);
+                        for (let id of bankaccountid) {
+                            output2.push(await findDetailsFromABankAccountId.findDetailsFromABankAccountId(id.bankcardId));
+                        }
+                    }
+                }
+                return {
+                    output1,
+                    output2
+                };
             } else {
                 return "error encountered, the correct Id was not supplied to searchLocationsByIdAndTime function"
             }
-        }
-        catch (err) {
-                console.log(err.name);
-                console.log(err.message);
-                throw "error encountered at function searchLocationsByIdAndTime";
+        } catch (err) {
+            console.log(err.name);
+            console.log(err.message);
+            throw "error encountered at function searchLocationsByIdAndTime";
         }
     }
 };
