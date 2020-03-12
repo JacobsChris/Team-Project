@@ -69,13 +69,16 @@ module.exports = {
 
     /**
      * @author Anthony Wilkinson & Chris
-     * @return returns promised array like Advanced Detail ATMPoint [ { ANPRPointId: 5544, stamptime: 2015-05-01T06:47:57.000Z, vehicleRegistrationNumber: 'JD94 XZB' } ]
+     * @return an array like Advanced Detail ATMPoint [ { ANPRPointId: 5544, stamptime: 2015-05-01T06:47:57.000Z, vehicleRegistrationNumber: 'JD94 XZB' } ]
      * @requires this at the end to get @return .then(([vehicleObs]) => { console.log("Advanced Detail vehicleObs" , vehicleObs); });*/
     JsonToStringVehicleObs: function JsonToStringVehicleObs(input) {
         return findVehicleLocationByVehicleReg.findVehicleLocationByVehicleReg(input.vehicleRegistrationNo)
     },
     JsonToStringANPRLocation: function JsonToStringANPRLocation(input) {
         return findANPRCameraLocation.findANPRCameraLocation(input.ANPRPointId);
+    },
+    JsonToStringMobileCallRecords: function JsonToStringMobileCallRecords(input) {
+        return findMobileCallRecordsFromOwnerPhoneNumb.findMobileCallRecordsFromOwnerPhoneNumb(input.phoneNumber);
     },
     /**
      * @author Chris & Tony
@@ -113,17 +116,7 @@ module.exports = {
         return findCallHistoryByPhoneNumber.findCallHistoryByPhoneNumber(input.phoneNumber)
     },
 
-    /**
-     * The functions below are pretty much identical.
-     * All work the same way.
-     * Difference is which cell tower they search through in Mobile Call Records:
-     *  one searches through Caller Cell Tower and the other through Receiver Cell Tower.  Third one takes in generic ID.
-     * @param input is a JSON object with a key-pair called callCellTowerId or receiverTowerId or cellTowerId
-     * @returns promised location of a cell tower with given ID.  Use below code to access tje results
-     * .then(([cellTower]) => {console.log("Advanced Detail Search ", cellTower);});
-     * @constructor
-     */
-    JsonToStringCallCellTowerLocation: function JsonToStringCellTowerLocation(input) {
+    JsonToStringCellTowerLocation: function JsonToStringCellTowerLocation(input) {
         return findCellTowerLocationBasedOnCellTowerId.findCellTowerLocationBasedOnCellTowerId(input.callCellTowerId);
     },
 
@@ -143,6 +136,12 @@ module.exports = {
     JsonToStringSearchByCellTowerAndTime: function JsonToStringSearchByCellTowerAndTime(input, intialTimeStamp, finalTimeStamp) {
     return searchLocationsByIdAndTime.searchLocationsByIdAndTime(input.cellTowerId, input.anprId, input.atmId, input.eposId, intialTimeStamp.intialTimeStamp, finalTimeStamp.finalTimeStamp)
     }
+    },
+
+    JsonToStringReceiverCellTowerLocation: function JsonToStringCellTowerLocation(input) {
+        return findCellTowerLocationBasedOnCellTowerId.findCellTowerLocationBasedOnCellTowerId(input.receiverTowerId);
+    },
+
 
 
 };
@@ -192,10 +191,10 @@ module.exports = {
 // JsonToStringDetails(
 //     {
 //         "citizenID": "",
-//         "forenames": "lucy mandy",
-//         "surname": "Price",
+//         "forenames": "William",
+//         "surname": "Willis",
 //         "homeAddress": "",
-//         "dateOfBirth": "1968-02-15",
+//         "dateOfBirth": "1958-10-27",
 //         "placeOfBirth": "",
 //         "sex": ""
 //     }
