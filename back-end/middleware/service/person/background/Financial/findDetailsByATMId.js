@@ -27,7 +27,7 @@ module.exports =
      *
      *  @require this function to work it requires a JSON object to be passed into JsonToStringATM()
      *  */
-    function findATMPointByATMId(timestamp, atmId, bankCardNumber, type, amount) {
+    function findDetailsByATMId(timestamp, atmId) {
         atmId = exactStr(atmId);
         return Promise.all([atmID(atmId)]);
 
