@@ -1,6 +1,6 @@
 const auth = require('../sqlauth.js');
 
-module.exports = {
+module.exports =
     /**
      * @author Anthony Wilkinson & Chris
      *
@@ -16,7 +16,7 @@ module.exports = {
      *
      * @requires this function requires a string input selected from findTransactionsByBankCard to function
      * */
-    findBankCardByEposId: function findBankCardByEposId(eposId,limit) {
+     function findBankCardByEposId(eposId,limit) {
         if (limit !==undefined) {
         }
         else {
@@ -27,5 +27,4 @@ module.exports = {
             " order by timestamp desc"+
             " Limit " + limit;
         return auth.SQLauthenticate(sqlSearchString)
-    }
-};
+    } ;
