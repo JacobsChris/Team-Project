@@ -13,6 +13,7 @@ import { GuardProvider, GuardedRoute } from 'react-router-guards';
 import CreateUser from './components/createUser';
 import SearchVehicle from './components/searchVehicle';
 import VehicleResultsPage from './components/vehicleResultsPage';
+import PersonLocation from './components/personLocation';
 
 function App() {
 
@@ -34,6 +35,7 @@ function App() {
           <GuardedRoute path='/admin/' component={AdminNavBar} />
           <GuardedRoute path='/admin/adduser' component={CreateUser} />
           <GuardedRoute path='/user/home/peopleresults' component={PeopleResultsPage} />
+          <GuardedRoute path='/user/home/personlocation' component={PersonLocation} />
           <GuardedRoute path='/user/home/vehicleresults' component={VehicleResultsPage} />
         </GuardProvider>
       <Route path='/user/signin' component={SignIn}></Route>
