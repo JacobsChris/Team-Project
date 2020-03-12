@@ -3,7 +3,7 @@ const exactStr = require('../inputvalidation/exactStr');
 module.exports =
     /**
      *
-     * @param cellTowerId
+     * @param input is an boject containing the key cellTowerId
      * @returns promised information about a celltower of given tower ID
      */
      function findCellTowerLocationBasedOnCellTowerId(input) {

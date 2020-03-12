@@ -6,7 +6,7 @@ const findOutGoingCallsByTargetPhoneNUmber = require("./findOutGoingCallsByTarge
 module.exports =
     /**
      *
-     * @param phoneNumber is the phone number you want the call history of
+     * @param input is an object containing the phone number you want the call history of
      * @returns promised arrays of the incoming and outgoing pone calls of the specified phone number
      */
      function findCallHistoryByPhoneNumber(input) {
