@@ -1,4 +1,4 @@
-const auth = require("../../../../../back-end/middleware/service/person/background/sqlauth");
+const SQLauthenticate = require("../../../../../back-end/middleware/service/person/background/sqlauth");
 
 let initRes = [];
 let expectedResult = [{
@@ -12,7 +12,7 @@ let expectedResult = [{
 }];
 
 test('tests SQL Auth does stuff', (done) => {
-    auth.SQLauthenticate("SELECT * FROM citizen WHERE citizenID=(1111269986) LIMIT 1")
+    SQLauthenticate("SELECT * FROM citizen WHERE citizenID=(1111269986) LIMIT 1")
         .then(res => {
             initRes = res;
             expect(initRes).toStrictEqual(expectedResult);
