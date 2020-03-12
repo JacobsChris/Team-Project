@@ -1,9 +1,13 @@
 const wildStr = require('../inputvalidation/wildStr.js');
 const exactStr = require('../inputvalidation/exactStr');
-const sendToAsyncCitizen = require('../sqlauth.js');
+
+const rad2Deg = require('./rad2Deg.js');
 const searchCamerasByArea = require('./searchCamerasByArea');
 const searchATMPointsByArea = require('./searchATMPointByArea.js');
-const rad2Deg = require('./rad2Deg.js');
+const searchCellTowerByArea = require('./searchCellTowerByArea.js');
+const searchEposTerminalByArea = require('./searchEposTerminalsByLocation.js');
+
+
 
 module.exports = {
     // /**
@@ -28,7 +32,7 @@ module.exports = {
     searchByLocation: function searchByLocation(inputLatitude, inputLongitude, Radius) {
         let earthR = 6371;
 
-
+        //create a box defined by the input query
         let maxLat = inputLatitude + rad2Deg.rad2Deg(Radius/earthR);
         let minLat = inputLatitude - rad2Deg.rad2Deg(Radius/earthR);
         let maxLon = inputLongitude + rad2Deg.rad2Deg(Math.asin(Radius/earthR) / Math.cos(rad2Deg.rad2Deg(inputLatitude)));
@@ -38,8 +42,22 @@ module.exports = {
         inputLongitude = exactStr.addExactStr(inputLongitude);
         Radius = exactStr.addExactStr(Radius);
 
-        return Promise.all([searchCamerasByArea.searchCamerasByArea(inputLatitude, inputLongitude, Radius,minLat,maxLat,minLon,maxLon),
-            searchATMPointsByArea.searchATMPointsByArea(inputLatitude, inputLongitude, Radius,minLat,maxLat,minLon,maxLon)]);
+
+        return Promise.all([
+            searchCamerasByArea.searchCamerasByArea(inputLatitude, inputLongitude, Radius,minLat,maxLat,minLon,maxLon),
+            searchATMPointsByArea.searchATMPointsByArea(inputLatitude, inputLongitude, Radius,minLat,maxLat,minLon,maxLon),
+            searchCellTowerByArea.searchCellTowerByArea(inputLatitude, inputLongitude, Radius,minLat,maxLat,minLon,maxLon),
+            searchEposTerminalByArea.searchEposTerminalByArea(inputLatitude, inputLongitude, Radius,minLat,maxLat,minLon,maxLon)
+        ]);
         // }
     }
 };
+
+// let working1 = 6371 * (Math.acos ( Math.cos ( rad2Deg.deg2Rad(inputLatitude) )* Math.cos( rad2Deg.deg2Rad( inputLatitude-2 ) )* Math.cos( rad2Deg.deg2Rad( inputLongitude-2 ) - rad2Deg.deg2Rad(inputLongitude ) )+ Math.sin ( rad2Deg.deg2Rad(inputLatitude) ) * Math.sin( rad2Deg.deg2Rad( inputLatitude-2 ) )));
+//
+// let working2 = (2*6371)*(Math.asin(Math.sqrt(((Math.sin(rad2Deg.deg2Rad((inputLatitude-2)-(inputLatitude))/2))**2) + (Math.cos(rad2Deg.deg2Rad(inputLatitude)) * (Math.cos(rad2Deg.deg2Rad(inputLatitude-2))) * (Math.sin(rad2Deg.deg2Rad((inputLongitude-2)-(inputLongitude))/2)) )**2 ));
+//
+// console.log("input lat",inputLatitude,"input long", inputLongitude);
+// console.log("test lat", inputLatitude-2, "test long", inputLongitude-2);
+// console.log("distance between points",working1);
+

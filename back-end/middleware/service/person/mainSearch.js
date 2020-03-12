@@ -10,6 +10,7 @@ const findPersonByMobile = require("./background/PhoneData/findPersonByMobile");
 const findCallHistoryByPhoneNumber = require("./background/PhoneData/findCallHistoryByPhoneNumber");
 const findCellTowerLocationBasedOnCellTowerId = require('./background/PhoneData/findCellTowerLocationBasedOnCellTowerId');
 // const searchByLocation = require('./background/LocationSearch/SearchByLocation');
+const searchLocationsByIdAndTime = require('./background/LocationSearch/searchLocationsByIdAndTime.js');
 
 module.exports = {
 
@@ -68,13 +69,16 @@ module.exports = {
 
     /**
      * @author Anthony Wilkinson & Chris
-     * @return returns promised array like Advanced Detail ATMPoint [ { ANPRPointId: 5544, stamptime: 2015-05-01T06:47:57.000Z, vehicleRegistrationNumber: 'JD94 XZB' } ]
+     * @return an array like Advanced Detail ATMPoint [ { ANPRPointId: 5544, stamptime: 2015-05-01T06:47:57.000Z, vehicleRegistrationNumber: 'JD94 XZB' } ]
      * @requires this at the end to get @return .then(([vehicleObs]) => { console.log("Advanced Detail vehicleObs" , vehicleObs); });*/
     JsonToStringVehicleObs: function JsonToStringVehicleObs(input) {
         return findVehicleLocationByVehicleReg.findVehicleLocationByVehicleReg(input.vehicleRegistrationNo)
     },
     JsonToStringANPRLocation: function JsonToStringANPRLocation(input) {
         return findANPRCameraLocation.findANPRCameraLocation(input.ANPRPointId);
+    },
+    JsonToStringMobileCallRecords: function JsonToStringMobileCallRecords(input) {
+        return findMobileCallRecordsFromOwnerPhoneNumb.findMobileCallRecordsFromOwnerPhoneNumb(input.phoneNumber);
     },
     /**
      * @author Chris & Tony
@@ -112,17 +116,7 @@ module.exports = {
         return findCallHistoryByPhoneNumber.findCallHistoryByPhoneNumber(input.phoneNumber)
     },
 
-    /**
-     * The functions below are pretty much identical.
-     * All work the same way.
-     * Difference is which cell tower they search through in Mobile Call Records:
-     *  one searches through Caller Cell Tower and the other through Receiver Cell Tower.  Third one takes in generic ID.
-     * @param input is a JSON object with a key-pair called callCellTowerId or receiverTowerId or cellTowerId
-     * @returns promised location of a cell tower with given ID.  Use below code to access tje results
-     * .then(([cellTower]) => {console.log("Advanced Detail Search ", cellTower);});
-     * @constructor
-     */
-    JsonToStringCallCellTowerLocation: function JsonToStringCellTowerLocation(input) {
+    JsonToStringCellTowerLocation: function JsonToStringCellTowerLocation(input) {
         return findCellTowerLocationBasedOnCellTowerId.findCellTowerLocationBasedOnCellTowerId(input.callCellTowerId);
     },
 
@@ -133,7 +127,18 @@ module.exports = {
     JsonToStringCellTowerLocation: function JsonToStringCellTowerLocation(input) {
         return findCellTowerLocationBasedOnCellTowerId.findCellTowerLocationBasedOnCellTowerId(input.cellTowerId);
     },
-
+    JsonToStringDetailsFromVehicleReg: function JsonToStringDetailsFromVehicleReg(input) {
+        return findFullDetailsBasedOnAVehcileReg.findDetailsByName(input.forenames, input.surname, input.address, input.dateOfBirth);
+    },
+    JsonToStringSearchByLocation: function JsonToStringSearchByLocation(input) {
+        return searchByLocation.searchByLocation(input.latitude, input.longitude, input.radius);
+    },
+    JsonToStringSearchByCellTowerAndTime: function JsonToStringSearchByCellTowerAndTime(input, intialTimeStamp, finalTimeStamp) {
+    return searchLocationsByIdAndTime.searchLocationsByIdAndTime(input.cellTowerId, input.anprId, input.atmId, input.eposId, intialTimeStamp.intialTimeStamp, finalTimeStamp.finalTimeStamp)
+    },
+    JsonToStringReceiverCellTowerLocation: function JsonToStringCellTowerLocation(input) {
+        return findCellTowerLocationBasedOnCellTowerId.findCellTowerLocationBasedOnCellTowerId(input.receiverTowerId);
+    }
 
 };
 
@@ -398,6 +403,11 @@ module.exports = {
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////// from a things given lat, long and an input radius  ////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//
 // function JsonToStringSearchByLocation(input){
 //     return searchByLocation.searchByLocation(input.latitude, input.longitude,input.radius);
 //
@@ -405,19 +415,44 @@ module.exports = {
 //
 // JsonToStringSearchByLocation({
 //     latitude: 51.54500551249844,
-//         longitude: -0.13447255196733515,
-//         radius: 1}).then(([ANPRCameraLocations,ATMPointLocations]) => {console.log("ANPRCameraLocations", ANPRCameraLocations,"ATMPointLocations",ATMPointLocations);});
-
-
-// function JsonToStringSearchCamerasByArea(input) {
-//     return searchCamerasByArea.searchCamerasByArea( input.latitude, input.longitude,input.radius)
-// }
-//
-// JsonToStringSearchCamerasByArea({
-//     latitude: 51.54500551249844,
 //     longitude: -0.13447255196733515,
-//     radius: 2}).then(([Locations]) => {console.log("Advanced Detail Search in order of vehicle", Locations);});
+//     radius: 0.25})
+// .then(([ANPRCameraLocations,ATMPointLocations,CellTowerLocations, EPOSTerminalLocations]) => {
+//             console.log("ANPRCameraLocations", ANPRCameraLocations,
+//                 "ATMPointLocations",ATMPointLocations,
+//                 "CellTowerLocations",CellTowerLocations,
+//                 "EPOSTerminalLocations",EPOSTerminalLocations);});
 
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////// from a things given an Id and timestamp  ////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+function JsonToStringSearchByCellTowerAndTime(input, intialTimeStamp, finalTimeStamp) {
+    return searchLocationsByIdAndTime.searchLocationsByIdAndTime(input.cellTowerId, input.anprId, input.atmId, input.eposId, intialTimeStamp.intialTimeStamp, finalTimeStamp.finalTimeStamp)
+}
+
+JsonToStringSearchByCellTowerAndTime({
+        "eposId": 696,
+    },
+    {
+        "intialTimeStamp": "2015-05-01 14:03:29"
+    }, {
+        "finalTimeStamp": "2015-05-01 16:33:29"
+    })
+    .then(({output1, output2}) => {
+        debugger;
+        console.log("output1", output1, 'output2', output2);
+    });
+
+// numbers to test this function with :)
+// "cellTowerId": 140391,
+//     "anprId": 73,
+//     "atmId": 697,
+//     "eposId": 696
+
+//atm time around 1400
+// the rest around 0930
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

@@ -11,6 +11,6 @@ module.exports = {
         phoneNumber = wildStr.addWildStr(phoneNumber);
         let sqlSearchString = "SELECT * FROM mobiles WHERE" +
             " phoneNumber LIKE " + phoneNumber;
-        return Promise.all([auth.SQLauthenticate(sqlSearchString)]);
+        return auth.SQLauthenticate(sqlSearchString);
     }
 };
