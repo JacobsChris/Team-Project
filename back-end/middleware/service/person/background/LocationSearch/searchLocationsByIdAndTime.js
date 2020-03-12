@@ -32,18 +32,18 @@ module.exports =
      *  @require this function to work it requires a JSON object to be passed into JsonToStringDetails()
      *  */
         async function searchLocationsByIdAndTime(cellTowerId, anprId, atmId, eposId, intialTimeStamp, finalTimeStamp) {
-        intialTimeStamp = exactStr.addExactStr(intialTimeStamp);
-        finalTimeStamp = exactStr.addExactStr(finalTimeStamp);
+        intialTimeStamp = exactStr(intialTimeStamp);
+        finalTimeStamp = exactStr(finalTimeStamp);
 
 
         try {
             if (cellTowerId !== undefined) {
                 const output2 = [];
-                cellTowerId = exactStr.(cellTowerId);
-                const output1 = await searchGivenACellTowerIdAndTime.(cellTowerId, intialTimeStamp, finalTimeStamp);
+                cellTowerId = exactStr(cellTowerId);
+                const output1 = await searchGivenACellTowerIdAndTime(cellTowerId, intialTimeStamp, finalTimeStamp);
 
                 for (let mob of output1) {
-                    output2.push(await findPersonByMobile.(mob.callerNumber));
+                    output2.push(await findPersonByMobile(mob.callerNumber));
                 }
                 return {
                     output1,
@@ -52,9 +52,9 @@ module.exports =
             } else if (anprId !== undefined) {
                 const output2 = [];
                 anprId = exactStr(anprId);
-                const output1 = await searchGivenASingleANPRIdAndTime.(anprId, intialTimeStamp, finalTimeStamp);
+                const output1 = await searchGivenASingleANPRIdAndTime(anprId, intialTimeStamp, finalTimeStamp);
                 for (let cam of output1) {
-                    output2.push(await searchByVehicleReg.searchByVehicleReg(cam.vehicleRegistrationNumber));
+                    output2.push(await searchByVehicleReg(cam.vehicleRegistrationNumber));
                 }
                 return {
                     output1,
@@ -64,14 +64,14 @@ module.exports =
             } else if (atmId !== undefined) {
                 const output2 = [];
                 atmId = exactStr(atmId);
-                const output1 = await searchGivenASingleATMIdAndTime.searchGivenASingleATMIdAndTime(atmId, intialTimeStamp, finalTimeStamp);
+                const output1 = await searchGivenASingleATMIdAndTime(atmId, intialTimeStamp, finalTimeStamp);
                 for (let atm of output1) {
-                    let cardNumber = await findBankCardByAtmId.findBankCardByAtmId(atm.atmId);
+                    let cardNumber = await findBankCardByAtmId(atm.atmId);
                     let bankCardNumber = exactStr(cardNumber.bankCardNumber);
                     for (let bankcard of cardNumber) {
-                        let bankaccountid = await findBankAccountIdGivenACardNumber.(bankcard.bankCardNumber);
+                        let bankaccountid = await findBankAccountIdGivenACardNumber(bankcard.bankCardNumber);
                         for (let id of bankaccountid) {
-                            output2.push(await findDetailsFromABankAccountId.(id.bankcardId));
+                            output2.push(await findDetailsFromABankAccountId(id.bankcardId));
                         }
                     }
                 }
@@ -81,15 +81,15 @@ module.exports =
                 };
             } else if (eposId !== undefined) {
                 const output2 = [];
-                eposId = exactStr.(eposId);
-                const output1 = await (searchGivenAEposIdAndTime.(eposId, intialTimeStamp, finalTimeStamp));
+                eposId = exactStr(eposId);
+                const output1 = await (searchGivenAEposIdAndTime(eposId, intialTimeStamp, finalTimeStamp));
                 for (let epos of output1) {
-                    let cardNumber = await findBankCardByEposId.(epos.eposId);
-                    let bankCardNumber = exactStr.(cardNumber.bankCardNumber);
+                    let cardNumber = await findBankCardByEposId(epos.eposId);
+                    let bankCardNumber = exactStr(cardNumber.bankCardNumber);
                     for (let bankcard of cardNumber) {
-                        let bankaccountid = await findBankAccountIdGivenACardNumber.(bankcard.bankCardNumber);
+                        let bankaccountid = await findBankAccountIdGivenACardNumber(bankcard.bankCardNumber);
                         for (let id of bankaccountid) {
-                            output2.push(await findDetailsFromABankAccountId.(id.bankcardId));
+                            output2.push(await findDetailsFromABankAccountId(id.bankcardId));
                         }
                     }
                 }

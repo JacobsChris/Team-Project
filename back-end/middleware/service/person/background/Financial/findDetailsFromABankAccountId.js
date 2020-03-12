@@ -1,6 +1,6 @@
 const auth = require('../sqlauth.js');
 
-module.exports = {
+module.exports =
     /**
      * @author Anthony Wilkinson & Chris
      *
@@ -16,7 +16,7 @@ module.exports = {
      *
      * @requires this function requires a string input selected from findDetailsByBankAccount to function
      * */
-    findDetailsFromABankAccountId: function findDetailsFromABankAccountId(bankAccountId,limit) {
+     function findDetailsFromABankAccountId(bankAccountId,limit) {
         if (limit !==undefined) {
         }
         else {
@@ -26,5 +26,4 @@ module.exports = {
             "bankAccountId LIKE " + bankAccountId +
             " Limit " + limit;
         return auth.SQLauthenticate(sqlSearchString)
-    }
-};
+    };
