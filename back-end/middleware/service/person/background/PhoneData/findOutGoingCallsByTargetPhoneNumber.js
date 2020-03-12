@@ -1,14 +1,19 @@
 const auth = require('../sqlauth.js');
 
 module.exports = {
+    /**
+     *
+     * @param phoneNumber
+     * @returns returns the numbers called by the given inputted phone number
+     */
     findOutGoingCalls: function findOutGoingCalls(phoneNumber) {
-        let sqlSearchString = "select *, count(callerNumber) from mobileCallRecords where" +
+        let sqlSearchString = "select *, count(receiverNumber) from mobileCallRecords where" +
             " callerNumber LIKE " + phoneNumber +
             " GROUP BY receiverNumber" +
-            " ORDER BY COUNT(callerNumber) DESC";
+            " ORDER BY COUNT(receiverNumber) DESC";
         return auth.SQLauthenticate(sqlSearchString)
     }
 
 };
 
-;
+

@@ -11,15 +11,10 @@ const loginAuth = passport.use("login", new LocalStrategy(
             if (!user) {
                 return done(null, false, {message: 'Incorrect username.'});
             } 
-            else {
-                bcrypt.compare(password, user.password)
-                    .then(response => {
-                        if (response !== true) {
-                            return done(null, false, {message: "Incorrect password"});
-                        }
-                        return done(null, user);
-                });
+            else if (!user.validPassword(password)) {
+                return done(null, false, {message: "Incorrect password"});
             }
+            return done(null, user);
         })
         .catch(error => {
             console.log(error);

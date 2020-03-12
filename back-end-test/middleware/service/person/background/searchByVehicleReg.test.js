@@ -39,7 +39,6 @@ test('takes in a valid complete vehicleReg and searches for vehicles', (done) =>
             expect(initRes).toContainEqual(expectedResult);
             done();
         });
-    // done()
 });
 
 test('takes in a valid incomplete vehicleReg and searches for vehicles', (done) => {

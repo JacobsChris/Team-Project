@@ -26,11 +26,29 @@ test('takes in a valid string and searches for persons', (done) => {
     jest.setTimeout(10000000);
     mainSearch.JsonToStringName(inputPerson)
         .then(([citizen]) => {
-            console.log("Advanced Detail Search in order of citizen"
-                , citizen);
             initRes = citizen;
-            console.log(initRes);
             expect(initRes).toStrictEqual(expectedResult);
             done();
         });
+});
+
+let badInputPerson = {
+    "citizenID": 1,
+    "forenames": 1,
+    "surname": 1,
+    "homeAddress": 1,
+    "dateOfBirth": 1,
+    "placeOfBirth": 1,
+    "sex": 1
+};
+
+
+test('takes in an invalid input and expects a thrown error', async () => {
+    try {
+        await mainSearch.JsonToStringName(badInputPerson);
+        throw 'This shouldn\'t have gotten here';
+    } catch (err) {
+        expect(err).toBeTruthy();
+        expect(err.message).toEqual('Not a string error');
+    }
 });

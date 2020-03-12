@@ -6,14 +6,11 @@ const findTransactionsByBankCard = require('./background/Financial/findTransacti
 const findATMPointByATMId = require('./background/Financial/findDetailsByATMId.js');
 const findVehicleLocationByVehicleReg = require('./background/vehicle/findVehicleObsByVehicle.js');
 const findANPRCameraLocation = require('./background/vehicle/findANPRCameraLocation.js');
-const findMobileCallRecordsFromOwnerPhoneNumb = require('./background/PhoneData/findMobileCallRecordsFromOwnerPhoneNumb');
 const findPersonByMobile = require("./background/PhoneData/findPersonByMobile");
 const findCallHistoryByPhoneNumber = require("./background/PhoneData/findCallHistoryByPhoneNumber");
 const findCellTowerLocationBasedOnCellTowerId = require('./background/PhoneData/findCellTowerLocationBasedOnCellTowerId');
-const findFullDetailsBasedOnAVehcileReg = require('./background/vehicle/findDetailsByVehicleRegDetails');
-const searchByLocation = require('./background/LocationSearch/SearchByLocation');
+// const searchByLocation = require('./background/LocationSearch/SearchByLocation');
 const searchLocationsByIdAndTime = require('./background/LocationSearch/searchLocationsByIdAndTime.js');
-
 
 module.exports = {
 
@@ -47,8 +44,8 @@ module.exports = {
      * */
 
 
-    JsonToStringBankDetails: function JsonToStringBankDetails(input, limit) {
-        return findBankCardByAccountId.findBankCardByAccountId(input.bankAccountId, input.accountNumber, input.bank, input.forenames, input.surname, input.dateOfBirth, input.homeAddress, limit)
+    JsonToStringBankDetails: function JsonToStringBankDetails(input) {
+        return findBankCardByAccountId.findBankCardByAccountId(input.bankAccountId, input.accountNumber, input.bank, input.forenames, input.surname, input.dateOfBirth, input.homeAddress)
 
     },
 
@@ -72,16 +69,13 @@ module.exports = {
 
     /**
      * @author Anthony Wilkinson & Chris
-     * @return an array like Advanced Detail ATMPoint [ { ANPRPointId: 5544, stamptime: 2015-05-01T06:47:57.000Z, vehicleRegistrationNumber: 'JD94 XZB' } ]
+     * @return returns promised array like Advanced Detail ATMPoint [ { ANPRPointId: 5544, stamptime: 2015-05-01T06:47:57.000Z, vehicleRegistrationNumber: 'JD94 XZB' } ]
      * @requires this at the end to get @return .then(([vehicleObs]) => { console.log("Advanced Detail vehicleObs" , vehicleObs); });*/
     JsonToStringVehicleObs: function JsonToStringVehicleObs(input) {
         return findVehicleLocationByVehicleReg.findVehicleLocationByVehicleReg(input.vehicleRegistrationNo)
     },
     JsonToStringANPRLocation: function JsonToStringANPRLocation(input) {
         return findANPRCameraLocation.findANPRCameraLocation(input.ANPRPointId);
-    },
-    JsonToStringMobileCallRecords: function JsonToStringMobileCallRecords(input) {
-        return findMobileCallRecordsFromOwnerPhoneNumb.findMobileCallRecordsFromOwnerPhoneNumb(input.phoneNumber);
     },
     /**
      * @author Chris & Tony
@@ -95,13 +89,18 @@ module.exports = {
     },
     /**
      * @author Chris & Tony
-     * @param input is a JSON which contains the key phoneNumber
-     * @returns an array object of persons that match the phone number inputted
+     * @param input is a JSON which contains the keys receiverNumber and callerNumber
+     * @param person is a JSON which contains the key phoneNumber
+     * @returns promised array object of persons that match the phone number inputted
      * @requires the following code at the end to access data:
      *          .then(([Person]) => {console.log("Advanced Detail Search in order of Person", Person);});
      */
-    JsonToPersonByMobile: function JsonToPersonByMoile(input) {
-        return findPersonByMobile.findPersonByMobile(input.phoneNumber)
+    JsonToPersonByMobile: function JsonToPersonByMoile(input, person) {
+        if (input.receiverNumber === person.phoneNumber) {
+            return findPersonByMobile.findPersonByMobile(input.callerNumber);
+        } else {
+            return findPersonByMobile.findPersonByMobile(input.receiverNumber);
+        }
     },
     /**
      * @author Chris & Tony
@@ -114,8 +113,26 @@ module.exports = {
         return findCallHistoryByPhoneNumber.findCallHistoryByPhoneNumber(input.phoneNumber)
     },
 
-    JsonToStringCellTowerLocation: function JsonToStringCellTowerLocation(input) {
+    /**
+     * The functions below are pretty much identical.
+     * All work the same way.
+     * Difference is which cell tower they search through in Mobile Call Records:
+     *  one searches through Caller Cell Tower and the other through Receiver Cell Tower.  Third one takes in generic ID.
+     * @param input is a JSON object with a key-pair called callCellTowerId or receiverTowerId or cellTowerId
+     * @returns promised location of a cell tower with given ID.  Use below code to access tje results
+     * .then(([cellTower]) => {console.log("Advanced Detail Search ", cellTower);});
+     * @constructor
+     */
+    JsonToStringCallCellTowerLocation: function JsonToStringCellTowerLocation(input) {
         return findCellTowerLocationBasedOnCellTowerId.findCellTowerLocationBasedOnCellTowerId(input.callCellTowerId);
+    },
+
+    JsonToStringReceiverCellTowerLocation: function JsonToStringCellTowerLocation(input) {
+        return findCellTowerLocationBasedOnCellTowerId.findCellTowerLocationBasedOnCellTowerId(input.receiverTowerId);
+    },
+
+    JsonToStringCellTowerLocation: function JsonToStringCellTowerLocation(input) {
+        return findCellTowerLocationBasedOnCellTowerId.findCellTowerLocationBasedOnCellTowerId(input.cellTowerId);
     },
     JsonToStringDetailsFromVehicleReg: function JsonToStringDetailsFromVehicleReg(input) {
         return findFullDetailsBasedOnAVehcileReg.findDetailsByName(input.forenames, input.surname, input.address, input.dateOfBirth);
@@ -126,6 +143,8 @@ module.exports = {
     JsonToStringSearchByCellTowerAndTime: function JsonToStringSearchByCellTowerAndTime(input, intialTimeStamp, finalTimeStamp) {
     return searchLocationsByIdAndTime.searchLocationsByIdAndTime(input.cellTowerId, input.anprId, input.atmId, input.eposId, intialTimeStamp.intialTimeStamp, finalTimeStamp.finalTimeStamp)
     }
+
+
 };
 
 
