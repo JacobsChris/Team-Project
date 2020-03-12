@@ -1,6 +1,5 @@
 const auth = require('../sqlauth.js');
 const wildStr = require("../inputvalidation/wildStr");
-const exactStr = require("../inputvalidation/exactStr");
 
 module.exports =    /**
      * @author Anthony Wilkinson & Chris
