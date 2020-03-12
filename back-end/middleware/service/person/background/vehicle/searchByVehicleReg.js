@@ -1,5 +1,5 @@
 const auth = require('../sqlauth.js');
-const {licencePlateValidator} = require("../inputvalidation/licencePlateValidator");
+const licencePlateValidator = require("../inputvalidation/licencePlateValidator");
 
 module.exports =
     /**
@@ -11,10 +11,10 @@ module.exports =
      *
      *  @require this function to work it requires a JSON object to be passed into JsonToStringName()
      * */
-    function searchByVehicleReg(vehicleReg) {
-        vehicleReg = licencePlateValidator(vehicleReg);
+    function searchByVehicleReg(input) {
+        input = licencePlateValidator(input.vehicleRegistrationNo);
         let sqlSearchString = "SELECT * FROM vehicleRegistration WHERE " +
-            "vehicleRegistrationNo LIKE " + vehicleReg;
-        return Promise.all([auth.SQLauthenticate(sqlSearchString)]);
+            "vehicleRegistrationNo LIKE " + input;
+        return Promise.all([auth(sqlSearchString)]);
 
     };

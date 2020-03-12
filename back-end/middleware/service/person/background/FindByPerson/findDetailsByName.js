@@ -1,7 +1,4 @@
-const wildStr = require('../inputvalidation/wildStr.js');
-const stringChecker = require('../inputvalidation/stringChecker');
-const exactStr = require('../inputvalidation/exactStr');
-const sendToAsyncCitizen = require('../sqlauth.js');
+
 const person = require('./findPersonByPerson.js');
 const bankAccount = require('./findBankAccountByPerson.js');
 const mobilePhone = require('./findMobileByPerson.js');

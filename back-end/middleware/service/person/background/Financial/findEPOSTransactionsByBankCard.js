@@ -1,5 +1,5 @@
 const auth = require('../sqlauth.js');
-
+const exactStr = require("../inputvalidation/exactStr");
 
 module.exports =
     /**
@@ -19,7 +19,7 @@ module.exports =
      * */
      function findEPOSTransactions(input) {
         let sqlSearchString = "SELECT * FROM eposTransactions WHERE "+
-            " bankCardNumber =(" + input.cardNumber + ")";
+            " bankCardNumber =(" + exactStr(input.cardNumber) + ")";
         return auth(sqlSearchString)
 
 };

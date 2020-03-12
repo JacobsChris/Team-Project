@@ -1,4 +1,5 @@
 const auth = require('../sqlauth.js');
+const exactStr = require("../inputvalidation/exactStr");
 
 module.exports =
     /**
@@ -18,6 +19,6 @@ module.exports =
      * */
     function findATMTransactions(input) {
         let sqlSearchString = "SELECT * FROM atmTransaction WHERE " +
-            " bankCardNumber =(" + input.cardNumber + ")";
+            " bankCardNumber =(" + exactStr(input.cardNumber) + ")";
         return auth(sqlSearchString);
 };

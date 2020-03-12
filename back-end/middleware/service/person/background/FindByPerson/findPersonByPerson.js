@@ -21,7 +21,7 @@ module.exports =    /**
      * */
      function findPersonByPerson(input) {
         let sqlSearchString = "SELECT * FROM citizen WHERE " +
-            "citizenID LIKE " + exactStr(input.citizenID) +
+            "citizenID LIKE " + wildStr(input.citizenID) +
             " AND forenames LIKE " + wildStr(input.forenames) +
             " AND surname LIKE " + wildStr(input.surname) +
             " AND homeAddress LIKE " + wildStr(input.homeAddress) +
