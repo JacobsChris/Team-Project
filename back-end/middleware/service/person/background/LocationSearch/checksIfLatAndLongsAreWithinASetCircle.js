@@ -1,7 +1,7 @@
 const geolib = require("geolib");
 
-module.exports = {
-    checkWithinRadius: function checkWithinRadius(center, rad, cam, atm, cell, epos) {
+module.exports =
+     function checkWithinRadius(center, rad, cam, atm, cell, epos) {
 
         let camIds = [], atmIds = [], cellIds = [], eposIds = [];
         let vars = [cam, atm, cell, epos];
@@ -56,7 +56,6 @@ module.exports = {
             return {anprId: camIds, atmId: atmIds, cellTowerID: cellIds, eposId: eposIds}
 
         }
-    }
 };
 
 

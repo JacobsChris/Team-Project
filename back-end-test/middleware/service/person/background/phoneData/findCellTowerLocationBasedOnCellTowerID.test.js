@@ -1,4 +1,4 @@
-const mainSearch = require("../../../../../../back-end/middleware/service/person/mainSearch");
+const findCellTowerLocationBasedOnCellTowerId = require("../../../../../../back-end/middleware/service/person/background/PhoneData/findCellTowerLocationBasedOnCellTowerId");
 
 let initRes = [];
 let expectedRes = [
@@ -19,7 +19,7 @@ let inputVal = {
 ;
 
 test("Takes in an object with CallerCellTower ID as a keypair, and returns information about the Cell Tower  of that ID", (done) => {
-    mainSearch.JsonToStringCallCellTowerLocation(inputVal)
+    findCellTowerLocationBasedOnCellTowerId(inputVal)
         .then(([CellTowerLoc]) => {
             initRes = CellTowerLoc;
             expect(initRes).toStrictEqual(expectedRes);
@@ -28,7 +28,7 @@ test("Takes in an object with CallerCellTower ID as a keypair, and returns infor
 });
 
 test("Takes in an object with ReceiverCellTower ID as a keypair, and returns information about the Cell Tower  of that ID.  These two tests should be identical", (done) => {
-    mainSearch.JsonToStringReceiverCellTowerLocation(inputVal)
+    findCellTowerLocationBasedOnCellTowerId(inputVal)
         .then(([CellTowerLoc]) => {
             initRes = CellTowerLoc;
             expect(initRes).toStrictEqual(expectedRes);
@@ -37,7 +37,7 @@ test("Takes in an object with ReceiverCellTower ID as a keypair, and returns inf
 });
 
 test("Takes in an object with ReceiverCellTower ID as a keypair, and returns information about the Cell Tower  of that ID.  These two tests should be identical", (done) => {
-    mainSearch.JsonToStringCellTowerLocation(inputVal)
+    findCellTowerLocationBasedOnCellTowerId(inputVal)
         .then(([CellTowerLoc]) => {
             initRes = CellTowerLoc;
             expect(initRes).toStrictEqual(expectedRes);

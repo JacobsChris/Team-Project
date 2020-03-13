@@ -2,7 +2,7 @@ const exactStr = require('../inputvalidation/exactStr');
 const bankCard = require('./findBankCardByBankAccount');
 
 
-module.exports = {
+module.exports =
     /**
      *  @author Anthony Wilkinson & Chris
      *  @function this function obtains an input originally from a JSON, deconstructs the incomming data into bankAccountId,
@@ -27,9 +27,7 @@ module.exports = {
      *
      *  @require this function to work it requires a JSON object to be passed into JsonToStringBankDetails()
      *  */
-    findBankCardByAccountId: function findBankCardByAccountId(bankAccountId, accountNumber, bank, forenames, surname, dateOfBirth, homeAddress,limit) {
-        bankAccountId = exactStr.addExactStr(bankAccountId);
-        return Promise.all([bankCard.findBankCard(bankAccountId)]);
-
-    }
+     function findBankCardByAccountId(input) {
+        bankAccountId = exactStr(input.bankAccountId);
+        return Promise.all([bankCard(bankAccountId)]);
 };

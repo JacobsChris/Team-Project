@@ -1,6 +1,6 @@
 const auth = require('../sqlauth.js');
 
-module.exports = {
+module.exports =
     /**
      * @author Anthony Wilkinson & Chris
      *
@@ -16,15 +16,24 @@ module.exports = {
      *
      * @requires this function requires a string input selected from findDetailsByBankAccount to function
      * */
-    findDetailsFromABankAccountId: function findDetailsFromABankAccountId(bankAccountId,limit) {
-        if (limit !==undefined) {
+     function findDetailsFromABankAccountId(bankAccountId,limit) {
+        try {
+            if(limit !==undefined){
+                let sqlSearchString = "SELECT * FROM peoplebankaccount WHERE " +
+                    "bankAccountId LIKE " + bankAccountId +
+                    " Limit " + limit;
+                return auth(sqlSearchString)
+            }
+            else {
+                let sqlSearchString = "SELECT * FROM peoplebankaccount WHERE " +
+                    "bankAccountId LIKE " + bankAccountId +
+                    " Limit 10000";
+                return auth(sqlSearchString)
+            }
         }
-        else {
-            limit = 1000;
+        catch (e) {
+            console.log(e.name);
+            console.log(e.message);
+            throw "error encountered in findBankCardByAtmId"
         }
-        let sqlSearchString = "SELECT * FROM peoplebankaccount WHERE " +
-            "bankAccountId LIKE " + bankAccountId +
-            " Limit " + limit;
-        return auth.SQLauthenticate(sqlSearchString)
-    }
-};
+    };

@@ -1,13 +1,12 @@
 const findCellTowerLocation = require('./SqlConstructorForCellTowerLocation');
 const exactStr = require('../inputvalidation/exactStr');
-module.exports = {
+module.exports =
     /**
      *
-     * @param cellTowerId
+     * @param input is an boject containing the key cellTowerId
      * @returns promised information about a celltower of given tower ID
      */
-    findCellTowerLocationBasedOnCellTowerId: function findCellTowerLocationBasedOnCellTowerId(cellTowerId) {
-        cellTowerId = exactStr.addExactStr(cellTowerId);
-        return Promise.all([findCellTowerLocation.findCellTowerLocation(cellTowerId)]);
-    }
+     function findCellTowerLocationBasedOnCellTowerId(input) {
+        let cellTowerId = exactStr(input.cellTowerId);
+        return Promise.all([findCellTowerLocation(cellTowerId)]);
 };

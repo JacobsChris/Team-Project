@@ -1,6 +1,7 @@
 const auth = require('../sqlauth.js');
+const wildStr = require("../inputvalidation/wildStr");
 
-module.exports = {
+module.exports =
     /**
      * @author Anthony Wilkinson & Chris
      *
@@ -16,12 +17,12 @@ module.exports = {
      *
      * @requires this function requires string inputs selected from findDetailsByName to function
      * */
-    findVehicleByPerson: function findVehicleByPerson(forenames, surname,  Addr, DoB) {
+     function findVehicleByPerson(input) {
         let sqlSearchString = "SELECT * FROM vehicleRegistration WHERE " +
-            "forenames LIKE " + forenames +
-            " AND surname LIKE " + surname +
-            " AND address LIKE " + Addr +
-            " AND dateOfBirth LIKE " + DoB;
-        return auth.SQLauthenticate(sqlSearchString);
-    }
+            "forenames LIKE " + wildStr(input.forenames) +
+            " AND surname LIKE " + wildStr(input.surname) +
+            " AND address LIKE " + wildStr(input.homeAddress) +
+            " AND dateOfBirth LIKE " + wildStr(input.dateOfBirth);
+        return auth(sqlSearchString);
+
 };

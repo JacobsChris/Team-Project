@@ -1,16 +1,27 @@
 const auth = require('../sqlauth.js');
 const wildStr = require('../inputvalidation/wildStr.js');
 
-module.exports = {
+module.exports =
     /**
      *
-     * @param phoneNumber
+     * @param input
+     * @param mobiles
      * @returns promised information about the owner of a given phone number
      */
-    findPersonByMobile: function findPersonByMobile(phoneNumber) {
-        phoneNumber = wildStr.addWildStr(phoneNumber);
+    function findPersonByMobile(input, mobiles) {
+        let aqNumber;
+        for (let phone of mobiles) {
+
+            if (input.receiverNumber == phone.phoneNumber) {
+                aqNumber = wildStr(input.callerNumber);
+            }else{
+                aqNumber = wildStr(input.receiverNumber);
+            }
+        }
+
         let sqlSearchString = "SELECT * FROM mobiles WHERE" +
-            " phoneNumber LIKE " + phoneNumber;
-        return auth.SQLauthenticate(sqlSearchString);
+            " phoneNumber LIKE " + aqNumber;
+        return Promise.all([auth(sqlSearchString)]);
+
     }
-};
+;

@@ -1,5 +1,5 @@
-module.exports = {
-    licencePlateValidator: function licencePlateValidator(inputString) {
+module.exports =
+     function licencePlateValidator(inputString) {
         /**
          * @author Chris
          *
@@ -19,5 +19,5 @@ module.exports = {
         } else {
             throw new Error("Not a valid vehicle registration number");
         }
-    }
+
 };

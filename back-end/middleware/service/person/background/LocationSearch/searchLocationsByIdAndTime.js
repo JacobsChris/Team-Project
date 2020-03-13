@@ -4,98 +4,165 @@ const searchGivenACellTowerIdAndTime = require('./idAndTimeStampFinders/searchGi
 const searchGivenASingleANPRIdAndTime = require('./idAndTimeStampFinders/searchGivenASingleANPRIdAndTime.js');
 const searchGivenASingleATMIdAndTime = require('./idAndTimeStampFinders/searchGivenASingleATMIdAndTime.js');
 const searchGivenAEposIdAndTime = require('./idAndTimeStampFinders/searchGivenAEposIdAndTime.js');
-const findPersonByMobile = require('../PhoneData/findPersonByMobile.js');
-const searchByVehicleReg = require('../searchByVehicleReg.js');
+const findPersonByMobileForLocation = require('../PhoneData/findPersonByMobileForLocation');
+const searchByVehicleReg = require('../vehicle/searchByVehicleReg');
 const findBankCardByAtmId = require('../Financial/findBankCardByAtmId.js');
 const findBankAccountIdGivenACardNumber = require('../Financial/findBankAccountIdGivenACardNumber.js');
 const findDetailsFromABankAccountId = require('../Financial/findDetailsFromABankAccountId.js');
 const findBankCardByEposId = require('../Financial/findBankCardByEposId.js');
 
-module.exports = {
+module.exports =
     /**
-     *  @author Anthony Wilkinson & Chris
-     *  @function this function obtains an input originally from a JSON, deconstructs the incomming data into citizenID,
-     *  forenames, surname, homeAddress, dateOfBirth, Sex and a Limit which is hardcoded for the time being to be 5 total. The
-     *  function then turns these input parameters into a MYSQL search string for sqlauth to querry the database. wildstr and
-     *  exactstr allow for a LIKE or an exact match. The MYSQL string is constructed in the functions: findPersonByPerson,
-     *  findBankAccountByPerson, findMobileByPerson, findVehicleByPerson. Those functions then send the constructed strings to
-     *  mysql auth where it then querries the database (see mysql auth JSDocs for more info) and then returns it here. The
-     *  promise.all waits for all querries from the database to be accompolished before returning the data, this returned data
-     *  is within an array that takes the format [{person},{bank},{mobile},{vehicle}].
-     *  @development there could be an intial execution of finding person, that the results of are then sent to bank, mobile and
-     *  vehicle in the form =>
-     *      promise.all([person]).then(res => promise.all([findBankAccountByPerson(res)...
+     *  @author Anthony Wilkinson
+     *  @function  this function takes in a json object similar to => {
+                                                                        "eposId": 696,
+                                                                        "intialTimeStamp": "2015-05-01 14:03:29",
+                                                                        "finalTimeStamp": "2015-05-01 16:33:29",
+                                                                        "limit": 1
+                                                                    }
+     * the initial and final timestamps are necessary for this function to work. The id field can either be celltowerId, anprId, atmId or eposId. the limit is an optional
+     * field and is not necessary for the code to function as there are redundancies in place in the rest of the code to work without it and assume a limit of around 10,000.
      *
-     *  the type of error needs a more accurate error statement
+     * the eventual result of this function should always return forename, surname, DoB and address. It will also include the type of id used to obtain the data and the number
+     * and the timestamp of the event occurrence.
      *
-     *  @return this function returns an array of JSON objects to be passed up
-     *  @require this function to work it requires a JSON object to be passed into JsonToStringDetails()
+     * There are checks to see if information returned will be an array like [], through bankaccountid[0] === undefined and this will not return the empty array but end that loop
+     * without saving the undefined array
+     *
+     *  @return this function returns an array of JSON objects to be passed up an example of a singular item would
+     *  be => {
+                    "eventIdTimeAndDetails": [{
+                        "bankAccountId": 468721,
+                        "accountNumber": 8636271,
+                        "bank": "Barclays Bank",
+                        "forenames": "Joseph Shane",
+                        "surname": "Logan",
+                        "dateOfBirth": "1991-02-14",
+                        "homeAddress": "69 KINGS ROAD, BIRMINGHAM, B11 2AA",
+                        "idType": "eposID",
+                        "id": 696,
+                        "timeStamp": "2015-05-01T14:37:26.000Z"
+                    }]
+                }
+     *  @require this function to work it requires a JSON object to be passed into it
      *  */
-    searchLocationsByIdAndTime: async function searchLocationsByIdAndTime(cellTowerId, anprId, atmId, eposId, intialTimeStamp, finalTimeStamp) {
-        intialTimeStamp = exactStr.addExactStr(intialTimeStamp);
-        finalTimeStamp = exactStr.addExactStr(finalTimeStamp);
+    async function searchLocationsByIdAndTime(input) {
+        const intialTimeStamp = exactStr(input.intialTimeStamp);
+        const finalTimeStamp = exactStr(input.finalTimeStamp);
+        const limit = (input.limit);
+        const eventIdTimeAndDetails = [];
 
 
         try {
-            if (cellTowerId !== undefined) {
+            if (input.cellTowerId !== undefined) {
                 const output2 = [];
-                cellTowerId = exactStr.addExactStr(cellTowerId);
-                const output1 = await searchGivenACellTowerIdAndTime.searchGivenACellTowerIdAndTime(cellTowerId, intialTimeStamp, finalTimeStamp);
-
+                const cellTowerId = exactStr(input.cellTowerId);
+                const output1 = await searchGivenACellTowerIdAndTime(cellTowerId, intialTimeStamp, finalTimeStamp);
                 for (let mob of output1) {
-                    output2.push(await findPersonByMobile.findPersonByMobile(mob.callerNumber));
+                    const temp = await findPersonByMobileForLocation(mob, limit);
+                    const temp2 = temp;
+                    if (temp[0] === undefined) {
+                    } else {
+                        output2.push(temp[0]);
+                        temp2[0]['idType'] = "CellTowerId";
+                        temp2[0]['id'] = input.cellTowerId;
+                        temp2[0]['timeStamp'] = mob.timestamp;
+                        eventIdTimeAndDetails.push(temp2[0]);
+                    }
                 }
                 return {
-                    output1,
-                    output2
+                    eventIdTimeAndDetails
                 };
-            } else if (anprId !== undefined) {
+            } else if (input.anprId !== undefined) {
                 const output2 = [];
-                anprId = exactStr.addExactStr(anprId);
-                const output1 = await searchGivenASingleANPRIdAndTime.searchGivenASingleANPRIdAndTime(anprId, intialTimeStamp, finalTimeStamp);
+                const anprId = exactStr(input.anprId);
+                const output1 = await searchGivenASingleANPRIdAndTime(anprId, intialTimeStamp, finalTimeStamp, limit);
                 for (let cam of output1) {
-                    output2.push(await searchByVehicleReg.searchByVehicleReg(cam.vehicleRegistrationNumber));
+                    const temp = await searchByVehicleReg(cam, limit);
+                    const temp2 = temp;
+                    if (temp[0] === undefined) {
+                    } else {
+                        output2.push(temp[0]);
+                        temp2[0]['idType'] = "AnprID";
+                        temp2[0]['id'] = input.anprId;
+                        temp2[0]['timeStamp'] = cam.timestamp;
+                        eventIdTimeAndDetails.push(temp2[0]);
+                    }
                 }
                 return {
-                    output1,
-                    output2
+                    eventIdTimeAndDetails
                 };
 
-            } else if (atmId !== undefined) {
+            } else if (input.atmId !== undefined) {
+                debugger
                 const output2 = [];
-                atmId = exactStr.addExactStr(atmId);
-                const output1 = await searchGivenASingleATMIdAndTime.searchGivenASingleATMIdAndTime(atmId, intialTimeStamp, finalTimeStamp);
+                const atmId = exactStr(input.atmId);
+                const output1 = await searchGivenASingleATMIdAndTime(atmId, intialTimeStamp, finalTimeStamp, limit);
                 for (let atm of output1) {
-                    let cardNumber = await findBankCardByAtmId.findBankCardByAtmId(atm.atmId);
-                    let bankCardNumber = exactStr.addExactStr(cardNumber.bankCardNumber);
-                    for (let bankcard of cardNumber) {
-                        let bankaccountid = await findBankAccountIdGivenACardNumber.findBankAccountIdGivenACardNumber(bankcard.bankCardNumber);
-                        for (let id of bankaccountid) {
-                            output2.push(await findDetailsFromABankAccountId.findDetailsFromABankAccountId(id.bankcardId));
+                    const temp = atm;
+                    let cardNumber = await findBankCardByAtmId(atm.atmId, limit);
+                    if (cardNumber[0] === undefined) {
+                    } else {
+                        for (let bankcard of cardNumber) {
+                            let bankaccountid = await findBankAccountIdGivenACardNumber(bankcard.bankCardNumber, limit);
+                            if (bankaccountid[0] === undefined) {
+                            } else {
+                                for (let id of bankaccountid) {
+                                    debugger
+                                    const temp2 = await findDetailsFromABankAccountId(id.bankcardId, limit);
+                                    if (temp2[0] === undefined) {
+                                    }
+                                else {
+                                        output2.push(temp2[0]);
+                                        const temp3 = temp2;
+                                        temp3[0]['idType'] = "atmID";
+                                        temp3[0]['id'] = input.atmId;
+                                        temp3[0]['timeStamp'] = temp.timestamp;
+                                        eventIdTimeAndDetails.push(temp3[0]);
+                                    }
+                                }
+                            }
                         }
                     }
                 }
                 return {
-                    output1,
-                    output2
+                    eventIdTimeAndDetails
                 };
-            } else if (eposId !== undefined) {
+            } else if (input.eposId !== undefined) {
+                debugger
                 const output2 = [];
-                eposId = exactStr.addExactStr(eposId);
-                const output1 = await (searchGivenAEposIdAndTime.searchGivenAEposIdAndTime(eposId, intialTimeStamp, finalTimeStamp));
-                for (let epos of output1) {
-                    let cardNumber = await findBankCardByEposId.findBankCardByEposId(epos.eposId);
-                    let bankCardNumber = exactStr.addExactStr(cardNumber.bankCardNumber);
-                    for (let bankcard of cardNumber) {
-                        let bankaccountid = await findBankAccountIdGivenACardNumber.findBankAccountIdGivenACardNumber(bankcard.bankCardNumber);
-                        for (let id of bankaccountid) {
-                            output2.push(await findDetailsFromABankAccountId.findDetailsFromABankAccountId(id.bankcardId));
+                const eposId = exactStr(input.eposId);
+                const output1 = await (searchGivenAEposIdAndTime(eposId, intialTimeStamp, finalTimeStamp, limit));
+                if (output1 === undefined) {
+                } else {
+                    for (let epos of output1) {
+                        const temp = epos;
+                        let cardNumber = await findBankCardByEposId(epos.eposId, limit);
+                        if (cardNumber[0] === undefined) {
+                        } else {
+                            for (let bankcard of cardNumber) {
+                                let bankaccountid = await findBankAccountIdGivenACardNumber(bankcard.bankCardNumber, limit);
+                                if (bankaccountid[0] === undefined) {
+                                } else {
+                                    for (let id of bankaccountid) {
+                                        const temp2 = await findDetailsFromABankAccountId(id.bankcardId, limit)
+                                        if (temp2[0] === undefined) {
+                                        } else {
+                                            output2.push(temp2);
+                                            const temp3 = temp2;
+                                            temp3[0]['idType'] = "eposID";
+                                            temp3[0]['id'] = input.eposId;
+                                            temp3[0]['timeStamp'] = temp.timestamp;
+                                            eventIdTimeAndDetails.push(temp3[0]);
+                                        }
+                                    }
+                                }
+                            }
                         }
                     }
                 }
                 return {
-                    output1,
-                    output2
+                    eventIdTimeAndDetails
                 };
             } else {
                 return "error encountered, the correct Id was not supplied to searchLocationsByIdAndTime function"
@@ -105,5 +172,4 @@ module.exports = {
             console.log(err.message);
             throw "error encountered at function searchLocationsByIdAndTime";
         }
-    }
-};
+    };

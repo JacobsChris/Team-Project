@@ -1,29 +1,29 @@
-const mainSearch = require("../../../../../../back-end/middleware/service/person/mainSearch");
+const findPersonByMobile = require("../../../../../../back-end/middleware/service/person/background/PhoneData/findPersonByMobile");
 
 let initRes = [];
 let expectedResult = [
     {
-        "address": "25 MARESFIELD GARDENS, LONDON, NW3 5TE",
-        "dateOfBirth": "1986-09-17",
-        "forenames": "Pamela Patricia",
-        "network": "Vodafone",
-        "phoneNumber": "07700 000022",
-        "surname": "Young"
+        "address": "18 CLIFTON AVENUE, LEYLAND, PR25 3ES",
+        "dateOfBirth": "1944-07-08",
+        "forenames": "Ryan Guy",
+        "network": "Three",
+        "phoneNumber": "07700 000020",
+        "surname": "Fraser"
     }
 ];
 
 let inputPhone = {
     "receiverNumber": "07700 000021",
-    "callerNumber": "07700 000022"
+    "callerNumber": "07700 000020"
 };
-let inputPerson = {
+let mobiles = [{
     "phoneNumber": "07700 000021"
-};
+}];
 
 
 test('takes in a valid string and searches for persons', (done) => {
     jest.setTimeout(10000000);
-    mainSearch.JsonToPersonByMobile(inputPhone, inputPerson)
+    findPersonByMobile(inputPhone, mobiles)
         .then(([citizen]) => {
             console.log("Advanced Detail Search in order of phone number"
                 , citizen);

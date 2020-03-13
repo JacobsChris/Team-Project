@@ -1,4 +1,4 @@
-const mainSearch = require("../../../../../../back-end/middleware/service/person/mainSearch");
+const findCallHistoryByPhoneNumber = require("../../../../../../back-end/middleware/service/person/background/PhoneData/findCallHistoryByPhoneNumber");
 
 let initRes = [[], []];
 let expectedResult = [
@@ -22,7 +22,7 @@ let inputPhone = {
 
 test('takes in a phone number and searches for a call history', (done) => {
     jest.setTimeout(1000000);
-    mainSearch.JsonToCallHistory(inputPhone)
+    findCallHistoryByPhoneNumber(inputPhone)
         .then(([OutGoing, InComing]) => {
             initRes[0] = OutGoing;
             initRes[1] = InComing;

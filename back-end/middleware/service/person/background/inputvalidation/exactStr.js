@@ -1,5 +1,5 @@
 
-module.exports = {
+module.exports =
     /**
      * @author Anthony Wilkinson & chris
      *
@@ -10,8 +10,8 @@ module.exports = {
      *
      * @requires this function requires an input which is a string
      * */
-    addExactStr: function addExactStr(inputString) {
+     function addExactStr(inputString) {
         inputString =  "'"+inputString+"'" ;
         return inputString
-    }
+
 };

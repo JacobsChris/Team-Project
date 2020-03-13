@@ -1,5 +1,5 @@
 
-module.exports = {
+module.exports =
     /**
      * @author Anthony Wilkinson & chris
      *
@@ -10,8 +10,7 @@ module.exports = {
      *
      * @requires this function requires an input which is a string
      * */
-    addWildStr: function addWildStr(inputString) {
+     function addWildStr(inputString) {
         inputString = "'%" + inputString + "%'";
-        return inputString
-    }
-};
+        return inputString;
+     }

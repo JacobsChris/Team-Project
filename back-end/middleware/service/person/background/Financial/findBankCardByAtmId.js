@@ -1,6 +1,6 @@
 const auth = require('../sqlauth.js');
 
-module.exports = {
+module.exports =
     /**
      * @author Anthony Wilkinson & Chris
      *
@@ -16,16 +16,27 @@ module.exports = {
      *
      * @requires this function requires a string input selected from findTransactionsByBankCard to function
      * */
-    findBankCardByAtmId: function findBankCardByAtmId(atmId,limit) {
-        if (limit !==undefined) {
+ function findBankCardByAtmId(atmId,limit) {
+     try {
+        if(limit !== undefined) {
+            let sqlSearchString = "SELECT * FROM atmTransaction WHERE " +
+                " atmId=" + "'" + atmId + "'" +
+                " order by timestamp desc" +
+                " Limit " + limit;
+            return auth(sqlSearchString)
         }
-        else {
-            limit = 10;
+        else{
+            let sqlSearchString = "SELECT * FROM atmTransaction WHERE " +
+                " atmId=" + "'" + atmId + "'" +
+                " order by timestamp desc" +
+                " Limit 1000";
+            return auth(sqlSearchString)
         }
-        let sqlSearchString = "SELECT * FROM atmTransaction WHERE " +
-            " atmId=" +"'"+atmId+"'"+
-            " order by timestamp desc"+
-            " Limit " + limit;
-        return auth.SQLauthenticate(sqlSearchString)
-    }
-};
+     }
+     catch (e) {
+         console.log(e.name);
+         console.log(e.message);
+         throw "error encountered in findBankCardByAtmId"
+
+     }
+    };

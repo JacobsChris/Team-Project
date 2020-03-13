@@ -1,10 +1,10 @@
 
-const stringChecker = require('../inputvalidation/stringChecker');
-const person = require('../FindByPerson/findPersonByPerson.js');
-const bankAccount = require('../FindByPerson/findBankAccountByPerson.js');
-const mobilePhone = require('../FindByPerson/findMobileByPerson.js');
-const veheicleReg = require('../FindByPerson/findVehicleByPerson.js');
-module.exports = {
+const person = require('./findPersonByPerson.js');
+const bankAccount = require('./findBankAccountByPerson.js');
+const mobilePhone = require('./findMobileByPerson.js');
+const vehicleReg = require('./findVehicleByPerson.js');
+
+module.exports =
     /**
      *  @author Anthony Wilkinson & Chris
      *  @function this function obtains an input originally from a JSON, deconstructs the incomming data into citizenID,
@@ -24,17 +24,11 @@ module.exports = {
      *  @return this function returns an array of JSON objects to be passed up
      *  @require this function to work it requires a JSON object to be passed into JsonToStringDetails()
      *  */
-    findDetailsByName: function findDetailsByName(citizenID, forenames, surname, homeAddress, dateOfBirth, placeOfBirth, sex) {
-        citizenID = stringChecker.stringChecker(citizenID);
-        forenames = stringChecker.stringChecker(forenames);
-        surname = stringChecker.stringChecker(surname);
-        homeAddress = stringChecker.stringChecker(homeAddress);
-        dateOfBirth = stringChecker.stringChecker(dateOfBirth);
-        placeOfBirth = stringChecker.stringChecker(placeOfBirth);
-        sex = stringChecker.stringChecker(sex);
-        return Promise.all([person.findPersonByPerson(citizenID, forenames, surname, homeAddress, dateOfBirth, placeOfBirth, sex),
-            bankAccount.findBankAccountByPerson(forenames, surname, homeAddress, dateOfBirth),
-            mobilePhone.findMobileByPerson(forenames, surname, homeAddress, dateOfBirth),
-            veheicleReg.findVehicleByPerson(forenames, surname, homeAddress, dateOfBirth)]);
+    function findDetailsByName(input) {
+
+        return Promise.all([person(input),
+            bankAccount(input),
+            mobilePhone(input),
+            vehicleReg(input)]);
+
     }
-};

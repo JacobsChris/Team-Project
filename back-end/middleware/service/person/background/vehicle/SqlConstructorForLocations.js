@@ -1,7 +1,7 @@
-const auth = require('../sqlauth.js');
+const SQLauthenticate = require('../sqlauth.js');
 
 
-module.exports = {
+module.exports =
     /**
      * @author Anthony Wilkinson & Chris
      *
@@ -17,9 +17,8 @@ module.exports = {
      *
      * @requires this function requires a string input selected from findDetailsByATMId to function
      * */
-    findLocation: function findLocation(ANPRPointId) {
+     function findLocation(ANPRPointId) {
         let sqlSearchString = "SELECT * FROM anprcamera WHERE" +
             " anprId LIKE " + ANPRPointId;
-        return auth.SQLauthenticate(sqlSearchString)
-    }
+        return SQLauthenticate(sqlSearchString)
 };

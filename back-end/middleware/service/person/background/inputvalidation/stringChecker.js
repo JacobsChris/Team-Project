@@ -1,6 +1,6 @@
 const wildStr = require("./wildStr");
 
-module.exports = {
+module.exports =
 
     /**
      * Used to ensure an input is, in fact, a string and then applies addWildStr if it is a string.
@@ -9,12 +9,11 @@ module.exports = {
      * @returns '%inputString%'
      */
 
-    stringChecker: function stringChecker(inputStr) {
+    function stringChecker(inputStr) {
         if (typeof inputStr != 'string') {
             throw new Error("Not a string error")
         } else {
-            inputStr = wildStr.addWildStr(inputStr);
+            inputStr = wildStr(inputStr);
             return inputStr;
         }
     }
-};

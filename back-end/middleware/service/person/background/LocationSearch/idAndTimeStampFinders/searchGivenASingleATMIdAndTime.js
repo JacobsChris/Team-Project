@@ -1,7 +1,7 @@
 const auth = require('../../sqlauth')
 
 
-module.exports = {
+module.exports =
     /**
      * @author  Anthony
      *
@@ -11,8 +11,24 @@ module.exports = {
      *
      *  @require this function to work it requires a JSON object to be passed into JsonToStringName()
      * */
-    searchGivenASingleATMIdAndTime: function searchGivenASingleATMIdAndTime(atmId,intialTimeStamp,finalTimeStamp) {
-        let searchCameras = "select * from atmTransaction where (timestamp Between " + intialTimeStamp + " And " + finalTimeStamp +") AND atmId="+ atmId + ";";
-        return auth.SQLauthenticate(searchCameras);
-    }
+     function searchGivenASingleATMIdAndTime(atmId,intialTimeStamp,finalTimeStamp,limit) {
+         try{
+             if(limit !== undefined) {
+                 let searchCameras = "select * from atmTransaction where (timestamp Between "
+                     + intialTimeStamp + " And " + finalTimeStamp + ") AND atmId=" + atmId + " Limit " + limit;
+                 return auth(searchCameras);
+             }
+             else{
+                 let searchCameras = "select * from atmTransaction where (timestamp Between "
+                     + intialTimeStamp + " And " + finalTimeStamp + ") AND atmId=" + atmId + " Limit " + limit;
+                 return auth(searchCameras);
+             }
+         }
+         catch (e) {
+             console.log(e.name);
+             console.log(e.message);
+             throw " error searchGivenASingleAtmIdAndTime"
+         }
+
+
 };
