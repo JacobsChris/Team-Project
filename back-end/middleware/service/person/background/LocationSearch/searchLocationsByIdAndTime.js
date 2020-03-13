@@ -20,16 +20,31 @@ module.exports =
                                                                         "finalTimeStamp": "2015-05-01 16:33:29",
                                                                         "limit": 1
                                                                     }
-     *  
+     * the initial and final timestamps are necessary for this function to work. The id field can either be celltowerId, anprId, atmId or eposId. the limit is an optional
+     * field and is not necessary for the code to function as there are redundancies in place in the rest of the code to work without it and assume a limit of around 10,000.
      *
-     *  @development there could be an intial execution of finding person, that the results of are then sent to bank, mobile and
-     *  vehicle in the form =>
-     *      promise.all([person]).then(res => promise.all([findBankAccountByPerson(res)...
+     * the eventual result of this function should always return forename, surname, DoB and address. It will also include the type of id used to obtain the data and the number
+     * and the timestamp of the event occurrence.
      *
-     *  the type of error needs a more accurate error statement
+     * There are checks to see if information returned will be an array like [], through bankaccountid[0] === undefined and this will not return the empty array but end that loop
+     * without saving the undefined array
      *
-     *  @return this function returns an array of JSON objects to be passed up
-     *  @require this function to work it requires a JSON object to be passed into JsonToStringDetails()
+     *  @return this function returns an array of JSON objects to be passed up an example of a singular item would
+     *  be => {
+                    "eventIdTimeAndDetails": [{
+                        "bankAccountId": 468721,
+                        "accountNumber": 8636271,
+                        "bank": "Barclays Bank",
+                        "forenames": "Joseph Shane",
+                        "surname": "Logan",
+                        "dateOfBirth": "1991-02-14",
+                        "homeAddress": "69 KINGS ROAD, BIRMINGHAM, B11 2AA",
+                        "idType": "eposID",
+                        "id": 696,
+                        "timeStamp": "2015-05-01T14:37:26.000Z"
+                    }]
+                }
+     *  @require this function to work it requires a JSON object to be passed into it
      *  */
     async function searchLocationsByIdAndTime(input) {
         const intialTimeStamp = exactStr(input.intialTimeStamp);
