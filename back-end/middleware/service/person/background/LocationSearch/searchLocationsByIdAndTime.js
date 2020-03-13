@@ -83,7 +83,6 @@ module.exports =
                 const atmId = exactStr(input.atmId);
                 const output1 = await searchGivenASingleATMIdAndTime(atmId, intialTimeStamp, finalTimeStamp,limit);
                 for (let atm of output1) {
-                    console.log(atm);
                     const temp = atm;
                     let cardNumber = await findBankCardByAtmId(atm.atmId,limit);
                     let bankCardNumber = exactStr(cardNumber.bankCardNumber);
