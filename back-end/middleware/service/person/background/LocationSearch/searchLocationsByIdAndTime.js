@@ -105,14 +105,15 @@ module.exports =
             } else if (input.eposId !== undefined) {
                 const output2 = [];
                 const eposId = exactStr(input.eposId);
-                const output1 = await (searchGivenAEposIdAndTime(eposId, intialTimeStamp, finalTimeStamp));
+                const output1 = await (searchGivenAEposIdAndTime(eposId, intialTimeStamp, finalTimeStamp,limit));
                 for (let epos of output1) {
-                    let cardNumber = await findBankCardByEposId(epos.eposId);
+                    console.log(epos);
+                    let cardNumber = await findBankCardByEposId(epos.eposId,limit);
                     let bankCardNumber = exactStr(cardNumber.bankCardNumber);
                     for (let bankcard of cardNumber) {
-                        let bankaccountid = await findBankAccountIdGivenACardNumber(bankcard.bankCardNumber);
+                        let bankaccountid = await findBankAccountIdGivenACardNumber(bankcard.bankCardNumber,limit);
                         for (let id of bankaccountid) {
-                            output2.push(await findDetailsFromABankAccountId(id.bankcardId));
+                            output2.push(await findDetailsFromABankAccountId(id.bankcardId,limit));
                         }
                     }
                 }
