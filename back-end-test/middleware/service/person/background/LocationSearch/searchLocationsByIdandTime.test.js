@@ -9,7 +9,7 @@ let inputValCelltowerIDOneRequest = {
 };
 
 let expectedValCelltowerIDOneRequest = {
-    "output3": [{
+    "eventIdTimeAndDetails": [{
         "forenames": "Antony Robin",
         "surname": "Sneddon",
         "dateOfBirth": "1951-05-08",
@@ -56,7 +56,7 @@ let inputValAnprIDLimit400 = {
 };
 
 let expectedValAnprIdlimit4 = ({
-    "output3": [{
+    "eventIdTimeAndDetails": [{
         "registrationID": 18029,
         "registrationDate": "2013-08-28",
         "vehicleRegistrationNo": "PI78 QZB",
@@ -88,7 +88,7 @@ let inputAtmId100Requests = {
     "atmId": 697,
     "intialTimeStamp": "2015-05-01 14:03:29",
     "finalTimeStamp": "2015-06-01 16:33:29",
-    "limit": 100
+    "limit": 15
 };
 
 let expectedValAtmIdOneRequest = {
@@ -106,6 +106,8 @@ let expectedValAtmIdOneRequest = {
     }]
 };
 
+const expectedValAtmId15Requests = require('./expectedTestResults/expectedValAtmIdlimit15.json');
+
 let inputEposIDOneRequest = {
     "eposId": 696,
     "intialTimeStamp": "2015-05-01 14:03:29",
@@ -113,21 +115,29 @@ let inputEposIDOneRequest = {
     "limit": 1
 };
 
-let expectedValEposIdOneRequest = {
-    output3:
-        [{
-            "bankAccountId": 468721,
-            "accountNumber": 8636271,
-            "bank": 'Barclays Bank',
-            "forenames": 'Joseph Shane',
-            "surname": 'Logan',
-            "dateOfBirth": '1991-02-14',
-            "homeAddress": '69 KINGS ROAD, BIRMINGHAM, B11 2AA',
-            "idType": 'eposID',
-            "id": 696,
-            "timeStamp": "2015-05-01T14:37:26.000Z"
-        }]
+let inputEposID100Request = {
+    "eposId": 696,
+    "intialTimeStamp": "2015-05-01 14:03:29",
+    "finalTimeStamp": "2015-06-01 16:33:29",
+    "limit": 20
 };
+
+let expectedValEposIdOneRequest = {
+    "eventIdTimeAndDetails": [{
+        "bankAccountId": 468721,
+        "accountNumber": 8636271,
+        "bank": "Barclays Bank",
+        "forenames": "Joseph Shane",
+        "surname": "Logan",
+        "dateOfBirth": "1991-02-14",
+        "homeAddress": "69 KINGS ROAD, BIRMINGHAM, B11 2AA",
+        "idType": "eposID",
+        "id": 696,
+        "timeStamp": "2015-05-01T14:37:26.000Z"
+    }]
+};
+
+const expectedValEposId20Request = require('./expectedTestResults/expectedValEposIdlimit20.json');
 
 let initRes = [];
 
@@ -183,12 +193,12 @@ test("searching with a atmId and a limit of one", (done) => {
         })
 });
 
-test("searching with a atmId and a limit of 100", (done) => {
-    jest.setTimeout(100000);
+test("searching with a atmId and a limit of 15", (done) => {
+    jest.setTimeout(10000000);
     searchLocationsByIdAndTime(inputAtmId100Requests)
         .then((expectedValAtmID) => {
             initRes = expectedValAtmID;
-            expect(JSON.stringify(initRes)).toStrictEqual(JSON.stringify(expectedValAtmIdOneRequest));
+            expect(JSON.stringify(initRes)).toStrictEqual(JSON.stringify(expectedValAtmId15Requests));
             done()
         })
 });
@@ -199,6 +209,16 @@ test("searching with a eposId and a limit of one", (done) => {
         .then((eventIdTimeAndDetails) => {
             initRes = (eventIdTimeAndDetails);
             expect(JSON.stringify(initRes)).toStrictEqual(JSON.stringify(expectedValEposIdOneRequest));
+            done()
+        })
+});
+
+test("searching with a eposId and a limit of 20", (done) => {
+    jest.setTimeout(250000);
+    searchLocationsByIdAndTime(inputEposID100Request)
+        .then((eventIdTimeAndDetails) => {
+            initRes = (eventIdTimeAndDetails);
+            expect(JSON.stringify(initRes)).toStrictEqual(JSON.stringify(expectedValEposId20Request));
             done()
         })
 });
