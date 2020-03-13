@@ -24,7 +24,9 @@ class ChangePassword extends Component {
 
         if(this.state.password === this.state.verPassword) {
             let data = {
-                password: this.state.password
+                username: this.props.username,
+                password: this.state.password,
+                isAdmin: this.props.admin
             }
     
             console.log(data);
@@ -66,4 +68,11 @@ ChangePassword.propTypes = {
     setPass: PropTypes.func.isRequired
   };
 
-export default connect(null, { setPass })(ChangePassword);
+  function mapStateToProps(state) {
+    return {
+        admin: state.signin.isAdmin,
+        username: state.signin.username,
+    }
+}
+
+export default connect(mapStateToProps, { setPass })(ChangePassword);

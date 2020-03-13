@@ -1,4 +1,4 @@
-import { SIGN_IN, SIGN_OUT } from '../actions/types';
+import { SIGN_IN, SIGN_OUT, USERNAME } from '../actions/types';
 
 
 const initialState = {
@@ -15,6 +15,12 @@ export default function(state = initialState, action){
                 isAdmin: [action.payload.data.admin],
                 token: [action.payload.data.token]
             };
+        case USERNAME: 
+            console.log(action.payload.username)
+            return {
+                ...state,
+                username: [action.payload.username]
+            }
         case SIGN_OUT:
             return {
                 ...state,

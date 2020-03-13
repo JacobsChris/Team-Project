@@ -6,13 +6,15 @@ import getUser from './getUser';
 import setPass from './setPass';
 import setAdmin from './setAdmin';
 import signIn from './signIn';
+import username from './setUsername';
 
 export default combineReducers({
     response: getReducer,
     vehicle: getVehicle,
-    allUsers: createUser,
-    user: getUser,
+    newUser: createUser,
+    allUsers: getUser,
     pass: setPass,
     admin: setAdmin,
-    signin: signIn
+    signin: signIn,
+    user: username
 });

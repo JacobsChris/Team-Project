@@ -11,6 +11,7 @@ import { Provider } from 'react-redux';
 import store from '../redux/store';
 import { GuardProvider, GuardedRoute } from 'react-router-guards';
 import CreateUser from './createUser';
+import Users from './users';
 import SearchVehicle from './searchVehicle';
 import VehicleResultsPage from './vehicleResultsPage';
 import ChangePassword from './changePassword';
@@ -29,73 +30,48 @@ class Router extends React.Component {
         }
     }
     
-    // requireLogin = (to, from, next) => {
-    //     console.log(this.state.token)
-    //     // debugger;
-    //     if (this.props.token) {
-    //         console.log('pass');
-    //         next();
-    //     }
-        
-    //     next.redirect('/user/signin');
-    // }
-
-    render() {
-        const requireLogin = (to, from, next) => {
-            console.log(this.props.token)
-            // debugger;
-            if (this.props.token) {
-                console.log('pass');
-                next();
-            }
-            
-            next.redirect('/user/signin');
+    requireLogin = (to, from, next) => {
+        if (this.props.token[0]) {
+            next();
         }
-        console.log(this.props.admin)
-        const isAdmin = (to, from, next) => {
-            console.log(this.props.admin)
+        next.redirect('/user/signin');
+    }
+
+    isAdmin = (to, from, next) => {
             if(this.props.admin){
                 next();
             }
-            console.log('redirect')
             next.redirect('/user/signin');
         }
 
+    render() {
         return (
-            // <Provider store={store}>
             <BrowserRouter>
                 <Route path='/user/' component={NavBar}></Route>
-                <GuardProvider guards={[requireLogin]}>
+                <GuardProvider guards={[this.requireLogin]}>
                     <GuardedRoute path='/user/home/' component={SearchNavBar} />
                     <GuardedRoute path='/user/home/searchpeople' component={SearchPeople} />
-                    <GuardedRoute path='/user/home/searchvehicle' component={SearchVehicle} />
-                        <GuardProvider guards={[isAdmin]}>
-                            <GuardedRoute path='/admin/' component={AdminNavBar} />
-                            <GuardedRoute path='/admin/adduser' component={CreateUser} />
-                            <GuardedRoute path='/admin/changepassword' component={ChangePassword} />
-                        </GuardProvider>
+                    <GuardedRoute path='/user/home/searchvehicle' component={SearchVehicle} /> 
                     <GuardedRoute path='/user/home/peopleresults' component={PeopleResultsPage} />
                     <GuardedRoute path='/user/home/vehicleresults' component={VehicleResultsPage} />
                 </GuardProvider>
+                <GuardProvider guards={[this.isAdmin]}>
+                    <GuardedRoute path='/admin/' component={AdminNavBar} />
+                    <GuardedRoute path='/admin/adduser' component={CreateUser} />
+                    <GuardedRoute path='/admin/users' component={Users} />
+                    <GuardedRoute path='/admin/changepassword' component={ChangePassword} />
+                </GuardProvider>
                 <Route path='/user/signin' component={SignIn}></Route>
             </BrowserRouter>
-            // </Provider>
         );
     }
 }
 
 function mapStateToProps(state) {
-
     return {
         admin: state.signin.isAdmin,
         token: state.signin.token
     }
 }
-
-// App.propTypes = {
-//   signIn: PropTypes.func.isRequired
-// };
-
-
 
 export default connect(mapStateToProps)(Router);

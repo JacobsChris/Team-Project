@@ -1,26 +1,28 @@
 import React from 'react';
 import { Nav, Navbar} from 'react-bootstrap';
+import { Link } from "react-router-dom";
+import store from '../redux/store';
+
 
 class AdminNavBar extends React.Component {
     signout = () => {
-        sessionStorage.clear();
-        this.props.history.push("/user/signin");
+        console.log('signOut')
+        store.dispatch({
+            type: 'SIGN_OUT',
+          value: ''
+        });
+        this.props.history.push('../user/signin')
     }
     render(){
         return (
-            <Navbar bg="dark" variant="dark" expand="md" className='main-nav'>
-                <Navbar.Brand href="/admin/home">REDSHIFT</Navbar.Brand>
-                <Navbar.Toggle aria-controls="collapse"/>
-                    <Navbar.Collapse id="collapse">
-                        <Nav className='ml-auto'>
-                            <Nav.Link href="admin/home">HOME</Nav.Link>
-                            <Nav.Link href="admin/adduser">ADD USER</Nav.Link>
-                            <Nav.Link href="admin/adduser">VIEW USERS</Nav.Link>
-                            <Nav.Link href="admin/changepassword">CHANGE PASSWORD</Nav.Link>
-                            <Nav.Link href="admin/help">HELP</Nav.Link>
-                            <Nav.Link onClick={this.signout}>SIGN OUT</Nav.Link>
-                        </Nav>
-                    </Navbar.Collapse>
+            <Navbar bg="dark" variant="dark" expand="md" className='main-nav'> 
+                <Link to="/admin/home">REDSHIFT</Link>
+                <Link to="/admin/home">HOME</Link>
+                <Link to="/admin/adduser">ADD USER</Link>
+                <Link to="/admin/users">VIEW USERS</Link>
+                <Link to="/admin/changepassword">CHANGE PASSWORD</Link>
+                <Link to="/admin/help">HELP</Link>
+                <Link onClick={this.signout}>SIGN OUT</Link>
             </Navbar>
         )
     }

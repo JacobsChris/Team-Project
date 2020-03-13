@@ -25,16 +25,17 @@ class SignIn extends React.Component {
             password: this.state.password            
         }
 
-
-        console.log(data);
-
         this.props.signIn(data);
-        // this.props.history.push("/user/home/searchpeople");
+
         setTimeout(() => {
-            console.log(this.props)
-            this.props.history.push("/user/home/searchpeople");
-          }, 1000);
-        
+            // console.log(this.props.admin)
+            // debugger;
+            if(this.props.admin[0]){
+                this.props.history.push("/admin/");
+            } else {
+                this.props.history.push("/user/home/searchpeople");
+            }
+          }, 1000);  
     }
 
     render(){
@@ -65,4 +66,10 @@ SignIn.propTypes = {
     signIn: PropTypes.func.isRequired
   };
 
-export default connect(null, { signIn })(SignIn);
+  function mapStateToProps(state) {
+    return {
+        admin: state.signin.isAdmin
+    }
+}
+
+export default connect(mapStateToProps, {signIn})(SignIn);

@@ -1,12 +1,13 @@
 import { SET_PASS } from './types';
 import axios from 'axios';
+import store from '../store';
 
 export const setPass = (pass) => dispatch => {
 
     console.log(pass);
     axios.post('http://localhost:8080/admin/register/', pass, {
         headers: {
-            Authorization: sessionStorage.jwt
+            Authorization: store.getState().signin.token[0]
           }
     })
         .then(response =>

@@ -1,5 +1,6 @@
 import { GET_PEOPLE, SET_RESULTS_LOADING } from './types';
 import axios from 'axios';
+import store from '../store';
 
 export const getPeople = (searchData) => dispatch => {
 
@@ -11,7 +12,7 @@ export const getPeople = (searchData) => dispatch => {
     });
     axios.post('http://localhost:8080/back-end/person/getData', searchData, {
         headers: {
-            Authorization: sessionStorage.jwt
+            Authorization: store.getState().signin.token[0]
         }
     })
         .then(response =>
