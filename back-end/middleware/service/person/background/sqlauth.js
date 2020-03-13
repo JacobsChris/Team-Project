@@ -1,6 +1,6 @@
 const {Sequelize} = require('sequelize');
 //RDS authentication
-const rawData = require('./config.json');
+const rawData = require('./GCPconfig.json');
 const sequelize = new Sequelize(rawData);
 const {QueryTypes} = require('sequelize');
 
