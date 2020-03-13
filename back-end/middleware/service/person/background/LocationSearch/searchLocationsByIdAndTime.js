@@ -35,7 +35,7 @@ module.exports =
         const intialTimeStamp = exactStr(input.intialTimeStamp);
         const finalTimeStamp = exactStr(input.finalTimeStamp);
         const limit = (input.limit);
-        const output3 = [];
+        const eventIdTimeAndDetails = [];
 
 
         try {
@@ -43,13 +43,20 @@ module.exports =
                 const output2 = [];
                 const cellTowerId = exactStr(input.cellTowerId);
                 const output1 = await searchGivenACellTowerIdAndTime(cellTowerId, intialTimeStamp, finalTimeStamp);
-
                 for (let mob of output1) {
-                    output2.push(await findPersonByMobileForLocation(mob.callerNumber,limit));
+                    const temp = await findPersonByMobileForLocation(mob, limit);
+                    const temp2 = temp;
+                    if (temp[0] === undefined) {
+                    } else {
+                        output2.push(temp[0]);
+                        temp2[0]['idType'] = "CellTowerId";
+                        temp2[0]['id'] = input.cellTowerId;
+                        temp2[0]['timeStamp'] = mob.timestamp;
+                        eventIdTimeAndDetails.push(temp2[0]);
+                    }
                 }
                 return {
-                    output1,
-                    output2
+                    output3: eventIdTimeAndDetails
                 };
             } else if (input.anprId !== undefined) {
                 const output2 = [];
@@ -64,11 +71,11 @@ module.exports =
                         temp2[0]['idType'] = "AnprID";
                         temp2[0]['id'] = input.anprId;
                         temp2[0]['timeStamp'] = cam.timestamp;
-                        output3.push(temp2[0]);
+                        eventIdTimeAndDetails.push(temp2[0]);
                     }
                 }
                 return {
-                    output3
+                    output3: eventIdTimeAndDetails
                 };
 
             } else if (input.atmId !== undefined) {

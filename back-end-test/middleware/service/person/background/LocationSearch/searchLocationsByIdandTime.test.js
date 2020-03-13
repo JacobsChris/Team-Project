@@ -8,6 +8,33 @@ let inputValCelltowerID = {
     "limit": 1
 };
 
+let expectedValCelltowerID = {
+    "output3": [
+        {
+            "address": "22 HEATH ROAD, MAIDSTONE, ME16 9LG",
+            "dateOfBirth": "1951-05-08",
+            "forenames": "Antony Robin",
+            "id": 140391,
+            "idType": "CellTowerId",
+            "network": "Vodafone",
+            "phoneNumber": "07700 801501",
+            "surname": "Sneddon",
+            "timeStamp": {}
+        },
+        {
+            "address": "109 EVELYN STREET, LONDON, SE8 5DD",
+            "dateOfBirth": "1970-01-11",
+            "forenames": "Yvonne Cheryl",
+            "id": 140391,
+            "idType": "CellTowerId",
+            "network": "Vodafone",
+            "phoneNumber": "07700 245643",
+            "surname": "Hussain",
+            "timeStamp": {}
+        }
+    ]
+}
+
 let inputValAnprID = {
     "anprId": 73,
     "intialTimeStamp": "2015-05-01 14:03:29",
@@ -54,22 +81,20 @@ let inputEposID = {
 let initRes = [];
 
 test("searching with a celltowerId", (done) => {
-    jest.setTimeout(100000);
+    jest.setTimeout(200000);
     searchLocationsByIdAndTime(inputValCelltowerID)
-        .then(([output1, output2]) => {
-            initRes = [output1, output2];
-            expect(initRes).toStrictEqual("");
+        .then((eventIdTimeAndDetails) => {
+            initRes = eventIdTimeAndDetails;
+            expect(initRes).toStrictEqual.toString(expectedValCelltowerID);
             done()
         })
 });
 
 test("searching with a anprID", (done) => {
     jest.setTimeout(100000);
-    debugger
     searchLocationsByIdAndTime(inputValAnprID)
-        .then((output3) => {
-            console.log(output3);
-            initRes = output3;
+        .then((eventIdTimeAndDetails) => {
+            initRes = eventIdTimeAndDetails;
             expect(initRes).toStrictEqual.toString(expectedValAnprId);
             done()
         })
