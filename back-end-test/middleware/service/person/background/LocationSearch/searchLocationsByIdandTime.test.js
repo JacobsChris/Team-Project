@@ -1,134 +1,204 @@
 const searchLocationsByIdAndTime = require("../../../../../../back-end/middleware/service/person/background/LocationSearch/searchLocationsByIdAndTime");
 
 
-let inputValCelltowerID = {
+let inputValCelltowerIDOneRequest = {
     "cellTowerId": 140391,
     "intialTimeStamp": "2015-05-01 09:03:29",
     "finalTimeStamp": "2015-05-01 09:33:29",
     "limit": 1
 };
 
-let expectedValCelltowerID = {
-    "output3": [
-        {
-            "address": "22 HEATH ROAD, MAIDSTONE, ME16 9LG",
-            "dateOfBirth": "1951-05-08",
-            "forenames": "Antony Robin",
-            "id": 140391,
-            "idType": "CellTowerId",
-            "network": "Vodafone",
-            "phoneNumber": "07700 801501",
-            "surname": "Sneddon",
-            "timeStamp": {}
-        },
-        {
-            "address": "109 EVELYN STREET, LONDON, SE8 5DD",
-            "dateOfBirth": "1970-01-11",
-            "forenames": "Yvonne Cheryl",
-            "id": 140391,
-            "idType": "CellTowerId",
-            "network": "Vodafone",
-            "phoneNumber": "07700 245643",
-            "surname": "Hussain",
-            "timeStamp": {}
-        }
-    ]
+let expectedValCelltowerIDOneRequest = {
+    "output3": [{
+        "forenames": "Antony Robin",
+        "surname": "Sneddon",
+        "dateOfBirth": "1951-05-08",
+        "address": "22 HEATH ROAD, MAIDSTONE, ME16 9LG",
+        "phoneNumber": "07700 801501",
+        "network": "Vodafone",
+        "idType": "CellTowerId",
+        "id": 140391,
+        "timeStamp": "2015-05-01T09:08:52.000Z"
+    }, {
+        "forenames": "Yvonne Cheryl",
+        "surname": "Hussain",
+        "dateOfBirth": "1970-01-11",
+        "address": "109 EVELYN STREET, LONDON, SE8 5DD",
+        "phoneNumber": "07700 245643",
+        "network": "Vodafone",
+        "idType": "CellTowerId",
+        "id": 140391,
+        "timeStamp": "2015-05-01T09:04:09.000Z"
+    }]
 };
 
-let inputValAnprID = {
+let inputValCelltowerID100Requests = {
+    "cellTowerId": 140391,
+    "intialTimeStamp": "2015-05-01 14:03:29",
+    "finalTimeStamp": "2015-06-01 14:33:29",
+    "limit": 100
+};
+
+let expectedValCelltowerID100Requests = require('./expectedTestResults/expectedValCelltowerIdLimit100');
+
+let inputValAnprIDlimit4 = {
     "anprId": 73,
     "intialTimeStamp": "2015-05-01 14:03:29",
     "finalTimeStamp": "2015-05-01 14:33:29",
     "limit": 4
 };
 
-let expectedValAnprId = ({
-    "output3": [
-        {
-            "address": "33 CLEVEDON ROAD, BLACKPOOL, FY1 2NX",
-            "colour": "black",
-            "dateOfBirth": "1964-09-15",
-            "driverLicenceID": "ARNOL659154C99OL 30",
-            "forenames": "Clare",
-            "id": 73,
-            "idType": "AnprID",
-            "make": "Mercedes",
-            "model": "E-Class",
-            "registrationDate": "2013-08-28",
-            "registrationID": 18029,
-            "surname": "Arnold",
-            "timeStamp": '2015-05-01T14:32:43.000Z',
-            "vehicleRegistrationNo": "PI78 QZB"
-        }
-    ]
+let inputValAnprIDLimit400 = {
+    "anprId": 73,
+    "intialTimeStamp": "2015-05-01 09:03:29",
+    "finalTimeStamp": "2015-06-01 14:33:29",
+    "limit": 400
+};
+
+let expectedValAnprIdlimit4 = ({
+    "output3": [{
+        "registrationID": 18029,
+        "registrationDate": "2013-08-28",
+        "vehicleRegistrationNo": "PI78 QZB",
+        "make": "Mercedes",
+        "model": "E-Class",
+        "colour": "black",
+        "forenames": "Clare",
+        "surname": "Arnold",
+        "address": "33 CLEVEDON ROAD, BLACKPOOL, FY1 2NX",
+        "dateOfBirth": "1964-09-15",
+        "driverLicenceID": "ARNOL659154C99OL 30",
+        "idType": "AnprID",
+        "id": 73,
+        "timeStamp": "2015-05-01T14:32:43.000Z"
+    }]
 });
 
+const expectedValAnprIdlimit400 = require('./expectedTestResults/expectedValAnprIdlimit400.json');
 
-let inputAtmId = {
+
+let inputAtmIdOneRequest = {
     "atmId": 697,
     "intialTimeStamp": "2015-05-01 14:03:29",
     "finalTimeStamp": "2015-05-01 16:33:29",
     "limit": 1
 };
 
-let expectedValAtmId = { output3:
-        [ { "bankAccountId": 451310,
-            "accountNumber": 4448212,
-            "bank": 'The Co-operative Bank',
-            "forenames": 'Aimee Katy',
-            "surname": 'Mckay',
-            "dateOfBirth": '1969-11-18',
-            "homeAddress": '87 LYNHURST CRESCENT, UXBRIDGE, UB10 9EQ',
-            "idType": 'atmID',
-            "id": 697,
-            "timeStamp": "2015-05-01T14:37:28.000Z" } ] };
+let inputAtmId100Requests = {
+    "atmId": 697,
+    "intialTimeStamp": "2015-05-01 14:03:29",
+    "finalTimeStamp": "2015-06-01 16:33:29",
+    "limit": 100
+};
 
-let inputEposID = {
+let expectedValAtmIdOneRequest = {
+    "eventIdTimeAndDetails": [{
+        "bankAccountId": 451310,
+        "accountNumber": 4448212,
+        "bank": "The Co-operative Bank",
+        "forenames": "Aimee Katy",
+        "surname": "Mckay",
+        "dateOfBirth": "1969-11-18",
+        "homeAddress": "87 LYNHURST CRESCENT, UXBRIDGE, UB10 9EQ",
+        "idType": "atmID",
+        "id": 697,
+        "timeStamp": "2015-05-01T14:37:28.000Z"
+    }]
+};
+
+let inputEposIDOneRequest = {
     "eposId": 696,
     "intialTimeStamp": "2015-05-01 14:03:29",
     "finalTimeStamp": "2015-05-01 16:33:29",
     "limit": 1
 };
 
+let expectedValEposIdOneRequest = {
+    output3:
+        [{
+            "bankAccountId": 468721,
+            "accountNumber": 8636271,
+            "bank": 'Barclays Bank',
+            "forenames": 'Joseph Shane',
+            "surname": 'Logan',
+            "dateOfBirth": '1991-02-14',
+            "homeAddress": '69 KINGS ROAD, BIRMINGHAM, B11 2AA',
+            "idType": 'eposID',
+            "id": 696,
+            "timeStamp": "2015-05-01T14:37:26.000Z"
+        }]
+};
+
 let initRes = [];
 
-test("searching with a celltowerId", (done) => {
+test("searching with a celltowerId and a limit of one", (done) => {
     jest.setTimeout(200000);
-    searchLocationsByIdAndTime(inputValCelltowerID)
+    searchLocationsByIdAndTime(inputValCelltowerIDOneRequest)
         .then((eventIdTimeAndDetails) => {
             initRes = eventIdTimeAndDetails;
-            expect(initRes).toStrictEqual.toString(expectedValCelltowerID);
+            expect(JSON.stringify(initRes)).toStrictEqual(JSON.stringify(expectedValCelltowerIDOneRequest));
             done()
         })
 });
 
-test("searching with a anprID", (done) => {
-    jest.setTimeout(100000);
-    searchLocationsByIdAndTime(inputValAnprID)
+
+test("searching with a celltowerId and a limit of 100", (done) => {
+    jest.setTimeout(200000);
+    searchLocationsByIdAndTime(inputValCelltowerID100Requests)
         .then((eventIdTimeAndDetails) => {
             initRes = eventIdTimeAndDetails;
-            expect(initRes).toStrictEqual.toString(expectedValAnprId);
+            const test = eventIdTimeAndDetails
+            expect(JSON.stringify(initRes)).toEqual(JSON.stringify(expectedValCelltowerID100Requests));
             done()
         })
 });
 
-test("searching with a atmId", (done) => {
+test("searching with a anprID and a limit of 4", (done) => {
     jest.setTimeout(100000);
-    searchLocationsByIdAndTime(inputAtmId)
+    searchLocationsByIdAndTime(inputValAnprIDlimit4)
+        .then((eventIdTimeAndDetails) => {
+            initRes = eventIdTimeAndDetails;
+            expect(JSON.stringify(initRes)).toStrictEqual(JSON.stringify(expectedValAnprIdlimit4));
+            done()
+        })
+});
+
+test("searching with a anprID and a limit of 400", (done) => {
+    jest.setTimeout(100000);
+    searchLocationsByIdAndTime(inputValAnprIDLimit400)
+        .then((eventIdTimeAndDetails) => {
+            initRes = eventIdTimeAndDetails;
+            expect(JSON.stringify(initRes)).toEqual(JSON.stringify(expectedValAnprIdlimit400));
+            done()
+        })
+});
+
+test("searching with a atmId and a limit of one", (done) => {
+    jest.setTimeout(100000);
+    searchLocationsByIdAndTime(inputAtmIdOneRequest)
         .then((expectedValAtmID) => {
             initRes = expectedValAtmID;
-            console.log(expectedValAtmID);
-            expect(initRes).toStrictEqual.toString(expectedValAtmId);
+            expect(JSON.stringify(initRes)).toStrictEqual(JSON.stringify(expectedValAtmIdOneRequest));
             done()
         })
 });
 
-test("searching with a eposId", (done) => {
+test("searching with a atmId and a limit of 100", (done) => {
     jest.setTimeout(100000);
-    searchLocationsByIdAndTime(inputEposID)
-        .then(([output1, output2]) => {
-            initRes = [output1, output2];
-            expect(initRes).toStrictEqual("");
+    searchLocationsByIdAndTime(inputAtmId100Requests)
+        .then((expectedValAtmID) => {
+            initRes = expectedValAtmID;
+            expect(JSON.stringify(initRes)).toStrictEqual(JSON.stringify(expectedValAtmIdOneRequest));
+            done()
+        })
+});
+
+test("searching with a eposId and a limit of one", (done) => {
+    jest.setTimeout(100000);
+    searchLocationsByIdAndTime(inputEposIDOneRequest)
+        .then((eventIdTimeAndDetails) => {
+            initRes = (eventIdTimeAndDetails);
+            expect(JSON.stringify(initRes)).toStrictEqual(JSON.stringify(expectedValEposIdOneRequest));
             done()
         })
 });

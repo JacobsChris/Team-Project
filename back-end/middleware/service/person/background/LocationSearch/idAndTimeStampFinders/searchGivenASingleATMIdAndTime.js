@@ -12,7 +12,6 @@ module.exports =
      *  @require this function to work it requires a JSON object to be passed into JsonToStringName()
      * */
      function searchGivenASingleATMIdAndTime(atmId,intialTimeStamp,finalTimeStamp,limit) {
-         debugger;
          try{
              if(limit !== undefined) {
                  let searchCameras = "select * from atmTransaction where (timestamp Between "
