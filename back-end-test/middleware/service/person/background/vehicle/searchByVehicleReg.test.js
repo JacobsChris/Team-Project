@@ -29,7 +29,7 @@ let inputVehicleInvalidReg = {
 
 
 test('takes in a valid complete vehicleReg and searches for vehicles', (done) => {
-    jest.setTimeout(10000000);
+    jest.setTimeout(100000);
     searchByVehicleReg(inputVehicleCompleteReg, 1)
         .then(([vehicle]) => {
             initRes = vehicle;

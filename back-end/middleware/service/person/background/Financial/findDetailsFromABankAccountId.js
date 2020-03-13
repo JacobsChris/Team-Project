@@ -34,6 +34,6 @@ module.exports =
         catch (e) {
             console.log(e.name);
             console.log(e.message);
-            throw "error encountered in findBankCardByAtmId"
+            throw new Error ("error encountered in findBankCardByAtmId")
         }
     };
