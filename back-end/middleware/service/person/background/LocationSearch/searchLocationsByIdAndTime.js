@@ -103,23 +103,29 @@ module.exports =
                     output3: eventIdTimeAndDetails
                 };
             } else if (input.eposId !== undefined) {
+                debugger
                 const output2 = [];
                 const eposId = exactStr(input.eposId);
                 const output1 = await (searchGivenAEposIdAndTime(eposId, intialTimeStamp, finalTimeStamp,limit));
                 for (let epos of output1) {
-                    console.log(epos);
+                    const temp = epos
                     let cardNumber = await findBankCardByEposId(epos.eposId,limit);
-                    let bankCardNumber = exactStr(cardNumber.bankCardNumber);
+                    let bankCardNumber = exactStr(cardNumber[0].bankCardNumber);
                     for (let bankcard of cardNumber) {
                         let bankaccountid = await findBankAccountIdGivenACardNumber(bankcard.bankCardNumber,limit);
                         for (let id of bankaccountid) {
-                            output2.push(await findDetailsFromABankAccountId(id.bankcardId,limit));
+                            const temp2 = await findDetailsFromABankAccountId(id.bankcardId,limit)
+                            output2.push(temp2);
+                            const temp3 = temp2;
+                            temp3[0]['idType'] = "eposID";
+                            temp3[0]['id'] = input.eposId;
+                            temp3[0]['timeStamp'] = temp.timestamp;
+                            eventIdTimeAndDetails.push(temp3[0]);
                         }
                     }
                 }
                 return {
-                    output1,
-                    output2
+                    output3: eventIdTimeAndDetails
                 };
             } else {
                 return "error encountered, the correct Id was not supplied to searchLocationsByIdAndTime function"
