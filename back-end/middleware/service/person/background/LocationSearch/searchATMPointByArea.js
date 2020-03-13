@@ -14,6 +14,6 @@ module.exports =
      function searchATMPointsByArea(inputLatitude, inputLongitude, Radius,minLat,maxLat,minLon,maxLon) {
         let searchCameras = "select * from atmpoint where (latitude Between " + minLat + " And " + maxLat +
             ") And (longitude Between " + minLon + " And " + maxLon +");";
-        return auth.SQLauthenticate(searchCameras);
+        return auth(searchCameras);
 
 };
