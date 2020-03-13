@@ -45,7 +45,7 @@ module.exports =
                 const output1 = await searchGivenACellTowerIdAndTime(cellTowerId, intialTimeStamp, finalTimeStamp);
 
                 for (let mob of output1) {
-                    output2.push(await findPersonByMobileForLocation(mob.callerNumber));
+                    output2.push(await findPersonByMobileForLocation(mob.callerNumber,limit));
                 }
                 return {
                     output1,

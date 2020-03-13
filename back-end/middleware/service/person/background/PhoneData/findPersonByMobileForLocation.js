@@ -8,19 +8,26 @@ module.exports =
      * @param mobiles
      * @returns promised information about the owner of a given phone number
      */
-    async function findPersonByMobileForLocation(input, mobiles) {
+    async function findPersonByMobileForLocation(input, mobiles,limit) {
         let aqNumber;
         for (let phone of mobiles) {
 
             if (input.receiverNumber == phone.phoneNumber) {
                 aqNumber = wildStr(input.callerNumber);
-            }else{
+            } else {
                 aqNumber = wildStr(input.receiverNumber);
             }
         }
+        if(limit !==undefined) {
+            let sqlSearchString = "SELECT * FROM mobiles WHERE" +
+                " phoneNumber LIKE " + aqNumber + " limit " + limit;
+            return await auth(sqlSearchString);
 
-        let sqlSearchString = "SELECT * FROM mobiles WHERE" +
-            " phoneNumber LIKE " + aqNumber;
-        return await auth(sqlSearchString);
+        }
+        else{
+            let sqlSearchString = "SELECT * FROM mobiles WHERE" +
+                " phoneNumber LIKE " + aqNumber + " limit 100000";
+            return await auth(sqlSearchString);
+        }
 
     };
