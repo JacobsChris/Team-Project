@@ -86,12 +86,11 @@ module.exports =
                 for (let atm of output1) {
                     const temp = atm;
                     let cardNumber = await findBankCardByAtmId(atm.atmId, limit);
-                    if (cardNumber === undefined) {
+                    if (cardNumber[0] === undefined) {
                     } else {
-                        let bankCardNumber = exactStr(cardNumber.bankCardNumber);
                         for (let bankcard of cardNumber) {
                             let bankaccountid = await findBankAccountIdGivenACardNumber(bankcard.bankCardNumber, limit);
-                            if (bankaccountid === undefined) {
+                            if (bankaccountid[0] === undefined) {
                             } else {
                                 for (let id of bankaccountid) {
                                     debugger
@@ -122,14 +121,13 @@ module.exports =
                 if (output1 === undefined) {
                 } else {
                     for (let epos of output1) {
-                        const temp = epos
+                        const temp = epos;
                         let cardNumber = await findBankCardByEposId(epos.eposId, limit);
-                        let bankCardNumber = exactStr(cardNumber[0].bankCardNumber);
-                        if (bankCardNumber === undefined) {
+                        if (cardNumber[0] === undefined) {
                         } else {
                             for (let bankcard of cardNumber) {
                                 let bankaccountid = await findBankAccountIdGivenACardNumber(bankcard.bankCardNumber, limit);
-                                if (bankaccountid === undefined) {
+                                if (bankaccountid[0] === undefined) {
                                 } else {
                                     for (let id of bankaccountid) {
                                         const temp2 = await findDetailsFromABankAccountId(id.bankcardId, limit)

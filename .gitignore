@@ -36,3 +36,4 @@ config.json
 
 back-end/middleware/auth/jwtConfig.json
 back-end/middleware/service/person/background/configProd.json
+/back-end/middleware/service/person/background/GCPconfig.json
