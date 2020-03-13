@@ -31,9 +31,11 @@ module.exports =
      *  @return this function returns an array of JSON objects to be passed up
      *  @require this function to work it requires a JSON object to be passed into JsonToStringDetails()
      *  */
-        async function searchLocationsByIdAndTime(input) {
+    async function searchLocationsByIdAndTime(input) {
         const intialTimeStamp = exactStr(input.intialTimeStamp);
         const finalTimeStamp = exactStr(input.finalTimeStamp);
+        const limit = (input.limit);
+        const output3 = [];
 
 
         try {
@@ -52,14 +54,21 @@ module.exports =
             } else if (input.anprId !== undefined) {
                 const output2 = [];
                 const anprId = exactStr(input.anprId);
-                const output1 = await searchGivenASingleANPRIdAndTime(anprId, intialTimeStamp, finalTimeStamp);
+                const output1 = await searchGivenASingleANPRIdAndTime(anprId, intialTimeStamp, finalTimeStamp, limit);
                 for (let cam of output1) {
-                    output2.push(await searchByVehicleReg(cam));
+                    const temp = await searchByVehicleReg(cam, limit);
+                    const temp2 = temp;
+                    if (temp[0] === undefined) {
+                    } else {
+                        output2.push(temp[0]);
+                        temp2[0]['idType'] = "AnprID";
+                        temp2[0]['id'] = input.anprId;
+                        temp2[0]['timeStamp'] = cam.timestamp;
+                        output3.push(temp2[0]);
+                    }
                 }
-                console.log("output1",output1,"output2",output2);
                 return {
-                    output1,
-                    output2
+                    output3
                 };
 
             } else if (input.atmId !== undefined) {
