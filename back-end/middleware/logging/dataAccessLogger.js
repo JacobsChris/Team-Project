@@ -1,7 +1,22 @@
 const morgan = require("morgan");
-const winston = require("./winston");
 const jwt = require('jsonwebtoken');
 const jwtConfig = require('../auth/jwtConfig.json');
+const winston = require('winston');
+const { DynamoDB } = require('winston-dynamodb');
+const options = require('./AuthDB.json')
+
+const logger = winston.createLogger({
+    level: "info",
+    format: winston.format.json(),
+    transports: [new winston.transports.DynamoDB(options)],
+    exitOnError: false
+});
+
+logger.stream = {
+    write: function(message) {
+        logger.info(message);
+    }  
+};
 
 morgan.token('user', function (req, res) {
     //grab token from req header and match to user in auth
@@ -23,6 +38,6 @@ morgan.token('request', function (req, res) {
 });
 
 
-module.exports = morgan(":remote-addr :user :request :date[clf] :status", { stream: winston.stream });
+module.exports = morgan(":remote-addr :user :request :date[clf] :status", { stream: logger.stream });
 
 
