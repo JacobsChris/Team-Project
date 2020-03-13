@@ -52,9 +52,11 @@ class PeopleResultsPage extends React.Component {
     render() {
         console.log('PD', this.state.personDetails);
 
-        const { citizenData: [ citizen = {} ] } = this.state.personDetails;
-        const { bankAccountData: [ personBank = {} ] } = this.state.personDetails;
-        const { mobilesData: [ personMobile = {} ] } = this.state.personDetails;
+        const { citizenData: [citizen = {}] } = this.state.personDetails;
+        const { bankAccountData: [personBank = {}] } = this.state.personDetails;
+        const { mobilesData: [personMobile = {}] } = this.state.personDetails;
+        const { acquaintancesData } = this.state.personDetails;
+
         return (
             <div>
                 {!this.props.resultsLoading ? (this.props.results.length === 0 ? (<h3>No results found</h3>) : (
@@ -85,8 +87,8 @@ class PeopleResultsPage extends React.Component {
                                 <Card className='flex-item' id='person-card' >
                                     <Row>
                                         <Col>
-                                        {this.state.detailsLoaded ? (<MdPerson className='large-person-icon' />) :
-                                        (<h3>Loading</h3>)}                         
+                                            {this.state.detailsLoaded ? (<MdPerson className='large-person-icon' />) :
+                                                (<h3>Loading</h3>)}
                                         </Col>
                                         <Col>
                                             <br />
@@ -103,9 +105,13 @@ class PeopleResultsPage extends React.Component {
                                                 personBank.bank : 'none'}</li>
                                             <li className="list-group-item">Account Number: {personBank !== undefined ?
                                                 personBank.accountNumber : 'none'}</li>
-                                            <li className="list-group-item">Mobile Number: {personMobile !== undefined ? 
+                                            <li className="list-group-item">Mobile Number: {personMobile !== undefined ?
                                                 personMobile.phoneNumber : 'none'}</li>
-                                            <li className="list-group-item">Associates: {citizen.associates}</li>
+                                            <li className="list-group-item">Associates: {acquaintancesData !== undefined ?
+                                                    acquaintancesData[0].forenames + ' ' + acquaintancesData[0].surname + ', ' +
+                                                    acquaintancesData[1].forenames + ' ' + acquaintancesData[1].surname + ', ' +
+                                                    acquaintancesData[2].forenames + ' ' + acquaintancesData[2].surname 
+                                                : 'none'}</li>
                                             <li className="list-group-item">Vehicles: {citizen.vehicles}</li>
                                             <li className="list-group-item">Recent locations: </li>
                                         </ul>
