@@ -28,11 +28,12 @@ module.exports = async function (input) {
         callHistory.push(data[0]);
     }
 
-    for (let call of callHistory[0]) {
-        let data = await findPersonByMobile(call, mobiles);
-        acquaintances.push(data[0][0])
+    if (callHistory[0]) {
+        for (let call of callHistory[0]) {
+            let data = await findPersonByMobile(call, mobiles);
+            acquaintances.push(data[0][0])
+        }
     }
-    console.log(citizen);
     return {
         "citizenData": citizen,
         "bankAccountData": bankAccount,
