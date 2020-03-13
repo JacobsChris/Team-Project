@@ -18,7 +18,9 @@ export const getPeople = (searchData) => dispatch => {
         dispatch({
             type: GET_PEOPLE,
             payload: response
-        }))
+        })
+        )
+        
 };
 
 
