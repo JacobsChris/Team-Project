@@ -13,15 +13,15 @@ const findBankCardByEposId = require('../Financial/findBankCardByEposId.js');
 
 module.exports =
     /**
-     *  @author Anthony Wilkinson & Chris
-     *  @function this function obtains an input originally from a JSON, deconstructs the incomming data into citizenID,
-     *  forenames, surname, homeAddress, dateOfBirth, Sex and a Limit which is hardcoded for the time being to be 5 total. The
-     *  function then turns these input parameters into a MYSQL search string for sqlauth to querry the database. wildstr and
-     *  exactstr allow for a LIKE or an exact match. The MYSQL string is constructed in the functions: findPersonByPerson,
-     *  findBankAccountByPerson, findMobileByPerson, findVehicleByPerson. Those functions then send the constructed strings to
-     *  mysql auth where it then querries the database (see mysql auth JSDocs for more info) and then returns it here. The
-     *  promise.all waits for all querries from the database to be accompolished before returning the data, this returned data
-     *  is within an array that takes the format [{person},{bank},{mobile},{vehicle}].
+     *  @author Anthony Wilkinson
+     *  @function  this function takes in a json object similar to => {
+                                                                        "eposId": 696,
+                                                                        "intialTimeStamp": "2015-05-01 14:03:29",
+                                                                        "finalTimeStamp": "2015-05-01 16:33:29",
+                                                                        "limit": 1
+                                                                    }
+     *  
+     *
      *  @development there could be an intial execution of finding person, that the results of are then sent to bank, mobile and
      *  vehicle in the form =>
      *      promise.all([person]).then(res => promise.all([findBankAccountByPerson(res)...
