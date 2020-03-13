@@ -4,5 +4,5 @@ let inputVal;
 
 test('takes in a bank account id and returns the details about it', (done) => {
     expect()
-})
+});
 //TODO finish this test

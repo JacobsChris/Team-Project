@@ -32,11 +32,8 @@ test('takes in a valid complete vehicleReg and searches for vehicles', (done) =>
     jest.setTimeout(10000000);
     searchByVehicleReg(inputVehicleCompleteReg, 1)
         .then(([vehicle]) => {
-            console.log("Advanced Detail Search in order of vehicle"
-                , vehicle);
             initRes = vehicle;
-            console.log(initRes);
-            expect(initRes).toContainEqual(expectedResult);
+            expect(initRes).toEqual(expectedResult);
             done();
         });
 });
@@ -44,25 +41,19 @@ test('takes in a valid complete vehicleReg and searches for vehicles', (done) =>
 test('takes in a valid incomplete vehicleReg and searches for vehicles', (done) => {
     searchByVehicleReg(inputVehicleInCompleteReg)
         .then(([vehicle]) => {
-            console.log("Advanced Detail Search in order of vehicle"
-                , vehicle);
             initRes = vehicle;
-            console.log(initRes);
-            expect(initRes).toContainEqual(expectedResult);
+            expect(initRes).toContainEqual.toString((expectedResult));
             done();
         });
 });
 
 test('takes in an invalid regNo and returns an error', (done) => {
-    expect(() => {
-        searchByVehicleReg(inputVehicleInvalidReg)
-            .then(([vehicle]) => {
-                console.log("Advanced Detail Search in order of vehicle"
-                    , vehicle);
-                initRes = vehicle;
-                done();
-            });
-    }).toThrow("Not a valid vehicle registration number");
-    done();
+    jest.setTimeout(10000)
+    searchByVehicleReg(inputVehicleInvalidReg)
+        .then(() => console.log("nope"))
+        .catch(err => {
+            expect(err).toEqual(new Error("Error occurred on search by vehicle reg."));
+            done();
+        });
 });
 

@@ -22,6 +22,7 @@ let outputVal = {
 };
 
 test('find a person\'s full details from partial details', (done) => {
+    jest.setTimeout(100000);
     findPersonByPerson(inputVal)
         .then(([person]) => {
             expect(person).toStrictEqual(outputVal);

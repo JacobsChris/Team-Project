@@ -118,8 +118,8 @@ module.exports =
                     }
                 }
                 return {
-                    output1,
-                    output2
+                   "location & eventType": output1,
+                    "persons": output2
                 };
             } else {
                 return "error encountered, the correct Id was not supplied to searchLocationsByIdAndTime function"
