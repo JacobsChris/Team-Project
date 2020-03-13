@@ -33,7 +33,7 @@ let expectedValCelltowerID = {
             "timeStamp": {}
         }
     ]
-}
+};
 
 let inputValAnprID = {
     "anprId": 73,
@@ -71,6 +71,18 @@ let inputAtmId = {
     "limit": 1
 };
 
+let expectedValAtmId = { output3:
+        [ { "bankAccountId": 451310,
+            "accountNumber": 4448212,
+            "bank": 'The Co-operative Bank',
+            "forenames": 'Aimee Katy',
+            "surname": 'Mckay',
+            "dateOfBirth": '1969-11-18',
+            "homeAddress": '87 LYNHURST CRESCENT, UXBRIDGE, UB10 9EQ',
+            "idType": 'atmID',
+            "id": 697,
+            "timeStamp": "2015-05-01T14:37:28.000Z" } ] };
+
 let inputEposID = {
     "eposId": 696,
     "intialTimeStamp": "2015-05-01 14:03:29",
@@ -103,9 +115,10 @@ test("searching with a anprID", (done) => {
 test("searching with a atmId", (done) => {
     jest.setTimeout(100000);
     searchLocationsByIdAndTime(inputAtmId)
-        .then(([output1, output2]) => {
-            initRes = [output1, output2];
-            expect(initRes).toStrictEqual("");
+        .then((expectedValAtmID) => {
+            initRes = expectedValAtmID;
+            console.log(expectedValAtmID);
+            expect(initRes).toStrictEqual.toString(expectedValAtmId);
             done()
         })
 });

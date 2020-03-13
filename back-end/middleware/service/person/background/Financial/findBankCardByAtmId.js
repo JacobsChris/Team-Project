@@ -17,14 +17,26 @@ module.exports =
      * @requires this function requires a string input selected from findTransactionsByBankCard to function
      * */
  function findBankCardByAtmId(atmId,limit) {
-        if (limit !==undefined) {
+     try {
+        if(limit !== undefined) {
+            let sqlSearchString = "SELECT * FROM atmTransaction WHERE " +
+                " atmId=" + "'" + atmId + "'" +
+                " order by timestamp desc" +
+                " Limit " + limit;
+            return auth(sqlSearchString)
         }
-        else {
-            limit = 10;
+        else{
+            let sqlSearchString = "SELECT * FROM atmTransaction WHERE " +
+                " atmId=" + "'" + atmId + "'" +
+                " order by timestamp desc" +
+                " Limit 1000";
+            return auth(sqlSearchString)
         }
-        let sqlSearchString = "SELECT * FROM atmTransaction WHERE " +
-            " atmId=" +"'"+atmId+"'"+
-            " order by timestamp desc"+
-            " Limit " + limit;
-        return auth(sqlSearchString)
+     }
+     catch (e) {
+         console.log(e.name);
+         console.log(e.message);
+         throw "error encountered in findBankCardByAtmId"
+
+     }
     };
