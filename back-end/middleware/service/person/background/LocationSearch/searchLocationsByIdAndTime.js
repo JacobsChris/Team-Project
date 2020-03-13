@@ -56,7 +56,7 @@ module.exports =
                     }
                 }
                 return {
-                    output3: eventIdTimeAndDetails
+                    eventIdTimeAndDetails
                 };
             } else if (input.anprId !== undefined) {
                 const output2 = [];
@@ -75,21 +75,22 @@ module.exports =
                     }
                 }
                 return {
-                    output3: eventIdTimeAndDetails
+                    eventIdTimeAndDetails
                 };
 
             } else if (input.atmId !== undefined) {
                 const output2 = [];
                 const atmId = exactStr(input.atmId);
-                const output1 = await searchGivenASingleATMIdAndTime(atmId, intialTimeStamp, finalTimeStamp,limit);
+                const output1 = await searchGivenASingleATMIdAndTime(atmId, intialTimeStamp, finalTimeStamp, limit);
                 for (let atm of output1) {
                     const temp = atm;
-                    let cardNumber = await findBankCardByAtmId(atm.atmId,limit);
+                    let cardNumber = await findBankCardByAtmId(atm.atmId, limit);
                     let bankCardNumber = exactStr(cardNumber.bankCardNumber);
                     for (let bankcard of cardNumber) {
-                        let bankaccountid = await findBankAccountIdGivenACardNumber(bankcard.bankCardNumber,limit);
+                        let bankaccountid = await findBankAccountIdGivenACardNumber(bankcard.bankCardNumber, limit);
                         for (let id of bankaccountid) {
-                            const temp2 = await findDetailsFromABankAccountId(id.bankcardId,limit)
+                            debugger
+                            const temp2 = await findDetailsFromABankAccountId(id.bankcardId, limit)
                             output2.push(temp2[0]);
                             const temp3 = temp2;
                             temp3[0]['idType'] = "atmID";
@@ -100,32 +101,40 @@ module.exports =
                     }
                 }
                 return {
-                    output3: eventIdTimeAndDetails
+                    eventIdTimeAndDetails
                 };
             } else if (input.eposId !== undefined) {
                 debugger
                 const output2 = [];
                 const eposId = exactStr(input.eposId);
-                const output1 = await (searchGivenAEposIdAndTime(eposId, intialTimeStamp, finalTimeStamp,limit));
+                const output1 = await (searchGivenAEposIdAndTime(eposId, intialTimeStamp, finalTimeStamp, limit));
                 for (let epos of output1) {
                     const temp = epos
-                    let cardNumber = await findBankCardByEposId(epos.eposId,limit);
+                    let cardNumber = await findBankCardByEposId(epos.eposId, limit);
                     let bankCardNumber = exactStr(cardNumber[0].bankCardNumber);
                     for (let bankcard of cardNumber) {
-                        let bankaccountid = await findBankAccountIdGivenACardNumber(bankcard.bankCardNumber,limit);
+                        let bankaccountid = await findBankAccountIdGivenACardNumber(bankcard.bankCardNumber, limit);
+                        if(bankaccountid ===undefined){
+                        }
+                        else{}
                         for (let id of bankaccountid) {
-                            const temp2 = await findDetailsFromABankAccountId(id.bankcardId,limit)
-                            output2.push(temp2);
-                            const temp3 = temp2;
-                            temp3[0]['idType'] = "eposID";
-                            temp3[0]['id'] = input.eposId;
-                            temp3[0]['timeStamp'] = temp.timestamp;
-                            eventIdTimeAndDetails.push(temp3[0]);
+                            const temp2 = await findDetailsFromABankAccountId(id.bankcardId, limit)
+                            if(temp2 === undefined) {
+                            }
+                        else{
+                            console.log(temp2)
+                                output2.push(temp2);
+                                const temp3 = temp2;
+                                temp3[0]['idType'] = "eposID";
+                                temp3[0]['id'] = input.eposId;
+                                temp3[0]['timeStamp'] = temp.timestamp;
+                                eventIdTimeAndDetails.push(temp3[0]);
+                            }
                         }
                     }
                 }
                 return {
-                    output3: eventIdTimeAndDetails
+                    eventIdTimeAndDetails
                 };
             } else {
                 return "error encountered, the correct Id was not supplied to searchLocationsByIdAndTime function"
