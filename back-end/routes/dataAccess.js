@@ -8,7 +8,7 @@ const person = require("./person");
 const vehicle = require("./vehicle");
 const locationEvent = require("./locationEvent");
 
-router.use(morgan("combined"));
+router.use(morgan);
 passport.use("jwt", endpointAuth);
 router.use(passport.authenticate("jwt", {session : false}));
 

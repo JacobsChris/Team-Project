@@ -1,4 +1,5 @@
 const morgan = require("morgan");
+const winston = require("./winston");
 const jwt = require('jsonwebtoken');
 const jwtConfig = require('../auth/jwtConfig.json');
 
@@ -22,6 +23,6 @@ morgan.token('request', function (req, res) {
 });
 
 
-module.exports = morgan(":remote-addr :user :request :date[clf] :status");
+module.exports = morgan(":remote-addr :user :request :date[clf] :status", { stream: winston.stream });
 
 

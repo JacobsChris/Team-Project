@@ -9,7 +9,7 @@ const getAllUsers = require("./getAllUsers");
 const router = express.Router();
 passport.use("admin", adminAuth);
 
-router.use(morgan("combined"));
+router.use(morgan);
 router.use(passport.authenticate("admin", {session : false}));
 
 router.use("/register", register);
