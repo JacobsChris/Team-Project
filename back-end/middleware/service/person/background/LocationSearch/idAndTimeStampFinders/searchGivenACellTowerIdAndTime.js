@@ -13,6 +13,6 @@ module.exports =
      * */
      function searchGivenACellTowerIdAndTime(cellTowerId,intialTimeStamp,finalTimeStamp) {
         let searchCameras = "select * from mobileCallRecords where (timestamp Between " + intialTimeStamp + " And " + finalTimeStamp +") AND callCellTowerId="+ cellTowerId + ";";
-        return auth.SQLauthenticate(searchCameras);
+        return auth(searchCameras);
 
 };

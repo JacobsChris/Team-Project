@@ -26,5 +26,5 @@ module.exports =
             " eposId=" +"'"+eposId+"'"+
             " order by timestamp desc"+
             " Limit " + limit;
-        return auth.SQLauthenticate(sqlSearchString)
+        return auth(sqlSearchString)
     } ;

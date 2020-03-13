@@ -26,5 +26,5 @@ module.exports =
         let sqlSearchString = "SELECT * FROM bankcard WHERE " +
             "cardNumber=" + cardNumber +
             " Limit " + limit;
-        return auth.SQLauthenticate(sqlSearchString)
+        return auth(sqlSearchString)
     };

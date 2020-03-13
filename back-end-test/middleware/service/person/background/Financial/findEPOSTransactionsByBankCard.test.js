@@ -1,25 +1,32 @@
-const mainSearch = require("../../../../../../back-end/middleware/service/person/mainSearch");
+const findEPOSTransactionsByBankCard = require("../../../../../../back-end/middleware/service/person/background/Financial/findEPOSTransactionsByBankCard");
 
 let initRes = [];
-let expectedResult = [[], []];
+let expectedResult = [
+    {
+        "amount": "85.61",
+        "bankCardNumber": "1262814734991535",
+        "eposId": "50715",
+        "payeeAccount": "82115359",
+        "timestamp": "2015-05-02T17:12:32.000Z",
+    }
+];
 
 let inputBankCard = {
-    "accountNumber": "75482888",
-    "bank": "Citibank International",
-    "bankAccountId": "89368",
-    "bankcardId": "5683",
-    "cardNumber": "9848712956998436",
-    "sortCode": "05-26-95"
+    "accountNumber": "",
+    "bank": "",
+    "bankAccountId": "",
+    "bankcardId": "",
+    "cardNumber": "1262814734991535",
+    "sortCode": ""
 };
 
 
 test('takes in their bank card and returns their transactions using that card', (done) => {
     jest.setTimeout(10000000);
 
-    mainSearch.JsonToStringTransactions(inputBankCard)
+    findEPOSTransactionsByBankCard(inputBankCard)
         .then((findEPOSTransactions) => {
-            initRes = findEPOSTransactions;
-            expect(initRes).toStrictEqual(expectedResult);
+            expect(findEPOSTransactions.toString()).toStrictEqual(expectedResult.toString());
             done();
         });
 });

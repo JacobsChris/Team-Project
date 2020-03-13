@@ -13,6 +13,6 @@ module.exports =
      * */
      function searchGivenASingleATMIdAndTime(atmId,intialTimeStamp,finalTimeStamp) {
         let searchCameras = "select * from atmTransaction where (timestamp Between " + intialTimeStamp + " And " + finalTimeStamp +") AND atmId="+ atmId + ";";
-        return auth.SQLauthenticate(searchCameras);
+        return auth(searchCameras);
 
 };

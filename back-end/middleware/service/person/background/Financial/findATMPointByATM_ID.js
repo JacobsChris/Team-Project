@@ -1,4 +1,4 @@
-const auth = require('../sqlauth.js');
+const SQLauthenticate = require('../sqlauth.js');
 
 
 module.exports =
@@ -20,6 +20,6 @@ module.exports =
      function findATMPoint(atmId) {
         let sqlSearchString = "SELECT * FROM atmpoint WHERE" +
             " atmId LIKE " + atmId;
-        return auth.SQLauthenticate(sqlSearchString)
+        return SQLauthenticate(sqlSearchString)
 
 };
