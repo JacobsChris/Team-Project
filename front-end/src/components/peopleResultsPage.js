@@ -42,10 +42,7 @@ class PeopleResultsPage extends React.Component {
             }
         })
             .then((response) => {
-                debugger;
-                console.log('Post ', response.data);
-                this.setState({
-                    
+                this.setState({ 
                     personDetails: response.data,
                     detailsLoaded: true
                 })
@@ -170,7 +167,6 @@ PeopleResultsPage.propTypes = {
 };
 
 export default connect(mapStateToProps, { getVehicle })(PeopleResultsPage);
-  
-// export default connect(null, { getVehicle })(PeopleResultsPage);
+
 
 
