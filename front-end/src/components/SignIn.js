@@ -9,7 +9,8 @@ class SignIn extends React.Component {
         super(props);
         this.state = {
             username: '',
-            password: ''
+            password: '',
+            error: false
         }
     }
 
@@ -29,10 +30,14 @@ class SignIn extends React.Component {
         setTimeout(() => {
             if(localStorage.getItem('token')){
                 if(this.props.admin[0]){
-                    this.props.history.push("/admin/");
+                    this.props.history.push("/admin/searchpeople");
                 } else {
                     this.props.history.push("/user/home/searchpeople");
                 }
+            } else {
+                this.setState({
+                    error: true
+                })
             }
           }, 1000);  
     }
@@ -53,6 +58,9 @@ class SignIn extends React.Component {
                             <label></label>
                             <FormInput name='password' type="password" value={this.state.password} handleChange={this.handleChange}/>
                         </div>
+                        {this.state.error ? <div className='creds'>
+                            <label>Invalid username or password</label>
+                        </div>: ''}
                         <input type="submit" value="Sign In" />
                     </fieldset>
                 </form>
