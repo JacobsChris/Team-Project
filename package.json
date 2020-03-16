@@ -9,7 +9,7 @@
     ]
   },
   "scripts": {
-    "start": "node ./back-end/app",
+    "start": "node functions/back-end/app",
     "test": "jest"
   },
   "dependencies": {
