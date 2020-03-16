@@ -22,9 +22,11 @@ import LocationResults from './LocationResults';
 class Router extends React.Component {
     
     requireLogin = (to, from, next) => {
-        const token = localStorage.getItem("token");
-        if (jwtDecode(token).exp < Date.now() / 1000) {
-            localStorage.clear();
+        const token = localStorage.getItem("token").slice(4);
+        if(localStorage.getItem('token')){
+            if (jwtDecode(token).exp < Date.now() / 1000) {
+                localStorage.clear();
+            }
         }
         if (localStorage.getItem('token')) {
             next();
@@ -33,9 +35,11 @@ class Router extends React.Component {
     }
 
     isAdmin = (to, from, next) => {
-            const token = localStorage.getItem("token");
-            if (jwtDecode(token).exp < Date.now() / 1000) {
-                localStorage.clear();
+            const token = localStorage.getItem("token").slice(4);
+            if(localStorage.getItem('token')){
+                if (jwtDecode(token).exp < Date.now() / 1000) {
+                    localStorage.clear();
+                }
             }
             if(this.props.admin && localStorage.getItem('token')){
                 next();

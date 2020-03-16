@@ -2,8 +2,6 @@ import { SIGN_IN, USERNAME } from './types';
 import axios from 'axios';
 
 export const signIn = (user) => dispatch => {
-
-    // console.log(user);
     axios.post('http://localhost:8080/login/', user)
         .then(response =>
             dispatch({
@@ -13,8 +11,6 @@ export const signIn = (user) => dispatch => {
             .then(() => dispatch({
                 type: USERNAME,
                 payload: user
-            }))
-
-            
+            }))         
 };
 

@@ -7,12 +7,16 @@ import store from '../redux/store';
 class AdminNavBar extends React.Component {
     signout = () => {
         // console.log('signOut')
+        if(localStorage.getItem('token')){
         store.dispatch({
             type: 'SIGN_OUT',
           value: ''
         });
+        if(localStorage.getItem('token')){
         localStorage.clear();
+        }
         this.props.history.push('../user/signin')
+    }
     }
     render(){
         return (
