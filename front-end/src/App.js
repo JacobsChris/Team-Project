@@ -14,6 +14,7 @@ import CreateUser from './components/createUser';
 import SearchVehicle from './components/searchVehicle';
 import VehicleResultsPage from './components/vehicleResultsPage';
 import PersonLocation from './components/personLocation';
+import {LocationResults} from "./components/LocationResults";
 
 function App() {
 
@@ -37,6 +38,7 @@ function App() {
           <GuardedRoute path='/user/home/peopleresults' component={PeopleResultsPage} />
           <GuardedRoute path='/user/home/personlocation' component={PersonLocation} />
           <GuardedRoute path='/user/home/vehicleresults' component={VehicleResultsPage} />
+          <GuardedRoute path='/user/home/testy' component={LocationResults}/>
         </GuardProvider>
       <Route path='/user/signin' component={SignIn}></Route>
     </BrowserRouter>

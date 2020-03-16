@@ -1,0 +1,15 @@
+/* Create two equal columns that floats next to each other */
+.column {
+    float: left;
+    margin: auto;
+    width: 45%;
+    padding: 10px;
+    height: 90%; /* Should be removed. Only for demonstration */
+}
+
+/* Clear floats after the columns */
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
