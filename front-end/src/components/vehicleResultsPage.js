@@ -4,23 +4,44 @@ import SearchVehicle from './searchVehicle';
 import { Container, Card, Row, Col } from 'react-bootstrap';
 import '../styles/peopleResults.css';
 import { MdDirectionsCar } from 'react-icons/md';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
 
-const mapStateToProps = state => ({
-    results: state.vehicle.results,
-    resultsLoading: state.response.resultsLoading
-});
-
-class VehicleResultsPage extends React.Component {
+export default class VehicleResultsPage extends React.Component {
     constructor(props) {
         super(props);
 
         this.state = {
+            results: [],
             vehicleDetails: [],
-            detailsLoaded: true
+            detailsLoaded: true,
+            vehiclesLoaded: false
         };
     };
+
+    componentDidMount() {
+        console.log(this.props);
+        const searchPlate = new URLSearchParams(this.props.location.search).get('plate');
+
+        let data = {
+            vehicleRegistrationNo: searchPlate,
+            make: '',
+            model: '',
+            colour: '',
+            registrationDate: ''
+        };
+
+        axios.post('http://localhost:8080/back-end/vehicle/getData', data, {
+            headers: {
+                Authorization: localStorage.getItem('token')
+            }
+        })
+            .then((response) => {
+                this.setState({
+                    results: [response.data],
+                    vehiclesLoaded: true
+                })
+                console.log('response', response.data)
+            });
+    }
 
     handleClick(reg, make, model, colour, regDate) {
 
@@ -37,7 +58,7 @@ class VehicleResultsPage extends React.Component {
         };
         axios.post('http://localhost:8080/back-end/vehicle/getData', data, {
             headers: {
-                Authorization: sessionStorage.jwt
+                Authorization: localStorage.getItem('token')
             }
         })
             .then((response) => {
@@ -51,18 +72,16 @@ class VehicleResultsPage extends React.Component {
 
     render() {
         const vehicleData = this.state.vehicleDetails;
-        console.log('render', vehicleData);
-        console.log(this.props.resultsLoading);
-        console.log('results:', this.props.results);
+        console.log('results', this.state.results);
 
         return (
 
             <div>
-                {!this.props.resultsLoading ? (!this.props.results ? (<h3>No results found</h3>) : (
+                {this.state.vehiclesLoaded ? (!this.state.results ? (<h3>No results found</h3>) : (
                     <Row>
                         <Col>
                             <Container className='flex-container' id='person-list'>
-                                {this.props.results?.map(vehicle =>
+                                {this.state.results?.map(vehicle =>
                                     <Card onClick={() => this.handleClick(vehicle.vehicleRegistrationNo, vehicle.make, vehicle.model,
                                         vehicle.colour, vehicle.registrationDate)}
                                         className='flex-item' id='small-person-card'>
@@ -114,25 +133,18 @@ class VehicleResultsPage extends React.Component {
                                             <li className="list-group-item">
                                                 <h5>Owner</h5>{vehicleData !== undefined ?
                                                     vehicleData.forenames : ' '}{' '} {vehicleData !== undefined ?
-                                                    vehicleData.surname : ' '}</li>
+                                                        vehicleData.surname : ' '}</li>
                                         </ul>
                                     </Card.Body>
                                 </Card>
                             </Container>
                         </Col>
-                    </Row>
-                )
-                ) : (<h3>Loading</h3>)};
+                    </Row>) 
+                ) : (<h3>Loading</h3>)
+                }
             </div>
 
         )
     }
 }
-
-VehicleResultsPage.propTypes = {
-    results: PropTypes.array.isRequired,
-};
-
-export default connect(mapStateToProps)(VehicleResultsPage);
-
 
