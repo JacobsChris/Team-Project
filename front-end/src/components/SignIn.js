@@ -26,15 +26,16 @@ class SignIn extends React.Component {
 
         this.props.signIn(data);
 
-        if(this.props.signedIn){
+        
         setTimeout(() => {
+            // if(this.props.signedIn){
             if(this.props.admin[0]){
                 this.props.history.push("/admin/");
             } else {
                 this.props.history.push("/user/home/searchpeople");
             }
           }, 1000);  
-        }
+        // }
     }
 
     render(){
@@ -66,12 +67,12 @@ SignIn.propTypes = {
   };
 
   function mapStateToProps(state) {
-      if(state.signin.token){
+
     return {
         admin: state.signin.isAdmin,
         signedIn: true
     }
-}
+
 }
 
 export default connect(mapStateToProps, {signIn})(SignIn);
