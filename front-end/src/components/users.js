@@ -17,11 +17,13 @@ class Users extends React.Component {
         console.log('component')
     }
     
-    handleClick = (name) => {
-        // e.preventDefault();
-        // console.log(name);
+    handleClick = (e) => {
+        // event.preventDefault();
+        e.preventDefault();
+        console.log(e.target.name);
         this.props.history.push('./changepassword')
-        this.props.username(name);
+
+        this.props.setUsername(e.target.name);
     }
 
     render() {
@@ -32,7 +34,7 @@ class Users extends React.Component {
                 {this.props.users?.map(user =>(
                     <div>
                     <p>{user.username}</p>
-                    <input type='submit' value='Change Password' onClick={this.handleClick(user.username)} />
+                    <input type='submit' value='Change Password' name={user.username} onClick={this.handleClick} />
                     </div>
                 ))}
        

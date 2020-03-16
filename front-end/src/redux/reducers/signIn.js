@@ -25,7 +25,6 @@ export default function(state = initialState, action){
             return {
                 ...state,
                 isAdmin: '',
-                token: '',
                 user: ''
             }
         default:

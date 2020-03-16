@@ -1,6 +1,5 @@
 import React from 'react';
 import FormInput from './FormInput';
-import axios from 'axios';
 import { connect } from 'react-redux';
 import { signIn } from '../redux/actions/signInAction';
 import PropTypes from 'prop-types';
@@ -28,8 +27,6 @@ class SignIn extends React.Component {
         this.props.signIn(data);
 
         setTimeout(() => {
-            // console.log(this.props.admin)
-            // debugger;
             if(this.props.admin[0]){
                 this.props.history.push("/admin/");
             } else {

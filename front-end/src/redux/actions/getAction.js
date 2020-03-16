@@ -12,7 +12,7 @@ export const getPeople = (searchData) => dispatch => {
     });
     axios.post('http://localhost:8080/back-end/person/getData', searchData, {
         headers: {
-            Authorization: store.getState().signin.token[0]
+            Authorization: localStorage.getItem('token')
         }
     })
         .then(response =>

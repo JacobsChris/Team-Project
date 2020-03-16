@@ -7,7 +7,7 @@ export const setAdmin = (admin) => dispatch => {
     console.log(pass);
     axios.post('http://localhost:8080/admin/register/', admin, {
         headers: {
-            Authorization: store.getState().signin.token[0]
+            Authorization: localStorage.getItem('token')
           }
     })
         .then(response =>

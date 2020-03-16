@@ -1,14 +1,11 @@
 import React from 'react';
 import { Route, BrowserRouter } from 'react-router-dom';
-// import './App.css';
 import SearchPeople from './SearchPeople';
 import NavBar from './navBar';
 import AdminNavBar from './adminNavBar';
 import SearchNavBar from './searchNavBar';
 import PeopleResultsPage from './peopleResultsPage';
 import SignIn from './SignIn';
-import { Provider } from 'react-redux';
-import store from '../redux/store';
 import { GuardProvider, GuardedRoute } from 'react-router-guards';
 import CreateUser from './createUser';
 import Users from './users';
@@ -16,29 +13,27 @@ import SearchVehicle from './searchVehicle';
 import VehicleResultsPage from './vehicleResultsPage';
 import ChangePassword from './changePassword';
 import { connect } from 'react-redux';
-import { signIn } from '../redux/actions/signInAction';
-import PropTypes from 'prop-types';
-
-
+import jwtDecode from 'jwt-decode';
 
 class Router extends React.Component {
-
-    constructor(props) {
-        super(props);
-        this.state = {
-            
-        }
-    }
     
     requireLogin = (to, from, next) => {
-        if (this.props.token[0]) {
+        const token = localStorage.getItem("token");
+        if (jwtDecode(token).exp < Date.now() / 1000) {
+            localStorage.clear();
+        }
+        if (localStorage.getItem('token')) {
             next();
         }
         next.redirect('/user/signin');
     }
 
     isAdmin = (to, from, next) => {
-            if(this.props.admin){
+            const token = localStorage.getItem("token");
+            if (jwtDecode(token).exp < Date.now() / 1000) {
+                localStorage.clear();
+            }
+            if(this.props.admin && localStorage.getItem('token')){
                 next();
             }
             next.redirect('/user/signin');
@@ -57,6 +52,11 @@ class Router extends React.Component {
                 </GuardProvider>
                 <GuardProvider guards={[this.isAdmin]}>
                     <GuardedRoute path='/admin/' component={AdminNavBar} />
+                    <GuardedRoute path='/admin/' component={SearchNavBar} />
+                    <GuardedRoute path='/admin/searchpeople' component={SearchPeople} />
+                    <GuardedRoute path='/admin/searchvehicle' component={SearchVehicle} /> 
+                    <GuardedRoute path='/admin/peopleresults' component={PeopleResultsPage} />
+                    <GuardedRoute path='/admin/vehicleresults' component={VehicleResultsPage} />
                     <GuardedRoute path='/admin/adduser' component={CreateUser} />
                     <GuardedRoute path='/admin/users' component={Users} />
                     <GuardedRoute path='/admin/changepassword' component={ChangePassword} />

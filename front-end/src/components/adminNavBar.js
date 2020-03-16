@@ -1,16 +1,17 @@
 import React from 'react';
-import { Nav, Navbar} from 'react-bootstrap';
+import { Navbar } from 'react-bootstrap';
 import { Link } from "react-router-dom";
 import store from '../redux/store';
 
 
 class AdminNavBar extends React.Component {
     signout = () => {
-        console.log('signOut')
+        // console.log('signOut')
         store.dispatch({
             type: 'SIGN_OUT',
           value: ''
         });
+        localStorage.clear();
         this.props.history.push('../user/signin')
     }
     render(){
@@ -20,7 +21,7 @@ class AdminNavBar extends React.Component {
                 <Link to="/admin/home">HOME</Link>
                 <Link to="/admin/adduser">ADD USER</Link>
                 <Link to="/admin/users">VIEW USERS</Link>
-                <Link to="/admin/changepassword">CHANGE PASSWORD</Link>
+                {/* <Link to="/admin/changepassword">CHANGE PASSWORD</Link> */}
                 <Link to="/admin/help">HELP</Link>
                 <Link onClick={this.signout}>SIGN OUT</Link>
             </Navbar>

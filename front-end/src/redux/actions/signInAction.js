@@ -9,7 +9,7 @@ export const signIn = (user) => dispatch => {
             dispatch({
                 type: SIGN_IN,
                 payload: response
-            }))
+            }, localStorage.setItem('token', response.data.token)))
             .then(() => dispatch({
                 type: USERNAME,
                 payload: user
