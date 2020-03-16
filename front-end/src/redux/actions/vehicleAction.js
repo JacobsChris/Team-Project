@@ -10,7 +10,7 @@ export const getVehicle = (searchData) => dispatch => {
 
     axios.post('http://localhost:8080/back-end/vehicle/getData/', searchData, {
         headers: {
-            Authorization: sessionStorage.jwt
+            Authorization: localStorage.getItem('token')
           }
     })
         .then(response =>

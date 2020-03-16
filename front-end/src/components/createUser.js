@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import FormInput from './FormInput';
 import { connect } from 'react-redux';
-import { getUser } from '../redux/actions/userAction';
+import { createUser } from '../redux/actions/createUserAction';
 import PropTypes from 'prop-types';
 
 class CreateUser extends Component {
@@ -35,7 +35,7 @@ class CreateUser extends Component {
 
         console.log(data);
 
-        this.props.getUser(data);
+        this.props.createUser(data);
     
         this.props.history.push('/admin');
     }
@@ -80,7 +80,7 @@ class CreateUser extends Component {
 }
 
 CreateUser.propTypes = {
-    getUser: PropTypes.func.isRequired
+    createUser: PropTypes.func.isRequired
   };
   
-export default connect(null, { getUser })(CreateUser);
+export default connect(null, { createUser })(CreateUser);

@@ -1,25 +1,26 @@
 import React from 'react';
-import { Nav, Navbar} from 'react-bootstrap';
+import { Navbar } from 'react-bootstrap';
+import { Link } from "react-router-dom";
+import store from '../redux/store';
 
 class NavBar extends React.Component {
 
     signout = () => {
-        sessionStorage.clear();
-        this.props.history.push("/user/signin");
+        store.dispatch({
+            type: 'SIGN_OUT',
+          value: ''
+        });
+        localStorage.clear();
+        this.props.history.push('./signin')
     }
     render(){
         return (
-            <Navbar bg="dark" variant="dark" expand="md" className='main-nav'>
-                <Nav.Link id='brand' className='mr-auto' href="/user/home">REDSHIFT</Nav.Link>
-                <Navbar.Toggle aria-controls="collapse"/>
-                    <Navbar.Collapse id="collapse">
-                        <Nav className='ml-auto'>
-                            <Nav.Link href="/user/home">HOME</Nav.Link>
-                            <Nav.Link href="/user/help">HELP</Nav.Link>
-                            <Nav.Link onClick={this.signout}>SIGN OUT</Nav.Link>
-                        </Nav>
-                    </Navbar.Collapse>
-            </Navbar>
+                <Navbar bg="dark" variant="dark" expand="md" className='main-nav'> 
+                    <Link id='brand' className='mr-auto' to="/user/home">REDSHIFT</Link>
+                    <Link to="/user/home">HOME</Link>
+                    <Link to="/user/help">HELP</Link>
+                    <Link onClick={this.signout} to="/user/signin">SIGN OUT</Link>
+                </Navbar>
         )
     }
 }
