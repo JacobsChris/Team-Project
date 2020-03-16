@@ -3,7 +3,7 @@
 }
 
 #person-card {
-    margin-top: 50px;
+    margin-top: 10px;
     margin-bottom: 100px;
 }
 
@@ -13,7 +13,7 @@
 }
 
 #person-list {
-    height: 500px;
+    height: 750px;
     overflow: scroll;
 }
 
@@ -35,4 +35,9 @@
     width: 150px;
     height: 150px;
     margin-left: 50px;
+}
+
+.link-style {
+    color: blue;
+    text-decoration: underline;
 }

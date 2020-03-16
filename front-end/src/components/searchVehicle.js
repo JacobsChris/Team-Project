@@ -16,8 +16,7 @@ class SearchVehicle extends Component {
             make: '',
             model: '',
             colour: '',
-            regDate: '',
-            owner: ''
+            regDate: ''
         });
     }
 
@@ -53,12 +52,11 @@ class SearchVehicle extends Component {
         //   model: this.state.model,
         //   colour: this.state.colour,
         //   registrationDate: date,
-        //   owner: this.state.owner
         }
     
         this.props.getVehicle(data);
     
-        if (window.location.pathname != '/user/home/vehicleresults'){
+        if (window.location.pathname !== '/user/home/vehicleresults'){
           this.props.history.push('/user/home/vehicleresults');
         }
       }
@@ -74,6 +72,7 @@ class SearchVehicle extends Component {
                 <Form.Group className='reg'>
                     <Form.Label htmlFor="reg">Vehicle Registration</Form.Label>
                     <FormInput name='reg' placeholder='Vehicle Registration' value={this.state.reg} handleChange={this.handleChange} />
+                    <span className='reg-message'>Replace unknown characters with underscores</span>
                 </Form.Group>
                 <Form.Group className='make'>
                     <Form.Label htmlFor="make">Make</Form.Label>
@@ -90,10 +89,6 @@ class SearchVehicle extends Component {
                 <Form.Group className='regDate'>
                     <Form.Label htmlFor="regDate">Registration Date</Form.Label>
                     <DatePicker name='regDate' value={this.state.regDate} handleChange={this.handleDateChange} dateFormat='yyyy-MM-dd'/>
-                </Form.Group>
-                <Form.Group className='owner'>
-                    <Form.Label htmlFor="owner">Owner Name</Form.Label>
-                    <FormInput name='owner' placeholder='Owner' value={this.state.owner} handleChange={this.handleChange} />
                 </Form.Group>
                 <Button variant='dark' id='submit-button' type='submit'>Search Vehicles</Button>
                 <br />

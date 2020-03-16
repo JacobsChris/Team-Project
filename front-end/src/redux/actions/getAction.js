@@ -4,8 +4,6 @@ import store from '../store';
 
 export const getPeople = (searchData) => dispatch => {
 
-    console.log(searchData);
-
     dispatch({
         type: SET_RESULTS_LOADING,
         payload: true
@@ -19,7 +17,8 @@ export const getPeople = (searchData) => dispatch => {
         dispatch({
             type: GET_PEOPLE,
             payload: response
-        }))
+        })
+        )      
 };
 
 
