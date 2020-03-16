@@ -15,6 +15,7 @@ export default class PeopleResultsPage extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            results: [],
             personDetails: {
                 citizenData: [],
                 bankAccountData: [],
@@ -36,6 +37,7 @@ export default class PeopleResultsPage extends React.Component {
             .then((response) => {
                 this.setState({
                     results: [response.data],
+                    peopleLoaded: true
                 })
                 console.log('response', response.data)
             });
@@ -96,7 +98,8 @@ export default class PeopleResultsPage extends React.Component {
     }
 
     render() {
-        console.log('People', this.props.location.state);
+        console.log('state', this.props.location.state);
+        console.log('People', this.state.results);
         const { citizenData: [citizen = {}] } = this.state.personDetails;
         const { bankAccountData: [personBank = {}] } = this.state.personDetails;
         const { mobilesData: [personMobile = {}] } = this.state.personDetails;
@@ -105,7 +108,7 @@ export default class PeopleResultsPage extends React.Component {
 
         return (
             <div>
-                {!this.state.peopleLoaded ? (this.props.results.length === 0 ? (<h3>No results found</h3>) : (
+                {!this.state.peopleLoaded ? (!this.state.results ? (<h3>No results found</h3>) : (
                     <Row>
                         <Col>
                             <Row>
