@@ -38,3 +38,4 @@ functions/back-end/middleware/logging/AuthDB.json
 functions/back-end/middleware/auth/jwtConfig.json
 functions/back-end/middleware/service/person/background/configProd.json
 /functions/back-end/middleware/service/person/background/GCPconfig.json
+/.env
