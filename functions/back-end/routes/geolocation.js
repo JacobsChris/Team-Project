@@ -1,5 +1,5 @@
 const express = require('express');
-const searchLocationsByIdAndTime = require('../middleware/service/person/background/LocationSearch/searchLocationsByIdAndTime');
+const searchLocationsByIdAndTime = require('../middleware/service/LocationSearch/searchLocationsByIdAndTime');
 
 const router = express.Router();
 

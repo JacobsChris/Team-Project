@@ -15,23 +15,7 @@ router.post("/", function (req, res) {
     userModel.findOne({where: {username: req.body.username}})
         .then(result => {
 
-            console.log(result);
-            if (result !== null) {
-                var comparison = bcrypt.compareSync(req.body.password, result.password);
-            }
-            else {
-                comparison = false;
-            }
-
-            if (comparison === false) {
-                let hashedPassword = userModel.passwordHash(req.body.password);
-                userModel.update({password: hashedPassword}, {where: {username: req.body.username}});
-                res.send("user updated");
-            } 
-            else if (result.username && comparison === true) {
-                res.status(202).send("username already taken");
-            }
-            else {
+            if (result === null) {
                 if (req.body.password.match(/[a-z]/g) && req.body.password.match(
                     /[A-Z]/g) && req.body.password.match(
                     /[0-9]/g) && req.body.password.match(
@@ -49,6 +33,22 @@ router.post("/", function (req, res) {
                 else {
                     return res.status(202).send("Password does not comply with requirements.")
                 }
+            }
+
+            if (result !== null) {
+                var comparison = bcrypt.compareSync(req.body.password, result.password);
+            }
+            else {
+                comparison = false;
+            }
+
+            if (comparison === false) {
+                let hashedPassword = userModel.passwordHash(req.body.password);
+                userModel.update({password: hashedPassword}, {where: {username: req.body.username}});
+                res.send("user updated");
+            } 
+            else if (result.username && comparison === true) {
+                res.status(202).send("username already taken");
             }
         })
         .catch(error => {
