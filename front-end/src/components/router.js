@@ -1,19 +1,22 @@
 import React from 'react';
 import { Route, BrowserRouter } from 'react-router-dom';
+import { GuardProvider, GuardedRoute } from 'react-router-guards';
+import { connect } from 'react-redux';
+import jwtDecode from 'jwt-decode';
+
 import SearchPeople from './SearchPeople';
 import NavBar from './navBar';
 import AdminNavBar from './adminNavBar';
 import SearchNavBar from './searchNavBar';
 import PeopleResultsPage from './peopleResultsPage';
 import SignIn from './SignIn';
-import { GuardProvider, GuardedRoute } from 'react-router-guards';
 import CreateUser from './createUser';
 import Users from './users';
 import SearchVehicle from './searchVehicle';
 import VehicleResultsPage from './vehicleResultsPage';
 import ChangePassword from './changePassword';
-import { connect } from 'react-redux';
-import jwtDecode from 'jwt-decode';
+import PersonLocation from './personLocation';
+
 
 class Router extends React.Component {
     
@@ -49,6 +52,7 @@ class Router extends React.Component {
                     <GuardedRoute path='/user/home/searchvehicle' component={SearchVehicle} /> 
                     <GuardedRoute path='/user/home/peopleresults' component={PeopleResultsPage} />
                     <GuardedRoute path='/user/home/vehicleresults' component={VehicleResultsPage} />
+                    <GuardedRoute path='/user/home/personlocation' component={PersonLocation} />
                 </GuardProvider>
                 <GuardProvider guards={[this.isAdmin]}>
                     <GuardedRoute path='/admin/' component={AdminNavBar} />
@@ -60,6 +64,7 @@ class Router extends React.Component {
                     <GuardedRoute path='/admin/adduser' component={CreateUser} />
                     <GuardedRoute path='/admin/users' component={Users} />
                     <GuardedRoute path='/admin/changepassword' component={ChangePassword} />
+                    <GuardedRoute path='/admin/personlocation' component={PersonLocation} />
                 </GuardProvider>
                 <Route path='/user/signin' component={SignIn}></Route>
             </BrowserRouter>
