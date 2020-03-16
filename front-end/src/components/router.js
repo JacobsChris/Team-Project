@@ -16,14 +16,17 @@ import SearchVehicle from './searchVehicle';
 import VehicleResultsPage from './vehicleResultsPage';
 import ChangePassword from './changePassword';
 import PersonLocation from './personLocation';
+import LocationResults from './LocationResults';
 
 
 class Router extends React.Component {
     
     requireLogin = (to, from, next) => {
-        const token = localStorage.getItem("token");
-        if (jwtDecode(token).exp < Date.now() / 1000) {
-            localStorage.clear();
+        const token = localStorage.getItem("token").slice(4);
+        if(localStorage.getItem('token')){
+            if (jwtDecode(token).exp < Date.now() / 1000) {
+                localStorage.clear();
+            }
         }
         if (localStorage.getItem('token')) {
             next();
@@ -32,9 +35,11 @@ class Router extends React.Component {
     }
 
     isAdmin = (to, from, next) => {
-            const token = localStorage.getItem("token");
-            if (jwtDecode(token).exp < Date.now() / 1000) {
-                localStorage.clear();
+            const token = localStorage.getItem("token").slice(4);
+            if(localStorage.getItem('token')){
+                if (jwtDecode(token).exp < Date.now() / 1000) {
+                    localStorage.clear();
+                }
             }
             if(this.props.admin && localStorage.getItem('token')){
                 next();
@@ -53,6 +58,7 @@ class Router extends React.Component {
                     <GuardedRoute path='/user/home/peopleresults' component={PeopleResultsPage} />
                     <GuardedRoute path='/user/home/vehicleresults' component={VehicleResultsPage} />
                     <GuardedRoute path='/user/home/personlocation' component={PersonLocation} />
+                    <GuardedRoute path='/user/home/locationresults' component={LocationResults} />
                 </GuardProvider>
                 <GuardProvider guards={[this.isAdmin]}>
                     <GuardedRoute path='/admin/' component={AdminNavBar} />
@@ -65,6 +71,7 @@ class Router extends React.Component {
                     <GuardedRoute path='/admin/users' component={Users} />
                     <GuardedRoute path='/admin/changepassword' component={ChangePassword} />
                     <GuardedRoute path='/admin/personlocation' component={PersonLocation} />
+                    <GuardedRoute path='/admin/locationresults' component={LocationResults} />
                 </GuardProvider>
                 <Route path='/user/signin' component={SignIn}></Route>
             </BrowserRouter>

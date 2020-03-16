@@ -18,7 +18,7 @@ const validateForm = (errors) => {
     (val) => val.length > 0 && (valid = false)
   );
   return valid;
-}
+};
 
 const countErrors = (errors) => {
   let count = 0;
@@ -26,7 +26,7 @@ const countErrors = (errors) => {
     (val) => val.length > 0 && (count = count + 1)
   );
   return count;
-}
+};
 
 export default class SearchPeople extends React.Component {
 
@@ -58,7 +58,7 @@ export default class SearchPeople extends React.Component {
     this.setState({
       dob: event
     });
-  }
+  };
 
   handleChange = ({ target: { value, name } }) => {
 
@@ -143,7 +143,7 @@ export default class SearchPeople extends React.Component {
     let getEmpty = () => {
       let length = this.state.forename.length + this.state.surname.length + this.state.dob.length + this.state.birthPlace.length + this.state.postcode.length;
       return length;
-    }
+    };
 
     const data = {
       citizenID: this.state.citizenID,
@@ -153,14 +153,14 @@ export default class SearchPeople extends React.Component {
       dateOfBirth: date,
       placeOfBirth: this.state.birthPlace,
       sex: this.state.gender
-    }
+    };
 
     if (this.state.formValid && getEmpty) {
       if (window.location.pathname !== '/user/home/peopleresults') {
         this.props.history.push('/user/home/peopleresults', data);
       }
     }
-  }
+  };
 
   render() {
     const { errors, formValid } = this.state;

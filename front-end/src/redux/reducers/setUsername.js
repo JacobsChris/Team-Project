@@ -7,7 +7,6 @@ const initialState = {
 export default function(state = initialState, action){
     switch(action.type){
         case SET_USERNAME:
-            console.log(action.payload.data);
             return {
                 ...state,
                 results: [action.payload.data]
