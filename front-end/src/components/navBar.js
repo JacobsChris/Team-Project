@@ -6,15 +6,15 @@ import store from '../redux/store';
 class NavBar extends React.Component {
 
     signout = () => {
+        if(localStorage.getItem('token')){
         store.dispatch({
             type: 'SIGN_OUT',
           value: ''
         });
-        // if(localStorage.getItem('token')){
-        //     console.log('1')
-        //     localStorage.clear();
-        // }
+            localStorage.clear();
+    }
         this.props.history.push('./signin')
+
     }
     render(){
         return (

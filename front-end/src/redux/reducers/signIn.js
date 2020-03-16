@@ -8,12 +8,10 @@ const initialState = {
 export default function(state = initialState, action){
     switch(action.type){
         case SIGN_IN:
-            console.log(action.payload.data);
             return {
                 ...state,
                 user: [action.payload.data],
-                isAdmin: [action.payload.data.admin],
-                // token: [action.payload.data.token]
+                isAdmin: [action.payload.data.admin]
             };
         case USERNAME: 
             return {
@@ -25,7 +23,6 @@ export default function(state = initialState, action){
                 ...state,
                 isAdmin: '',
                 user: '',
-                // token: ''
             }
         default:
             return state;
