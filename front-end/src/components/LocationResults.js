@@ -55,7 +55,7 @@ const Map = withScriptjs(withGoogleMap(props =>
     </GoogleMap>
 ));
 
-export class LocationResults extends React.Component {
+export default class LocationResults extends React.Component {
 
 
     render() {
