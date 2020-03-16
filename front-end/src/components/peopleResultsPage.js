@@ -3,28 +3,45 @@ import axios from 'axios';
 import { Container, Card, Row, Col } from 'react-bootstrap';
 import '../styles/peopleResults.css';
 import { MdPerson } from 'react-icons/md';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
+// import PropTypes from 'prop-types';
+// import { connect } from 'react-redux';
 
-const mapStateToProps = state => ({
-    results: state.response.results,
-    resultsLoading: state.response.resultsLoading
-});
+// const mapStateToProps = state => ({
+//     results: state.response.results,
+//     resultsLoading: state.response.resultsLoading
+// });
 
-class PeopleResultsPage extends React.Component {
+export default class PeopleResultsPage extends React.Component {
     constructor(props) {
         super(props);
-        console.log('prp props:', props);
         this.state = {
+            results: [],
             personDetails: {
                 citizenData: [],
                 bankAccountData: [],
                 mobilesData: [],
                 vehicleData: []
             },
-            detailsLoaded: true
+            detailsLoaded: true,
+            peopleLoaded: false
         };
     };
+
+    componentDidMount() {
+
+        axios.post('http://localhost:8080/back-end/vehicle/getData', this.props.location.state, {
+            headers: {
+                Authorization: localStorage.getItem('token')
+            }
+        })
+            .then((response) => {
+                this.setState({
+                    results: [response.data],
+                    peopleLoaded: true
+                })
+                console.log('response', response.data)
+            });
+    }
 
     handleClick = (person) => {
         this.setState({
@@ -81,7 +98,8 @@ class PeopleResultsPage extends React.Component {
     }
 
     render() {
-        console.log('PD', this.state.personDetails);
+        console.log('state', this.props.location.state);
+        console.log('People', this.state.results);
         const { citizenData: [citizen = {}] } = this.state.personDetails;
         const { bankAccountData: [personBank = {}] } = this.state.personDetails;
         const { mobilesData: [personMobile = {}] } = this.state.personDetails;
@@ -90,7 +108,7 @@ class PeopleResultsPage extends React.Component {
 
         return (
             <div>
-                {!this.props.resultsLoading ? (this.props.results.length === 0 ? (<h3>No results found</h3>) : (
+                {!this.state.peopleLoaded ? (!this.state.results ? (<h3>No results found</h3>) : (
                     <Row>
                         <Col>
                             <Row>
@@ -156,12 +174,12 @@ class PeopleResultsPage extends React.Component {
     }
 }
 
-PeopleResultsPage.propTypes = {
-    results: PropTypes.array.isRequired,
-    getVehicle: PropTypes.func.isRequired
-};
+// PeopleResultsPage.propTypes = {
+//     results: PropTypes.array.isRequired,
+//     getVehicle: PropTypes.func.isRequired
+// };
 
-export default connect(mapStateToProps)(PeopleResultsPage);
+// export default connect(mapStateToProps)(PeopleResultsPage);
 
 
 

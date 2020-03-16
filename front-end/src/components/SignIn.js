@@ -78,6 +78,6 @@ SignIn.propTypes = {
         admin: state.signin.isAdmin,
         signedIn: true
     }
-}
+  }
 
 export default connect(mapStateToProps, {signIn})(SignIn);
