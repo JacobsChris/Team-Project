@@ -31,7 +31,7 @@ export default class VehicleResultsPage extends React.Component {
 
         axios.post('http://localhost:8080/back-end/vehicle/getData', data, {
             headers: {
-                Authorization: sessionStorage.jwt
+                Authorization: localStorage.getItem('token')
             }
         })
             .then((response) => {
@@ -58,7 +58,7 @@ export default class VehicleResultsPage extends React.Component {
         };
         axios.post('http://localhost:8080/back-end/vehicle/getData', data, {
             headers: {
-                Authorization: sessionStorage.jwt
+                Authorization: localStorage.getItem('token')
             }
         })
             .then((response) => {

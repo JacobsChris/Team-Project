@@ -13,7 +13,7 @@ export default function(state = initialState, action){
                 ...state,
                 user: [action.payload.data],
                 isAdmin: [action.payload.data.admin],
-                token: [action.payload.data.token]
+                // token: [action.payload.data.token]
             };
         case USERNAME: 
             console.log(action.payload.username)

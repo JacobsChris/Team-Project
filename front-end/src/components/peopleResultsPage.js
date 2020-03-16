@@ -37,7 +37,7 @@ class PeopleResultsPage extends React.Component {
         });
         axios.post('http://localhost:8080/back-end/person/getMatching', person, {
             headers: {
-                Authorization: sessionStorage.jwt
+                Authorization: localStorage.getItem('token')
             }
         })
             .then((response) => {

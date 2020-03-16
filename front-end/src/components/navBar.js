@@ -6,6 +6,7 @@ import store from '../redux/store';
 class NavBar extends React.Component {
 
     signout = () => {
+        // debugger;
         store.dispatch({
             type: 'SIGN_OUT',
           value: ''
