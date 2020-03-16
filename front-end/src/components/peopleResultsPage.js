@@ -5,7 +5,6 @@ import '../styles/peopleResults.css';
 import { MdPerson } from 'react-icons/md';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { getVehicle } from '../redux/actions/vehicleAction';
 
 const mapStateToProps = state => ({
     results: state.response.results,
@@ -162,7 +161,7 @@ PeopleResultsPage.propTypes = {
     getVehicle: PropTypes.func.isRequired
 };
 
-export default connect(mapStateToProps, { getVehicle })(PeopleResultsPage);
+export default connect(mapStateToProps)(PeopleResultsPage);
 
 
 
