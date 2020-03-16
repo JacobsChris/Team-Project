@@ -1,9 +1,13 @@
-import { GET_VEHICLE } from './types';
+import { GET_VEHICLE, SET_VEHICLE_RESULTS_LOADING } from './types';
 import axios from 'axios';
 
 export const getVehicle = (searchData) => dispatch => {
 
-    // console.log(searchData);
+    dispatch({
+        type: SET_VEHICLE_RESULTS_LOADING,
+        payload: true
+    });
+
     axios.post('http://localhost:8080/back-end/vehicle/getData/', searchData, {
         headers: {
             Authorization: sessionStorage.jwt
