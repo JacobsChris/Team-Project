@@ -5,7 +5,6 @@ import '../styles/peopleResults.css';
 import { MdPerson } from 'react-icons/md';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { getVehicle } from '../redux/actions/vehicleAction';
 
 const mapStateToProps = state => ({
     results: state.response.results,
@@ -38,7 +37,7 @@ class PeopleResultsPage extends React.Component {
         });
         axios.post('http://localhost:8080/back-end/person/getMatching', person, {
             headers: {
-                Authorization: sessionStorage.jwt
+                Authorization: localStorage.getItem('token')
             }
         })
             .then((response) => {
@@ -74,15 +73,11 @@ class PeopleResultsPage extends React.Component {
         }
     }
 
-    vehicleClick = (event, vehicleReg) => {
+    vehicleClick = (vehicleData) => () => {
 
-        const data = {
-            vehicleRegistrationNo: vehicleReg
-        };
+        console.log('plate', vehicleData[0].vehicleRegistrationNo);
 
-        this.props.getVehicle(data);
-
-        this.props.history.push('/user/home/vehicleresults')
+        this.props.history.push('/user/home/vehicleresults?plate=' + vehicleData[0].vehicleRegistrationNo);
     }
 
     render() {
@@ -144,7 +139,7 @@ class PeopleResultsPage extends React.Component {
                                             <li className="list-group-item">Mobile Number: {personMobile && personMobile.length > 0?
                                                 personMobile.phoneNumber : ''}</li>
                                             <li className="list-group-item">Associates: {this.getAcquaintances(acquaintancesData)}</li>
-                                            <li className="list-group-item">Vehicles: <a onClick={() => this.vehicleClick(vehicleData.vehicleRegistrationNo)}
+                                            <li className="list-group-item">Vehicles: <a onClick={this.vehicleClick(vehicleData)}
                                             className='stretched-link link-style'>{this.getVehicles(vehicleData)}</a> </li>
                                             <li className="list-group-item">Recent locations: </li>
                                         </ul>
@@ -166,7 +161,7 @@ PeopleResultsPage.propTypes = {
     getVehicle: PropTypes.func.isRequired
 };
 
-export default connect(mapStateToProps, { getVehicle })(PeopleResultsPage);
+export default connect(mapStateToProps)(PeopleResultsPage);
 
 
 

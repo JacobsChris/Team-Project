@@ -1,12 +1,10 @@
 import { GET_USER } from './types';
 import axios from 'axios';
 
-export const getUser = (searchData) => dispatch => {
-
-    console.log(searchData);
-    axios.post('http://localhost:8080/register/', searchData, {
+export const getUsers = (users) => dispatch => {
+    axios.get('http://localhost:8080/admin/getAllUsers/', {
         headers: {
-            Authorization: sessionStorage.jwt
+            Authorization: localStorage.getItem('token')
           }
     })
         .then(response =>

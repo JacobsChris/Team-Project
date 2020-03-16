@@ -1,20 +1,16 @@
 import React from 'react';
-import { Nav, Navbar} from 'react-bootstrap';
+import { Navbar } from 'react-bootstrap';
+import { Link } from "react-router-dom";
 import '../styles/nav.css';
 
 class SearchNavBar extends React.Component {
 
     render(){
         return (
-            <Navbar bg="dark" variant="dark" expand="md" id='search-nav'>
-                <Navbar.Toggle aria-controls="collapse"/>
-                    <Navbar.Collapse id="collapse">
-                        <Nav className='mr-auto ml-auto'>
-                            <Nav.Link href="/user/home/searchpeople">Search People</Nav.Link>
-                            <Nav.Link href="/user/home/searchvehicle">Search Vehicles</Nav.Link>
-                            <Nav.Link href="/user/home/searchlocation">Search Location</Nav.Link>
-                        </Nav>
-                    </Navbar.Collapse>
+            <Navbar bg="dark" variant="dark" expand="md" className='main-nav'> 
+                <Link to="./searchpeople">Search People</Link>
+                <Link to="./searchvehicle">Search Vehicles</Link>
+                <Link to="./searchlocation">Search Location</Link>
             </Navbar>
         )
     }

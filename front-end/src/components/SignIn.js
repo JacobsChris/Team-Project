@@ -1,6 +1,8 @@
 import React from 'react';
 import FormInput from './FormInput';
-import axios from 'axios';
+import { connect } from 'react-redux';
+import { signIn } from '../redux/actions/signInAction';
+import PropTypes from 'prop-types';
 
 class SignIn extends React.Component {
     constructor(props){
@@ -22,16 +24,17 @@ class SignIn extends React.Component {
             password: this.state.password            
         }
 
+        this.props.signIn(data);
 
-        console.log(data);
-        axios.post('http://localhost:8080/login/', data)
-        .then(res => {
-            console.log(res);
-            sessionStorage.setItem('jwt', res.data.token);
-            this.props.history.push("/user/home/searchpeople");
-        }).catch(err => {
-            console.log(err);
-        });  
+        if(this.props.signedIn){
+        setTimeout(() => {
+            if(this.props.admin[0]){
+                this.props.history.push("/admin/");
+            } else {
+                this.props.history.push("/user/home/searchpeople");
+            }
+          }, 1000);  
+        }
     }
 
     render(){
@@ -58,4 +61,17 @@ class SignIn extends React.Component {
     }
 }
 
-  export default SignIn;
+SignIn.propTypes = {
+    signIn: PropTypes.func.isRequired
+  };
+
+  function mapStateToProps(state) {
+      if(state.signin.token){
+    return {
+        admin: state.signin.isAdmin,
+        signedIn: true
+    }
+}
+}
+
+export default connect(mapStateToProps, {signIn})(SignIn);

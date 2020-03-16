@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, BrowserRouter } from 'react-router-dom';
+import Router from './components/router';
 import './App.css';
 import SearchPeople from './components/SearchPeople';
 import NavBar from './components/navBar';
@@ -17,15 +17,8 @@ import PersonLocation from './components/personLocation';
 import {LocationResults} from "./components/LocationResults";
 
 function App() {
-
-  const requireLogin = (to, from, next) => {
-    if (sessionStorage.getItem('jwt')) {
-      next();
-    }
-    next.redirect('/user/signin');
-  };
-
   return (
+
     <Provider store={store}>
       <BrowserRouter>
       <Route path='/user/' component={NavBar}></Route>
@@ -45,6 +38,5 @@ function App() {
     </Provider>
   );
 }
-
 
 export default App;
