@@ -16,7 +16,6 @@ export default function(state = initialState, action){
                 // token: [action.payload.data.token]
             };
         case USERNAME: 
-            console.log(action.payload.username)
             return {
                 ...state,
                 username: [action.payload.username]
@@ -25,7 +24,8 @@ export default function(state = initialState, action){
             return {
                 ...state,
                 isAdmin: '',
-                user: ''
+                user: '',
+                // token: ''
             }
         default:
             return state;

@@ -21,7 +21,7 @@ import PersonLocation from './personLocation';
 class Router extends React.Component {
     
     requireLogin = (to, from, next) => {
-        const token = localStorage.getItem("token");
+        const token = localStorage.getItem("token").slice(4);
         if(localStorage.getItem('token')){
             if (jwtDecode(token).exp < Date.now() / 1000) {
                 localStorage.clear();
@@ -34,7 +34,7 @@ class Router extends React.Component {
     }
 
     isAdmin = (to, from, next) => {
-            const token = localStorage.getItem("token");
+            const token = localStorage.getItem("token").slice(4);
             if(localStorage.getItem('token')){
                 if (jwtDecode(token).exp < Date.now() / 1000) {
                     localStorage.clear();
