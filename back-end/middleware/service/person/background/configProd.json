@@ -1,7 +1,0 @@
-{
-    "host": "34.76.99.44",
-    "database": "prod",
-    "username": "root",
-    "password": "BlackMamba",
-    "dialect": "mysql"
-  }
