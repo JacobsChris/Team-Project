@@ -1,11 +1,11 @@
 # TEAM APP NAME HERE
 
 ## WHAT IS
-###Brief:
+### Brief:
 
 A Single Page Application (SPA) to connect to a database and search for persons from given information.
 
-###How use:
+### How use:
 
 By navigating to the URL, do the search stuff.
 
@@ -19,21 +19,21 @@ throw repo at firebase and gcp
 dun.
 
 ##  HOW WORK
-###Tech involved:
+### Tech involved:
 MERN
 Jest
 GCP
 Firebase
 List from JSON Packagelockstuff
 SQL
-###Architecture
+### Architecture
 fancypicture
 
 ## FAQ YOU
 
-###Q It broke
+### Q It broke
 Answer: Get woke
 
-###Q I dum
+### Q I dum
 Answer: Git gud
 
