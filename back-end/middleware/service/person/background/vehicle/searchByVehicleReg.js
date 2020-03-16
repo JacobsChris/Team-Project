@@ -32,8 +32,8 @@ module.exports =
                 return [];
             }
         }
-        catch (e) {
-            throw "error occured on search by vehicle reg"
+        catch (e){
+            throw new Error("Error occurred on search by vehicle reg.")
         }
 
     }
