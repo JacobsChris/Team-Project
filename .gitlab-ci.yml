@@ -1,16 +1,16 @@
 image: node:latest
 
+before_script:
+  - cd ./backend_auth
+  - npm install
 cache:
   paths:
     - node_modules/
-
-deploy_production:
-  stage: deploy
-  environment: Production
+test:node:latest:
+  script:
+    - npm test
+    - firebase login
+    - firebase deploy
   only:
     - master
-  script:
-    - npm install -g firebase-tools
-    - npm install
-    - firebase use --token $FIREBASE_DEPLOY_KEY production
-    - firebase deploy --only functions
+    - dev
