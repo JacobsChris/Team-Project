@@ -14,10 +14,16 @@ router.post("/", function (req, res) {
     
     userModel.findOne({where: {username: req.body.username}})
         .then(result => {
-            
-            let comparison = bcrypt.compareSync(req.body.password, result.password);
 
-            if (comparison === false && req.body.password !== result.password) {
+            console.log(result);
+            if (result !== null) {
+                var comparison = bcrypt.compareSync(req.body.password, result.password);
+            }
+            else {
+                comparison = false;
+            }
+
+            if (comparison === false) {
                 let hashedPassword = userModel.passwordHash(req.body.password);
                 userModel.update({password: hashedPassword}, {where: {username: req.body.username}});
                 res.send("user updated");
