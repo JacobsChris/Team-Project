@@ -10,7 +10,10 @@ class NavBar extends React.Component {
             type: 'SIGN_OUT',
           value: ''
         });
-        localStorage.clear();
+        // if(localStorage.getItem('token')){
+        //     console.log('1')
+        //     localStorage.clear();
+        // }
         this.props.history.push('./signin')
     }
     render(){

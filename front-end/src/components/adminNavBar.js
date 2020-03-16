@@ -11,7 +11,9 @@ class AdminNavBar extends React.Component {
             type: 'SIGN_OUT',
           value: ''
         });
+        if(localStorage.getItem('token')){
         localStorage.clear();
+        }
         this.props.history.push('../user/signin')
     }
     render(){
