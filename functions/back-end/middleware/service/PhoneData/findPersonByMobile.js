@@ -12,9 +12,9 @@ module.exports =
         let aqNumber;
         for (let phone of mobiles) {
 
-            if (input.receiverNumber == phone.phoneNumber) {
+            if (input.receiverNumber === phone.phoneNumber) {
                 aqNumber = wildStr(input.callerNumber);
-            }else{
+            } else {
                 aqNumber = wildStr(input.receiverNumber);
             }
         }
