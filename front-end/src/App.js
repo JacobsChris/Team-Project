@@ -38,7 +38,7 @@ function App() {
           <GuardedRoute path='/user/home/peopleresults' component={PeopleResultsPage} />
           <GuardedRoute path='/user/home/personlocation' component={PersonLocation} />
           <GuardedRoute path='/user/home/vehicleresults' component={VehicleResultsPage} />
-          <GuardedRoute path='/user/home/testy' component={LocationResults}/>
+          <GuardedRoute path='/user/home/locationresults' component={LocationResults}/>
         </GuardProvider>
       <Route path='/user/signin' component={SignIn}></Route>
     </BrowserRouter>
