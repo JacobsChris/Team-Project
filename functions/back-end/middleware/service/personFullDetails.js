@@ -38,17 +38,17 @@ module.exports = async function (input) {
     }
 
 
-    // for (let mobile of mobiles) {
-    //     let data = await findCalls(mobile);
-    //     callHistory.push(data[0]);
-    // }
-    //
-    // if (callHistory[0]) {
-    //     for (let call of callHistory[0]) {
-    //         let data = await findPersonByMobile(call, mobiles);
-    //         acquaintances.push(data[0][0])
-    //     }
-    // }
+    for (let mobile of mobiles) {
+        let data = await findCalls(mobile);
+        callHistory.push(data[0]);
+    }
+
+    if (callHistory[0]) {
+        for (let call of callHistory[0]) {
+            let data = await findPersonByMobile(call, mobiles);
+            acquaintances.push(data[0][0])
+        }
+    }
     return {
         "citizenData": citizen,
         "bankAccountData": bankAccount,
