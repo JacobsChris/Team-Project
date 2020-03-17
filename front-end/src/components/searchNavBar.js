@@ -8,9 +8,9 @@ class SearchNavBar extends React.Component {
     render(){
         return (
             <Navbar bg="dark" variant="dark" expand="md" id='search-nav'> 
-                <Link className='search-nav-item' to="./searchpeople">Search People</Link>
-                <Link className='search-nav-item' to="./searchvehicle">Search Vehicles</Link>
-                <Link className='search-nav-item' to="./searchlocation">Search Location</Link>
+                <Link className='search-nav-item' to="/user/home/searchpeople">Search People</Link>
+                <Link className='search-nav-item' to="/user/home/searchvehicle">Search Vehicles</Link>
+                <Link className='search-nav-item' to="/user/home/searchlocation">Search Location</Link>
             </Navbar>
         )
     }

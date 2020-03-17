@@ -4,7 +4,7 @@ import '../styles/form.css';
 import DatePicker from './DateSelector.js';
 import "react-datepicker/dist/react-datepicker.css";
 import { Form, Button } from 'react-bootstrap';
-// import { connect } from 'react-redux';
+import { connect } from 'react-redux';
 // import { getPeople } from '../redux/actions/getAction';
 // import PropTypes from 'prop-types';
 
@@ -28,7 +28,7 @@ const countErrors = (errors) => {
   return count;
 };
 
-export default class SearchPeople extends React.Component {
+class SearchPeople extends React.Component {
 
   constructor(props) {
     super(props);
@@ -156,8 +156,14 @@ export default class SearchPeople extends React.Component {
     };
 
     if (this.state.formValid && getEmpty) {
-      if (window.location.pathname !== '/user/home/peopleresults') {
-        this.props.history.push('/user/home/peopleresults', data);
+      if(!this.props.admin){
+        if (window.location.pathname !== '/user/home/peopleresults') {
+          this.props.history.push('/user/home/peopleresults', data);
+        }
+      } else {
+        if (window.location.pathname !== '/admin/peopleresults') {
+          this.props.history.push('/admin/peopleresults', data);
+        }
       }
     }
   };
@@ -215,4 +221,10 @@ export default class SearchPeople extends React.Component {
 //   getPeople: PropTypes.func.isRequired
 // };
 
-// export default connect(null, { getPeople })(SearchPeople);
+function mapStateToProps(state){
+  return {
+    admin: state.signin.isAdmin
+  }
+}
+
+export default connect(mapStateToProps)(SearchPeople);
