@@ -74,6 +74,98 @@ const matchingData = {
             "driverLicenceID": "NEWTO851169GH9SQ 67"
         }
     ],
+    "vehicleSightings": [
+        {
+            "ANPRPointId": 1296,
+            "timestamp": "2015-05-01T05:55:52.000Z",
+            "vehicleRegistrationNumber": "JO24 RTP",
+            "anprId": 1296,
+            "streetName": "Blackwall Tunnel Northern Approach, A12",
+            "latitude": 51.53143204446358,
+            "longitude": -0.01826155971575289
+        },
+        {
+            "ANPRPointId": 4048,
+            "timestamp": "2015-05-01T06:01:12.000Z",
+            "vehicleRegistrationNumber": "JO24 RTP",
+            "anprId": 4048,
+            "streetName": "Bethnal Green Road, A1209",
+            "latitude": 51.52461141030367,
+            "longitude": -0.07222853762422214
+        },
+        {
+            "ANPRPointId": 1440,
+            "timestamp": "2015-05-01T15:12:41.000Z",
+            "vehicleRegistrationNumber": "JO24 RTP",
+            "anprId": 1440,
+            "streetName": "A12",
+            "latitude": 51.532270421063984,
+            "longitude": -0.01921653790510903
+        },
+        {
+            "ANPRPointId": 1296,
+            "timestamp": "2015-05-02T05:50:38.000Z",
+            "vehicleRegistrationNumber": "JO24 RTP",
+            "anprId": 1296,
+            "streetName": "Blackwall Tunnel Northern Approach, A12",
+            "latitude": 51.53143204446358,
+            "longitude": -0.01826155971575289
+        },
+        {
+            "ANPRPointId": 4048,
+            "timestamp": "2015-05-02T05:55:58.000Z",
+            "vehicleRegistrationNumber": "JO24 RTP",
+            "anprId": 4048,
+            "streetName": "Bethnal Green Road, A1209",
+            "latitude": 51.52461141030367,
+            "longitude": -0.07222853762422214
+        },
+        {
+            "ANPRPointId": 1440,
+            "timestamp": "2015-05-02T14:31:18.000Z",
+            "vehicleRegistrationNumber": "JO24 RTP",
+            "anprId": 1440,
+            "streetName": "A12",
+            "latitude": 51.532270421063984,
+            "longitude": -0.01921653790510903
+        },
+        {
+            "ANPRPointId": 7321,
+            "timestamp": "2015-05-02T14:23:26.000Z",
+            "vehicleRegistrationNumber": "JO24 RTP",
+            "anprId": 7321,
+            "streetName": "Old Street, A5201",
+            "latitude": 51.52462854663943,
+            "longitude": -0.09417664470173367
+        },
+        {
+            "ANPRPointId": 4048,
+            "timestamp": "2015-05-03T05:50:02.000Z",
+            "vehicleRegistrationNumber": "JO24 RTP",
+            "anprId": 4048,
+            "streetName": "Bethnal Green Road, A1209",
+            "latitude": 51.52461141030367,
+            "longitude": -0.07222853762422214
+        },
+        {
+            "ANPRPointId": 1296,
+            "timestamp": "2015-05-03T05:44:42.000Z",
+            "vehicleRegistrationNumber": "JO24 RTP",
+            "anprId": 1296,
+            "streetName": "Blackwall Tunnel Northern Approach, A12",
+            "latitude": 51.53143204446358,
+            "longitude": -0.01826155971575289
+        },
+        {
+            "ANPRPointId": 1440,
+            "timestamp": "2015-05-03T14:28:03.000Z",
+            "vehicleRegistrationNumber": "JO24 RTP",
+            "anprId": 1440,
+            "streetName": "A12",
+            "latitude": 51.532270421063984,
+            "longitude": -0.01921653790510903
+        }
+    ],
     "bankDetailsData": [
         {
             "bankcardId": 193894,
@@ -91,7 +183,13 @@ const matchingData = {
                 "eposId": 32967,
                 "bankCardNumber": 2634571841835896,
                 "payeeAccount": 72576527,
-                "amount": 35.58
+                "amount": 35.58,
+                "id": 32967,
+                "vendor": "CoCo",
+                "streetName": "St. John Street, B501",
+                "postcode": "EC1V0AZ",
+                "latitude": 51.5260805510584,
+                "longitude": -0.103622249912791
             }
         ],
         "atm": [
@@ -100,7 +198,12 @@ const matchingData = {
                 "atmId": 1984,
                 "bankCardNumber": 2634571841835896,
                 "type": "Cash Withdrawal",
-                "amount": 30
+                "amount": 30,
+                "operator": "HSBC Bank",
+                "streetName": "Gray's Inn Road",
+                "postcode": "A5200",
+                "latitude": 51.5215957950182,
+                "longitude": -0.113351357217604
             }
         ]
     },
