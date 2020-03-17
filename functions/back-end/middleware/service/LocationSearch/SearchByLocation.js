@@ -41,8 +41,6 @@ module.exports =
         inputLatitude = exactStr(inputLatitude);
         inputLongitude = exactStr(inputLongitude);
         Radius = exactStr(Radius);
-        console.log("1", inputLatitude, "2", inputLongitude, "3", Radius);
-
 
         return Promise.all([
             searchCamerasByArea(inputLatitude, inputLongitude, Radius,minLat,maxLat,minLon,maxLon),

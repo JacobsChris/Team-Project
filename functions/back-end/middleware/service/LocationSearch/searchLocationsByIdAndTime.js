@@ -52,6 +52,7 @@ module.exports =
         const limit = (input.limit);
         const eventIdTimeAndDetails = [];
 
+        console.log(input)
 
         try {
             if (input.cellTowerId !== undefined) {
