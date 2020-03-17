@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import FormInput from './FormInput.js';
 import "react-datepicker/dist/react-datepicker.css";
 import { Form, Button } from 'react-bootstrap';
-import '../styles/searchVehicle.css';
+import '../styles/form.css';
 
 export default class SearchVehicle extends Component {
     constructor(props){

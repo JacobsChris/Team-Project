@@ -7,10 +7,10 @@ class SearchNavBar extends React.Component {
 
     render(){
         return (
-            <Navbar bg="dark" variant="dark" expand="md" className='main-nav'> 
-                <Link to="./searchpeople">Search People</Link>
-                <Link to="./searchvehicle">Search Vehicles</Link>
-                <Link to="./searchlocation">Search Location</Link>
+            <Navbar bg="dark" variant="dark" expand="md" id='search-nav'> 
+                <Link className='search-nav-item' to="./searchpeople">Search People</Link>
+                <Link className='search-nav-item' to="./searchvehicle">Search Vehicles</Link>
+                <Link className='search-nav-item' to="./searchlocation">Search Location</Link>
             </Navbar>
         )
     }
