@@ -1,0 +1,17 @@
+image: node:latest
+
+before_script:
+  - cd ./backend_auth
+  - npm install
+cache:
+  paths:
+    - node_modules/
+test:node:latest:
+  script:
+    - npm test
+    - firebase login
+    - firebase deploy
+  only:
+    - master
+    - dev
+    - devier-integration-into-dev
