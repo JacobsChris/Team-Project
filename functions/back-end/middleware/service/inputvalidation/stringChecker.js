@@ -15,7 +15,8 @@ module.exports =
         if (typeof inputStr != 'string') {
             throw new Error("Not a string error")
         } else {
-            inputStr = wildStr(sanitiseSQLInput(inputStr));
+            inputStr = sanitiseSQLInput(inputStr);
+            inputStr = wildStr(inputStr);
 
             return inputStr;
         }
