@@ -39,7 +39,7 @@ export default class PeopleResultsPage extends React.Component {
                     results: [response.data],
                     peopleLoaded: true
                 })
-                console.log('response', response.data)
+                console.log('response', this.state.results);
             });
     }
 

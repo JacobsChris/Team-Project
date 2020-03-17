@@ -8,8 +8,10 @@
     font-size: 25px;
 }
 
-#search-nav-item {
-    padding-left: 100px;
+.search-nav-item {
+    margin-left: auto;
+    margin-right: auto;
+    color: white;
 }
 
 #brand {
