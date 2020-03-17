@@ -5,6 +5,7 @@ const findPersonByMobile = require('./PhoneData/findPersonByMobile');
 const findDetailsByName = require('./FindByPerson/findDetailsByName');
 const findATMPointByATM_ID = require("./Financial/findATMPointByATM_ID");
 const findEposTerminal = require("./Financial/findEPOSTerminalByEposID");
+const findVehicleObs = require('./vehicle/findVehicleObsByVehicle');
 
 module.exports = async function (input) {
 
@@ -14,34 +15,43 @@ module.exports = async function (input) {
 
     [citizen, bankAccount, mobiles, vehicle] = await findDetailsByName(input);
 
-    for (let account of bankAccount) {
-        let data = await findDetailsByBankAccount(account);
-        bankDetails.push(data[0][0]);
+    for (let i = 0; i < vehicle.length; i++) {
+        console.log("vehicle", vehicle);
+        let car = vehicle[i];
+        console.log("car", car);
+
+        let data = await findVehicleObs(car);
+        console.log("data", data)
     }
 
-    for (let details of bankDetails) {
-        const data = await findTransactionsByBankCard(details);
-        transactions.epos = data[0];
-        transactions.atm = data[1];
-    }
-
-    for (let i = 0; i < transactions.epos.length; i++) {
-        const epos = transactions.epos[i];
-        const data = await findEposTerminal(epos.eposId);
-        transactions.epos[i] = {...epos, ...data[0]};
-    }
-
-    for (let i = 0; i < transactions.atm.length; i++) {
-        const atm = transactions.atm[i];
-        const data = await findATMPointByATM_ID(atm.atmId);
-        transactions.atm[i] = {...atm, ...data[0]};
-    }
-
-
-    for (let mobile of mobiles) {
-        let data = await findCalls(mobile);
-        callHistory.push(data[0]);
-    }
+    // for (let account of bankAccount) {
+    //     let data = await findDetailsByBankAccount(account);
+    //     bankDetails.push(data[0][0]);
+    // }
+    //
+    // for (let details of bankDetails) {
+    //     const data = await findTransactionsByBankCard(details);
+    //     transactions.epos = data[0];
+    //     transactions.atm = data[1];
+    // }
+    //
+    // for (let i = 0; i < transactions.epos.length; i++) {
+    //     const epos = transactions.epos[i];
+    //     const data = await findEposTerminal(epos.eposId);
+    //     transactions.epos[i] = {...epos, ...data[0]};
+    // }
+    //
+    // for (let i = 0; i < transactions.atm.length; i++) {
+    //     const atm = transactions.atm[i];
+    //     const data = await findATMPointByATM_ID(atm.atmId);
+    //     transactions.atm[i] = {...atm, ...data[0]};
+    // }
+    //
+    //
+    // for (let mobile of mobiles) {
+    //     let data = await findCalls(mobile);
+    //     callHistory.push(data[0]);
+    // }
 
     if (callHistory[0]) {
         for (let call of callHistory[0]) {
