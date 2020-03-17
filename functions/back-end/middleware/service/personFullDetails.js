@@ -11,41 +11,42 @@ module.exports = async function (input) {
 
     let citizen = [], mobiles = [], bankAccount = [], vehicle = [], bankDetails = [],
         transactions = {epos: [], atm: []},
-        callHistory = [], acquaintances = [];
+        callHistory = [], acquaintances = [], vehicleSightings = [];
 
     [citizen, bankAccount, mobiles, vehicle] = await findDetailsByName(input);
 
     for (let i = 0; i < vehicle.length; i++) {
-        console.log("vehicle", vehicle);
         let car = vehicle[i];
-        console.log("car", car);
-
-        let data = await findVehicleObs(car);
-        console.log("data", data)
+        let data;
+        if (car.vehicleRegistrationNo !== "") {
+            data = await findVehicleObs(car);
+        }
+        vehicleSightings.push(data[0]);
     }
 
-    // for (let account of bankAccount) {
-    //     let data = await findDetailsByBankAccount(account);
-    //     bankDetails.push(data[0][0]);
-    // }
-    //
-    // for (let details of bankDetails) {
-    //     const data = await findTransactionsByBankCard(details);
-    //     transactions.epos = data[0];
-    //     transactions.atm = data[1];
-    // }
-    //
-    // for (let i = 0; i < transactions.epos.length; i++) {
-    //     const epos = transactions.epos[i];
-    //     const data = await findEposTerminal(epos.eposId);
-    //     transactions.epos[i] = {...epos, ...data[0]};
-    // }
-    //
-    // for (let i = 0; i < transactions.atm.length; i++) {
-    //     const atm = transactions.atm[i];
-    //     const data = await findATMPointByATM_ID(atm.atmId);
-    //     transactions.atm[i] = {...atm, ...data[0]};
-    // }
+
+    for (let account of bankAccount) {
+        let data = await findDetailsByBankAccount(account);
+        bankDetails.push(data[0][0]);
+    }
+
+    for (let details of bankDetails) {
+        const data = await findTransactionsByBankCard(details);
+        transactions.epos = data[0];
+        transactions.atm = data[1];
+    }
+
+    for (let i = 0; i < transactions.epos.length; i++) {
+        const epos = transactions.epos[i];
+        const data = await findEposTerminal(epos.eposId);
+        transactions.epos[i] = {...epos, ...data[0]};
+    }
+
+    for (let i = 0; i < transactions.atm.length; i++) {
+        const atm = transactions.atm[i];
+        const data = await findATMPointByATM_ID(atm.atmId);
+        transactions.atm[i] = {...atm, ...data[0]};
+    }
     //
     //
     // for (let mobile of mobiles) {
@@ -64,6 +65,7 @@ module.exports = async function (input) {
         "bankAccountData": bankAccount,
         "mobilesData": mobiles,
         "vehicleData": vehicle,
+        "vehicleSightings": vehicleSightings[0],
         "bankDetailsData": bankDetails,
         "transactionsData": transactions,
         "callHistoryData": callHistory[0],
