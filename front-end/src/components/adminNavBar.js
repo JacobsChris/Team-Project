@@ -23,11 +23,11 @@ class AdminNavBar extends React.Component {
         return (
             <Navbar bg="dark" variant="dark" expand="md" className='main-nav'> 
                 <Link id='brand' to="/admin/home" className='mr-auto'>REDSHIFT</Link>
-                <Link to="/admin/home">HOME</Link>
-                <Link to="/admin/adduser">ADD USER</Link>
-                <Link to="/admin/users">VIEW USERS</Link>
-                <Link to="/admin/help">HELP</Link>
-                <Link onClick={this.signout}>SIGN OUT</Link>
+                <Link className='nav-item' to="/admin/home">HOME</Link>
+                <Link className='nav-item' to="/admin/adduser">ADD USER</Link>
+                <Link className='nav-item' to="/admin/users">VIEW USERS</Link>
+                <Link className='nav-item' to="/admin/help">HELP</Link>
+                <Link className='nav-item' onClick={this.signout}>SIGN OUT</Link>
             </Navbar>
         )
     }

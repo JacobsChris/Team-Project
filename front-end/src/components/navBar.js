@@ -21,9 +21,9 @@ class NavBar extends React.Component {
         return (
                 <Navbar bg="dark" variant="dark" expand="md" className='main-nav'> 
                     <Link id='brand' className='mr-auto' to="/user/home">REDSHIFT</Link>
-                    <Link to="/user/home">HOME</Link>
-                    <Link to="/user/help">HELP</Link>
-                    <Link onClick={this.signout} to="/user/signin">SIGN OUT</Link>
+                    <Link className='nav-item' to="/user/home">HOME</Link>
+                    <Link className='nav-item' to="/user/help">HELP</Link>
+                    <Link className='nav-item' onClick={this.signout} to="/user/signin">SIGN OUT</Link>
                 </Navbar>
         )
     }

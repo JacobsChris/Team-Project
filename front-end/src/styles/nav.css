@@ -16,4 +16,11 @@
 
 #brand {
     color: white;
+    margin-left: 50px;
+}
+
+.nav-item {
+    margin-left: 50px;
+    margin-right: 50px;
+    color: white;
 }
