@@ -3,8 +3,9 @@ import FormInput from './FormInput.js';
 import "react-datepicker/dist/react-datepicker.css";
 import { Form, Button } from 'react-bootstrap';
 import '../styles/form.css';
+import { connect } from 'react-redux';
 
-export default class SearchVehicle extends Component {
+class SearchVehicle extends Component {
     constructor(props){
         super(props);
         this.state = ({
@@ -36,6 +37,17 @@ export default class SearchVehicle extends Component {
         if (window.location.pathname !== '/user/home/vehicleresults'){
           this.props.history.push('/user/home/vehicleresults?plate=' + reg);
         }
+        
+            if(!this.props.admin){
+                if (window.location.pathname !== '/user/home/vehicleresults'){
+                    this.props.history.push('/user/home/vehicleresults?plate=' + reg);
+                  }
+            } else {
+                if (window.location.pathname !== '/admin/vehicleresults'){
+                    this.props.history.push('/admin/vehicleresults?plate=' + reg);
+                  }
+            }
+          
       }
 
     render() {
@@ -56,3 +68,11 @@ export default class SearchVehicle extends Component {
         )
     }
 }
+
+function mapStateToProps(state){
+    return {
+        admin: state.signin.isAdmin
+    }
+}
+
+export default connect(mapStateToProps)(SearchVehicle)
