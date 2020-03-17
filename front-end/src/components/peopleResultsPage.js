@@ -84,8 +84,12 @@ export default class PeopleResultsPage extends React.Component {
     }
 
     vehicleClick = (vehicleData) => () => {
-
         this.props.history.push('/user/home/vehicleresults?plate=' + vehicleData[0].vehicleRegistrationNo);
+    }
+
+    recentLocation = () => {
+        const { bankAccountData } = this.state.personDetails;
+        this.props.history.push('/user/home/personlocation?bank=' + bankAccountData);
     }
 
     render() {
@@ -149,7 +153,8 @@ export default class PeopleResultsPage extends React.Component {
                                             <li className="list-group-item">Associates: {this.getAcquaintances(acquaintancesData)}</li>
                                             <li className="list-group-item">Vehicles: <a onClick={this.vehicleClick(vehicleData)}
                                             className='stretched-link link-style'>{this.getVehicles(vehicleData)}</a> </li>
-                                            <li className="list-group-item">Recent locations: </li>
+                                            <li className="list-group-item">Recent locations: <a onClick={this.recentLocation} 
+                                            className='stretched-link link-style'></a></li>
                                         </ul>
                                     </Card.Body>
                                 </Card>

@@ -20,6 +20,10 @@ export class PersonLocation extends React.Component {
         }
     }
 
+    componentDidMount() {
+        console.log('props', this.props.location.state)
+    }
+
     onMarkerClick = (props, marker, event) =>
         this.setState({
             selectedMarker: props,
