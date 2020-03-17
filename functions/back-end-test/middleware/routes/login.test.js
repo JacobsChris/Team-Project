@@ -1,11 +1,6 @@
 const app = require('../../../back-end/app');
 const request = require('supertest');
-
-
-const goodUser = {
-    "username": "mynameisadmin",
-    "password": "Mypass123!"
-};
+const goodUser = require('../../adminUser.json');
 
 const badUser = {
     "username": "root",
