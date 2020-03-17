@@ -1,6 +1,6 @@
 import React from 'react';
 import FormInput from './FormInput.js';
-import '../styles/searchPeople.css';
+import '../styles/form.css';
 import DatePicker from './DateSelector.js';
 import "react-datepicker/dist/react-datepicker.css";
 import { Form, Button } from 'react-bootstrap';
