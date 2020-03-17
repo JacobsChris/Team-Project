@@ -6,6 +6,7 @@ const findDetailsByName = require('./FindByPerson/findDetailsByName');
 const findATMPointByATM_ID = require("./Financial/findATMPointByATM_ID");
 const findEposTerminal = require("./Financial/findEPOSTerminalByEposID");
 const findVehicleObs = require('./vehicle/findVehicleObsByVehicle');
+const findANPRCamLoc = require("./vehicle/findANPRCameraLocation");
 
 module.exports = async function (input) {
 
@@ -23,7 +24,13 @@ module.exports = async function (input) {
         }
         vehicleSightings.push(data[0]);
     }
+    vehicleSightings = vehicleSightings[0];
 
+    for (let i = 0; i < vehicleSightings.length; i++) {
+        const sighting = vehicleSightings[i];
+        let data = await findANPRCamLoc(sighting);
+        vehicleSightings[i] = {...sighting, ...data[0][0]};
+    }
 
     for (let account of bankAccount) {
         let data = await findDetailsByBankAccount(account);
@@ -47,12 +54,12 @@ module.exports = async function (input) {
         const data = await findATMPointByATM_ID(atm.atmId);
         transactions.atm[i] = {...atm, ...data[0]};
     }
-    //
-    //
-    // for (let mobile of mobiles) {
-    //     let data = await findCalls(mobile);
-    //     callHistory.push(data[0]);
-    // }
+
+
+    for (let mobile of mobiles) {
+        let data = await findCalls(mobile);
+        callHistory.push(data[0]);
+    }
 
     if (callHistory[0]) {
         for (let call of callHistory[0]) {
@@ -60,12 +67,14 @@ module.exports = async function (input) {
             acquaintances.push(data[0][0])
         }
     }
+
+
     return {
         "citizenData": citizen,
         "bankAccountData": bankAccount,
         "mobilesData": mobiles,
         "vehicleData": vehicle,
-        "vehicleSightings": vehicleSightings[0],
+        "vehicleSightings": vehicleSightings,
         "bankDetailsData": bankDetails,
         "transactionsData": transactions,
         "callHistoryData": callHistory[0],
