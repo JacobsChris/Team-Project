@@ -211,8 +211,4 @@ export default class SearchPeople extends React.Component {
   }
 }
 
-// SearchPeople.propTypes = {
-//   getPeople: PropTypes.func.isRequired
-// };
 
-// export default connect(null, { getPeople })(SearchPeople);
