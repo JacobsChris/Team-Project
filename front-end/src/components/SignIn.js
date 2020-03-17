@@ -29,6 +29,7 @@ class SignIn extends React.Component {
 
         setTimeout(() => {
             if(localStorage.getItem('token')){
+                console.log(this.props)
                 if(this.props.admin[0]){
                     this.props.history.push("/admin/searchpeople");
                 } else {
