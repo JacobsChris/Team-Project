@@ -13,6 +13,6 @@ module.exports =     /**
      function searchEposTerminalByArea(inputLatitude, inputLongitude, Radius,minLat,maxLat,minLon,maxLon) {
         let searchCameras = "select * from eposTerminals where (latitude Between " + minLat + " And " + maxLat +
             ") And (longitude Between " + minLon + " And " + maxLon +");";
-        return auth.SQLauthenticate(searchCameras);
+        return auth(searchCameras);
 
 };

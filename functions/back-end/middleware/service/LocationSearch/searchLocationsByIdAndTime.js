@@ -47,7 +47,7 @@ module.exports =
      *  @require this function to work it requires a JSON object to be passed into it
      *  */
     async function searchLocationsByIdAndTime(input) {
-        const intialTimeStamp = exactStr(input.intialTimeStamp);
+        const intialTimeStamp = exactStr(input.initialTimeStamp);
         const finalTimeStamp = exactStr(input.finalTimeStamp);
         const limit = (input.limit);
         const eventIdTimeAndDetails = [];
