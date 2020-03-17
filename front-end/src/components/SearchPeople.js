@@ -217,10 +217,6 @@ class SearchPeople extends React.Component {
   }
 }
 
-// SearchPeople.propTypes = {
-//   getPeople: PropTypes.func.isRequired
-// };
-
 function mapStateToProps(state){
   return {
     admin: state.signin.isAdmin
@@ -228,3 +224,4 @@ function mapStateToProps(state){
 }
 
 export default connect(mapStateToProps)(SearchPeople);
+
