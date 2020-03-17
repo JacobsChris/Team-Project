@@ -70,6 +70,23 @@ export default class VehicleResultsPage extends React.Component {
             });
     };
 
+    personClick = (vehicleData) => () => {
+
+        console.log('personclick', vehicleData);
+
+        const data = {
+            citizenID: '',
+            forenames: vehicleData.forenames,
+            surname: vehicleData.surname,
+            homeAddress: vehicleData.address,
+            dateOfBirth: vehicleData.dateOfBirth,
+            placeOfBirth: '',
+            sex: ''
+          };
+
+        this.props.history.push('/user/home/peopleresults', data);
+    }
+
     render() {
         const vehicleData = this.state.vehicleDetails;
         console.log('results', this.state.results);
@@ -131,9 +148,10 @@ export default class VehicleResultsPage extends React.Component {
                                                 <h5>Registration Date</h5>{vehicleData !== undefined ?
                                                     vehicleData.registrationDate : ' '}</li>
                                             <li className="list-group-item">
-                                                <h5>Owner</h5>{vehicleData !== undefined ?
-                                                    vehicleData.forenames : ' '}{' '} {vehicleData !== undefined ?
-                                                        vehicleData.surname : ' '}</li>
+                                                <h5>Owner</h5><a onClick={this.personClick(vehicleData)}
+                                            className='stretched-link link-style'>{vehicleData !== undefined ?
+                                                vehicleData.forenames : ' '}{' '} {vehicleData !== undefined ?
+                                                    vehicleData.surname : ' '}</a></li>
                                         </ul>
                                     </Card.Body>
                                 </Card>
