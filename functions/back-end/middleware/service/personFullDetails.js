@@ -13,7 +13,8 @@ module.exports = async function (input) {
 
     let citizen = [], mobiles = [], bankAccount = [], vehicle = [], bankDetails = [],
         transactions = {epos: [], atm: []},
-        callHistory = [], acquaintances = [], vehicleSightings = [], acquaintancesCallHistory = [];
+        callHistory = [], vehicleSightings = [], acquaintancesCallHistory = [], targetHasCalled = [],
+        targetHasBeenCalledBy = [];
 
     [citizen, bankAccount, mobiles, vehicle] = await findDetailsByName(input);
 
@@ -72,8 +73,8 @@ module.exports = async function (input) {
     for (let call of acquaintancesCallHistory[0]) {
         console.log("call2", call);
         let data = await findPersonByMobile(call, mobiles);
-        if (!(acquaintances.includes(data[0][0]))) {
-            acquaintances.push(data[0][0])
+        if (!(targetHasCalled.includes(data[0][0]))) {
+            targetHasCalled.push(data[0][0])
         }
     }
 
@@ -82,8 +83,8 @@ module.exports = async function (input) {
         console.log("mobiles", mobiles);
         let data = await findPersonByMobile(call, mobiles);
         console.log("data", data);
-        if (!(acquaintances.includes(data[0][0]))) {
-            acquaintances.push(data[0][0])
+        if (!(targetHasBeenCalledBy.includes(data[0][0]))) {
+            targetHasBeenCalledBy.push(data[0][0])
         }
     }
 
@@ -97,7 +98,8 @@ module.exports = async function (input) {
         "bankDetailsData": bankDetails,
         "transactionsData": transactions,
         "callHistoryData": callHistory[0],
-        "acquaintancesData": acquaintances
+        "targetHasCalled": targetHasCalled,
+        "targetHasBeenCalledBy": targetHasBeenCalledBy
     }
 
 
