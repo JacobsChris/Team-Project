@@ -16,7 +16,7 @@ module.exports =
             " And " +
             maxLat +
             ") And (longitude Between " + minLon + " And " + maxLon +");";
-        return auth.SQLauthenticate(searchCameras);
+        return auth(searchCameras);
 
 };
 

@@ -6,14 +6,25 @@ const checksIfLatAndLongsAreWithinASetCircle = require("../middleware/service/Lo
 const searchLocationsByIdAndTime = require("../middleware/service/LocationSearch/searchLocationsByIdAndTime");
 
 router.post("/getLocationEventsInArea", async function (req, res) {
-    let latitude = req.body.latitude;
-    let longitude = req.body.longitude;
-    let cell = [], cam = [], atm = [], epos = [];
-    [[cell], [cam], [atm], [epos]] = await searchByLocation(latitude, longitude, req.body.radius);
+    try {
+        let latitude = req.body.latitude;
+        let longitude = req.body.longitude;
+        let intialTimeStampInput = req.body.startTime;
+        let finalTimeStampInput = req.body.endTime;
+        const [cam, atm, cell, epos] = await searchByLocation(latitude, longitude, req.body.radius);
 
-    let idObject = checksIfLatAndLongsAreWithinASetCircle({latitude, longitude}, req.body.radius, cam, atm, cell, epos);
+        let idObject = await checksIfLatAndLongsAreWithinASetCircle({
+            latitude,
+            longitude
+        }, req.body.radius, cam, atm, cell, epos);
 
-    await searchLocationsByIdAndTime(idObject, req.body.startTime, req.body.endTime)
+        let returnStatement =  await searchLocationsByIdAndTime(idObject,intialTimeStampInput,finalTimeStampInput).then(data => res.send(data));
+        return returnStatement;
+    } catch (e) {
+        console.info(e.name);
+        console.info(e.message);
+    }
+
 });
 
 module.exports = router;

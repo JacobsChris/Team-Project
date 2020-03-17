@@ -30,19 +30,17 @@ module.exports =
      *  @require this function to work it requires a JSON object to be passed into JsonToStringDetails()
      *  */
      function searchByLocation(inputLatitude, inputLongitude, Radius) {
-        let earthR = 6371;
+        let earthR = 6371.0;
 
         //create a box defined by the input query
-        let maxLat = inputLatitude + rad2Deg.rad2Deg(Radius/earthR);
-        let minLat = inputLatitude - rad2Deg.rad2Deg(Radius/earthR);
-        let maxLon = inputLongitude + rad2Deg.rad2Deg(Math.asin(Radius/earthR) / Math.cos(rad2Deg.rad2Deg(inputLatitude)));
-        let minLon = inputLongitude - rad2Deg.rad2Deg(Math.asin(Radius/earthR) / Math.cos(rad2Deg.rad2Deg(inputLatitude)));
+        let maxLat = +inputLatitude + rad2Deg(Radius/earthR);
+        let minLat = inputLatitude - rad2Deg(Radius/earthR);
+        let maxLon = +inputLongitude + rad2Deg(Math.asin(Radius/earthR) / Math.cos(rad2Deg(inputLatitude)));
+        let minLon = inputLongitude - rad2Deg(Math.asin(Radius/earthR) / Math.cos(rad2Deg(inputLatitude)));
 
         inputLatitude = exactStr(inputLatitude);
         inputLongitude = exactStr(inputLongitude);
         Radius = exactStr(Radius);
-        console.log("1", inputLatitude, "2", inputLongitude, "3", Radius);
-
 
         return Promise.all([
             searchCamerasByArea(inputLatitude, inputLongitude, Radius,minLat,maxLat,minLon,maxLon),

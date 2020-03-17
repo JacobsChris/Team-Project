@@ -19,6 +19,7 @@ module.exports =
         } else {
             let searchCameras = "select * from vehicleObservations where (timestamp Between " + intialTimeStamp + " And " + finalTimeStamp + ") AND ANPRPointId=" + anprId + " " +
                 "Limit 10000;";
+            console.log(searchCameras)
             return auth(searchCameras);
         }
 
