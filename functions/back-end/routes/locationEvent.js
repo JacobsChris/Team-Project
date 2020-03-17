@@ -11,6 +11,7 @@ router.post("/getLocationEventsInArea", async function (req, res) {
         let longitude = req.body.longitude;
         let intialTimeStampInput = req.body.startTime;
         let finalTimeStampInput = req.body.endTime;
+        let limit = req.body.limit;
         const [cam, atm, cell, epos] = await searchByLocation(latitude, longitude, req.body.radius);
 
         let idObject = await checksIfLatAndLongsAreWithinASetCircle({
@@ -18,7 +19,13 @@ router.post("/getLocationEventsInArea", async function (req, res) {
             longitude
         }, req.body.radius, cam, atm, cell, epos);
 
-        let returnStatement =  await searchLocationsByIdAndTime(idObject,intialTimeStampInput,finalTimeStampInput).then(data => res.send(data));
+        let returnStatement = await searchLocationsByIdAndTime(idObject, intialTimeStampInput, finalTimeStampInput,limit)
+            .then(result => {
+                res.send(result);
+            })
+            .catch(error => {
+                res.send("An error has occurred while fetching data" + " " + error);
+            });
         return returnStatement;
     } catch (e) {
         console.info(e.name);
