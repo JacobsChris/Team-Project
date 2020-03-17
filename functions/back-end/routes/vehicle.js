@@ -4,7 +4,7 @@ const searchByVehicleReg = require("../middleware/service/vehicle/searchByVehicl
 
 router.post("/getData/", function (req, res) {
 
-    searchByVehicleReg(req.body).then(data => res.send((data[0])));
+    searchByVehicleReg(req.body).then(data => res.send((data)));
 });
 
 module.exports = router;
