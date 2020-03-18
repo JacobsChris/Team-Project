@@ -8,12 +8,14 @@ const findATMPointByATM_ID = require("./Financial/findATMPointByATM_ID");
 const findEposTerminal = require("./Financial/findEPOSTerminalByEposID");
 const findVehicleObs = require('./vehicle/findVehicleObsByVehicle');
 const findANPRCamLoc = require("./vehicle/findANPRCameraLocation");
+const findCellTower = require("./PhoneData/findCellTowerLocationBasedOnCellTowerId");
 
 module.exports = async function (input) {
 
     let citizen = [], mobiles = [], bankAccount = [], vehicle = [], bankDetails = [],
         transactions = {epos: [], atm: []},
-        callHistory = [], vehicleSightings = [], acquaintancesCallHistory = [], targetHasCalled = [],
+        inComingCallHistory = [], outGoingCallHistory = [], vehicleSightings = [], acquaintancesCallHistory = [],
+        targetHasCalled = [],
         targetHasBeenCalledBy = [];
 
     [citizen, bankAccount, mobiles, vehicle] = await findDetailsByName(input);
@@ -60,33 +62,40 @@ module.exports = async function (input) {
 
     for (let mobile of mobiles) {
         let data = await findAllCalls(mobile);
-        callHistory.push(data[0]);
+        outGoingCallHistory.push(data[0]);
+        inComingCallHistory.push(data[1])
+    }
+    outGoingCallHistory = outGoingCallHistory[0];
+    inComingCallHistory = inComingCallHistory[0];
+
+    for (let i = 0; i < outGoingCallHistory.length; i++) {
+        const phoneCall = outGoingCallHistory[i];
+        console.log("!!!!!!!!!!!!!!", phoneCall);
+        let data = await findCellTower(phoneCall.callCellTowerId);
+        console.log("££££££££££££££££", data);
+        // outGoingCallHistory[i] = {...phoneCall,...data[0]}
+        //TODO: get data in the right format, so that I can add the location of the target to the phone call history
     }
 
-    for (let mobile of mobiles) {
-        let data = await findAcquaintanceCalls(mobile);
-        acquaintancesCallHistory.push(data[0]);
-        acquaintancesCallHistory.push(data[1]);
-    }
-    console.log("HERE!!!!!!!!!!!!", acquaintancesCallHistory);
-
-    for (let call of acquaintancesCallHistory[0]) {
-        console.log("call2", call);
-        let data = await findPersonByMobile(call, mobiles);
-        if (!(targetHasCalled.includes(data[0][0]))) {
-            targetHasCalled.push(data[0][0])
-        }
-    }
-
-    for (let call of acquaintancesCallHistory[1]) {
-        console.log("call", call);
-        console.log("mobiles", mobiles);
-        let data = await findPersonByMobile(call, mobiles);
-        console.log("data", data);
-        if (!(targetHasBeenCalledBy.includes(data[0][0]))) {
-            targetHasBeenCalledBy.push(data[0][0])
-        }
-    }
+    // for (let mobile of mobiles) {
+    //     let data = await findAcquaintanceCalls(mobile);
+    //     acquaintancesCallHistory.push(data[0]);
+    //     acquaintancesCallHistory.push(data[1]);
+    // }
+    //
+    // for (let call of acquaintancesCallHistory[0]) {
+    //     let data = await findPersonByMobile(call, mobiles);
+    //     if (!(targetHasCalled.includes(data[0][0]))) {
+    //         targetHasCalled.push(data[0][0])
+    //     }
+    // }
+    //
+    // for (let call of acquaintancesCallHistory[1]) {
+    //     let data = await findPersonByMobile(call, mobiles);
+    //     if (!(targetHasBeenCalledBy.includes(data[0][0]))) {
+    //         targetHasBeenCalledBy.push(data[0][0])
+    //     }
+    // }
 
 
     return {
@@ -97,7 +106,8 @@ module.exports = async function (input) {
         "vehicleSightings": vehicleSightings,
         "bankDetailsData": bankDetails,
         "transactionsData": transactions,
-        "callHistoryData": callHistory[0],
+        "inComingCallHistory": inComingCallHistory,
+        "outGoingCallHistory": outGoingCallHistory,
         "targetHasCalled": targetHasCalled,
         "targetHasBeenCalledBy": targetHasBeenCalledBy
     }
