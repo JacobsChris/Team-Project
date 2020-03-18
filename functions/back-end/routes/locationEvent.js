@@ -19,6 +19,7 @@ router.post("/getLocationEventsInArea", async function (req, res) {
             longitude
         }, req.body.radius, cam, atm, cell, epos);
 
+        console.log(idObject)
         let returnStatement = await searchLocationsByIdAndTime(idObject, intialTimeStampInput, finalTimeStampInput,limit)
             .then(result => {
                 res.send(result);
