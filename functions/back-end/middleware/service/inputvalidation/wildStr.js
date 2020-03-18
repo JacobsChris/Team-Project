@@ -1,4 +1,3 @@
-
 module.exports =
     /**
      * @author Anthony Wilkinson & chris
@@ -11,6 +10,13 @@ module.exports =
      * @requires this function requires an input which is a string
      * */
     function addWildStr(inputString) {
-        inputString = "'%" + inputString + "%'";
-        return inputString;
+        try {
+            inputString = "'%" + inputString + "%'";
+            return inputString;
+        } catch (e) {
+            console.info(e);
+            console.info(e.name);
+            console.info(e.message);
+            throw new Error('error occured at wild str');
+        }
     };
