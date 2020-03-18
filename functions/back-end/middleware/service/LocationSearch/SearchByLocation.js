@@ -30,7 +30,7 @@ module.exports =
      *  @require this function to work it requires a JSON object to be passed into JsonToStringDetails()
      *  */
      function searchByLocation(inputLatitude, inputLongitude, Radius) {
-        let earthR = 6371.0;
+        let earthR = 6371000.0;
 
         //create a box defined by the input query
         let maxLat = +inputLatitude + rad2Deg(Radius/earthR);

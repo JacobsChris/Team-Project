@@ -31,6 +31,7 @@ module.exports =
                             atmIds.push(atm[i])
                         }
                     }
+                    console.log(atmIds)
                 }
 
                 if (!cell) {
@@ -42,6 +43,7 @@ module.exports =
                             cellIds.push(cell[i])
                         }
                     }
+                    console.log(cellIds)
                 }
 
                 if (!epos) {
