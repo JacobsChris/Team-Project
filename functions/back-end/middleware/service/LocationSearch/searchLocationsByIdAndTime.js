@@ -191,7 +191,7 @@ module.exports =
             console.log(err.message);
             console.info(err.name);
             console.info(err.message);
-            throw "error encountered at function searchLocationsByIdAndTime";
+            throw new Error('error encountered at function searchLocationsByIdAndTime');
         }
     }
 ;
