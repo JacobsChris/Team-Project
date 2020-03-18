@@ -8,7 +8,6 @@ const searchCellTowerByArea = require('./searchCellTowerByArea.js');
 const searchEposTerminalByArea = require('./searchEposTerminalsByLocation.js');
 
 
-
 module.exports =
     /**
      *  @author Anthony Wilkinson & Chris
@@ -29,23 +28,29 @@ module.exports =
      *  @return this function returns an array of JSON objects to be passed up
      *  @require this function to work it requires a JSON object to be passed into JsonToStringDetails()
      *  */
-     function searchByLocation(inputLatitude, inputLongitude, Radius) {
-        let earthR = 6371000.0;
+    function searchByLocation(inputLatitude, inputLongitude, Radius) {
+        try {
+            let earthR = 6371000.0;
 
-        //create a box defined by the input query
-        let maxLat = +inputLatitude + rad2Deg(Radius/earthR);
-        let minLat = inputLatitude - rad2Deg(Radius/earthR);
-        let maxLon = +inputLongitude + rad2Deg(Math.asin(Radius/earthR) / Math.cos(rad2Deg(inputLatitude)));
-        let minLon = inputLongitude - rad2Deg(Math.asin(Radius/earthR) / Math.cos(rad2Deg(inputLatitude)));
+            //create a box defined by the input query
+            let maxLat = +inputLatitude + rad2Deg(Radius / earthR);
+            let minLat = inputLatitude - rad2Deg(Radius / earthR);
+            let maxLon = +inputLongitude + rad2Deg(Math.asin(Radius / earthR) / Math.cos(rad2Deg(inputLatitude)));
+            let minLon = inputLongitude - rad2Deg(Math.asin(Radius / earthR) / Math.cos(rad2Deg(inputLatitude)));
 
-        inputLatitude = exactStr(inputLatitude);
-        inputLongitude = exactStr(inputLongitude);
-        Radius = exactStr(Radius);
+            inputLatitude = exactStr(inputLatitude);
+            inputLongitude = exactStr(inputLongitude);
+            Radius = exactStr(Radius);
 
-        return Promise.all([
-            searchCamerasByArea(inputLatitude, inputLongitude, Radius,minLat,maxLat,minLon,maxLon),
-            searchATMPointsByArea(inputLatitude, inputLongitude, Radius,minLat,maxLat,minLon,maxLon),
-            searchCellTowerByArea(inputLatitude, inputLongitude, Radius,minLat,maxLat,minLon,maxLon),
-            searchEposTerminalByArea(inputLatitude, inputLongitude, Radius,minLat,maxLat,minLon,maxLon)
-        ]);
-};
+            return Promise.all([
+                searchCamerasByArea(inputLatitude, inputLongitude, Radius, minLat, maxLat, minLon, maxLon),
+                searchATMPointsByArea(inputLatitude, inputLongitude, Radius, minLat, maxLat, minLon, maxLon),
+                searchCellTowerByArea(inputLatitude, inputLongitude, Radius, minLat, maxLat, minLon, maxLon),
+                searchEposTerminalByArea(inputLatitude, inputLongitude, Radius, minLat, maxLat, minLon, maxLon)
+            ]);
+        } catch (e) {
+            console.info(e);
+            console.info(e.name);
+            console.info(e.message);
+        }
+    };
