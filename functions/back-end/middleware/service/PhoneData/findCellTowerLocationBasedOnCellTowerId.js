@@ -7,5 +7,5 @@ module.exports =
      * @returns promised information about a celltower of given tower ID
      */
     function findCellTowerLocationBasedOnCellTowerId(cellTowerId) {
-        return Promise.all(findCellTowerLocation(cellTowerId));
+        return Promise.all([findCellTowerLocation(cellTowerId)]);
     };
