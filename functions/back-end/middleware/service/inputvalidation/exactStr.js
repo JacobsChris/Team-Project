@@ -1,3 +1,4 @@
+const sanitiseSQLInput = require("./sanitiseSQLInputs");
 
 module.exports =
     /**

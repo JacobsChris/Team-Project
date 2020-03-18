@@ -55,7 +55,7 @@ let inputValAnprAndEposIDOneRequest = {
 let intialTimeStampInput = "2015-05-01 14:08:52";
 let finalTimeStampInput = "2015-05-21 14:12:52";
 let smalllimit = 1;
-let biglimit =100;
+let biglimit = 2;
 
 let expectedValCelltowerIDOneRequest = {
     "eventIdTimeAndDetails": [{
@@ -70,6 +70,8 @@ let expectedValCelltowerIDOneRequest = {
         "address": "106 DUNSMORE ROAD, LUTON, LU1 5JZ",
         "dateOfBirth": "1985-04-29",
         "driverLicenceID": "CURTI854295SK9FI 62",
+        "latitude": 51.99191686492973,
+        "longitude": -0.6983792565400733,
         "idType": "AnprID",
         "id": 1130,
         "timeStamp": "2015-05-01T14:45:53.000Z"
@@ -85,6 +87,8 @@ let expectedValCelltowerIDOneRequest = {
         "address": "21 PLANTATION PLACE, MILTON KEYNES, MK5 7FP",
         "dateOfBirth": "1948-01-13",
         "driverLicenceID": "MORTO451138KJ9BF 27",
+        "latitude": 52.004523061316974,
+        "longitude": -0.7101314301073126,
         "idType": "AnprID",
         "id": 3234,
         "timeStamp": "2015-05-01T14:44:01.000Z"
@@ -96,6 +100,8 @@ let expectedValCelltowerIDOneRequest = {
         "surname": "Black",
         "dateOfBirth": "1986-03-25",
         "homeAddress": "84 PURLEY WAY, CROYDON, CR0 0XZ",
+        "latitude": 52.0010366812786,
+        "longitude": -0.714454986366195,
         "idType": "eposID",
         "id": 256,
         "timeStamp": "2015-05-01T16:30:24.000Z"
@@ -107,6 +113,8 @@ let expectedValCelltowerIDOneRequest = {
         "surname": "Chalmers",
         "dateOfBirth": "1975-03-12",
         "homeAddress": "28 THE HAWTHORNS, READING, RG10 9TS",
+        "latitude": 51.9921995290974,
+        "longitude": -0.69929857257226,
         "idType": "eposID",
         "id": 894,
         "timeStamp": "2015-05-01T15:39:54.000Z"
@@ -118,6 +126,8 @@ let expectedValCelltowerIDOneRequest = {
         "surname": "Elliott",
         "dateOfBirth": "1944-11-23",
         "homeAddress": "65 BIRCHALL ROAD, BRISTOL, BS6 7TU",
+        "latitude": 51.9975987787286,
+        "longitude": -0.709338657946343,
         "idType": "eposID",
         "id": 939,
         "timeStamp": "2015-05-01T16:11:54.000Z"
@@ -192,7 +202,6 @@ let inputValCelltowerID100Requests = {
 };
 
 let expectedValCelltowerID100Requests = require('./expectedTestResults/expectedValCelltowerIdLimit100');
-
 
 
 let inputValAnprIDLimit400 = {
@@ -280,9 +289,9 @@ test("searching with a AnprId and epos and a limit of one", (done) => {
         })
 });
 
-test("searching with a anprID and a limit of 100", (done) => {
+test("searching with a anprID  and epos and a limit of 2", (done) => {
     jest.setTimeout(10000000);
-    searchLocationsByIdAndTime(inputValAnprAndEposIDOneRequest, intialTimeStampInput, finalTimeStampInput,biglimit)
+    searchLocationsByIdAndTime(inputValAnprAndEposIDOneRequest, intialTimeStampInput, finalTimeStampInput, biglimit)
         .then((eventIdTimeAndDetails) => {
             initRes = eventIdTimeAndDetails;
             expect(JSON.stringify(initRes)).toStrictEqual(JSON.stringify(expectedValAnprIdlimit400));
@@ -301,7 +310,6 @@ test("searching with a celltowerId and a limit of 100", (done) => {
             done()
         })
 });
-
 
 
 test("searching with a anprID and a limit of 400", (done) => {
