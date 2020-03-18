@@ -26,10 +26,13 @@ module.exports = async function (input) {
     }
     vehicleSightings = vehicleSightings[0];
 
-    for (let i = 0; i < vehicleSightings.length; i++) {
-        const sighting = vehicleSightings[i];
-        let data = await findANPRCamLoc(sighting);
-        vehicleSightings[i] = {...sighting, ...data[0][0]};
+    try {
+        for (let i = 0; i < vehicleSightings.length; i++) {
+            const sighting = vehicleSightings[i];
+            let data = await findANPRCamLoc(sighting);
+            vehicleSightings[i] = {...sighting, ...data[0][0]};
+        }
+    } catch {
     }
 
     for (let account of bankAccount) {
