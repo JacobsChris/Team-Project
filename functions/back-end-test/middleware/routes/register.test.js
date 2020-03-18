@@ -18,7 +18,10 @@ describe('POST to /register', () => {
     beforeAll(async function(done) {
         let res = await request(app)
             .post('/login')
-            .send(adminUser);
+            .send({
+                username: adminUser.username,
+                password: adminUser.password
+            });
         token = res.body.token;
         done();
     });
