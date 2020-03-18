@@ -17,9 +17,18 @@ module.exports =
      *
      * @requires this function requires a string input selected from findDetailsByATMId to function
      * */
-     function findCellTowerLocation(cellTowerId) {
-        let sqlSearchString = "SELECT * FROM celltower WHERE" +
-            " cellTowerId=" + cellTowerId;
-        return SQLauthenticate(sqlSearchString)
+    function findCellTowerLocation(cellTowerId) {
+        try {
 
-};
+
+            let sqlSearchString = "SELECT * FROM celltower WHERE" +
+                " cellTowerId=" + cellTowerId;
+            return SQLauthenticate(sqlSearchString)
+        }
+        catch (e) {
+            console.info(e);
+            console.info(e.name);
+            console.info(e.message);
+            throw new Error('error occured at sql constructor for cell tower location');
+        }
+    };

@@ -8,13 +8,20 @@ module.exports =
      * @returns returns the numbers called by the given inputted phone number
      */
     function findOutGoingCalls(input) {
-        let sqlSearchString = "select receiverNumber from mobileCallRecords where" +
-            " callerNumber LIKE " + exactStr(input.phoneNumber) +
-            " GROUP BY receiverNumber" +
-            " ORDER BY COUNT(receiverNumber) DESC";
-        return auth(sqlSearchString)
+        try {
+            let sqlSearchString = "select receiverNumber from mobileCallRecords where" +
+                " callerNumber LIKE " + exactStr(input.phoneNumber) +
+                " GROUP BY receiverNumber" +
+                " ORDER BY COUNT(receiverNumber) DESC";
+            return auth(sqlSearchString)
 
-
+        }
+        catch (e) {
+            console.info(e);
+            console.info(e.name);
+            console.info(e.message);
+            throw new Error('error occured at find acquaintance out going calls by target phone number');
+        }
     };
 
 
