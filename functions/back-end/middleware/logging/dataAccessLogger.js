@@ -2,13 +2,15 @@ const morgan = require("morgan");
 const jwt = require('jsonwebtoken');
 const jwtConfig = require('../auth/jwtConfig.json');
 const winston = require('winston');
-const {DynamoDB} = require('winston-dynamodb');
-const options = require('./AuthDB.json');
+const { DynamoDB } = require('winston-dynamodb');
+const options = require('./DataAccessDB.json');
 
 const logger = winston.createLogger({
     level: "info",
     format: winston.format.json(),
-    transports: [new winston.transports.DynamoDB(options)],
+    transports: [
+        new winston.transports.DynamoDB(options)
+    ],
     exitOnError: false
 });
 
@@ -34,10 +36,14 @@ morgan.token('user', function (req, res) {
 });
 
 morgan.token('request', function (req, res) {
-    return JSON.stringify(req.query);
+    let reqObj = {
+        request: req.body,
+        token: req.headers.authorization 
+    };
+    return JSON.stringify(reqObj);
 });
 
 
-module.exports = morgan(":remote-addr :user :request :date[clf] :status", { stream: logger.stream });
+module.exports = morgan(":remote-addr :request :date[web] :url :method :status", { stream: logger.stream });
 
 
