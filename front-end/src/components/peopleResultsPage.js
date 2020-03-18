@@ -21,6 +21,7 @@ export default class PeopleResultsPage extends React.Component {
     };
 
     componentDidMount() {
+        console.log('data', this.props.location.state)
         axios.post('http://localhost:8080/back-end/person/getData', this.props.location.state, {
             headers: {
                 Authorization: localStorage.getItem('token')
@@ -88,8 +89,15 @@ export default class PeopleResultsPage extends React.Component {
     }
 
     recentLocation = () => {
-        const { bankAccountData } = this.state.personDetails;
-        this.props.history.push('/user/home/personlocation?bank=' + bankAccountData);
+        // const { bankAccountData } = this.state.personDetails;
+        const data = {
+            transactions: this.state.personDetails.transactionsData,
+            vehicleSightings: this.state.personDetails.vehicleSightings,
+            callIncoming: this.state.personDetails.outGoingCallHistory,
+            callOutgoing: this.state.personDetails.inComingCallHistory
+        }
+        console.log('recent', this.state.personDetails.transactionsData);
+        this.props.history.push('/user/home/personlocation', data);
     }
 
     render() {

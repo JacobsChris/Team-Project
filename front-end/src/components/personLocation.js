@@ -16,12 +16,32 @@ export class PersonLocation extends React.Component {
         this.state = {
             showingInfoWindow: false,
             activeMarker: {},
-            selectedMarker: {}
+            selectedMarker: {},
+            epos: this.props.location.state.transactions.epos,
+            atm: this.props.location.state.transactions.atm,
+            vehicleSightings: this.props.location.state.vehicleSightings,
+            callIncoming: this.props.location.state.callIncoming,
+            callOutgoing: this.props.location.state.callOutgoing,
+            anpr: false,
+            mobile: false,
+            transaction: false
+            
         }
     }
 
     componentDidMount() {
         console.log('props', this.props.location.state)
+        // this.setState({
+        //     transactions: this.props.location.state
+        // })
+        console.log('transactions', this.state.callIncoming)
+     
+    }
+
+    handleQuery = ({target: {name, checked}}) => {
+        this.setState({
+            [name]: checked
+        });
     }
 
     onMarkerClick = (props, marker, event) =>
@@ -58,22 +78,29 @@ export class PersonLocation extends React.Component {
                             <Form.Check
                                 type="checkbox"
                                 label="ANPR data"
+                                name="anpr"
+                                onChange={this.handleQuery}
                             />
                         </Col>
                         <Col>
                             <Form.Check
                                 type="checkbox"
                                 label="Transaction data"
+                                name="transaction"
+                                onChange={this.handleQuery}
                             />
                         </Col>
                         <Col>
                             <Form.Check
                                 type="checkbox"
                                 label="Mobile data"
+                                name="mobile"
+                                onChange={this.handleQuery}
                             />
                         </Col>
                     </Form.Row>
                 </Form>
+                
                 <Map className='event-map'
                     google={this.props.google}
                     zoom={14}
@@ -82,11 +109,54 @@ export class PersonLocation extends React.Component {
                         lat: 53.483959,
                         lng: -2.244644
                     }}>
-                    <Marker
-                        position={{ lat: 53.475021, lng: -2.286451 }}
-                        onClick={this.onMarkerClick}
-                        name={'Test marker'}
-                    />
+                        {this.state.transaction ?
+
+                                this.state.epos?.map(location =>
+                                    <Marker
+                                        position={{ lat: location.latitude, lng: location.longitude }}
+                                        onClick={this.onMarkerClick}
+                                        name={'EPOS'}
+                                    />
+                                )
+                                
+                                // this.state.atm?.map(location =>
+                                //     <Marker
+                                //         position={{ lat: location.latitude, lng: location.longitude }}
+                                //         onClick={this.onMarkerClick}
+                                //         name={'ATM'}
+                                //     />
+                                // )
+                            
+                        : ''}
+                        {this.state.anpr ? 
+                             
+                                this.state.vehicleSightings?.map(location =>
+                                    <Marker
+                                        position={{ lat: location.latitude, lng: location.longitude }}
+                                        onClick={this.onMarkerClick}
+                                        name={'Vehicle Sighting'}
+                                    />
+                                )
+                            
+                        : ''}
+                        {this.state.mobile ? 
+                            
+                                (this.state.callIncoming?.map(location =>
+                                    <Marker
+                                        position={{ lat: location.latitude, lng: location.longitude }}
+                                        onClick={this.onMarkerClick}
+                                        name={'Incoming Call'}
+                                    />
+                                ))
+                                // this.state.callOutgoing?.map(location =>
+                                //     <Marker
+                                //         position={{ lat: location.latitude, lng: location.longitude }}
+                                //         onClick={this.onMarkerClick}
+                                //         name={'Outgoing Call'}
+                                //     />
+                                // )
+                            
+                        : ''}
                     <InfoWindow
                         marker={this.state.activeMarker}
                         visible={this.state.showingInfoWindow}
