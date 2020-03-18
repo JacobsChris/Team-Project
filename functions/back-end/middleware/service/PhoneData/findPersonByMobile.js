@@ -9,12 +9,13 @@ module.exports =
      * @returns promised information about the owner of a given phone number
      */
     function findPersonByMobile(input, mobiles) {
+        debugger
         try {
             let aqNumber;
-            if ((input.callerNumber === undefined) && input.receiverNumber) {
+            if (input.receiverNumber !== undefined) {
                 aqNumber = wildStr(input.receiverNumber);
             }
-            if ((input.receiverNumber === undefined) && input.callerNumber) {
+            if (input.callerNumber !== undefined) {
                 aqNumber = wildStr(input.callerNumber);
             }
 
