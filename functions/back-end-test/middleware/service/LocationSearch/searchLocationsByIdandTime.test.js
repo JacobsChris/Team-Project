@@ -193,12 +193,7 @@ let inputValCelltowerID100Requests = {
 
 let expectedValCelltowerID100Requests = require('./expectedTestResults/expectedValCelltowerIdLimit100');
 
-let inputValAnprIDlimit4 = {
-    "anprId": 73,
-    "intialTimeStamp": "2015-05-01 14:03:29",
-    "finalTimeStamp": "2015-05-01 14:33:29",
-    "limit": 4
-};
+
 
 let inputValAnprIDLimit400 = {
     "anprId": 73,
@@ -207,24 +202,6 @@ let inputValAnprIDLimit400 = {
     "limit": 400
 };
 
-let expectedValAnprIdlimit4 = ({
-    "eventIdTimeAndDetails": [{
-        "registrationID": 18029,
-        "registrationDate": "2013-08-28",
-        "vehicleRegistrationNo": "PI78 QZB",
-        "make": "Mercedes",
-        "model": "E-Class",
-        "colour": "black",
-        "forenames": "Clare",
-        "surname": "Arnold",
-        "address": "33 CLEVEDON ROAD, BLACKPOOL, FY1 2NX",
-        "dateOfBirth": "1964-09-15",
-        "driverLicenceID": "ARNOL659154C99OL 30",
-        "idType": "AnprID",
-        "id": 73,
-        "timeStamp": "2015-05-01T14:32:43.000Z"
-    }]
-});
 
 const expectedValAnprIdlimit400 = require('./expectedTestResults/expectedValAnprIdlimit400.json');
 

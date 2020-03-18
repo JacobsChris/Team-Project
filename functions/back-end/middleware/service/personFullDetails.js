@@ -36,7 +36,10 @@ module.exports = async function (input) {
             let data = await findANPRCamLoc(sighting);
             vehicleSightings[i] = {...sighting, ...data[0][0]};
         }
-    } catch {
+    } catch (e) {
+        console.info(e)
+        console.info(e.name);
+        console.info(e.message);
     }
 
     for (let account of bankAccount) {
