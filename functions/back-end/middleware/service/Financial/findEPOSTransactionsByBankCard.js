@@ -17,9 +17,16 @@ module.exports =
      *
      * @requires this function requires a string input selected from findTransactionsByBankCard to function
      * */
-     function findEPOSTransactions(input) {
-        let sqlSearchString = "SELECT * FROM eposTransactions WHERE "+
-            " bankCardNumber =(" + exactStr(input.cardNumber) + ")";
-        return auth(sqlSearchString)
+    function findEPOSTransactions(input) {
+        try {
+            let sqlSearchString = "SELECT * FROM eposTransactions WHERE " +
+                " bankCardNumber =(" + exactStr(input.cardNumber) + ")";
+            return auth(sqlSearchString)
+        } catch (e) {
+            console.info(e);
+            console.info(e.name);
+            console.info(e.message);
+            throw new Error('error occured at find Bank Card By BankAccount');
+        }
 
-};
+    };

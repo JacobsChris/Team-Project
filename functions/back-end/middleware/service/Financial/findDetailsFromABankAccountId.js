@@ -16,24 +16,23 @@ module.exports =
      *
      * @requires this function requires a string input selected from findDetailsByBankAccount to function
      * */
-     function findDetailsFromABankAccountId(bankAccountId,limit) {
+    function findDetailsFromABankAccountId(bankAccountId, limit) {
         try {
-            if(limit !==undefined){
+            if (limit !== undefined) {
                 let sqlSearchString = "SELECT * FROM peoplebankaccount WHERE " +
                     "bankAccountId LIKE " + bankAccountId +
                     " Limit " + limit;
                 return auth(sqlSearchString)
-            }
-            else {
+            } else {
                 let sqlSearchString = "SELECT * FROM peoplebankaccount WHERE " +
                     "bankAccountId LIKE " + bankAccountId +
                     " Limit 10000";
                 return auth(sqlSearchString)
             }
-        }
-        catch (e) {
-            console.log(e.name);
-            console.log(e.message);
-            throw new Error ("error encountered in findBankCardByAtmId")
+        } catch (e) {
+            console.info(e);
+            console.info(e.name);
+            console.info(e.message);
+            throw new Error('error occured at find details from a bank account id');
         }
     };

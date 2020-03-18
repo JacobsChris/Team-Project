@@ -14,5 +14,13 @@ module.exports =
  *  @require this function to work it requires a JSON object to be passed into JsonToStringTransactions()
  *  */
 function (input) {
-    return Promise.all([findEPOSTransactions(input), findATMTransactions(input)]);
+    try {
+        return Promise.all([findEPOSTransactions(input), findATMTransactions(input)]);
+    }
+    catch (e) {
+        console.info(e);
+        console.info(e.name);
+        console.info(e.message);
+        throw new Error('error occured at find transactions by bank card');
+    }
 };
