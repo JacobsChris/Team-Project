@@ -187,8 +187,7 @@ module.exports =
 
         } catch
             (err) {
-            console.log(err.name);
-            console.log(err.message);
+            console.info(err);
             console.info(err.name);
             console.info(err.message);
             throw new Error('error encountered at function searchLocationsByIdAndTime');

@@ -25,9 +25,10 @@ module.exports =
              }
          }
          catch (e) {
-             console.log(e.name);
-             console.log(e.message);
-             throw " error searchGivenASingleAtmIdAndTime"
+             console.info(e);
+             console.info(e.name);
+             console.info(e.message);
+             throw new Error('error occured at search given a single atm id and time');
          }
 
 
