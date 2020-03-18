@@ -1,6 +1,7 @@
 const request = require('supertest');
 const app = require('../../../back-end/app');
 const adminUser = require('../../adminUser.json');
+const searchByVehicleReg = require('../../../back-end/middleware/service/vehicle/searchByVehicleReg');
 
 const server = app;
 
@@ -8,6 +9,10 @@ let token = "";
 
 const partialInput = {
     "vehicleRegistrationNo": "IK54 ___"
+};
+
+const failureInput = {
+    "vehicleRegistrationNo": undefined
 };
 
 const partialMatchingData = [
@@ -273,7 +278,7 @@ const partialMatchingData = [
     }
 ];
 
-describe('testing all person endpoints', function() {
+describe('testing all vehicle endpoints', function() {
     
     beforeAll( async function(done) {
         let res = await request(app)
@@ -299,5 +304,16 @@ describe('testing all person endpoints', function() {
         jest.setTimeout(100000);
         expect(res.text).toBe(JSON.stringify(partialMatchingData));
         done();        
+    });
+
+    it('should throw an error if the input is not an empty string', (done) => {
+        let res = request(app)
+            .post('/back-end/vehicle/getData')
+            .set("Authorization", token)
+            .send(failureInput);
+        res.catch(error => {
+            expect(error.response).toBeUndefined();
+        });
+        done();
     });
 });

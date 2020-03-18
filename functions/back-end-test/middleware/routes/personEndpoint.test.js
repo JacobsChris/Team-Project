@@ -497,7 +497,7 @@ describe('testing all person endpoints', function() {
         done();
     });
 
-    it('should throw an error if any of the inputs are not strings', async (done) => {
+    it('should return an empty array if any of the inputs are not strings', async (done) => {
         let res = await request(app)
             .post('/back-end/person/getData')
             .set("Authorization", token)
