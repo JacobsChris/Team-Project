@@ -14,28 +14,51 @@ By navigating to the URL, do the search stuff.
 
 ## HOW DEPLOY
 
-Grab repo
-put repo in gitlabs
+Acquire repo in gitlab
 grab firebase
 throw repo at firebase and gcp
 dun.
 
 ##  HOW WORK
-### Technologies involved:
-MERN
-Jest
-GCP
-Firebase
-List from JSON Packagelockstuff
-SQL
+### Major Technologies involved:
+SQL:
+* A SQL database allows the different data tables to be linked together.  It isn't the fastest database available, however; but it is long lasting.  
+
+Google Cloud Platform (GCP):
+* GCP hosts the finished product and its database.  
+* The database is secured by GCP services and can only be accessed by whitelisted IPs that have the appropriate security certificates.
+
+Firebase:
+* A specific service offered by GCP that hosts the front- and back-ends of the app
+
+Node.JS and Express:
+*How the back-end works
+
+React:
+* how the front-end works
+
+Jest, Chai, Mocha:
+* Provides testing functionality
+
+BCrypt and Passport:
+* Security stuff, ask Harris
+
+Morgan and Winston:
+*Logging stuff, ask someone else
+
+For a full list of all dependencies, please see the package.json.
+
 ### Architecture
 fancypicture
 
 ## FAQ YOU
 
-### Q It broke
-Answer: Get woke
+### Q It says I'm not authorised when i try to login!
+Answer: You have either forgotten your login credentials or do not hold valid login credentials.  
+In either case, contact the product owner to see if you are supposed to have access to this product.
 
-### Q I dum
-Answer: Git gud
+### Q How do I see the logs of who has access, or tried to access, the data?
+Answer: Ask Harris
+
+# _*TODO:  FILL THIS STUFF IN*_
 
