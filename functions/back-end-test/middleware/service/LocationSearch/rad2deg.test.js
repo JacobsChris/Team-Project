@@ -7,7 +7,7 @@ let expectedOutputArray = [57.29577951308232, 114.59155902616465, 180, 360];
 test('checks that rad2Deg works', () => {
     let outputArray = [];
     for (let i = 0; i < inputArray.length; i++) {
-        outputArray[i] = rad2Deg.rad2Deg(inputArray[i]);
+        outputArray[i] = rad2Deg(inputArray[i]);
     }
     expect(outputArray).toStrictEqual(expectedOutputArray);
 });

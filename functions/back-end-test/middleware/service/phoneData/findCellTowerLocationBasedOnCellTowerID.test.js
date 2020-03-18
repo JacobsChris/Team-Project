@@ -11,12 +11,7 @@ let expectedRes = [
     }
 ];
 
-let inputVal = {
-        "callCellTowerId": 4,
-        "receiverTowerId": 4,
-        "cellTowerId": 4
-    }
-;
+let inputVal = 4;
 
 test("Takes in an object with CallerCellTower ID as a keypair, and returns information about the Cell Tower  of that ID", (done) => {
     findCellTowerLocationBasedOnCellTowerId(inputVal)
