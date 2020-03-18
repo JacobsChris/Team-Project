@@ -6,7 +6,14 @@ module.exports =
      * @param vehicleRegistrationNumber
      * @returns returns promised information of the locations a vehicle of given licence plate has been sighted
      */
-     function findVehicleLocationByVehicleReg(input) {
-        let vehicleRegistrationNumber = licencePlateValidator(input.vehicleRegistrationNo);
-        return Promise.all([findVehicleObs(vehicleRegistrationNumber)]);
-};
+    function findVehicleLocationByVehicleReg(input) {
+        try {
+            let vehicleRegistrationNumber = licencePlateValidator(input.vehicleRegistrationNo);
+            return Promise.all([findVehicleObs(vehicleRegistrationNumber)]);
+        } catch (e) {
+            console.info(e);
+            console.info(e.name);
+            console.info(e.message);
+            throw new Error('error occured at find vehicle observations by vehicle');
+        }
+    };

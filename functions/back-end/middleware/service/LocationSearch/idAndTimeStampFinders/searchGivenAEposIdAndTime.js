@@ -25,8 +25,9 @@ module.exports =
             }
         }
         catch (e) {
-            console.log(e.name);
-            console.log(e.message);
-            throw "error encountered in search Given A Epos Id and Time"
+            console.info(e);
+            console.info(e.name);
+            console.info(e.message);
+            throw new Error('error occured at search given a epos id and a time');
         }
     };

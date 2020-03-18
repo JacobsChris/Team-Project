@@ -18,5 +18,13 @@ module.exports =
      *  @require this function to work meerly needs an input in a MYSQL syntax to search the database
      *  */
     function SQLauthenticate(Input) {
-        return sequelize.query(Input, {type: QueryTypes.SELECT});
+        try {
+            return sequelize.query(Input, {type: QueryTypes.SELECT});
+
+        } catch (e) {
+            console.info(e);
+            console.info(e.name);
+            console.info(e.message);
+            throw new Error('error occured at sql auth');
+        }
     };

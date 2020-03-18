@@ -16,15 +16,21 @@ module.exports =
      *
      * @requires this function requires a string input selected from findTransactionsByBankCard to function
      * */
-     function findBankCardByEposId(eposId,limit) {
-        if (limit !==undefined) {
+    function findBankCardByEposId(eposId, limit) {
+        try {
+            if (limit !== undefined) {
+            } else {
+                limit = 10;
+            }
+            let sqlSearchString = "SELECT * FROM eposTransactions WHERE " +
+                " eposId=" + "'" + eposId + "'" +
+                " order by timestamp desc" +
+                " Limit " + limit;
+            return auth(sqlSearchString)
+        } catch (e) {
+            console.info(e);
+            console.info(e.name);
+            console.info(e.message);
+            throw new Error('error occured at find bank card by epos id');
         }
-        else {
-            limit = 10;
-        }
-        let sqlSearchString = "SELECT * FROM eposTransactions WHERE " +
-            " eposId=" +"'"+eposId+"'"+
-            " order by timestamp desc"+
-            " Limit " + limit;
-        return auth(sqlSearchString)
-    } ;
+    };

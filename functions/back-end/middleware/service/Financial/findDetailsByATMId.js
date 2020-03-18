@@ -28,7 +28,15 @@ module.exports =
      *  @require this function to work it requires a JSON object to be passed into JsonToStringATM()
      *  */
     function findDetailsByATMId(timestamp, atmId) {
-        atmId = exactStr(atmId);
-        return Promise.all([atmID(atmId)]);
+        try {
+            atmId = exactStr(atmId);
+            return Promise.all([atmID(atmId)]);
+        }
+        catch (e) {
+            console.info(e);
+            console.info(e.name);
+            console.info(e.message);
+            throw new Error('error occured at find details by atm id');
+        }
 
 };

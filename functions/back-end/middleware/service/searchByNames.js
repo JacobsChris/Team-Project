@@ -44,9 +44,6 @@
 //
 //
 // };
-const stringChecker = require("./inputvalidation/stringChecker");
-const wildStr = require("./inputvalidation/wildStr");
-const exactStr = require("./inputvalidation/exactStr");
 
 module.exports =
     /**
@@ -62,6 +59,7 @@ module.exports =
      *  @require this function to work it requires a JSON object to be passed into JsonToStringName()
      *  */
     function searchByNames(citizenID, forenames, surname, homeAddress, dateOfBirth, placeOfBirth, sex) {
+        try {
         citizenID = stringChecker(citizenID);
         forenames = stringChecker(forenames);
         surname = stringChecker(surname);
@@ -75,13 +73,20 @@ module.exports =
             sex = exactStr(sex);
         }
 
-        let sqlSearchString = "SELECT * FROM citizen WHERE " +
-            "citizenID LIKE " + citizenID +
-            " AND forenames LIKE " + forenames +
-            " AND surname LIKE " + surname +
-            " AND homeAddress LIKE " + homeAddress +
-            " AND dateOfBirth LIKE " + dateOfBirth +
-            " AND placeOfBirth LIKE " + placeOfBirth +
-            " AND sex LIKE " + sex;
-        return auth.SQLauthenticate(sqlSearchString);
+            let sqlSearchString = "SELECT * FROM citizen WHERE " +
+                "citizenID LIKE " + citizenID +
+                " AND forenames LIKE " + forenames +
+                " AND surname LIKE " + surname +
+                " AND homeAddress LIKE " + homeAddress +
+                " AND dateOfBirth LIKE " + dateOfBirth +
+                " AND placeOfBirth LIKE " + placeOfBirth +
+                " AND sex LIKE " + sex;
+            return auth.SQLauthenticate(sqlSearchString);
+        }
+        catch (e) {
+            console.info(e);
+            console.info(e.name);
+            console.info(e.message);
+            throw new Error('error occured at search by names');
+        }
 };

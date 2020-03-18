@@ -18,10 +18,17 @@ module.exports =
      * @requires this function requires string inputs selected from findDetailsByName to function
      * */
     function findBankAccountByPerson(input) {
-        const sqlSearchString = "SELECT * FROM peoplebankaccount WHERE" +
-            " forenames LIKE " + wildStr(input.forenames) +
-            " AND surname LIKE " + wildStr(input.surname) +
-            " AND homeAddress LIKE " + wildStr(input.homeAddress) +
-            " AND dateOfBirth LIKE " + wildStr(input.dateOfBirth);
-        return auth(sqlSearchString);
-};
+        try {
+            const sqlSearchString = "SELECT * FROM peoplebankaccount WHERE" +
+                " forenames LIKE " + wildStr(input.forenames) +
+                " AND surname LIKE " + wildStr(input.surname) +
+                " AND homeAddress LIKE " + wildStr(input.homeAddress) +
+                " AND dateOfBirth LIKE " + wildStr(input.dateOfBirth);
+            return auth(sqlSearchString);
+        } catch (e) {
+            console.info(e);
+            console.info(e.name);
+            console.info(e.message);
+            throw new Error('error occured at find Bank Card By BankAccount');
+        }
+    };

@@ -34,9 +34,9 @@ module.exports =
         }
      }
      catch (e) {
-         console.log(e.name);
-         console.log(e.message);
-         throw "error encountered in findBankCardByAtmId"
-
+         console.info(e);
+         console.info(e.name);
+         console.info(e.message);
+         throw new Error('error occured at find Bank Card By AtmId');
      }
     };

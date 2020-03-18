@@ -12,17 +12,22 @@ module.exports =
      *  @require this function to work it requires a JSON object to be passed into JsonToStringName()
      * */
     function searchGivenASingleANPRIdAndTime(anprId, intialTimeStamp, finalTimeStamp, limit) {
-        if (limit !== undefined) {
-            let searchCameras = "select * from vehicleObservations where (timestamp Between " + intialTimeStamp + " And " + finalTimeStamp + ") AND ANPRPointId=" + anprId + " " +
-                "Limit " + limit + ";";
-            return auth(searchCameras);
-        } else {
-            let searchCameras = "select * from vehicleObservations where (timestamp Between " + intialTimeStamp + " And " + finalTimeStamp + ") AND ANPRPointId=" + anprId + " " +
-                "Limit 10000;";
-            console.log(searchCameras)
-            return auth(searchCameras);
+        try {
+            if (limit !== undefined) {
+                let searchCameras = "select * from vehicleObservations where (timestamp Between " + intialTimeStamp + " And " + finalTimeStamp + ") AND ANPRPointId=" + anprId + " " +
+                    "Limit " + limit + ";";
+                return auth(searchCameras);
+            } else {
+                let searchCameras = "select * from vehicleObservations where (timestamp Between " + intialTimeStamp + " And " + finalTimeStamp + ") AND ANPRPointId=" + anprId + " " +
+                    "Limit 10000;";
+                return auth(searchCameras);
+            }
         }
-
-
+        catch (e) {
+            console.info(e);
+            console.info(e.name);
+            console.info(e.message);
+            throw new Error('error occured in search given a single anpr id and time')
+        }
 
     };
