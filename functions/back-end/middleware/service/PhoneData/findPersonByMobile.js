@@ -10,13 +10,19 @@ module.exports =
      */
     function findPersonByMobile(input, mobiles) {
         let aqNumber;
-        for (let phone of mobiles) {
-
-            if (input.receiverNumber === phone.phoneNumber) {
-                aqNumber = wildStr(input.callerNumber);
-            } else {
-                aqNumber = wildStr(input.receiverNumber);
-            }
+        // for (let phone of mobiles) {
+        //
+        //     if (input.receiverNumber === phone.phoneNumber) {
+        //         aqNumber = wildStr(input.callerNumber);
+        //     } else {
+        //         aqNumber = wildStr(input.receiverNumber);
+        //     }
+        // }
+        if ((input.callerNumber === undefined) && input.receiverNumber) {
+            aqNumber = wildStr(input.receiverNumber);
+        }
+        if ((input.receiverNumber === undefined) && input.callerNumber) {
+            aqNumber = wildStr(input.callerNumber);
         }
 
         let sqlSearchString = "SELECT * FROM mobiles WHERE" +
