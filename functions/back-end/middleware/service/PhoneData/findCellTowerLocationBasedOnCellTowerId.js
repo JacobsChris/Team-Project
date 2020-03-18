@@ -6,7 +6,6 @@ module.exports =
      * @param input is an boject containing the key cellTowerId
      * @returns promised information about a celltower of given tower ID
      */
-     function findCellTowerLocationBasedOnCellTowerId(input) {
-        let cellTowerId = exactStr(input.cellTowerId);
+    function findCellTowerLocationBasedOnCellTowerId(cellTowerId) {
         return Promise.all([findCellTowerLocation(cellTowerId)]);
-};
+    };

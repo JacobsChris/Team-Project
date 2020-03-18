@@ -4,6 +4,8 @@
 ### Brief:
 
 A Single Page Application (SPA) to connect to a database and search for persons from given information.
+By entering search parameters into the webpage, a search query will be sent to a secure remote cloud based database.
+Example searches are finding the full details of a person, their transaction records, call history, and vehicle locations. 
 
 ### How use:
 
@@ -19,7 +21,7 @@ throw repo at firebase and gcp
 dun.
 
 ##  HOW WORK
-### Tech involved:
+### Technologies involved:
 MERN
 Jest
 GCP

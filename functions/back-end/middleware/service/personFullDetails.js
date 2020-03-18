@@ -1,18 +1,22 @@
 const findTransactionsByBankCard = require('./Financial/findTransactionsByBankCard');
 const findDetailsByBankAccount = require('./Financial/findDetailsByBankAccount');
-const findCalls = require('./PhoneData/findCallHistoryByPhoneNumber');
+const findAllCalls = require('./PhoneData/findCallHistoryByPhoneNumber');
+const findAcquaintanceCalls = require('./PhoneData/findAcquaintanceHistoryByPhoneNumber');
 const findPersonByMobile = require('./PhoneData/findPersonByMobile');
 const findDetailsByName = require('./FindByPerson/findDetailsByName');
 const findATMPointByATM_ID = require("./Financial/findATMPointByATM_ID");
 const findEposTerminal = require("./Financial/findEPOSTerminalByEposID");
 const findVehicleObs = require('./vehicle/findVehicleObsByVehicle');
 const findANPRCamLoc = require("./vehicle/findANPRCameraLocation");
+const findCellTower = require("./PhoneData/findCellTowerLocationBasedOnCellTowerId");
 
 module.exports = async function (input) {
 
     let citizen = [], mobiles = [], bankAccount = [], vehicle = [], bankDetails = [],
         transactions = {epos: [], atm: []},
-        callHistory = [], acquaintances = [], vehicleSightings = [];
+        inComingCallHistory = [], outGoingCallHistory = [], vehicleSightings = [], acquaintancesCallHistory = [],
+        targetHasCalled = [],
+        targetHasBeenCalledBy = [];
 
     [citizen, bankAccount, mobiles, vehicle] = await findDetailsByName(input);
 
@@ -26,10 +30,13 @@ module.exports = async function (input) {
     }
     vehicleSightings = vehicleSightings[0];
 
-    for (let i = 0; i < vehicleSightings.length; i++) {
-        const sighting = vehicleSightings[i];
-        let data = await findANPRCamLoc(sighting);
-        vehicleSightings[i] = {...sighting, ...data[0][0]};
+    try {
+        for (let i = 0; i < vehicleSightings.length; i++) {
+            const sighting = vehicleSightings[i];
+            let data = await findANPRCamLoc(sighting);
+            vehicleSightings[i] = {...sighting, ...data[0][0]};
+        }
+    } catch {
     }
 
     for (let account of bankAccount) {
@@ -57,14 +64,42 @@ module.exports = async function (input) {
 
 
     for (let mobile of mobiles) {
-        let data = await findCalls(mobile);
-        callHistory.push(data[0]);
+        let data = await findAllCalls(mobile);
+        outGoingCallHistory.push(data[0]);
+        inComingCallHistory.push(data[1])
+    }
+    outGoingCallHistory = outGoingCallHistory[0];
+    inComingCallHistory = inComingCallHistory[0];
+
+    for (let i = 0; i < outGoingCallHistory.length; i++) {
+        const phoneCall = outGoingCallHistory[i];
+        let data = await findCellTower(phoneCall.callCellTowerId);
+        outGoingCallHistory[i] = {...phoneCall, ...data[0][0]};
     }
 
-    if (callHistory[0]) {
-        for (let call of callHistory[0]) {
-            let data = await findPersonByMobile(call, mobiles);
-            acquaintances.push(data[0][0])
+    for (let i = 0; i < inComingCallHistory.length; i++) {
+        const phoneCall = inComingCallHistory[i];
+        let data = await findCellTower(phoneCall.receiverTowerId);
+        inComingCallHistory[i] = {...phoneCall, ...data[0][0]};
+    }
+
+    for (let mobile of mobiles) {
+        let data = await findAcquaintanceCalls(mobile);
+        acquaintancesCallHistory.push(data[0]);
+        acquaintancesCallHistory.push(data[1]);
+    }
+
+    for (let call of acquaintancesCallHistory[0]) {
+        let data = await findPersonByMobile(call, mobiles);
+        if (!(targetHasCalled.includes(data[0][0]))) {
+            targetHasCalled.push(data[0][0])
+        }
+    }
+
+    for (let call of acquaintancesCallHistory[1]) {
+        let data = await findPersonByMobile(call, mobiles);
+        if (!(targetHasBeenCalledBy.includes(data[0][0]))) {
+            targetHasBeenCalledBy.push(data[0][0])
         }
     }
 
@@ -77,8 +112,10 @@ module.exports = async function (input) {
         "vehicleSightings": vehicleSightings,
         "bankDetailsData": bankDetails,
         "transactionsData": transactions,
-        "callHistoryData": callHistory[0],
-        "acquaintancesData": acquaintances
+        "inComingCallHistory": inComingCallHistory,
+        "outGoingCallHistory": outGoingCallHistory,
+        "targetHasCalled": targetHasCalled,
+        "targetHasBeenCalledBy": targetHasBeenCalledBy
     }
 
 
