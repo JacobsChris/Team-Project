@@ -14,10 +14,15 @@ By navigating to the URL, do the search stuff.
 
 ## HOW DEPLOY
 
-Acquire repo in gitlab
-grab firebase
-throw repo at firebase and gcp
-dun.
+DevOps:
+Create at least two GCP compute instance
+Have database on GCP
+connect back-end instance to sql
+load git branch thing to back-end instance
+make sure it is constantly updated and running
+do similar with front-end 
+
+
 
 ##  HOW WORK
 ### Major Technologies involved:
