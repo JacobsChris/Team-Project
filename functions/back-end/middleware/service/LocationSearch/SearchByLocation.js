@@ -42,12 +42,18 @@ module.exports =
             inputLongitude = exactStr(inputLongitude);
             Radius = exactStr(Radius);
 
-            return Promise.all([
-                searchCamerasByArea(inputLatitude, inputLongitude, Radius, minLat, maxLat, minLon, maxLon),
-                searchATMPointsByArea(inputLatitude, inputLongitude, Radius, minLat, maxLat, minLon, maxLon),
-                searchCellTowerByArea(inputLatitude, inputLongitude, Radius, minLat, maxLat, minLon, maxLon),
-                searchEposTerminalByArea(inputLatitude, inputLongitude, Radius, minLat, maxLat, minLon, maxLon)
-            ]);
+            if (maxLon === NaN || minLon === NaN) {
+                throw new Error('The entered radius was bigger than the size of the radius of the earth so the function could not be performed');
+                return "The entered radius was bigger than the size of the radius of the earth so the function could not be performed";
+            } else {
+
+                return Promise.all([
+                    searchCamerasByArea(inputLatitude, inputLongitude, Radius, minLat, maxLat, minLon, maxLon),
+                    searchATMPointsByArea(inputLatitude, inputLongitude, Radius, minLat, maxLat, minLon, maxLon),
+                    searchCellTowerByArea(inputLatitude, inputLongitude, Radius, minLat, maxLat, minLon, maxLon),
+                    searchEposTerminalByArea(inputLatitude, inputLongitude, Radius, minLat, maxLat, minLon, maxLon)
+                ]);
+            }
         } catch (e) {
             console.info(e);
             console.info(e.name);

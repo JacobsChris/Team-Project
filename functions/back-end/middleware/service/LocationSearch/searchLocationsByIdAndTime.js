@@ -80,9 +80,10 @@ module.exports =
                 }
             }
             for (let inp of arrays[1]) {
+                debugger
                 if (inp.atmId !== undefined) {
                     const output2 = [];
-                    const atmId = exactStr(input.atmId);
+                    const atmId = exactStr(inp.atmId);
                     const output1 = await searchGivenASingleATMIdAndTime(atmId, intialTimeStamp, finalTimeStamp, limit);
                     for (let atm of output1) {
                         const temp = atm;
