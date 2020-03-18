@@ -20,7 +20,6 @@ module.exports =
             } else {
                 let searchCameras = "select * from vehicleObservations where (timestamp Between " + intialTimeStamp + " And " + finalTimeStamp + ") AND ANPRPointId=" + anprId + " " +
                     "Limit 10000;";
-                console.log(searchCameras)
                 return auth(searchCameras);
             }
         }
@@ -28,6 +27,7 @@ module.exports =
             console.info(e);
             console.info(e.name);
             console.info(e.message);
+            throw new Error('error occured in search given a single anpr id and time')
         }
 
     };

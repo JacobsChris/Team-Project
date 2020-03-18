@@ -52,5 +52,6 @@ module.exports =
             console.info(e);
             console.info(e.name);
             console.info(e.message);
+            throw new Error('error occured in search by location')
         }
     };

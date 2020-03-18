@@ -31,6 +31,7 @@ router.post("/getLocationEventsInArea", async function (req, res) {
         console.info(e);
         console.info(e.name);
         console.info(e.message);
+        throw new Error('error occured in location event')
     }
 
 });
