@@ -21,7 +21,8 @@ export default class PeopleResultsPage extends React.Component {
     };
 
     componentDidMount() {
-
+        console.log('data', this.props.location.state)
+        axios.post('http://localhost:8080/back-end/person/getData', this.props.location.state, {
         this.getResults(this.props.location.state);
     }
 
@@ -112,8 +113,19 @@ export default class PeopleResultsPage extends React.Component {
     }
 
     vehicleClick = (vehicleData) => () => {
-
         this.props.history.push('/user/home/vehicleresults?plate=' + vehicleData[0].vehicleRegistrationNo);
+    }
+
+    recentLocation = () => {
+        // const { bankAccountData } = this.state.personDetails;
+        const data = {
+            transactions: this.state.personDetails.transactionsData,
+            vehicleSightings: this.state.personDetails.vehicleSightings,
+            callIncoming: this.state.personDetails.outGoingCallHistory,
+            callOutgoing: this.state.personDetails.inComingCallHistory
+        }
+        console.log('recent', this.state.personDetails.transactionsData);
+        this.props.history.push('/user/home/personlocation', data);
     }
 
     render() {
@@ -176,7 +188,8 @@ export default class PeopleResultsPage extends React.Component {
                                             <li className="list-group-item">Associates: {this.getAcquaintances(acquaintancesData)}</li>
                                             <li className="list-group-item">Vehicles: {vehicleData && vehicleData.length > 0 ? (<a onClick={this.vehicleClick(vehicleData)}
                                                 className='stretched-link link-style'>{this.getVehicles(vehicleData)}</a>) : ''}</li>
-                                            <li className="list-group-item">Recent locations: </li>
+                                            <li className="list-group-item">Recent locations: <a onClick={this.recentLocation} 
+                                            className='stretched-link link-style'></a></li>
                                         </ul>
                                     </Card.Body>
                                 </Card>
