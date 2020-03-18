@@ -308,7 +308,7 @@ test("searching with a anprID and a limit of 100", (done) => {
     searchLocationsByIdAndTime(inputValAnprAndEposIDOneRequest, intialTimeStampInput, finalTimeStampInput,biglimit)
         .then((eventIdTimeAndDetails) => {
             initRes = eventIdTimeAndDetails;
-            expect(JSON.stringify(initRes)).toStrictEqual(JSON.stringify(expectedValAnprIdlimit4));
+            expect(JSON.stringify(initRes)).toStrictEqual(JSON.stringify(expectedValAnprIdlimit400));
             done()
         })
 });
