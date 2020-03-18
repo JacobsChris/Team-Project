@@ -25,7 +25,10 @@ describe('login test', function() {
     it("takes in correct username and password and should return success message", async (done) => {
         let res = await request(app)
             .post("/login")
-            .send(goodUser);
+            .send({
+                username: goodUser.username,
+                password: goodUser.password
+            });
         expect(res.body.message).toBe(success);
         done();
     });
