@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import jwtDecode from 'jwt-decode';
 
 import SearchPeople from './SearchPeople';
+import SearchLocation from './searchLocation';
 import NavBar from './navBar';
 import AdminNavBar from './adminNavBar';
 import SearchNavBar from './searchNavBar';
@@ -55,6 +56,7 @@ class Router extends React.Component {
                     <GuardedRoute path='/user/home/' component={SearchNavBar} />
                     <GuardedRoute path='/user/home/searchpeople' component={SearchPeople} />
                     <GuardedRoute path='/user/home/searchvehicle' component={SearchVehicle} /> 
+                    <GuardedRoute path='/user/home/searchlocation' component={SearchLocation} /> 
                     <GuardedRoute path='/user/home/peopleresults' component={PeopleResultsPage} />
                     <GuardedRoute path='/user/home/vehicleresults' component={VehicleResultsPage} />
                     <GuardedRoute path='/user/home/personlocation' component={PersonLocation} />
@@ -65,6 +67,7 @@ class Router extends React.Component {
                     <GuardedRoute path='/admin/' component={SearchNavBar} />
                     <GuardedRoute path='/admin/searchpeople' component={SearchPeople} />
                     <GuardedRoute path='/admin/searchvehicle' component={SearchVehicle} /> 
+                    <GuardedRoute path='/admin/searchlocation' component={SearchLocation} /> 
                     <GuardedRoute path='/admin/peopleresults' component={PeopleResultsPage} />
                     <GuardedRoute path='/admin/vehicleresults' component={VehicleResultsPage} />
                     <GuardedRoute path='/admin/adduser' component={CreateUser} />
