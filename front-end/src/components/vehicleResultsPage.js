@@ -36,10 +36,9 @@ export default class VehicleResultsPage extends React.Component {
         })
             .then((response) => {
                 this.setState({
-                    results: [response.data],
+                    results: response.data,
                     vehiclesLoaded: true
                 })
-                console.log('response', response.data)
             });
     }
 
@@ -63,7 +62,7 @@ export default class VehicleResultsPage extends React.Component {
         })
             .then((response) => {
                 this.setState({
-                    vehicleDetails: response.data,
+                    vehicleDetails: response.data[0],
                     detailsLoaded: true
                 })
                 console.log('post', this.state.vehicleDetails);
@@ -89,7 +88,9 @@ export default class VehicleResultsPage extends React.Component {
 
     render() {
         const vehicleData = this.state.vehicleDetails;
-        console.log('results', this.state.results);
+        console.log('results:', this.state.results);
+        // const resultArray = this.state.results[0];
+        // console.log('result array:', resultArray);
 
         return (
 
@@ -98,7 +99,7 @@ export default class VehicleResultsPage extends React.Component {
                     <Row>
                         <Col>
                             <Container className='flex-container' id='person-list'>
-                                {this.state.results?.map(vehicle =>
+                                {this.state.results.map(vehicle =>
                                     <Card onClick={() => this.handleClick(vehicle.vehicleRegistrationNo, vehicle.make, vehicle.model,
                                         vehicle.colour, vehicle.registrationDate)}
                                         className='flex-item' id='small-person-card'>

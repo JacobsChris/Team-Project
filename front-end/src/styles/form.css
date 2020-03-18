@@ -43,7 +43,12 @@
   .town,
   .postcode,
   .username,
-  .password {
+  .password,
+  .latitude,
+  .longitude,
+  .radius,
+  .startDateTime,
+  .endDateTime {
     display: flex;
     flex-direction: column;
     margin-bottom: 15px;

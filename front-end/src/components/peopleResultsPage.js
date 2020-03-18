@@ -23,6 +23,12 @@ export default class PeopleResultsPage extends React.Component {
     componentDidMount() {
         console.log('data', this.props.location.state)
         axios.post('http://localhost:8080/back-end/person/getData', this.props.location.state, {
+        this.getResults(this.props.location.state);
+    }
+
+
+    getResults = (personObject) => {
+        axios.post('http://localhost:8080/back-end/person/getData', personObject, {
             headers: {
                 Authorization: localStorage.getItem('token')
             }
@@ -35,6 +41,7 @@ export default class PeopleResultsPage extends React.Component {
                 console.log('response', this.state.results);
             });
     }
+    
 
     handleClick = (person) => {
         this.setState({
@@ -51,7 +58,7 @@ export default class PeopleResultsPage extends React.Component {
             }
         })
             .then((response) => {
-                this.setState({ 
+                this.setState({
                     personDetails: response.data,
                     detailsLoaded: true
                 })
@@ -59,27 +66,48 @@ export default class PeopleResultsPage extends React.Component {
             })
     };
 
+    personClick = (personData) => () => {
+
+        console.log('person:', personData);
+
+        const data = {
+            citizenID: '',
+            forenames: personData.forenames,
+            surname: personData.surname,
+            homeAddress: personData.address,
+            dateOfBirth: personData.dateOfBirth,
+            placeOfBirth: '',
+            sex: ''
+          };
+
+        this.getResults(data);
+    }
 
     getAcquaintances = (acquaintancesData) => {
-        if (acquaintancesData && acquaintancesData.length > 0 ) {
+        if (acquaintancesData && acquaintancesData.length > 0) {
             return (
-                acquaintancesData[0].forenames + ' ' + acquaintancesData[0].surname + ', ' +
-                acquaintancesData[1].forenames + ' ' + acquaintancesData[1].surname + ', ' +
-                acquaintancesData[2].forenames + ' ' + acquaintancesData[2].surname
+                <div>
+                    <a onClick={this.personClick(acquaintancesData[0])}>
+                        {acquaintancesData[0].forenames + ' ' + acquaintancesData[0].surname + ', '}</a>
+                    <a onClick={this.personClick(acquaintancesData[1])}>
+                        {acquaintancesData[1].forenames + ' ' + acquaintancesData[1].surname + ', '}</a>
+                    <a onClick={this.personClick(acquaintancesData[2])}>
+                        {acquaintancesData[2].forenames + ' ' + acquaintancesData[2].surname}</a>
+                </div>
             );
-        } else if (this.state.detailsLoaded){
+        } else if (this.state.detailsLoaded) {
             return '';
         }
     }
 
     getVehicles = (vehicleData) => {
-        if (vehicleData && vehicleData.length > 0 ){
-            for(let i = 0; i < vehicleData.length; i++){
+        if (vehicleData && vehicleData.length > 0) {
+            for (let i = 0; i < vehicleData.length; i++) {
                 return (
                     vehicleData[i].vehicleRegistrationNo
                 );
             }
-        } else if (this.state.detailsLoaded){
+        } else if (this.state.detailsLoaded) {
             return '';
         }
     }
@@ -106,7 +134,6 @@ export default class PeopleResultsPage extends React.Component {
         const { mobilesData } = this.state.personDetails;
         const { acquaintancesData } = this.state.personDetails;
         const { vehicleData } = this.state.personDetails;
-        console.log(bankAccountData);
 
         return (
             <div>
@@ -156,11 +183,11 @@ export default class PeopleResultsPage extends React.Component {
                                                 bankAccountData[0].bank : ''}</li>
                                             <li className="list-group-item">Account Number: {bankAccountData && bankAccountData.length > 0 ?
                                                 bankAccountData[0].accountNumber : ''}</li>
-                                            <li className="list-group-item">Mobile Number: {mobilesData && mobilesData.length > 0?
+                                            <li className="list-group-item">Mobile Number: {mobilesData && mobilesData.length > 0 ?
                                                 mobilesData[0].phoneNumber : ''}</li>
                                             <li className="list-group-item">Associates: {this.getAcquaintances(acquaintancesData)}</li>
-                                            <li className="list-group-item">Vehicles: <a onClick={this.vehicleClick(vehicleData)}
-                                            className='stretched-link link-style'>{this.getVehicles(vehicleData)}</a> </li>
+                                            <li className="list-group-item">Vehicles: {vehicleData && vehicleData.length > 0 ? (<a onClick={this.vehicleClick(vehicleData)}
+                                                className='stretched-link link-style'>{this.getVehicles(vehicleData)}</a>) : ''}</li>
                                             <li className="list-group-item">Recent locations: <a onClick={this.recentLocation} 
                                             className='stretched-link link-style'></a></li>
                                         </ul>
