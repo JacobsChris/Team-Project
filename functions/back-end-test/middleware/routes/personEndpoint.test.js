@@ -26,6 +26,16 @@ const partialInput = {
 	"sex": ""
 };
 
+const failureInput = {
+    "citizenID": undefined,
+	"forenames": "Gillian Holly",
+	"surname": "Newton",
+	"homeAddress": "67 TAVISTOCK ROAD, LONDON, E15 4EP",
+	"dateOfBirth": "1989-01-16",
+	"placeOfBirth": "HASLEMERE",
+    "sex": "Female"
+};	
+
 const matchingData = {
     "citizenData": [
         {
@@ -79,6 +89,7 @@ const matchingData = {
             "ANPRPointId": 1296,
             "timestamp": "2015-05-01T05:55:52.000Z",
             "vehicleRegistrationNumber": "JO24 RTP",
+            "sightingId": 337292,
             "anprId": 1296,
             "streetName": "Blackwall Tunnel Northern Approach, A12",
             "latitude": 51.53143204446358,
@@ -88,6 +99,7 @@ const matchingData = {
             "ANPRPointId": 4048,
             "timestamp": "2015-05-01T06:01:12.000Z",
             "vehicleRegistrationNumber": "JO24 RTP",
+            "sightingId": 1861684,
             "anprId": 4048,
             "streetName": "Bethnal Green Road, A1209",
             "latitude": 51.52461141030367,
@@ -97,6 +109,7 @@ const matchingData = {
             "ANPRPointId": 1440,
             "timestamp": "2015-05-01T15:12:41.000Z",
             "vehicleRegistrationNumber": "JO24 RTP",
+            "sightingId": 1912962,
             "anprId": 1440,
             "streetName": "A12",
             "latitude": 51.532270421063984,
@@ -106,6 +119,7 @@ const matchingData = {
             "ANPRPointId": 1296,
             "timestamp": "2015-05-02T05:50:38.000Z",
             "vehicleRegistrationNumber": "JO24 RTP",
+            "sightingId": 3509270,
             "anprId": 1296,
             "streetName": "Blackwall Tunnel Northern Approach, A12",
             "latitude": 51.53143204446358,
@@ -115,6 +129,7 @@ const matchingData = {
             "ANPRPointId": 4048,
             "timestamp": "2015-05-02T05:55:58.000Z",
             "vehicleRegistrationNumber": "JO24 RTP",
+            "sightingId": 3644513,
             "anprId": 4048,
             "streetName": "Bethnal Green Road, A1209",
             "latitude": 51.52461141030367,
@@ -124,6 +139,7 @@ const matchingData = {
             "ANPRPointId": 1440,
             "timestamp": "2015-05-02T14:31:18.000Z",
             "vehicleRegistrationNumber": "JO24 RTP",
+            "sightingId": 6381956,
             "anprId": 1440,
             "streetName": "A12",
             "latitude": 51.532270421063984,
@@ -133,6 +149,7 @@ const matchingData = {
             "ANPRPointId": 7321,
             "timestamp": "2015-05-02T14:23:26.000Z",
             "vehicleRegistrationNumber": "JO24 RTP",
+            "sightingId": 8264040,
             "anprId": 7321,
             "streetName": "Old Street, A5201",
             "latitude": 51.52462854663943,
@@ -142,6 +159,7 @@ const matchingData = {
             "ANPRPointId": 4048,
             "timestamp": "2015-05-03T05:50:02.000Z",
             "vehicleRegistrationNumber": "JO24 RTP",
+            "sightingId": 9218849,
             "anprId": 4048,
             "streetName": "Bethnal Green Road, A1209",
             "latitude": 51.52461141030367,
@@ -151,6 +169,7 @@ const matchingData = {
             "ANPRPointId": 1296,
             "timestamp": "2015-05-03T05:44:42.000Z",
             "vehicleRegistrationNumber": "JO24 RTP",
+            "sightingId": 10857418,
             "anprId": 1296,
             "streetName": "Blackwall Tunnel Northern Approach, A12",
             "latitude": 51.53143204446358,
@@ -160,6 +179,7 @@ const matchingData = {
             "ANPRPointId": 1440,
             "timestamp": "2015-05-03T14:28:03.000Z",
             "vehicleRegistrationNumber": "JO24 RTP",
+            "sightingId": 12467672,
             "anprId": 1440,
             "streetName": "A12",
             "latitude": 51.532270421063984,
@@ -184,6 +204,7 @@ const matchingData = {
                 "bankCardNumber": 2634571841835896,
                 "payeeAccount": 72576527,
                 "amount": 35.58,
+                "transactionId": 135465,
                 "id": 32967,
                 "vendor": "CoCo",
                 "streetName": "St. John Street, B501",
@@ -199,6 +220,7 @@ const matchingData = {
                 "bankCardNumber": 2634571841835896,
                 "type": "Cash Withdrawal",
                 "amount": 30,
+                "transactionsID": 129138,
                 "operator": "HSBC Bank",
                 "streetName": "Gray's Inn Road",
                 "postcode": "A5200",
@@ -213,49 +235,56 @@ const matchingData = {
             "callerNumber": "07700 002267",
             "callCellTowerId": 34788,
             "receiverNumber": "07700 904492",
-            "receiverTowerId": -1
+            "receiverTowerId": -1,
+            "phoneCallId": 2138043
         },
         {
             "timestamp": "2015-05-02T08:01:36.000Z",
             "callerNumber": "07700 002267",
             "callCellTowerId": -1,
             "receiverNumber": "07700 904492",
-            "receiverTowerId": 112275
+            "receiverTowerId": 112275,
+            "phoneCallId": 4077818
         },
         {
             "timestamp": "2015-05-01T10:40:35.000Z",
             "callerNumber": "07700 002267",
             "callCellTowerId": 34788,
             "receiverNumber": "07700 613869",
-            "receiverTowerId": -1
+            "receiverTowerId": -1,
+            "phoneCallId": 4644000
         },
         {
             "timestamp": "2015-05-01T10:40:35.000Z",
             "callerNumber": "07700 002267",
             "callCellTowerId": -1,
             "receiverNumber": "07700 613869",
-            "receiverTowerId": 60232
+            "receiverTowerId": 60232,
+            "phoneCallId": 6834568
         },
         {
             "timestamp": "2015-05-02T19:22:31.000Z",
             "callerNumber": "07700 002267",
             "callCellTowerId": -1,
             "receiverNumber": "07700 904492",
-            "receiverTowerId": 128645
+            "receiverTowerId": 128645,
+            "phoneCallId": 14055059
         },
         {
             "timestamp": "2015-05-02T19:22:31.000Z",
             "callerNumber": "07700 002267",
             "callCellTowerId": 35082,
             "receiverNumber": "07700 904492",
-            "receiverTowerId": -1
+            "receiverTowerId": -1,
+            "phoneCallId": 16621736
         },
         {
             "timestamp": "2015-05-03T13:46:58.000Z",
             "callerNumber": "07700 002267",
             "callCellTowerId": 34788,
             "receiverNumber": "07700 493682",
-            "receiverTowerId": 35513
+            "receiverTowerId": 35513,
+            "phoneCallId": 22045150
         }
     ],
     "acquaintancesData": [
@@ -435,12 +464,15 @@ describe('testing all person endpoints', function() {
     beforeAll( async function(done) {
         let res = await request(app)
             .post('/login')
-            .send(adminUser);
+            .send({
+                username: adminUser.username,
+                password: adminUser.password
+            });
         token = res.body.token;
         done();
     });
 
-    afterEach(function(done) {
+    afterAll(function(done) {
         server.close();
         done();
     });
@@ -462,6 +494,16 @@ describe('testing all person endpoints', function() {
             .send(fullInput);
         jest.setTimeout(100000);
         expect(res.text).toBe(JSON.stringify(matchingData));
+        done();
+    });
+
+    it('should throw an error if any of the inputs are not strings', async (done) => {
+        let res = await request(app)
+            .post('/back-end/person/getData')
+            .set("Authorization", token)
+            .send(failureInput);
+        jest.setTimeout(100000);
+        expect(res.text).toBe("[]");
         done();
     });
 });

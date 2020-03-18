@@ -1,3 +1,5 @@
+const sanitiseSQLInput = require("./sanitiseSQLInputs");
+
 module.exports =
     /**
      * @author Anthony Wilkinson & chris
@@ -10,8 +12,10 @@ module.exports =
      * @requires this function requires an input which is a string
      * */
     function addWildStr(inputString) {
+
         try {
-            inputString = "'%" + inputString + "%'";
+            inputString = sanitiseSQLInput("" + inputString);
+            inputString = "\"%" + inputString + "%\"";
             return inputString;
         } catch (e) {
             console.info(e);

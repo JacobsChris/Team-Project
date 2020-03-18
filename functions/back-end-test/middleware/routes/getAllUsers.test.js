@@ -2,14 +2,10 @@ const request = require('supertest');
 const app = require('../../../back-end/app');
 const adminUser = require('../../adminUser.json');
 
+
 const server = app;
 
-const resObj = [{
-    "id": 1,
-    "username": "mynameisadmin",
-    "password": "$2a$05$yVmRzsE0e939lprUdR4QROLBdyYm5XmsE0H/hYWbDJm2abjt3ZWbe",
-    "admin": true
-}];
+const resObj = [adminUser.hashedUser];
 
 let token = "";
 
@@ -18,7 +14,10 @@ describe('GET /getAllUsers', function() {
     beforeAll(async function(done) {
         let res = await request(app)
             .post('/login')
-            .send(adminUser);
+            .send({
+                username: adminUser.username,
+                password: adminUser.password
+            });
         token = res.body.token;
         done();
     });

@@ -12,7 +12,8 @@ module.exports =
      * */
      function addExactStr(inputString) {
          try {
-             inputString = "'" + inputString + "'";
+             inputString = sanitiseSQLInput("" + inputString);
+             inputString = "\"" + inputString + "\"";
              return inputString
          }
          catch (e) {
