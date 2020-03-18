@@ -7,5 +7,13 @@ module.exports =
      * @returns promised information about a celltower of given tower ID
      */
     function findCellTowerLocationBasedOnCellTowerId(cellTowerId) {
-        return Promise.all([findCellTowerLocation(cellTowerId)]);
+        try {
+            return Promise.all([findCellTowerLocation(cellTowerId)]);
+
+        } catch (e) {
+            console.info(e);
+            console.info(e.name);
+            console.info(e.message);
+            throw new Error('error occured at find cell tower location based on cell tower id');
+        }
     };

@@ -17,12 +17,18 @@ module.exports =
      *
      * @requires this function requires string inputs selected from findDetailsByName to function
      * */
-     function findVehicleByPerson(input) {
-        let sqlSearchString = "SELECT * FROM vehicleRegistration WHERE " +
-            "forenames LIKE " + wildStr(input.forenames) +
-            " AND surname LIKE " + wildStr(input.surname) +
-            " AND address LIKE " + wildStr(input.homeAddress) +
-            " AND dateOfBirth LIKE " + wildStr(input.dateOfBirth);
-        return auth(sqlSearchString);
-
-};
+    function findVehicleByPerson(input) {
+        try {
+            let sqlSearchString = "SELECT * FROM vehicleRegistration WHERE " +
+                "forenames LIKE " + wildStr(input.forenames) +
+                " AND surname LIKE " + wildStr(input.surname) +
+                " AND address LIKE " + wildStr(input.homeAddress) +
+                " AND dateOfBirth LIKE " + wildStr(input.dateOfBirth);
+            return auth(sqlSearchString);
+        } catch (e) {
+            console.info(e);
+            console.info(e.name);
+            console.info(e.message);
+            throw new Error('error occured at find vehicle by person');
+        }
+    };

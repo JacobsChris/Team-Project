@@ -9,8 +9,6 @@ cache:
 test:node:latest:
   script:
     - npm test
-    - firebase login
-    - firebase deploy
   only:
     - master
     - dev

@@ -17,8 +17,15 @@ module.exports =
      *
      * @requires this function requires a string input selected from findDetailsByATMId to function
      * */
-     function findLocation(ANPRPointId) {
-        let sqlSearchString = "SELECT * FROM anprcamera WHERE" +
-            " anprId LIKE " + ANPRPointId;
-        return SQLauthenticate(sqlSearchString)
-};
+    function findLocation(ANPRPointId) {
+        try {
+            let sqlSearchString = "SELECT * FROM anprcamera WHERE" +
+                " anprId LIKE " + ANPRPointId;
+            return SQLauthenticate(sqlSearchString)
+        } catch (e) {
+            console.info(e);
+            console.info(e.name);
+            console.info(e.message);
+            throw new Error('error occured at sql constructor for location');
+        }
+    };

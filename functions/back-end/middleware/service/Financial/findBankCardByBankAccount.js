@@ -17,8 +17,15 @@ module.exports =
      * @requires this function requires a string input selected from findDetailsByBankAccount to function
      * */
      function findBankCard(bankAccountId) {
-
+    try {
         let sqlSearchString = "SELECT * FROM bankcard WHERE " +
-            "bankAccountId =(" + bankAccountId +")";
+            "bankAccountId =(" + bankAccountId + ")";
         return auth(sqlSearchString)
+    }
+    catch (e) {
+        console.info(e);
+        console.info(e.name);
+        console.info(e.message);
+        throw new Error('error occured at find Bank Card By BankAccount');
+    }
 };

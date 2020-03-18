@@ -18,7 +18,15 @@ module.exports =
      * @requires this function requires a string input selected from findTransactionsByBankCard to function
      * */
     function findATMTransactions(input) {
-        let sqlSearchString = "SELECT * FROM atmTransaction WHERE " +
-            " bankCardNumber =(" + exactStr(input.cardNumber) + ")";
-        return auth(sqlSearchString);
+        try {
+            let sqlSearchString = "SELECT * FROM atmTransaction WHERE " +
+                " bankCardNumber =(" + exactStr(input.cardNumber) + ")";
+            return auth(sqlSearchString);
+        }
+        catch (e) {
+            console.info(e);
+            console.info(e.name);
+            console.info(e.message);
+            throw new Error('error occured at find ATM Transactions By BankCard');
+        }
 };

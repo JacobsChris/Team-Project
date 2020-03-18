@@ -7,228 +7,204 @@ const server = app;
 let token = "";
 
 const fullInput = {
-	"citizenID": "",
-	"forenames": "Gillian Holly",
-	"surname": "Newton",
-	"homeAddress": "67 TAVISTOCK ROAD, LONDON, E15 4EP",
-	"dateOfBirth": "1989-01-16",
-	"placeOfBirth": "HASLEMERE",
-	"sex": "Female"	
+    "citizenID": "",
+    "forenames": "Gillian Holly",
+    "surname": "Newton",
+    "homeAddress": "67 TAVISTOCK ROAD, LONDON, E15 4EP",
+    "dateOfBirth": "1989-01-16",
+    "placeOfBirth": "HASLEMERE",
+    "sex": "Female"
 };
 
 const partialInput = {
-	"citizenID": "",
-	"forenames": "Gillian",
-	"surname": "Newton",
-	"homeAddress": "",
-	"dateOfBirth": "",
-	"placeOfBirth": "",
-	"sex": ""
+    "citizenID": "",
+    "forenames": "Gillian",
+    "surname": "Newton",
+    "homeAddress": "",
+    "dateOfBirth": "",
+    "placeOfBirth": "",
+    "sex": ""
 };
 
 const failureInput = {
     "citizenID": undefined,
-	"forenames": "Gillian Holly",
-	"surname": "Newton",
-	"homeAddress": "67 TAVISTOCK ROAD, LONDON, E15 4EP",
-	"dateOfBirth": "1989-01-16",
-	"placeOfBirth": "HASLEMERE",
+    "forenames": "Gillian Holly",
+    "surname": "Newton",
+    "homeAddress": "67 TAVISTOCK ROAD, LONDON, E15 4EP",
+    "dateOfBirth": "1989-01-16",
+    "placeOfBirth": "HASLEMERE",
     "sex": "Female"
-};	
+};
 
 const matchingData = {
-    "citizenData": [
-        {
-            "citizenID": 3729893493,
-            "forenames": "Gillian Holly",
-            "surname": "Newton",
-            "homeAddress": "67 TAVISTOCK ROAD, LONDON, E15 4EP",
-            "dateOfBirth": "1989-01-16",
-            "placeOfBirth": "HASLEMERE",
-            "sex": "Female"
-        }
-    ],
-    "bankAccountData": [
-        {
-            "bankAccountId": 277579,
-            "accountNumber": 67968666,
-            "bank": "National Westminster Bank",
-            "forenames": "Gillian Holly",
-            "surname": "Newton",
-            "dateOfBirth": "1989-01-16",
-            "homeAddress": "67 TAVISTOCK ROAD, LONDON, E15 4EP"
-        }
-    ],
-    "mobilesData": [
-        {
-            "forenames": "Gillian Holly",
-            "surname": "Newton",
-            "dateOfBirth": "1989-01-16",
-            "address": "67 TAVISTOCK ROAD, LONDON, E15 4EP",
-            "phoneNumber": "07700 002267",
-            "network": "Orange"
-        }
-    ],
-    "vehicleData": [
-        {
-            "registrationID": 178966,
-            "registrationDate": "2013-01-10",
-            "vehicleRegistrationNo": "JO24 RTP",
-            "make": "Vauxhall",
-            "model": "Astra",
-            "colour": "natural",
-            "forenames": "Gillian Holly",
-            "surname": "Newton",
-            "address": "67 TAVISTOCK ROAD, LONDON, E15 4EP",
-            "dateOfBirth": "1989-01-16",
-            "driverLicenceID": "NEWTO851169GH9SQ 67"
-        }
-    ],
-    "vehicleSightings": [
-        {
-            "ANPRPointId": 1296,
-            "timestamp": "2015-05-01T05:55:52.000Z",
-            "vehicleRegistrationNumber": "JO24 RTP",
-            "sightingId": 337292,
-            "anprId": 1296,
-            "streetName": "Blackwall Tunnel Northern Approach, A12",
-            "latitude": 51.53143204446358,
-            "longitude": -0.01826155971575289
-        },
-        {
-            "ANPRPointId": 4048,
-            "timestamp": "2015-05-01T06:01:12.000Z",
-            "vehicleRegistrationNumber": "JO24 RTP",
-            "sightingId": 1861684,
-            "anprId": 4048,
-            "streetName": "Bethnal Green Road, A1209",
-            "latitude": 51.52461141030367,
-            "longitude": -0.07222853762422214
-        },
-        {
-            "ANPRPointId": 1440,
-            "timestamp": "2015-05-01T15:12:41.000Z",
-            "vehicleRegistrationNumber": "JO24 RTP",
-            "sightingId": 1912962,
-            "anprId": 1440,
-            "streetName": "A12",
-            "latitude": 51.532270421063984,
-            "longitude": -0.01921653790510903
-        },
-        {
-            "ANPRPointId": 1296,
-            "timestamp": "2015-05-02T05:50:38.000Z",
-            "vehicleRegistrationNumber": "JO24 RTP",
-            "sightingId": 3509270,
-            "anprId": 1296,
-            "streetName": "Blackwall Tunnel Northern Approach, A12",
-            "latitude": 51.53143204446358,
-            "longitude": -0.01826155971575289
-        },
-        {
-            "ANPRPointId": 4048,
-            "timestamp": "2015-05-02T05:55:58.000Z",
-            "vehicleRegistrationNumber": "JO24 RTP",
-            "sightingId": 3644513,
-            "anprId": 4048,
-            "streetName": "Bethnal Green Road, A1209",
-            "latitude": 51.52461141030367,
-            "longitude": -0.07222853762422214
-        },
-        {
-            "ANPRPointId": 1440,
-            "timestamp": "2015-05-02T14:31:18.000Z",
-            "vehicleRegistrationNumber": "JO24 RTP",
-            "sightingId": 6381956,
-            "anprId": 1440,
-            "streetName": "A12",
-            "latitude": 51.532270421063984,
-            "longitude": -0.01921653790510903
-        },
-        {
-            "ANPRPointId": 7321,
-            "timestamp": "2015-05-02T14:23:26.000Z",
-            "vehicleRegistrationNumber": "JO24 RTP",
-            "sightingId": 8264040,
-            "anprId": 7321,
-            "streetName": "Old Street, A5201",
-            "latitude": 51.52462854663943,
-            "longitude": -0.09417664470173367
-        },
-        {
-            "ANPRPointId": 4048,
-            "timestamp": "2015-05-03T05:50:02.000Z",
-            "vehicleRegistrationNumber": "JO24 RTP",
-            "sightingId": 9218849,
-            "anprId": 4048,
-            "streetName": "Bethnal Green Road, A1209",
-            "latitude": 51.52461141030367,
-            "longitude": -0.07222853762422214
-        },
-        {
-            "ANPRPointId": 1296,
-            "timestamp": "2015-05-03T05:44:42.000Z",
-            "vehicleRegistrationNumber": "JO24 RTP",
-            "sightingId": 10857418,
-            "anprId": 1296,
-            "streetName": "Blackwall Tunnel Northern Approach, A12",
-            "latitude": 51.53143204446358,
-            "longitude": -0.01826155971575289
-        },
-        {
-            "ANPRPointId": 1440,
-            "timestamp": "2015-05-03T14:28:03.000Z",
-            "vehicleRegistrationNumber": "JO24 RTP",
-            "sightingId": 12467672,
-            "anprId": 1440,
-            "streetName": "A12",
-            "latitude": 51.532270421063984,
-            "longitude": -0.01921653790510903
-        }
-    ],
-    "bankDetailsData": [
-        {
-            "bankcardId": 193894,
-            "cardNumber": 2634571841835896,
-            "sortCode": "39-80-29",
-            "bankAccountId": 277579,
-            "accountNumber": 67968666,
-            "bank": "National Westminster Bank"
-        }
-    ],
+    "citizenData": [{
+        "citizenID": 3729893493,
+        "forenames": "Gillian Holly",
+        "surname": "Newton",
+        "homeAddress": "67 TAVISTOCK ROAD, LONDON, E15 4EP",
+        "dateOfBirth": "1989-01-16",
+        "placeOfBirth": "HASLEMERE",
+        "sex": "Female"
+    }],
+    "bankAccountData": [{
+        "bankAccountId": 277579,
+        "accountNumber": 67968666,
+        "bank": "National Westminster Bank",
+        "forenames": "Gillian Holly",
+        "surname": "Newton",
+        "dateOfBirth": "1989-01-16",
+        "homeAddress": "67 TAVISTOCK ROAD, LONDON, E15 4EP"
+    }],
+    "mobilesData": [{
+        "forenames": "Gillian Holly",
+        "surname": "Newton",
+        "dateOfBirth": "1989-01-16",
+        "address": "67 TAVISTOCK ROAD, LONDON, E15 4EP",
+        "phoneNumber": "07700 002267",
+        "network": "Orange"
+    }],
+    "vehicleData": [{
+        "registrationID": 178966,
+        "registrationDate": "2013-01-10",
+        "vehicleRegistrationNo": "JO24 RTP",
+        "make": "Vauxhall",
+        "model": "Astra",
+        "colour": "natural",
+        "forenames": "Gillian Holly",
+        "surname": "Newton",
+        "address": "67 TAVISTOCK ROAD, LONDON, E15 4EP",
+        "dateOfBirth": "1989-01-16",
+        "driverLicenceID": "NEWTO851169GH9SQ 67"
+    }],
+    "vehicleSightings": [{
+        "ANPRPointId": 1296,
+        "timestamp": "2015-05-01T05:55:52.000Z",
+        "vehicleRegistrationNumber": "JO24 RTP",
+        "sightingId": 337292,
+        "anprId": 1296,
+        "streetName": "Blackwall Tunnel Northern Approach, A12",
+        "latitude": 51.53143204446358,
+        "longitude": -0.01826155971575289
+    }, {
+        "ANPRPointId": 4048,
+        "timestamp": "2015-05-01T06:01:12.000Z",
+        "vehicleRegistrationNumber": "JO24 RTP",
+        "sightingId": 1861684,
+        "anprId": 4048,
+        "streetName": "Bethnal Green Road, A1209",
+        "latitude": 51.52461141030367,
+        "longitude": -0.07222853762422214
+    }, {
+        "ANPRPointId": 1440,
+        "timestamp": "2015-05-01T15:12:41.000Z",
+        "vehicleRegistrationNumber": "JO24 RTP",
+        "sightingId": 1912962,
+        "anprId": 1440,
+        "streetName": "A12",
+        "latitude": 51.532270421063984,
+        "longitude": -0.01921653790510903
+    }, {
+        "ANPRPointId": 1296,
+        "timestamp": "2015-05-02T05:50:38.000Z",
+        "vehicleRegistrationNumber": "JO24 RTP",
+        "sightingId": 3509270,
+        "anprId": 1296,
+        "streetName": "Blackwall Tunnel Northern Approach, A12",
+        "latitude": 51.53143204446358,
+        "longitude": -0.01826155971575289
+    }, {
+        "ANPRPointId": 4048,
+        "timestamp": "2015-05-02T05:55:58.000Z",
+        "vehicleRegistrationNumber": "JO24 RTP",
+        "sightingId": 3644513,
+        "anprId": 4048,
+        "streetName": "Bethnal Green Road, A1209",
+        "latitude": 51.52461141030367,
+        "longitude": -0.07222853762422214
+    }, {
+        "ANPRPointId": 1440,
+        "timestamp": "2015-05-02T14:31:18.000Z",
+        "vehicleRegistrationNumber": "JO24 RTP",
+        "sightingId": 6381956,
+        "anprId": 1440,
+        "streetName": "A12",
+        "latitude": 51.532270421063984,
+        "longitude": -0.01921653790510903
+    }, {
+        "ANPRPointId": 7321,
+        "timestamp": "2015-05-02T14:23:26.000Z",
+        "vehicleRegistrationNumber": "JO24 RTP",
+        "sightingId": 8264040,
+        "anprId": 7321,
+        "streetName": "Old Street, A5201",
+        "latitude": 51.52462854663943,
+        "longitude": -0.09417664470173367
+    }, {
+        "ANPRPointId": 4048,
+        "timestamp": "2015-05-03T05:50:02.000Z",
+        "vehicleRegistrationNumber": "JO24 RTP",
+        "sightingId": 9218849,
+        "anprId": 4048,
+        "streetName": "Bethnal Green Road, A1209",
+        "latitude": 51.52461141030367,
+        "longitude": -0.07222853762422214
+    }, {
+        "ANPRPointId": 1296,
+        "timestamp": "2015-05-03T05:44:42.000Z",
+        "vehicleRegistrationNumber": "JO24 RTP",
+        "sightingId": 10857418,
+        "anprId": 1296,
+        "streetName": "Blackwall Tunnel Northern Approach, A12",
+        "latitude": 51.53143204446358,
+        "longitude": -0.01826155971575289
+    }, {
+        "ANPRPointId": 1440,
+        "timestamp": "2015-05-03T14:28:03.000Z",
+        "vehicleRegistrationNumber": "JO24 RTP",
+        "sightingId": 12467672,
+        "anprId": 1440,
+        "streetName": "A12",
+        "latitude": 51.532270421063984,
+        "longitude": -0.01921653790510903
+    }],
+    "bankDetailsData": [{
+        "bankcardId": 193894,
+        "cardNumber": 2634571841835896,
+        "sortCode": "39-80-29",
+        "bankAccountId": 277579,
+        "accountNumber": 67968666,
+        "bank": "National Westminster Bank"
+    }],
     "transactionsData": {
-        "epos": [
-            {
-                "timestamp": "2015-05-01T15:03:11.000Z",
-                "eposId": 32967,
-                "bankCardNumber": 2634571841835896,
-                "payeeAccount": 72576527,
-                "amount": 35.58,
-                "transactionId": 135465,
-                "id": 32967,
-                "vendor": "CoCo",
-                "streetName": "St. John Street, B501",
-                "postcode": "EC1V0AZ",
-                "latitude": 51.5260805510584,
-                "longitude": -0.103622249912791
-            }
-        ],
-        "atm": [
-            {
-                "timestamp": "2015-05-02T14:20:38.000Z",
-                "atmId": 1984,
-                "bankCardNumber": 2634571841835896,
-                "type": "Cash Withdrawal",
-                "amount": 30,
-                "transactionsID": 129138,
-                "operator": "HSBC Bank",
-                "streetName": "Gray's Inn Road",
-                "postcode": "A5200",
-                "latitude": 51.5215957950182,
-                "longitude": -0.113351357217604
-            }
-        ]
+        "epos": [{
+            "timestamp": "2015-05-01T15:03:11.000Z",
+            "eposId": 32967,
+            "bankCardNumber": 2634571841835896,
+            "payeeAccount": 72576527,
+            "amount": 35.58,
+            "transactionId": 135465,
+            "id": 32967,
+            "vendor": "CoCo",
+            "streetName": "St. John Street, B501",
+            "postcode": "EC1V0AZ",
+            "latitude": 51.5260805510584,
+            "longitude": -0.103622249912791
+        }],
+        "atm": [{
+            "timestamp": "2015-05-02T14:20:38.000Z",
+            "atmId": 1984,
+            "bankCardNumber": 2634571841835896,
+            "type": "Cash Withdrawal",
+            "amount": 30,
+            "transactionsID": 129138,
+            "operator": "HSBC Bank",
+            "streetName": "Gray's Inn Road",
+            "postcode": "A5200",
+            "latitude": 51.5215957950182,
+            "longitude": -0.113351357217604
+        }]
     },
+  
     "inComingCallHistory": [
         {
             "timestamp": "2015-05-02T06:59:10.000Z",
@@ -796,9 +772,9 @@ const partialMatchingData = [
 ];
 
 
-describe('testing all person endpoints', function() {
-    
-    beforeAll( async function(done) {
+describe('testing all person endpoints', function () {
+
+    beforeAll(async function (done) {
         let res = await request(app)
             .post('/login')
             .send({
@@ -809,7 +785,7 @@ describe('testing all person endpoints', function() {
         done();
     });
 
-    afterAll(function(done) {
+    afterAll(function (done) {
         server.close();
         done();
     });
@@ -821,7 +797,7 @@ describe('testing all person endpoints', function() {
             .send(partialInput);
         jest.setTimeout(100000);
         expect(res.text).toBe(JSON.stringify(partialMatchingData));
-        done();        
+        done();
     });
 
     it('should get data that fully match the input', async (done) => {

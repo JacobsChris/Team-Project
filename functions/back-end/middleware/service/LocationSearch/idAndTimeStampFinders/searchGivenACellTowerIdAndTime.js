@@ -22,12 +22,10 @@ module.exports =
             }
         }
         catch (err) {
-            console.log(err.name);
-            console.log(err.message);
-            console.data(err.name);
-            console.data(err.message);
-            throw "error encountered in find person by searchGivenACellTowerIdAndTime";
-            return "error";
+            console.info(e);
+            console.info(e.name);
+            console.info(e.message);
+            throw new Error('error occured at search given a cell tower id and a time');
         }
 
     };

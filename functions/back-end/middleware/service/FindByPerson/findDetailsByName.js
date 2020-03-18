@@ -1,4 +1,3 @@
-
 const person = require('./findPersonByPerson.js');
 const bankAccount = require('./findBankAccountByPerson.js');
 const mobilePhone = require('./findMobileByPerson.js');
@@ -25,10 +24,15 @@ module.exports =
      *  @require this function to work it requires a JSON object to be passed into JsonToStringDetails()
      *  */
     function findDetailsByName(input) {
-
-        return Promise.all([person(input),
-            bankAccount(input),
-            mobilePhone(input),
-            vehicleReg(input)]);
-
+        try {
+            return Promise.all([person(input),
+                bankAccount(input),
+                mobilePhone(input),
+                vehicleReg(input)]);
+        } catch (e) {
+            console.info(e);
+            console.info(e.name);
+            console.info(e.message);
+            throw new Error('error occured at find details by name');
+        }
     };

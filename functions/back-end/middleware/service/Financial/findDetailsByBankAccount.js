@@ -28,6 +28,14 @@ module.exports =
      *  @require this function to work it requires a JSON object to be passed into JsonToStringBankDetails()
      *  */
      function findBankCardByAccountId(input) {
-        bankAccountId = exactStr(input.bankAccountId);
-        return Promise.all([bankCard(bankAccountId)]);
+         try {
+             bankAccountId = exactStr(input.bankAccountId);
+             return Promise.all([bankCard(bankAccountId)]);
+         }
+         catch (e) {
+             console.info(e);
+             console.info(e.name);
+             console.info(e.message);
+             throw new Error('error occured at find bank card by account id ');
+         }
 };

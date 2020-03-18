@@ -31,7 +31,6 @@ module.exports =
                             atmIds.push(atm[i])
                         }
                     }
-                    console.log(atmIds)
                 }
 
                 if (!cell) {
@@ -43,7 +42,6 @@ module.exports =
                             cellIds.push(cell[i])
                         }
                     }
-                    console.log(cellIds)
                 }
 
                 if (!epos) {
@@ -61,9 +59,10 @@ module.exports =
             }
         }
         catch (e) {
+            console.info(e);
             console.info(e.name);
             console.info(e.message);
-            throw "An error occurred on checking if things are within the stated circle"
+            throw new Error('An error occurred on checking if things are within the stated circle');
 
         }
     };

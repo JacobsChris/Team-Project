@@ -9,11 +9,18 @@ module.exports =
      * @returns promised arrays of the incoming and outgoing pone calls of the specified phone number
      */
     function findAcquaintanceHistoryByPhoneNumber(input) {
-        return Promise.all(
-            [
-                findAcquaintanceOutGoingCallsByTargetPhoneNUmber(input),
-                findAcquaintanceInComingCallsByTargetPhoneNumber(input)
-            ]
-        )
+        try {
+            return Promise.all(
+                [
+                    findAcquaintanceOutGoingCallsByTargetPhoneNUmber(input),
+                    findAcquaintanceInComingCallsByTargetPhoneNumber(input)
+                ]
+            )
 
+        } catch (e) {
+            console.info(e);
+            console.info(e.name);
+            console.info(e.message);
+            throw new Error('error occured at find acquaintaince history by phone number');
+        }
     };

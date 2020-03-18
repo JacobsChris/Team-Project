@@ -12,8 +12,14 @@ module.exports =
      * @requires this function requires an input which is a string
      * */
     function addExactStr(inputString) {
-        inputString = sanitiseSQLInput("" + inputString);
-        inputString = "\"" + inputString + "\"";
-        return inputString
-
-    };
+        try {
+            inputString = sanitiseSQLInput("" + inputString);
+            inputString = "\"" + inputString + "\"";
+            return inputString
+        } catch (e) {
+            console.info(e);
+            console.info(e.name);
+            console.info(e.message);
+            throw new Error('error occured at exact str');
+        }
+};

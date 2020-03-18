@@ -37,7 +37,7 @@ module.exports = async function (input) {
             vehicleSightings[i] = {...sighting, ...data[0][0]};
         }
     } catch (e) {
-        console.info(e)
+        console.info(e);
         console.info(e.name);
         console.info(e.message);
     }
@@ -120,7 +120,6 @@ module.exports = async function (input) {
         "targetHasCalled": targetHasCalled,
         "targetHasBeenCalledBy": targetHasBeenCalledBy
     }
-
 
 }
 ;

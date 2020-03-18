@@ -12,12 +12,20 @@ module.exports =
      */
 
     function stringChecker(inputStr) {
-        if (typeof inputStr != 'string') {
-            throw new Error("Not a string error")
-        } else {
-            inputStr = sanitiseSQLInput(inputStr);
-            inputStr = wildStr(inputStr);
 
-            return inputStr;
+        try {
+            if (typeof inputStr != 'string') {
+                throw new Error("Not a string error")
+            } else {
+                inputStr = sanitiseSQLInput(inputStr);
+                inputStr = wildStr(inputStr);
+
+                return inputStr;
+            }
+        } catch (e) {
+            console.info(e);
+            console.info(e.name);
+            console.info(e.message);
+            throw new Error('error occured at string checker');
         }
     };
