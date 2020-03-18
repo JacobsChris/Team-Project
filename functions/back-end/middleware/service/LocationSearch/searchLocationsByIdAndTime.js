@@ -49,6 +49,8 @@ module.exports =
     async function searchLocationsByIdAndTime(input, intialTimeStampInput, finalTimeStampInput, limit) {
         const intialTimeStamp = exactStr(intialTimeStampInput);
         const finalTimeStamp = exactStr(finalTimeStampInput);
+
+
         const eventIdTimeAndDetails = [];
         const arrays = Object.values(input);
 
@@ -133,7 +135,6 @@ module.exports =
             }
             for (let inp of arrays[3]) {
                 if (inp.id !== undefined) {
-                    debugger
                     const output2 = [];
                     const eposId = exactStr(inp.id);
                     const output1 = await (searchGivenAEposIdAndTime(eposId, intialTimeStamp, finalTimeStamp, limit));
