@@ -44,6 +44,9 @@
 //
 //
 // };
+const stringChecker = require("./inputvalidation/stringChecker");
+const wildStr = require("./inputvalidation/wildStr");
+const exactStr = require("./inputvalidation/exactStr");
 
 module.exports =
     /**
@@ -59,17 +62,17 @@ module.exports =
      *  @require this function to work it requires a JSON object to be passed into JsonToStringName()
      *  */
     function searchByNames(citizenID, forenames, surname, homeAddress, dateOfBirth, placeOfBirth, sex) {
-        citizenID = stringChecker.stringChecker(citizenID);
-        forenames = stringChecker.stringChecker(forenames);
-        surname = stringChecker.stringChecker(surname);
-        homeAddress = stringChecker.stringChecker(homeAddress);
-        dateOfBirth = stringChecker.stringChecker(dateOfBirth);
-        placeOfBirth = stringChecker.stringChecker(placeOfBirth);
+        citizenID = stringChecker(citizenID);
+        forenames = stringChecker(forenames);
+        surname = stringChecker(surname);
+        homeAddress = stringChecker(homeAddress);
+        dateOfBirth = stringChecker(dateOfBirth);
+        placeOfBirth = stringChecker(placeOfBirth);
 
         if (sex === "") {
-            sex = wildStr.addWildStr(sex);
+            sex = wildStr(sex);
         } else {
-            sex = exactStr.addExactStr(sex);
+            sex = exactStr(sex);
         }
 
         let sqlSearchString = "SELECT * FROM citizen WHERE " +

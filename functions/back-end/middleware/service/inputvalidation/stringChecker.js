@@ -1,4 +1,6 @@
 const wildStr = require("./wildStr");
+const sanitiseSQLInput = require("./sanitiseSQLInputs");
+
 
 module.exports =
 
@@ -13,7 +15,9 @@ module.exports =
         if (typeof inputStr != 'string') {
             throw new Error("Not a string error")
         } else {
+            inputStr = sanitiseSQLInput(inputStr);
             inputStr = wildStr(inputStr);
+
             return inputStr;
         }
     };
