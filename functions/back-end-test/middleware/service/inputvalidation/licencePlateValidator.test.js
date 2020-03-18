@@ -11,21 +11,21 @@ test('takes in an incomplete RegNo and ensures it is a valid Reg No', () => {
 test('takes in an invalid regNo that has a number where a letter should be, and returns an error', (done) => {
     expect(() => {
         licencePlateValidator("G561 VLR")
-    }).toThrow("Not a valid vehicle registration number");
+    }).toThrow("error occurred at licence plate validator");
     done();
 });
 
 test('takes in an invalid regNo that has an extra character, and returns an error', (done) => {
     expect(() => {
         licencePlateValidator("GJ61 VLRA")
-    }).toThrow("Not a valid vehicle registration number");
+    }).toThrow("error occurred at licence plate validator");
     done();
 });
 
 test('takes in an invalid regNo that is missing a character, and returns an error', (done) => {
     expect(() => {
         licencePlateValidator("GJ61 VL")
-    }).toThrow("Not a valid vehicle registration number");
+    }).toThrow("error occurred at licence plate validator");
     done();
 });
 

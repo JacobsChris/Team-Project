@@ -11,5 +11,5 @@ test("test that inputting a string is accepted and adds wildStr to it", () => {
 test('test that inputting a bad string (ie not a string) throws an error', () => {
     expect(() => {
         stringChecker(badInputString)
-    }).toThrowError("Not a string error")
+    }).toThrowError("error occurred at string checker")
 });

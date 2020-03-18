@@ -24,6 +24,6 @@ module.exports =
             console.info(e);
             console.info(e.name);
             console.info(e.message);
-            throw new Error('error occured at licence plate validator');
+            throw new Error('error occurred at licence plate validator');
         }
     };

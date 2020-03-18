@@ -14,6 +14,6 @@ module.exports =
             console.info(e);
             console.info(e.name);
             console.info(e.message);
-            throw new Error('error occured at find vehicle observations by vehicle');
+            throw new Error('error occurred at find vehicle observations by vehicle');
         }
     };

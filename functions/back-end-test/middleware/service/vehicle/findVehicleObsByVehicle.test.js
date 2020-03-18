@@ -44,7 +44,7 @@ test("takes in an invalid complete vehicle reg and returns all observations of t
         throw "this shouldn't have got here"
     } catch (err) {
         expect(err).toBeTruthy();
-        expect(err.message).toEqual("Not a valid vehicle registration number")
+        expect(err.message).toEqual("error occurred at find vehicle observations by vehicle")
     }
 });
 
