@@ -1,6 +1,6 @@
 const morgan = require('morgan');
 const winston = require('winston');
-const {DynamoDB} = require('winston-dynamodb');
+const { DynamoDB } = require('winston-dynamodb');
 const options = require('./AuthDB.json');
 
 const logger = winston.createLogger({
