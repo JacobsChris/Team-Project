@@ -66,6 +66,8 @@ module.exports =
                         if (temp[0] === undefined) {
                         } else {
                             output2.push(temp[0]);
+                            temp2[0]['latitude'] = inp.latitude;
+                            temp2[0]['longitude'] = inp.longitude;
                             temp2[0]['idType'] = "AnprID";
                             temp2[0]['id'] = inp.anprId;
                             temp2[0]['timeStamp'] = cam.timestamp;
@@ -97,6 +99,8 @@ module.exports =
                                         } else {
                                             output2.push(temp2[0]);
                                             const temp3 = temp2;
+                                            temp3[0]['latitude'] = inp.latitude;
+                                            temp3[0]['longitude'] = inp.longitude;
                                             temp3[0]['idType'] = "atmID";
                                             temp3[0]['id'] = input.atmId;
                                             temp3[0]['timeStamp'] = temp.timestamp;
@@ -123,6 +127,8 @@ module.exports =
                         if (temp[0] === undefined) {
                         } else {
                             output2.push(temp[0]);
+                            temp2[0]['latitude'] = inp.latitude;
+                            temp2[0]['longitude'] = inp.longitude;
                             temp2[0]['idType'] = "CellTowerId";
                             temp2[0]['id'] = inp.cellTowerId;
                             temp2[0]['timeStamp'] = mob.timestamp;
@@ -155,6 +161,8 @@ module.exports =
                                             } else {
                                                 output2.push(temp2);
                                                 const temp3 = temp2;
+                                                temp3[0]['latitude'] = inp.latitude;
+                                                temp3[0]['longitude'] = inp.longitude;
                                                 temp3[0]['idType'] = "eposID";
                                                 temp3[0]['id'] = inp.id;
                                                 temp3[0]['timeStamp'] = temp.timestamp;
