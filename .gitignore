@@ -33,6 +33,7 @@ yarn-error.log*
 .vscode
 
 config.json
+functions/back-end-test/adminUser.json
 functions/back-end/middleware/logging/DataAccessDB.json
 functions/back-end/middleware/logging/AuthDB.json
 functions/back-end/middleware/auth/jwtConfig.json
