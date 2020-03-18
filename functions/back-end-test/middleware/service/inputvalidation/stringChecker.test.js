@@ -2,7 +2,7 @@ const stringChecker = require("../../../../back-end/middleware/service/inputvali
 
 let goodInputString = "hello world";
 let badInputString = 1;
-let outputString = "\'%hello world%\'";
+let outputString = "\"%hello world%\"";
 
 test("test that inputting a string is accepted and adds wildStr to it", () => {
     expect(stringChecker(goodInputString)).toBe(outputString);
