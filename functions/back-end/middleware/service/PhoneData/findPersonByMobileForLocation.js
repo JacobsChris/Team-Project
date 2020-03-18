@@ -29,6 +29,9 @@ module.exports =
                 return await auth(sqlSearchString);
             }
         } catch (e) {
-            throw "error encountered in find person by mobile for location"
+            console.info(e);
+            console.info(e.name);
+            console.info(e.message);
+            throw new Error('error occured at find person by mobile for location');
         }
     };

@@ -18,8 +18,14 @@ module.exports =
      * @requires this function requires a string input selected from findDetailsByATMId to function
      * */
      function findATMPoint(atmId) {
-        let sqlSearchString = "SELECT * FROM atmpoint WHERE" +
-            " atmId LIKE " + atmId;
-        return SQLauthenticate(sqlSearchString)
-
+         try {
+             let sqlSearchString = "SELECT * FROM atmpoint WHERE" +
+                 " atmId LIKE " + atmId;
+             return SQLauthenticate(sqlSearchString)
+         }catch (e) {
+             console.info(e);
+             console.info(e.name);
+             console.info(e.message);
+             throw new Error('error occured at find ATM point by Atm Id');
+         }
 };
