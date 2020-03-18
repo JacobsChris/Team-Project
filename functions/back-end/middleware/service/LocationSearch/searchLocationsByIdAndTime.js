@@ -46,33 +46,15 @@ module.exports =
                 }
      *  @require this function to work it requires a JSON object to be passed into it
      *  */
-    async function searchLocationsByIdAndTime(input, intialTimeStampInput, finalTimeStampInput) {
+    async function searchLocationsByIdAndTime(input, intialTimeStampInput, finalTimeStampInput, limit) {
         const intialTimeStamp = exactStr(intialTimeStampInput);
         const finalTimeStamp = exactStr(finalTimeStampInput);
-        const limit = (input.limit);
         const eventIdTimeAndDetails = [];
-        try {
-            if (input.cellTowerId !== undefined) {
-                for (let inp of input.cellTowerId) {
-                    const output2 = [];
-                    const cellTowerId = exactStr(inp.cellTowerId);
-                    const output1 = await searchGivenACellTowerIdAndTime(cellTowerId, intialTimeStamp, finalTimeStamp);
-                    for (let mob of output1) {
-                        const temp = await findPersonByMobileForLocation(mob, limit);
-                        const temp2 = temp;
-                        if (temp[0] === undefined) {
-                        } else {
-                            output2.push(temp[0]);
-                            temp2[0]['idType'] = "CellTowerId";
-                            temp2[0]['id'] = inp.cellTowerId;
-                            temp2[0]['timeStamp'] = mob.timestamp;
-                            eventIdTimeAndDetails.push(temp2[0]);
-                        }
-                    }
-                }
+        const arrays = Object.values(input);
 
-            } else if (input.anprId !== undefined) {
-                for (let inp of input.anprId) {
+        try {
+            for (let inp of arrays[0]) {
+                if (inp.anprId !== undefined) {
                     const output2 = [];
                     const anprId = exactStr(inp.anprId);
                     const output1 = await searchGivenASingleANPRIdAndTime(anprId, intialTimeStamp, finalTimeStamp, limit);
@@ -88,10 +70,13 @@ module.exports =
                             eventIdTimeAndDetails.push(temp2[0]);
                         }
                     }
+
+                } else {
+                    return "error encountered, the correct Id was not supplied to searchLocationsByIdAndTime function. anpr"
                 }
-            } else if (input.atmId !== undefined) {
-                for (let inp of input.atmId) {
-                    debugger
+            }
+            for (let inp of arrays[1]) {
+                if (inp.atmId !== undefined) {
                     const output2 = [];
                     const atmId = exactStr(input.atmId);
                     const output1 = await searchGivenASingleATMIdAndTime(atmId, intialTimeStamp, finalTimeStamp, limit);
@@ -105,7 +90,6 @@ module.exports =
                                 if (bankaccountid[0] === undefined) {
                                 } else {
                                     for (let id of bankaccountid) {
-                                        debugger
                                         const temp2 = await findDetailsFromABankAccountId(id.bankcardId, limit);
                                         if (temp2[0] === undefined) {
                                         } else {
@@ -121,50 +105,84 @@ module.exports =
                             }
                         }
                     }
-                }
-            } else if (input.eposId !== undefined) {
-                debugger
-                const output2 = [];
-                const eposId = exactStr(input.eposId);
-                const output1 = await (searchGivenAEposIdAndTime(eposId, intialTimeStamp, finalTimeStamp, limit));
-                if (output1 === undefined) {
                 } else {
-                    for (let epos of output1) {
-                        const temp = epos;
-                        let cardNumber = await findBankCardByEposId(epos.eposId, limit);
-                        if (cardNumber[0] === undefined) {
+                    return "error encountered, the correct Id was not supplied to searchLocationsByIdAndTime function. atm"
+                }
+            }
+            for (let inp of arrays[2]) {
+
+                if (inp.cellTowerId !== undefined) {
+                    const output2 = [];
+                    const cellTowerId = exactStr(inp.cellTowerId);
+                    const output1 = await searchGivenACellTowerIdAndTime(cellTowerId, intialTimeStamp, finalTimeStamp, limit);
+                    for (let mob of output1) {
+                        const temp = await findPersonByMobileForLocation(mob, limit);
+                        const temp2 = temp;
+                        if (temp[0] === undefined) {
                         } else {
-                            for (let bankcard of cardNumber) {
-                                let bankaccountid = await findBankAccountIdGivenACardNumber(bankcard.bankCardNumber, limit);
-                                if (bankaccountid[0] === undefined) {
-                                } else {
-                                    for (let id of bankaccountid) {
-                                        const temp2 = await findDetailsFromABankAccountId(id.bankcardId, limit);
-                                        if (temp2[0] === undefined) {
-                                        } else {
-                                            output2.push(temp2);
-                                            const temp3 = temp2;
-                                            temp3[0]['idType'] = "eposID";
-                                            temp3[0]['id'] = input.eposId;
-                                            temp3[0]['timeStamp'] = temp.timestamp;
-                                            eventIdTimeAndDetails.push(temp3[0]);
+                            output2.push(temp[0]);
+                            temp2[0]['idType'] = "CellTowerId";
+                            temp2[0]['id'] = inp.cellTowerId;
+                            temp2[0]['timeStamp'] = mob.timestamp;
+                            eventIdTimeAndDetails.push(temp2[0]);
+                        }
+                    }
+                } else {
+                    return "error encountered, the correct Id was not supplied to searchLocationsByIdAndTime function. celltower"
+                }
+            }
+            for (let inp of arrays[3]) {
+                if (inp.id !== undefined) {
+                    debugger
+                    const output2 = [];
+                    const eposId = exactStr(inp.id);
+                    const output1 = await (searchGivenAEposIdAndTime(eposId, intialTimeStamp, finalTimeStamp, limit));
+                    if (output1 === undefined) {
+                    } else {
+                        for (let epos of output1) {
+                            const temp = epos;
+                            let cardNumber = await findBankCardByEposId(epos.eposId, limit);
+                            if (cardNumber[0] === undefined) {
+                            } else {
+                                for (let bankcard of cardNumber) {
+                                    let bankaccountid = await findBankAccountIdGivenACardNumber(bankcard.bankCardNumber, limit);
+                                    if (bankaccountid[0] === undefined) {
+                                    } else {
+                                        for (let id of bankaccountid) {
+                                            const temp2 = await findDetailsFromABankAccountId(id.bankcardId, limit);
+                                            if (temp2[0] === undefined) {
+                                            } else {
+                                                output2.push(temp2);
+                                                const temp3 = temp2;
+                                                temp3[0]['idType'] = "eposID";
+                                                temp3[0]['id'] = inp.id;
+                                                temp3[0]['timeStamp'] = temp.timestamp;
+                                                eventIdTimeAndDetails.push(temp3[0]);
+                                            }
                                         }
                                     }
                                 }
                             }
                         }
+
                     }
+                } else {
+                    return "error encountered, the correct Id was not supplied to searchLocationsByIdAndTime function. epos"
                 }
-            } else {
-                return "error encountered, the correct Id was not supplied to searchLocationsByIdAndTime function"
             }
 
             return {
                 eventIdTimeAndDetails
             };
-        } catch (err) {
+
+
+        } catch
+            (err) {
             console.log(err.name);
             console.log(err.message);
+            console.info(err.name);
+            console.info(err.message);
             throw "error encountered at function searchLocationsByIdAndTime";
         }
-    };
+    }
+;
