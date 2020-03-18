@@ -229,14 +229,286 @@ const matchingData = {
             }
         ]
     },
-    "callHistoryData": [
+    "inComingCallHistory": [
+        {
+            "timestamp": "2015-05-02T06:59:10.000Z",
+            "callerNumber": "07700 904492",
+            "callCellTowerId": -1,
+            "receiverNumber": "07700 002267",
+            "receiverTowerId": 34788,
+            "phoneCallId": 1116721,
+            "cellTowerId": 34788,
+            "operator": "Orange",
+            "type": "GSM",
+            "latitude": 51.5245845297589,
+            "longitude": -0.104563791686722
+        },
+        {
+            "timestamp": "2015-05-02T06:59:10.000Z",
+            "callerNumber": "07700 904492",
+            "callCellTowerId": 112275,
+            "receiverNumber": "07700 002267",
+            "receiverTowerId": -1,
+            "phoneCallId": 1472512
+        },
+        {
+            "timestamp": "2015-05-01T18:22:06.000Z",
+            "callerNumber": "07700 060978",
+            "callCellTowerId": 19984,
+            "receiverNumber": "07700 002267",
+            "receiverTowerId": -1,
+            "phoneCallId": 3834211
+        },
+        {
+            "timestamp": "2015-05-01T11:22:57.000Z",
+            "callerNumber": "07700 838434",
+            "callCellTowerId": -1,
+            "receiverNumber": "07700 002267",
+            "receiverTowerId": 34788,
+            "phoneCallId": 5631803,
+            "cellTowerId": 34788,
+            "operator": "Orange",
+            "type": "GSM",
+            "latitude": 51.5245845297589,
+            "longitude": -0.104563791686722
+        },
+        {
+            "timestamp": "2015-05-01T18:16:27.000Z",
+            "callerNumber": "07700 378599",
+            "callCellTowerId": 71148,
+            "receiverNumber": "07700 002267",
+            "receiverTowerId": -1,
+            "phoneCallId": 5868517
+        },
+        {
+            "timestamp": "2015-05-01T11:22:57.000Z",
+            "callerNumber": "07700 838434",
+            "callCellTowerId": 98072,
+            "receiverNumber": "07700 002267",
+            "receiverTowerId": -1,
+            "phoneCallId": 6330722
+        },
+        {
+            "timestamp": "2015-05-01T18:22:06.000Z",
+            "callerNumber": "07700 060978",
+            "callCellTowerId": -1,
+            "receiverNumber": "07700 002267",
+            "receiverTowerId": 35082,
+            "phoneCallId": 7125967,
+            "cellTowerId": 35082,
+            "operator": "Orange",
+            "type": "GSM",
+            "latitude": 51.540689913717,
+            "longitude": 0.00873503751890265
+        },
+        {
+            "timestamp": "2015-05-01T18:16:27.000Z",
+            "callerNumber": "07700 378599",
+            "callCellTowerId": -1,
+            "receiverNumber": "07700 002267",
+            "receiverTowerId": 35082,
+            "phoneCallId": 7562581,
+            "cellTowerId": 35082,
+            "operator": "Orange",
+            "type": "GSM",
+            "latitude": 51.540689913717,
+            "longitude": 0.00873503751890265
+        },
+        {
+            "timestamp": "2015-05-01T20:02:36.000Z",
+            "callerNumber": "07700 662897",
+            "callCellTowerId": -1,
+            "receiverNumber": "07700 002267",
+            "receiverTowerId": 35082,
+            "phoneCallId": 8018168,
+            "cellTowerId": 35082,
+            "operator": "Orange",
+            "type": "GSM",
+            "latitude": 51.540689913717,
+            "longitude": 0.00873503751890265
+        },
+        {
+            "timestamp": "2015-05-01T20:37:41.000Z",
+            "callerNumber": "07700 987576",
+            "callCellTowerId": -1,
+            "receiverNumber": "07700 002267",
+            "receiverTowerId": 35082,
+            "phoneCallId": 8350185,
+            "cellTowerId": 35082,
+            "operator": "Orange",
+            "type": "GSM",
+            "latitude": 51.540689913717,
+            "longitude": 0.00873503751890265
+        },
+        {
+            "timestamp": "2015-05-01T20:02:36.000Z",
+            "callerNumber": "07700 662897",
+            "callCellTowerId": 51205,
+            "receiverNumber": "07700 002267",
+            "receiverTowerId": -1,
+            "phoneCallId": 9982853
+        },
+        {
+            "timestamp": "2015-05-02T12:29:38.000Z",
+            "callerNumber": "07700 469870",
+            "callCellTowerId": 60048,
+            "receiverNumber": "07700 002267",
+            "receiverTowerId": -1,
+            "phoneCallId": 10513710
+        },
+        {
+            "timestamp": "2015-05-02T12:29:38.000Z",
+            "callerNumber": "07700 469870",
+            "callCellTowerId": -1,
+            "receiverNumber": "07700 002267",
+            "receiverTowerId": 34788,
+            "phoneCallId": 11834007,
+            "cellTowerId": 34788,
+            "operator": "Orange",
+            "type": "GSM",
+            "latitude": 51.5245845297589,
+            "longitude": -0.104563791686722
+        },
+        {
+            "timestamp": "2015-05-01T20:37:41.000Z",
+            "callerNumber": "07700 987576",
+            "callCellTowerId": 71148,
+            "receiverNumber": "07700 002267",
+            "receiverTowerId": -1,
+            "phoneCallId": 13211050
+        },
+        {
+            "timestamp": "2015-05-02T18:21:02.000Z",
+            "callerNumber": "07700 904492",
+            "callCellTowerId": 128645,
+            "receiverNumber": "07700 002267",
+            "receiverTowerId": -1,
+            "phoneCallId": 14476931
+        },
+        {
+            "timestamp": "2015-05-02T19:20:08.000Z",
+            "callerNumber": "07700 378599",
+            "callCellTowerId": 71148,
+            "receiverNumber": "07700 002267",
+            "receiverTowerId": -1,
+            "phoneCallId": 14579758
+        },
+        {
+            "timestamp": "2015-05-02T18:21:02.000Z",
+            "callerNumber": "07700 904492",
+            "callCellTowerId": -1,
+            "receiverNumber": "07700 002267",
+            "receiverTowerId": 35082,
+            "phoneCallId": 14927054,
+            "cellTowerId": 35082,
+            "operator": "Orange",
+            "type": "GSM",
+            "latitude": 51.540689913717,
+            "longitude": 0.00873503751890265
+        },
+        {
+            "timestamp": "2015-05-02T19:20:08.000Z",
+            "callerNumber": "07700 378599",
+            "callCellTowerId": -1,
+            "receiverNumber": "07700 002267",
+            "receiverTowerId": 35082,
+            "phoneCallId": 15206240,
+            "cellTowerId": 35082,
+            "operator": "Orange",
+            "type": "GSM",
+            "latitude": 51.540689913717,
+            "longitude": 0.00873503751890265
+        },
+        {
+            "timestamp": "2015-05-02T20:40:27.000Z",
+            "callerNumber": "07700 875537",
+            "callCellTowerId": -1,
+            "receiverNumber": "07700 002267",
+            "receiverTowerId": 35082,
+            "phoneCallId": 15930066,
+            "cellTowerId": 35082,
+            "operator": "Orange",
+            "type": "GSM",
+            "latitude": 51.540689913717,
+            "longitude": 0.00873503751890265
+        },
+        {
+            "timestamp": "2015-05-02T20:40:27.000Z",
+            "callerNumber": "07700 875537",
+            "callCellTowerId": 111032,
+            "receiverNumber": "07700 002267",
+            "receiverTowerId": -1,
+            "phoneCallId": 17296129
+        },
+        {
+            "timestamp": "2015-05-03T11:10:29.000Z",
+            "callerNumber": "07700 378599",
+            "callCellTowerId": 90352,
+            "receiverNumber": "07700 002267",
+            "receiverTowerId": -1,
+            "phoneCallId": 20781992
+        },
+        {
+            "timestamp": "2015-05-03T14:52:29.000Z",
+            "callerNumber": "07700 053859",
+            "callCellTowerId": -1,
+            "receiverNumber": "07700 002267",
+            "receiverTowerId": 35082,
+            "phoneCallId": 22255024,
+            "cellTowerId": 35082,
+            "operator": "Orange",
+            "type": "GSM",
+            "latitude": 51.540689913717,
+            "longitude": 0.00873503751890265
+        },
+        {
+            "timestamp": "2015-05-03T14:52:29.000Z",
+            "callerNumber": "07700 053859",
+            "callCellTowerId": 54958,
+            "receiverNumber": "07700 002267",
+            "receiverTowerId": -1,
+            "phoneCallId": 22426313
+        },
+        {
+            "timestamp": "2015-05-03T11:10:29.000Z",
+            "callerNumber": "07700 378599",
+            "callCellTowerId": -1,
+            "receiverNumber": "07700 002267",
+            "receiverTowerId": 34788,
+            "phoneCallId": 23357621,
+            "cellTowerId": 34788,
+            "operator": "Orange",
+            "type": "GSM",
+            "latitude": 51.5245845297589,
+            "longitude": -0.104563791686722
+        },
+        {
+            "timestamp": "2015-05-03T23:00:02.000Z",
+            "callerNumber": "07700 475717",
+            "callCellTowerId": 35082,
+            "receiverNumber": "07700 002267",
+            "receiverTowerId": 35082,
+            "phoneCallId": 26420113,
+            "cellTowerId": 35082,
+            "operator": "Orange",
+            "type": "GSM",
+            "latitude": 51.540689913717,
+            "longitude": 0.00873503751890265
+        }
+    ],
+    "outGoingCallHistory": [
         {
             "timestamp": "2015-05-02T08:01:36.000Z",
             "callerNumber": "07700 002267",
             "callCellTowerId": 34788,
             "receiverNumber": "07700 904492",
             "receiverTowerId": -1,
-            "phoneCallId": 2138043
+            "phoneCallId": 2138043,
+            "cellTowerId": 34788,
+            "operator": "Orange",
+            "type": "GSM",
+            "latitude": 51.5245845297589,
+            "longitude": -0.104563791686722
         },
         {
             "timestamp": "2015-05-02T08:01:36.000Z",
@@ -252,7 +524,12 @@ const matchingData = {
             "callCellTowerId": 34788,
             "receiverNumber": "07700 613869",
             "receiverTowerId": -1,
-            "phoneCallId": 4644000
+            "phoneCallId": 4644000,
+            "cellTowerId": 34788,
+            "operator": "Orange",
+            "type": "GSM",
+            "latitude": 51.5245845297589,
+            "longitude": -0.104563791686722
         },
         {
             "timestamp": "2015-05-01T10:40:35.000Z",
@@ -276,7 +553,12 @@ const matchingData = {
             "callCellTowerId": 35082,
             "receiverNumber": "07700 904492",
             "receiverTowerId": -1,
-            "phoneCallId": 16621736
+            "phoneCallId": 16621736,
+            "cellTowerId": 35082,
+            "operator": "Orange",
+            "type": "GSM",
+            "latitude": 51.540689913717,
+            "longitude": 0.00873503751890265
         },
         {
             "timestamp": "2015-05-03T13:46:58.000Z",
@@ -284,18 +566,15 @@ const matchingData = {
             "callCellTowerId": 34788,
             "receiverNumber": "07700 493682",
             "receiverTowerId": 35513,
-            "phoneCallId": 22045150
+            "phoneCallId": 22045150,
+            "cellTowerId": 34788,
+            "operator": "Orange",
+            "type": "GSM",
+            "latitude": 51.5245845297589,
+            "longitude": -0.104563791686722
         }
     ],
-    "acquaintancesData": [
-        {
-            "forenames": "Ian",
-            "surname": "Howard",
-            "dateOfBirth": "1969-03-17",
-            "address": "29 WRAGBY ROAD, LONDON, E11 3LD",
-            "phoneNumber": "07700 904492",
-            "network": "Vodafone"
-        },
+    "targetHasCalled": [
         {
             "forenames": "Ian",
             "surname": "Howard",
@@ -311,30 +590,6 @@ const matchingData = {
             "address": "13 HAM PARK ROAD, LONDON, E15 4HE",
             "phoneNumber": "07700 613869",
             "network": "Three"
-        },
-        {
-            "forenames": "Garry Luke",
-            "surname": "Watson",
-            "dateOfBirth": "1994-07-29",
-            "address": "13 HAM PARK ROAD, LONDON, E15 4HE",
-            "phoneNumber": "07700 613869",
-            "network": "Three"
-        },
-        {
-            "forenames": "Ian",
-            "surname": "Howard",
-            "dateOfBirth": "1969-03-17",
-            "address": "29 WRAGBY ROAD, LONDON, E11 3LD",
-            "phoneNumber": "07700 904492",
-            "network": "Vodafone"
-        },
-        {
-            "forenames": "Ian",
-            "surname": "Howard",
-            "dateOfBirth": "1969-03-17",
-            "address": "29 WRAGBY ROAD, LONDON, E11 3LD",
-            "phoneNumber": "07700 904492",
-            "network": "Vodafone"
         },
         {
             "forenames": "Brett Roger",
@@ -342,6 +597,88 @@ const matchingData = {
             "dateOfBirth": "1975-02-27",
             "address": "5 HAM PARK ROAD, LONDON, E15 4HE",
             "phoneNumber": "07700 493682",
+            "network": "Orange"
+        }
+    ],
+    "targetHasBeenCalledBy": [
+        {
+            "forenames": "Gordon Shaun",
+            "surname": "Miles",
+            "dateOfBirth": "1972-09-22",
+            "address": "20 HAM PARK ROAD, LONDON, E15 4HE",
+            "phoneNumber": "07700 378599",
+            "network": "T-Mobile"
+        },
+        {
+            "forenames": "Ian",
+            "surname": "Howard",
+            "dateOfBirth": "1969-03-17",
+            "address": "29 WRAGBY ROAD, LONDON, E11 3LD",
+            "phoneNumber": "07700 904492",
+            "network": "Vodafone"
+        },
+        {
+            "forenames": "Tanya Kathleen",
+            "surname": "Howard",
+            "dateOfBirth": "1982-11-15",
+            "address": "29 WRAGBY ROAD, LONDON, E11 3LD",
+            "phoneNumber": "07700 060978",
+            "network": "O2"
+        },
+        {
+            "forenames": "Thomas Allan",
+            "surname": "Chambers",
+            "dateOfBirth": "1955-05-07",
+            "address": "60 TAVISTOCK ROAD, LONDON, E15 4EP",
+            "phoneNumber": "07700 838434",
+            "network": "Vodafone"
+        },
+        {
+            "forenames": "Cheryl",
+            "surname": "Watson",
+            "dateOfBirth": "1964-06-23",
+            "address": "13 HAM PARK ROAD, LONDON, E15 4HE",
+            "phoneNumber": "07700 662897",
+            "network": "Three"
+        },
+        {
+            "forenames": "Fiona Lynda",
+            "surname": "Bruce",
+            "dateOfBirth": "1940-09-10",
+            "address": "67 TAVISTOCK ROAD, LONDON, E15 4EP",
+            "phoneNumber": "07700 987576",
+            "network": "T-Mobile"
+        },
+        {
+            "forenames": "Kenneth Julian",
+            "surname": "Wilkinson",
+            "dateOfBirth": "1947-10-03",
+            "address": "8 HAM PARK ROAD, LONDON, E15 4HE",
+            "phoneNumber": "07700 469870",
+            "network": "Three"
+        },
+        {
+            "forenames": "Alex Tony",
+            "surname": "Dawson",
+            "dateOfBirth": "1987-09-23",
+            "address": "25 HAM PARK ROAD, LONDON, E15 4HE",
+            "phoneNumber": "07700 875537",
+            "network": "Vodafone"
+        },
+        {
+            "forenames": "Lorraine",
+            "surname": "Petrie",
+            "dateOfBirth": "1954-07-01",
+            "address": "8 HAM PARK ROAD, LONDON, E15 4HE",
+            "phoneNumber": "07700 053859",
+            "network": "Three"
+        },
+        {
+            "forenames": "Michele Emma",
+            "surname": "Anderson",
+            "dateOfBirth": "1970-11-09",
+            "address": "62 TAVISTOCK ROAD, LONDON, E15 4EP",
+            "phoneNumber": "07700 475717",
             "network": "Orange"
         }
     ]
@@ -493,7 +830,7 @@ describe('testing all person endpoints', function() {
             .set("Authorization", token)
             .send(fullInput);
         jest.setTimeout(100000);
-        expect(res.text).toBe(JSON.stringify(matchingData));
+        expect(res.text).toEqual(JSON.stringify(matchingData));
         done();
     });
 
