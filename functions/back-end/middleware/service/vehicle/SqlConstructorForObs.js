@@ -17,8 +17,15 @@ module.exports =
      *
      * @requires this function requires a string input selected from findDetailsByATMId to function
      * */
-     function findVehicleObs(vehicleRegistrationNumber) {
-        let sqlSearchString = "SELECT * FROM vehicleObservations WHERE" +
-            " vehicleRegistrationNumber LIKE " + vehicleRegistrationNumber;
-        return SQLauthenticate(sqlSearchString);
-};
+    function findVehicleObs(vehicleRegistrationNumber) {
+        try {
+            let sqlSearchString = "SELECT * FROM vehicleObservations WHERE" +
+                " vehicleRegistrationNumber LIKE " + vehicleRegistrationNumber;
+            return SQLauthenticate(sqlSearchString);
+        } catch (e) {
+            console.info(e);
+            console.info(e.name);
+            console.info(e.message);
+            throw new Error('error occured at sql constructor for obs');
+        }
+    };
