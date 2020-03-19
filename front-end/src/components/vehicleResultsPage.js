@@ -29,7 +29,7 @@ export default class VehicleResultsPage extends React.Component {
             registrationDate: ''
         };
 
-        axios.post('http://localhost:8080/back-end/vehicle/getData', data, {
+        axios.post('http://35.246.9.251:8080/back-end/vehicle/getData', data, {
             headers: {
                 Authorization: localStorage.getItem('token')
             }
@@ -55,7 +55,7 @@ export default class VehicleResultsPage extends React.Component {
             colour: colour,
             registrationDate: regDate
         };
-        axios.post('http://localhost:8080/back-end/vehicle/getData', data, {
+        axios.post('http://35.246.9.251:8080/back-end/vehicle/getData', data, {
             headers: {
                 Authorization: localStorage.getItem('token')
             }
