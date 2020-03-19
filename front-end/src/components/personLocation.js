@@ -3,8 +3,7 @@ import { Map, GoogleApiWrapper, Marker, InfoWindow } from 'google-maps-react';
 import { Form, Col } from 'react-bootstrap';
 import '../styles/personlocation.css';
 import DatePicker from './DateTimeSelector';
-import parseISO from 'date-fns/parse';
-import moment from 'react-moment';
+import "react-datepicker/dist/react-datepicker.css";
 
 const mapStyles = {
     width: '100%',
@@ -60,20 +59,6 @@ export class PersonLocation extends React.Component {
 
         const start = new Date(this.state.startDateTime);
         const end = new Date(this.state.endDateTime);
-
-        // let eposData = [];
-        // for(let obj of this.state.epos){
-        //     eposData.push(obj);
-        // }
-        // for(let obj in eposData){
-        //     const date = new Date(eposData[obj].timestamp);
-        //     if(start > date || end < date){
-        //             eposData.pop(obj);
-        //     }            
-        // }
-        // this.setState({
-        //     queryEpos: eposData
-        // })
 
         let eposData = [];
         for(let epos of this.state.epos){
@@ -151,9 +136,6 @@ export class PersonLocation extends React.Component {
     render() {
         return (
             <div>
-                <header className='person-location-header'>
-                    <h2>Person name</h2>
-                </header>
                 <Form id='person-location-form'>
                     <Form.Row>
                         <Col>
@@ -174,7 +156,6 @@ export class PersonLocation extends React.Component {
                         <Col>
                             <Form.Check
                                 type="checkbox"
-                                checked
                                 label="ANPR data"
                                 name="anpr"
                                 onChange={this.handleQuery}
@@ -183,7 +164,6 @@ export class PersonLocation extends React.Component {
                         <Col>
                             <Form.Check
                                 type="checkbox"
-                                checked
                                 label="Transaction data"
                                 name="transaction"
                                 onChange={this.handleQuery}
@@ -192,7 +172,6 @@ export class PersonLocation extends React.Component {
                         <Col>
                             <Form.Check
                                 type="checkbox"
-                                checked
                                 label="Mobile data"
                                 name="mobile"
                                 onChange={this.handleQuery}
@@ -203,7 +182,7 @@ export class PersonLocation extends React.Component {
                 
                 <Map className='event-map'
                     google={this.props.google}
-                    zoom={14}
+                    zoom={6}
                     style={mapStyles}
                     initialCenter={{
                         lat: 53.483959,

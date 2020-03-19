@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import { Map, GoogleApiWrapper, Marker, InfoWindow, Circle } from 'google-maps-react';
+import { Map, GoogleApiWrapper, Marker, InfoWindow } from 'google-maps-react';
 import '../styles/personlocation.css';
 import loading from '../loading.gif';
 import '../styles/spinner.css';
