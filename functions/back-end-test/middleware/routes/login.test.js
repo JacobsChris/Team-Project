@@ -16,7 +16,7 @@ const server = app;
 describe('login test', function() {
 
 
-    afterEach(function(done) {
+    afterAll(function(done) {
 
         server.close();
         done();
