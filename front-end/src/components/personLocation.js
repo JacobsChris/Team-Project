@@ -174,6 +174,7 @@ export class PersonLocation extends React.Component {
                         <Col>
                             <Form.Check
                                 type="checkbox"
+                                checked
                                 label="ANPR data"
                                 name="anpr"
                                 onChange={this.handleQuery}
@@ -182,6 +183,7 @@ export class PersonLocation extends React.Component {
                         <Col>
                             <Form.Check
                                 type="checkbox"
+                                checked
                                 label="Transaction data"
                                 name="transaction"
                                 onChange={this.handleQuery}
@@ -190,6 +192,7 @@ export class PersonLocation extends React.Component {
                         <Col>
                             <Form.Check
                                 type="checkbox"
+                                checked
                                 label="Mobile data"
                                 name="mobile"
                                 onChange={this.handleQuery}

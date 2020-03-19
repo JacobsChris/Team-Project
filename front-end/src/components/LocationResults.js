@@ -85,44 +85,44 @@ export class LocationResults extends React.Component {
                 <header className='person-location-header'>
                     <h2>Latitude: {search.latitude + ', '} Longitude: {search.longitude}</h2>
                 </header>
-                <Map className='event-map'
-                    google={this.props.google}
-                    zoom={14}
-                    style={mapStyles}
-                    initialCenter={{
-                        lat: search.latitude,
-                        lng: search.longitude
-                    }}
-                >
-
-                    {this.state.eventsLoaded ? ((!events) ? (<div>No results found</div>) :
-                        (events.map(e =>
+                {this.state.eventsLoaded ? ((!events) ? (<div>No results found</div>) : (
+                    <Map className='event-map'
+                        google={this.props.google}
+                        zoom={14}
+                        style={mapStyles}
+                        initialCenter={{
+                            lat: search.latitude,
+                            lng: search.longitude
+                        }}
+                    >
+                        {events.map(e =>
 
                             (<Marker
-                                position={{ lat: e.latitude, lng: e.longitude }}
-                                onClick={this.onMarkerClick}
-                                name={e.forenames + ' ' + e.surname}
-                                info={this.getDataType(e.idType)}
-                                time={e.timeStamp}
-                                personData={e}
-                            />)
+                            position={{ lat: e.latitude, lng: e.longitude }}
+                            onClick={this.onMarkerClick}
+                            name={e.forenames + ' ' + e.surname}
+                            info={this.getDataType(e.idType)}
+                            time={e.timeStamp}
+                            personData={e}
+                        />)
 
-                        )
-                        )) : (<div>Loading</div>)}
+                        )}
+                        
 
                     <InfoWindow
-                        marker={this.state.activeMarker}
-                        visible={this.state.showingInfoWindow}
-                        onClose={this.onClose}
-                    >
-                        <div>
-                            <h4>{this.state.selectedMarker.name}</h4>
-                            <p>{this.state.selectedMarker.info}</p>
-                            <p>{this.state.selectedMarker.time === undefined ? ' ' : (this.state.selectedMarker.time)}</p>
-                        </div>
-                    </InfoWindow>
+                            marker={this.state.activeMarker}
+                            visible={this.state.showingInfoWindow}
+                            onClose={this.onClose}
+                        >
+                            <div>
+                                <h4>{this.state.selectedMarker.name}</h4>
+                                <p>{this.state.selectedMarker.info}</p>
+                                <p>{this.state.selectedMarker.time === undefined ? ' ' : (this.state.selectedMarker.time)}</p>
+                            </div>
+                        </InfoWindow>
 
-                </Map>
+                    </Map>
+                         )): (<div>Loading</div>)}
             </div>
         );
     }
