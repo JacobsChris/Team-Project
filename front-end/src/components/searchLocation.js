@@ -81,7 +81,12 @@ class SearchLocation extends React.Component {
         }
 
         if (this.state.formValid) {
-            this.props.history.push('/user/home/locationresults', data);
+            if (!this.props.admin){
+                this.props.history.push('/user/home/locationresults', data);
+            }
+            else {
+                this.props.history.push('/admin/locationresults', data);
+            }   
         }
     };
 
