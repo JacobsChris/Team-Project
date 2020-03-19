@@ -44,6 +44,8 @@
   .postcode,
   .username,
   .password,
+  .verPassword,
+  .verUsername,
   .latitude,
   .longitude,
   .radius,

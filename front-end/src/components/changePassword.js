@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import FormInput from './FormInput';
+import { Form, Button } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { setPass } from '../redux/actions/setPassAction';
 import PropTypes from 'prop-types';
+import '../styles/form.css';
 
 class ChangePassword extends Component {
-    constructor(props){
+    constructor(props) {
         super(props);
         this.state = {
             password: '',
@@ -13,7 +15,7 @@ class ChangePassword extends Component {
         }
     }
 
-    handleChange = ({target : {name, value}}) => {
+    handleChange = ({ target: { name, value } }) => {
         this.setState({
             [name]: value
         })
@@ -22,43 +24,41 @@ class ChangePassword extends Component {
     submit = (e) => {
         e.preventDefault();
 
-        if(this.state.password === this.state.verPassword) {
+        if (this.state.password === this.state.verPassword) {
             let data = {
                 username: this.props.username,
                 password: this.state.password,
                 isAdmin: this.props.admin
             }
-    
+
             console.log(data);
-    
+
             this.props.setPass(data);
-        
+
             this.props.history.push('/admin');
 
-        this.props.setPass();
+            this.props.setPass();
+        }
     }
-}
 
     render() {
         return (
-            <div>
-                <form onSubmit={this.submit}>
-                    <fieldset>
-                        <legend>
-                            Change Password
-                        </legend>
-                        <p>Username: </p>
-                        <div className='password'>
-                            <label></label>
-                            <FormInput name='password' type="password" value={this.state.password} handleChange={this.handleChange}/>
-                        </div>
-                        <div className='password'>
-                            <label></label>
-                            <FormInput name='verPassword' type="password" value={this.state.verPassword} handleChange={this.handleChange}/>
-                        </div>
-                        <input type="submit" value="Change Password" />
-                    </fieldset>
-                </form>
+            <div className='form-size'>
+                <Form onSubmit={this.submit}>
+                    <h2 className='form-header'>Change password</h2>
+                    <br />
+                    <Form.Group className='password'>
+                        <label></label>
+                        <FormInput name='password' type="password" placeholder="Password" 
+                        value={this.state.password} handleChange={this.handleChange} />
+                    </Form.Group>
+                    <Form.Group className='password'>
+                        <label></label>
+                        <FormInput name='verPassword' type="password" placeholder="Confirm password"
+                        value={this.state.verPassword} handleChange={this.handleChange} />
+                    </Form.Group>
+                    <Button variant='dark' id='submit-button' type='submit'>Submit</Button>
+                </Form>
             </div>
         )
     }
@@ -66,9 +66,9 @@ class ChangePassword extends Component {
 
 ChangePassword.propTypes = {
     setPass: PropTypes.func.isRequired
-  };
+};
 
-  function mapStateToProps(state) {
+function mapStateToProps(state) {
     return {
         admin: state.signin.isAdmin,
         username: state.signin.username,

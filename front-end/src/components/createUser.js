@@ -38,52 +38,52 @@ class CreateUser extends Component {
     }
 
     validate = (name, value) => {
-        if((name === 'username') && !usernameRegex.test(value)){
+        if ((name === 'username') && !usernameRegex.test(value)) {
             this.setState({
                 userError: 'Username is invalid'
             })
-        } 
-        else if((name === 'verUsername') && !usernameRegex.test(value)){
+        }
+        else if ((name === 'verUsername') && !usernameRegex.test(value)) {
             this.setState({
                 verUserError: 'Username is invalid'
             })
-        } 
-        else if((name === 'password') && !passRegex.test(value)){
+        }
+        else if ((name === 'password') && !passRegex.test(value)) {
             this.setState({
                 passwordError: 'Password is invalid'
             })
-        } 
-        else if((name === 'verPassword') && !passRegex.test(value)){
+        }
+        else if ((name === 'verPassword') && !passRegex.test(value)) {
             this.setState({
                 verPasswordError: 'Password is invalid'
             })
-        } 
-        else if((name === 'verUsername') && usernameRegex.test(value)){
+        }
+        else if ((name === 'verUsername') && usernameRegex.test(value)) {
             this.setState({
                 verUserError: ''
             })
-        } 
-        else if((name === 'username') && usernameRegex.test(value)){
+        }
+        else if ((name === 'username') && usernameRegex.test(value)) {
             this.setState({
                 userError: ''
             })
-        } 
-        else if((name === 'verPassword') && passRegex.test(value)){
+        }
+        else if ((name === 'verPassword') && passRegex.test(value)) {
             this.setState({
                 verPasswordError: ''
             })
-        } 
-        else if((name === 'password') && passRegex.test(value)){
+        }
+        else if ((name === 'password') && passRegex.test(value)) {
             this.setState({
                 passwordError: ''
             })
-        } 
-        if((this.state.username === this.state.verUsername)){
+        }
+        if ((this.state.username === this.state.verUsername)) {
             this.setState({
                 userMatch: true
             })
-        } 
-        if((this.state.password !== this.state.verPassword)) {
+        }
+        if ((this.state.password !== this.state.verPassword)) {
             this.setState({
                 passwordMatch: false
             })
@@ -93,7 +93,7 @@ class CreateUser extends Component {
     submit = (e) => {
         e.preventDefault();
 
-        if((this.state.passwordMatch && this.state.userMatch) && !this.state.invalid) {
+        if ((this.state.passwordMatch && this.state.userMatch) && !this.state.invalid) {
             let data = {
                 username: this.state.username,
                 password: this.state.password,
@@ -104,50 +104,43 @@ class CreateUser extends Component {
 
             this.props.createUser(data);
             this.props.history.push('/admin');
-        } 
+        }
     }
 
     render() {
         return (
-            <div>
-                <form onSubmit={this.submit}>
-                    <fieldset>
-                        <legend>
-                            Create User
-                        </legend>
-                        <div className='username'>
-                            <label></label>
-                            <FormInput name='username' value={this.state.username} handleChange={this.handleChange}/>
-                        </div>{console.log(this.state.userError)}
+            <div className='form-size'>
+                <Form onSubmit={this.submit}>
+                    <h2 className='form-header'>Create User</h2>
+                    <br />
+                    <Form.Group className='username'>
+                        <Form.Label>Username</Form.Label>
+                        <FormInput name='username' placeholder='Username' value={this.state.username} handleChange={this.handleChange} />
                         {this.state.userError !== '' ? <span>{this.state.userError}</span> : ''}
-                        <div className='username'>
-                            <label></label>
-                            <FormInput name='verUsername' value={this.state.verUsername} handleChange={this.handleChange}/>
-                        </div>
+                    </Form.Group>
+                    <Form.Group className='username'>
+                        <Form.Label>Confirm username</Form.Label>
+                        <FormInput name='verUsername' placeholder='Confirm username' value={this.state.verUsername} handleChange={this.handleChange} />
                         {this.state.verUserError !== '' ? <span>{this.state.verUserError}</span> : ''}
-                        {((this.state.username && this.state.verUsername) !== '') && this.state.userMatch ? 
-                        <span>Usernames do not match</span> : ''}
-                        <div className='password'>
-                            <label></label>
-                            <FormInput name='password' type="password" value={this.state.password} handleChange={this.handleChange}/>
-                        </div>
+                        {((this.state.username && this.state.verUsername) !== '') && this.state.userMatch ?
+                            <span>Usernames do not match</span> : ''}
+                    </Form.Group>
+                    <Form.Group className='password'>
+                        <Form.Label>Password</Form.Label>
+                        <FormInput name='password' type="password" placeholder='Password' value={this.state.password} handleChange={this.handleChange} />
                         {this.state.passwordError !== '' ? <span>{this.state.passwordError}</span> : ''}
-                        <div className='password'>
-                            <label></label>
-                            <FormInput name='verPassword' type="password" value={this.state.verPassword} handleChange={this.handleChange}/>
-                        </div>
-                        {this.state.verPasswordError !== '' ? <span>{this.state.verPasswordError}</span> : ''} {!this.state.passwordMatch ? 
+                    </Form.Group>
+                    <Form.Group className='password'>
+                        <Form.Label>Confirm password</Form.Label>
+                        <FormInput name='verPassword' type="password" placeholder='Confirm password' value={this.state.verPassword} handleChange={this.handleChange} />
+                        {this.state.verPasswordError !== '' ? <span>{this.state.verPasswordError}</span> : ''} {!this.state.passwordMatch ?
                         <span>Passwords do not match</span> : ''}
-                        <div className='admin'>
-                            <label>
-                                Make Admin:
-                                    <input name="isAdmin" type="checkbox" onChange={this.handleChange}/>
-                            </label>
-                        </div>
-                        <input type="submit" value="Create User" />
-                        {!this.state.submitted ? <p className="form-status">Form is {!this.state.invalid ? 'valid ✅' : 'invalid ❌'}</p> : <p className="form-status">Form not submitted</p>}
-                    </fieldset>
-                </form>
+                    </Form.Group>
+                    <Form.Check type="checkbox" label="Make admin" name="isAdmin" onChange={this.handleChange} />
+                    <br />
+                    <Button variant='dark' id='submit-button' type='submit'>Create User</Button>
+                    {!this.state.submitted ? <p className="form-status">Form is {!this.state.invalid ? 'valid ✅' : 'invalid ❌'}</p> : <p className="form-status">Form not submitted</p>}
+                </Form>
             </div>
         )
     }
