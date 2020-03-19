@@ -21,6 +21,6 @@ module.exports =
              console.info(e);
              console.info(e.name);
              console.info(e.message);
-             throw new Error('error occured at search cameras by area');
+             throw new Error('error occurred at search cameras by area');
          }
 };
