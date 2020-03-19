@@ -3,6 +3,8 @@ import { getUsers } from '../redux/actions/getUserAction';
 import { setUsername } from '../redux/actions/setUsernameAction';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { Card, Button } from 'react-bootstrap';
+import '../styles/user.css';
 
 class Users extends React.Component {
     constructor(props){
@@ -30,12 +32,12 @@ class Users extends React.Component {
         console.log('prop')
         console.log(this.props.users)
         return (
-            <div> 
+            <div id='user-cards'> 
                 {this.props.users?.map(user =>(
-                    <div>
-                    <p>{user.username}</p>
-                    <input type='submit' value='Change Password' name={user.username} onClick={this.handleClick} />
-                    </div>
+                    <Card>
+                    <Card.Title id='username'>{user.username}</Card.Title>
+                    <Button variant='dark' id='password-button' name={user.username} onClick={this.handleClick} type='submit'>Change Password</Button>
+                    </Card>
                 ))}
        
             </div>
