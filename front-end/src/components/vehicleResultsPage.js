@@ -4,6 +4,8 @@ import SearchVehicle from './searchVehicle';
 import { Container, Card, Row, Col } from 'react-bootstrap';
 import '../styles/peopleResults.css';
 import { MdDirectionsCar } from 'react-icons/md';
+import loading from '../loading.gif';
+import '../styles/spinner.css';
 
 export default class VehicleResultsPage extends React.Component {
     constructor(props) {
@@ -123,7 +125,7 @@ export default class VehicleResultsPage extends React.Component {
                                     <Row>
                                         <Col>
                                             {this.state.detailsLoaded ? (<MdDirectionsCar className='large-person-icon' />) :
-                                                (<h3>Loading</h3>)}
+                                                (<img src={loading} className="spinner" id="spinner"/>)}
                                         </Col>
                                         <Col>
                                             <br />
@@ -159,7 +161,7 @@ export default class VehicleResultsPage extends React.Component {
                             </Container>
                         </Col>
                     </Row>) 
-                ) : (<h3>Loading</h3>)
+                ) : (<img src={loading} className="spinner" id="spinner"/>)
                 }
             </div>
 

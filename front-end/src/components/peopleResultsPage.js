@@ -3,6 +3,8 @@ import axios from 'axios';
 import { Container, Card, Row, Col } from 'react-bootstrap';
 import '../styles/peopleResults.css';
 import { MdPerson } from 'react-icons/md';
+import loading from '../loading.gif';
+import '../styles/spinner.css';
 
 export default class PeopleResultsPage extends React.Component {
     constructor(props) {
@@ -164,7 +166,7 @@ export default class PeopleResultsPage extends React.Component {
                                     <Row>
                                         <Col>
                                             {this.state.detailsLoaded ? (<MdPerson className='large-person-icon' />) :
-                                                (<h3>Loading</h3>)}
+                                                (<img src={loading} className="spinner" id="spinner"/>)}
                                         </Col>
                                         <Col>
                                             <br />
@@ -195,7 +197,7 @@ export default class PeopleResultsPage extends React.Component {
                         </Col>
                     </Row>
                 )
-                ) : (<h3>Loading</h3>)};
+                ) : (<img src={loading} className="spinner" id="spinner"/>)};
             </div>
 
         )
