@@ -21,8 +21,6 @@ export default class PeopleResultsPage extends React.Component {
     };
 
     componentDidMount() {
-        console.log('data', this.props.location.state)
-        axios.post('http://localhost:8080/back-end/person/getData', this.props.location.state, {
         this.getResults(this.props.location.state);
     }
 
