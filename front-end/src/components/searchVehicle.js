@@ -77,7 +77,7 @@ class SearchVehicle extends Component {
                 <Form onSubmit={this.submit}>
                 <h2 className='form-header'>Search Vehicle</h2>
                 <br />
-                <span className='reg-message'>Replace unknown characters with underscores</span>
+                <h5 className='form-header'>Replace unknown characters with underscores</h5>
                 <br />
                 <Form.Group className='reg'>
                     <Form.Label htmlFor="reg">Vehicle Registration</Form.Label>

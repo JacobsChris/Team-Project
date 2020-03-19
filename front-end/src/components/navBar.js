@@ -20,9 +20,8 @@ class NavBar extends React.Component {
     render(){
         return (
                 <Navbar bg="dark" variant="dark" expand="md" className='main-nav'> 
-                    <Link id='brand' className='mr-auto' to="/user/home">REDSHIFT</Link>
-                    <Link className='nav-item' to="/user/home">HOME</Link>
-                    <Link className='nav-item' to="/user/help">HELP</Link>
+                    <Link id='brand' className='mr-auto' to="/user/home/searchpeople">REDSHIFT</Link>
+                    <Link className='nav-item' to="/user/home/searchpeople">HOME</Link>
                     <Link className='nav-item' onClick={this.signout} to="/user/signin">SIGN OUT</Link>
                 </Navbar>
         )
