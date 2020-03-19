@@ -26,6 +26,6 @@ module.exports =
             console.info(e);
             console.info(e.name);
             console.info(e.message);
-            throw new Error('error occured at find ATM point by Atm Id');
+            throw new Error('error occurred at find ATM point by Atm Id');
         }
     };
