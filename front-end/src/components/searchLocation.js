@@ -57,6 +57,50 @@ class SearchLocation extends React.Component {
 
         let errors = this.state.errors;
 
+        switch (name) {
+            case 'latitude':
+                errors.latitude = '';
+                if (value.length === 0) {
+                    errors.latitude = 'Please enter a latitude';
+                }
+                else if (value < -90 || value > 90) {
+                    errors.latitude = 'Please enter a latitude between 90 and -90';
+                }
+                break;
+            case 'longitude':
+                errors.longitude = '';
+                if (value.length === 0) {
+                    errors.longitude = 'Please enter a longitude';
+                }
+                else if (value < -180 || value > 180) {
+                    errors.longitude = 'Please enter a longitude between 180 and -180';
+                }
+                break;
+            case 'radius':
+                errors.radius = '';
+                if (value.length === 0) {
+                    errors.radius = 'Please enter a radius';
+                }
+                else if (value < 0 || value > 6371000) {
+                    errors.radius = 'Please enter a radius between 0 and 6371000';
+                }
+                break;
+            case 'startDateTime':
+                errors.startDateTime = '';
+                if (value.length === 0) {
+                    errors.startDateTime = 'Please enter a start time';
+                }
+                break;
+            case 'endDateTime':
+                errors.endDateTime = '';
+                if (value.length === 0) {
+                    errors.endDateTime = 'Please enter an end time';
+                }
+                break;
+            default:
+                break;
+        }
+
         this.setState({ errors, [name]: value });
         this.setState({ formValid: validateForm(this.state.errors) });
         this.setState({ errorCount: countErrors(this.state.errors) });
@@ -81,12 +125,12 @@ class SearchLocation extends React.Component {
         }
 
         if (this.state.formValid) {
-            if (!this.props.admin){
+            if (!this.props.admin) {
                 this.props.history.push('/user/home/locationresults', data);
             }
             else {
                 this.props.history.push('/admin/locationresults', data);
-            }   
+            }
         }
     };
 
@@ -103,7 +147,7 @@ class SearchLocation extends React.Component {
                     <Form.Group className='latitude'>
                         <Form.Label>Latitude</Form.Label>
                         <FormInput name='latitude' type='number' placeholder='Latitude' value={this.state.latitude} handleChange={this.handleChange} />
-                        {errors.latitude.length > 0 && <span className='error'>{errors.latidue}</span>}
+                        {errors.latitude.length > 0 && <span className='error'>{errors.latitude}</span>}
                     </Form.Group>
                     <Form.Group className='longitude'>
                         <Form.Label>Longitude</Form.Label>
