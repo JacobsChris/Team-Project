@@ -14,7 +14,7 @@ class SearchVehicle extends Component {
         this.state = ({
             reg: '',
             invalid: true,
-            error: '',
+            error: 'License plate is invalid',
             submitted: false
         });
     }
@@ -24,10 +24,11 @@ class SearchVehicle extends Component {
         this.setState({
             [name]: value
         })
-        if(!vehicleRegex.test(value)){
+        if(!vehicleRegex.test(value)||this.state.reg===''){
             this.setState({
                 error: 'License plate is invalid'
             })
+            console.log(this.state.error)
         } else {
             this.setState({
                 error: '',
@@ -50,15 +51,12 @@ class SearchVehicle extends Component {
           });
         
         const reg = this.state.reg;
-        if(!this.state.invalid){
+        
+        if(!this.state.error){
+            console.log('submit', this.state.error)
             this.setState({
                 submitted: true
             })
-            if (window.location.pathname !== '/user/home/vehicleresults'){
-                this.props.history.push('/user/home/vehicleresults?plate=' + reg);
-            }
-        }
-        
             if(!this.props.admin){
                 if (window.location.pathname !== '/user/home/vehicleresults'){
                     this.props.history.push('/user/home/vehicleresults?plate=' + reg);
@@ -68,6 +66,10 @@ class SearchVehicle extends Component {
                     this.props.history.push('/admin/vehicleresults?plate=' + reg);
                   }
             }
+        
+        }
+    
+            
           
       }
 
@@ -88,7 +90,7 @@ class SearchVehicle extends Component {
                 <Button variant='dark' id='submit-button' type='submit'>Search Vehicles</Button>
                 <br />
                 </Form>{console.log(this.state.error)}
-                {!this.state.submitted ? <p className="form-status">Form is {!this.state.invalid ? 'valid ✅' : 'invalid ❌'}</p> : <p className="form-status">Form not submitted</p>}
+                {!this.state.submitted ? <p className="form-status">Form is {!this.state.error ? 'valid ✅' : 'invalid ❌'}</p> : <p className="form-status">Form not submitted</p>}
             </div>
         )
     }
