@@ -28,7 +28,7 @@ export default class PeopleResultsPage extends React.Component {
 
 
     getResults = (personObject) => {
-        axios.post('http://localhost:8080/back-end/person/getData', personObject, {
+        axios.post('http://35.246.9.251:8080/back-end/person/getData', personObject, {
             headers: {
                 Authorization: localStorage.getItem('token')
             }
@@ -52,7 +52,7 @@ export default class PeopleResultsPage extends React.Component {
             },
             detailsLoaded: false
         });
-        axios.post('http://localhost:8080/back-end/person/getMatching', person, {
+        axios.post('http://35.246.9.251:8080/back-end/person/getMatching', person, {
             headers: {
                 Authorization: localStorage.getItem('token')
             }

@@ -158,6 +158,7 @@ export class PersonLocation extends React.Component {
                                 type="checkbox"
                                 label="ANPR data"
                                 name="anpr"
+                                // checked="true"
                                 onChange={this.handleQuery}
                             />
                         </Col>

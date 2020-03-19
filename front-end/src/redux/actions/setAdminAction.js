@@ -5,7 +5,7 @@ import store from '../store';
 export const setAdmin = (admin) => dispatch => {
 
     console.log(pass);
-    axios.post('http://localhost:8080/admin/register/', admin, {
+    axios.post('http://35.246.9.251:8080/admin/register/', admin, {
         headers: {
             Authorization: localStorage.getItem('token')
           }
