@@ -36,10 +36,9 @@ export default class VehicleResultsPage extends React.Component {
         })
             .then((response) => {
                 this.setState({
-                    results: [response.data],
+                    results: response.data,
                     vehiclesLoaded: true
                 })
-                console.log('response', response.data)
             });
     }
 
@@ -63,16 +62,35 @@ export default class VehicleResultsPage extends React.Component {
         })
             .then((response) => {
                 this.setState({
-                    vehicleDetails: response.data,
+                    vehicleDetails: response.data[0],
                     detailsLoaded: true
                 })
                 console.log('post', this.state.vehicleDetails);
             });
     };
 
+    personClick = (vehicleData) => () => {
+
+        console.log('personclick', vehicleData);
+
+        const data = {
+            citizenID: '',
+            forenames: vehicleData.forenames,
+            surname: vehicleData.surname,
+            homeAddress: vehicleData.address,
+            dateOfBirth: vehicleData.dateOfBirth,
+            placeOfBirth: '',
+            sex: ''
+          };
+
+        this.props.history.push('/user/home/peopleresults', data);
+    }
+
     render() {
         const vehicleData = this.state.vehicleDetails;
-        console.log('results', this.state.results);
+        console.log('results:', this.state.results);
+        // const resultArray = this.state.results[0];
+        // console.log('result array:', resultArray);
 
         return (
 
@@ -81,7 +99,7 @@ export default class VehicleResultsPage extends React.Component {
                     <Row>
                         <Col>
                             <Container className='flex-container' id='person-list'>
-                                {this.state.results?.map(vehicle =>
+                                {this.state.results.map(vehicle =>
                                     <Card onClick={() => this.handleClick(vehicle.vehicleRegistrationNo, vehicle.make, vehicle.model,
                                         vehicle.colour, vehicle.registrationDate)}
                                         className='flex-item' id='small-person-card'>
@@ -131,9 +149,10 @@ export default class VehicleResultsPage extends React.Component {
                                                 <h5>Registration Date</h5>{vehicleData !== undefined ?
                                                     vehicleData.registrationDate : ' '}</li>
                                             <li className="list-group-item">
-                                                <h5>Owner</h5>{vehicleData !== undefined ?
-                                                    vehicleData.forenames : ' '}{' '} {vehicleData !== undefined ?
-                                                        vehicleData.surname : ' '}</li>
+                                                <h5>Owner</h5><a onClick={this.personClick(vehicleData)}
+                                            className='stretched-link link-style'>{vehicleData !== undefined ?
+                                                vehicleData.forenames : ' '}{' '} {vehicleData !== undefined ?
+                                                    vehicleData.surname : ' '}</a></li>
                                         </ul>
                                     </Card.Body>
                                 </Card>

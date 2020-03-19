@@ -3,12 +3,14 @@ import FormInput from './FormInput';
 import { connect } from 'react-redux';
 import { createUser } from '../redux/actions/createUserAction';
 import PropTypes from 'prop-types';
+import { Form, Button } from 'react-bootstrap';
+import '../styles/form.css';
 
 const passRegex = RegExp(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,15}$/);
 const usernameRegex = RegExp(/^[a-zA_Z0-9_-]{8,15}$/);
 
 class CreateUser extends Component {
-    constructor(props){
+    constructor(props) {
         super(props);
         this.state = {
             username: '',
@@ -27,7 +29,7 @@ class CreateUser extends Component {
         }
     }
 
-    handleChange = ({target: {name, value, checked}}) => {
+    handleChange = ({ target: { name, value, checked } }) => {
         value = name === 'isAdmin' ? checked : value;
         this.setState({
             [name]: value
@@ -101,7 +103,6 @@ class CreateUser extends Component {
             console.log(data);
 
             this.props.createUser(data);
-        
             this.props.history.push('/admin');
         } 
     }
@@ -154,6 +155,6 @@ class CreateUser extends Component {
 
 CreateUser.propTypes = {
     createUser: PropTypes.func.isRequired
-  };
-  
+};
+
 export default connect(null, { createUser })(CreateUser);

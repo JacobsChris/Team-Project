@@ -1,84 +1,134 @@
 import React from 'react';
-import {withScriptjs, withGoogleMap, GoogleMap, Marker, Circle} from "react-google-maps"
+import axios from 'axios';
+import { Map, GoogleApiWrapper, Marker, InfoWindow, Circle } from 'google-maps-react';
+import '../styles/personlocation.css';
 
-import '../styles/LocationResults.css'
-
-const input = {
-    "radius": 5 * 1000,
-    "latitude": 51.5,
-    "longitude": 0.15
+const mapStyles = {
+    width: '100%',
+    height: '80%'
 };
 
-const circleOpt = {
-    "defaultCenter": {
-        lat: parseFloat(input.latitude),
-        lng: parseFloat(input.longitude)
-    },
-    "options": {
-        "strokeColor": "#ff0000"
-    },
-    "radius": input.radius
-};
+export class LocationResults extends React.Component {
 
-const results = [{
-    "anprId": 0,
-    "streetName": "Rainham Road South, A1112",
-    "latitude": 51.5384050430001,
-    "longitude": 0.1668546386105114
-}, {
-    "anprId": 266,
-    "streetName": "The Furry, A394",
-    "latitude": 50.096346998878126,
-    "longitude": -5.272012880564024
-}];
-
-const Map = withScriptjs(withGoogleMap(props =>
-    <GoogleMap
-
-        defaultZoom={10}
-        defaultCenter={{lat: input.latitude, lng: input.longitude}}
-    >
-        <Circle
-            defaultCenter={circleOpt.defaultCenter}
-            options={circleOpt.options}
-            radius={circleOpt.radius}
-        />
-        {
-            results.map(results =>
-                <Marker
-                    key={results.anprId}
-                    position={{lat: results.latitude, lng: results.longitude}}
-                />
-            )
+    constructor(props) {
+        super(props);
+        this.state = {
+            results: [],
+            showingInfoWindow: false,
+            activeMarker: {},
+            selectedMarker: {},
+            eventsLoaded: false
         }
+    }
 
-    </GoogleMap>
-));
+    componentDidMount() {
+        this.getResults(this.props.location.state);
+    }
 
-export default class LocationResults extends React.Component {
+    getResults = (locationObject) => {
+        axios.post('http://localhost:8080/back-end/locationEvent/getLocationEventsInArea', locationObject, {
+            headers: {
+                Authorization: localStorage.getItem('token')
+            }
+        })
+            .then((response) => {
+                this.setState({
+                    results: response.data,
+                    eventsLoaded: true
+                })
+                console.log('response', this.state.results);
+                console.log(this.state.eventsLoaded);
+            });
+    }
 
+    getDataType = (dataId) => {
+
+        if (dataId === 'AnprID') {
+            return 'ANPR data';
+        }
+        else if (dataId === 'eposID') {
+            return 'EPOS data';
+        }
+        else if (dataId === 'atmID') {
+            return 'ATM data';
+        }
+        else if (dataId === 'CellTowerID') {
+            return 'Call data'
+        }
+    }
+
+    onMarkerClick = (props, marker, event) =>
+        this.setState({
+            selectedMarker: props,
+            activeMarker: marker,
+            showingInfoWindow: true
+        });
+
+    onClose = props => {
+        if (this.state.showingInfoWindow) {
+            this.setState({
+                showingInfoWindow: false,
+                activeMarker: null
+            });
+        }
+    };
 
     render() {
-
+        const search = this.props.location.state;
+        console.log('search', search);
+        const events = this.state.results.eventIdTimeAndDetails;
+        console.log('events', events);
+        console.log(this.state.selectedMarker.timeStamp);
 
         return (
+            <div>
+                <header className='person-location-header'>
+                    <h2>Latitude: {search.latitude + ', '} Longitude: {search.longitude}</h2>
+                </header>
+                <Map className='event-map'
+                    google={this.props.google}
+                    zoom={14}
+                    style={mapStyles}
+                    initialCenter={{
+                        lat: search.latitude,
+                        lng: search.longitude
+                    }}
+                >
 
-            <div className="row">
-                <div className="column">
-                    <h2>Location Search Results</h2>
-                    <p>results go here</p>
-                </div>
-                <div className="column">
-                    <Map
-                        id="resultmap"
-                        googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyBAW0t48SoZCxWY8MOoY6l6QlUvW5uEIB0&callback=initMap"
-                        loadingElement={<div style={{height: `100%`}}/>}
-                        containerElement={<div style={{height: `400px`}}/>}
-                        mapElement={<div style={{height: `75%`}}/>}
-                    />
-                </div>
+                    {this.state.eventsLoaded ? ((!events) ? (<div>No results found</div>) :
+                        (events.map(e =>
+
+                            (<Marker
+                                position={{ lat: e.latitude, lng: e.longitude }}
+                                onClick={this.onMarkerClick}
+                                name={e.forenames + ' ' + e.surname}
+                                info={this.getDataType(e.idType)}
+                                time={e.timeStamp}
+                                personData={e}
+                            />)
+
+                        )
+                        )) : (<div>Loading</div>)}
+
+                    <InfoWindow
+                        marker={this.state.activeMarker}
+                        visible={this.state.showingInfoWindow}
+                        onClose={this.onClose}
+                    >
+                        <div>
+                            <h4>{this.state.selectedMarker.name}</h4>
+                            <p>{this.state.selectedMarker.info}</p>
+                            <p>{this.state.selectedMarker.time === undefined ? ' ' : (this.state.selectedMarker.time)}</p>
+                        </div>
+                    </InfoWindow>
+
+                </Map>
             </div>
         );
     }
 }
+
+export default GoogleApiWrapper({
+    apiKey: 'AIzaSyBAW0t48SoZCxWY8MOoY6l6QlUvW5uEIB0'
+})(LocationResults);
 

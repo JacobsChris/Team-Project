@@ -3,13 +3,6 @@ import axios from 'axios';
 import { Container, Card, Row, Col } from 'react-bootstrap';
 import '../styles/peopleResults.css';
 import { MdPerson } from 'react-icons/md';
-// import PropTypes from 'prop-types';
-// import { connect } from 'react-redux';
-
-// const mapStateToProps = state => ({
-//     results: state.response.results,
-//     resultsLoading: state.response.resultsLoading
-// });
 
 export default class PeopleResultsPage extends React.Component {
     constructor(props) {
@@ -28,20 +21,25 @@ export default class PeopleResultsPage extends React.Component {
     };
 
     componentDidMount() {
+        this.getResults(this.props.location.state);
+    }
 
-        axios.post('http://localhost:8080/back-end/vehicle/getData', this.props.location.state, {
+
+    getResults = (personObject) => {
+        axios.post('http://localhost:8080/back-end/person/getData', personObject, {
             headers: {
                 Authorization: localStorage.getItem('token')
             }
         })
             .then((response) => {
                 this.setState({
-                    results: [response.data],
+                    results: response.data,
                     peopleLoaded: true
                 })
-                console.log('response', response.data)
+                console.log('response', this.state.results);
             });
     }
+    
 
     handleClick = (person) => {
         this.setState({
@@ -58,62 +56,91 @@ export default class PeopleResultsPage extends React.Component {
             }
         })
             .then((response) => {
-                this.setState({ 
+                this.setState({
                     personDetails: response.data,
                     detailsLoaded: true
                 })
+                console.log('details', this.state.personDetails);
             })
     };
 
+    personClick = (personData) => () => {
+
+        console.log('person:', personData);
+
+        const data = {
+            citizenID: '',
+            forenames: personData.forenames,
+            surname: personData.surname,
+            homeAddress: personData.address,
+            dateOfBirth: personData.dateOfBirth,
+            placeOfBirth: '',
+            sex: ''
+          };
+
+        this.getResults(data);
+    }
 
     getAcquaintances = (acquaintancesData) => {
-        if (acquaintancesData && acquaintancesData.length > 0 ) {
+        if (acquaintancesData && acquaintancesData.length > 0) {
             return (
-                acquaintancesData[0].forenames + ' ' + acquaintancesData[0].surname + ', ' +
-                acquaintancesData[1].forenames + ' ' + acquaintancesData[1].surname + ', ' +
-                acquaintancesData[2].forenames + ' ' + acquaintancesData[2].surname
+                <div>
+                    <a onClick={this.personClick(acquaintancesData[0])}>
+                        {acquaintancesData[0].forenames + ' ' + acquaintancesData[0].surname + ', '}</a>
+                    <a onClick={this.personClick(acquaintancesData[1])}>
+                        {acquaintancesData[1].forenames + ' ' + acquaintancesData[1].surname + ', '}</a>
+                    <a onClick={this.personClick(acquaintancesData[2])}>
+                        {acquaintancesData[2].forenames + ' ' + acquaintancesData[2].surname}</a>
+                </div>
             );
-        } else if (this.state.detailsLoaded){
+        } else if (this.state.detailsLoaded) {
             return '';
         }
     }
 
     getVehicles = (vehicleData) => {
-        if (vehicleData && vehicleData.length > 0 ){
-            for(let i = 0; i < vehicleData.length; i++){
+        if (vehicleData && vehicleData.length > 0) {
+            for (let i = 0; i < vehicleData.length; i++) {
                 return (
                     vehicleData[i].vehicleRegistrationNo
                 );
             }
-        } else if (this.state.detailsLoaded){
+        } else if (this.state.detailsLoaded) {
             return '';
         }
     }
 
     vehicleClick = (vehicleData) => () => {
-
-        console.log('plate', vehicleData[0].vehicleRegistrationNo);
-
         this.props.history.push('/user/home/vehicleresults?plate=' + vehicleData[0].vehicleRegistrationNo);
     }
 
+    recentLocation = () => {
+        // const { bankAccountData } = this.state.personDetails;
+        const data = {
+            transactions: this.state.personDetails.transactionsData,
+            vehicleSightings: this.state.personDetails.vehicleSightings,
+            callIncoming: this.state.personDetails.outGoingCallHistory,
+            callOutgoing: this.state.personDetails.inComingCallHistory
+        }
+        console.log('recent', this.state.personDetails.transactionsData);
+        this.props.history.push('/user/home/personlocation', data);
+    }
+
     render() {
-        console.log('state', this.props.location.state);
-        console.log('People', this.state.results);
         const { citizenData: [citizen = {}] } = this.state.personDetails;
-        const { bankAccountData: [personBank = {}] } = this.state.personDetails;
-        const { mobilesData: [personMobile = {}] } = this.state.personDetails;
+        const { bankAccountData } = this.state.personDetails;
+        const { mobilesData } = this.state.personDetails;
         const { acquaintancesData } = this.state.personDetails;
         const { vehicleData } = this.state.personDetails;
 
         return (
             <div>
-                {!this.state.peopleLoaded ? (!this.state.results ? (<h3>No results found</h3>) : (
+                {this.state.peopleLoaded ? (!this.state.results ? (<h3>No results found</h3>) : (
                     <Row>
                         <Col>
                             <Row>
                                 <Container className='flex-container' id='person-list'>
-                                    {this.props.results?.map(person =>
+                                    {this.state.results?.map(person =>
                                         <Card onClick={() => this.handleClick(person)}
                                             className='flex-item' id='small-person-card'>
                                             <Row>
@@ -150,16 +177,17 @@ export default class PeopleResultsPage extends React.Component {
                                             <li className="list-group-item">Home Address: {citizen.homeAddress}</li>
                                             <li className="list-group-item">Date of Birth: {citizen.dateOfBirth}</li>
                                             <li className="list-group-item">Place of Birth: {citizen.placeOfBirth}</li>
-                                            <li className="list-group-item">Bank: {personBank && personBank.length > 0 ?
-                                                personBank.bank : ''}</li>
-                                            <li className="list-group-item">Account Number: {personBank && personBank.length > 0 ?
-                                                personBank.accountNumber : ''}</li>
-                                            <li className="list-group-item">Mobile Number: {personMobile && personMobile.length > 0?
-                                                personMobile.phoneNumber : ''}</li>
+                                            <li className="list-group-item">Bank: {bankAccountData && bankAccountData.length > 0 ?
+                                                bankAccountData[0].bank : ''}</li>
+                                            <li className="list-group-item">Account Number: {bankAccountData && bankAccountData.length > 0 ?
+                                                bankAccountData[0].accountNumber : ''}</li>
+                                            <li className="list-group-item">Mobile Number: {mobilesData && mobilesData.length > 0 ?
+                                                mobilesData[0].phoneNumber : ''}</li>
                                             <li className="list-group-item">Associates: {this.getAcquaintances(acquaintancesData)}</li>
-                                            <li className="list-group-item">Vehicles: <a onClick={this.vehicleClick(vehicleData)}
-                                            className='stretched-link link-style'>{this.getVehicles(vehicleData)}</a> </li>
-                                            <li className="list-group-item">Recent locations: </li>
+                                            <li className="list-group-item">Vehicles: {vehicleData && vehicleData.length > 0 ? (<a onClick={this.vehicleClick(vehicleData)}
+                                                className='stretched-link link-style'>{this.getVehicles(vehicleData)}</a>) : ''}</li>
+                                            <li className="list-group-item">Recent locations: <a onClick={this.recentLocation} 
+                                            className='stretched-link link-style'></a></li>
                                         </ul>
                                     </Card.Body>
                                 </Card>
@@ -174,12 +202,6 @@ export default class PeopleResultsPage extends React.Component {
     }
 }
 
-// PeopleResultsPage.propTypes = {
-//     results: PropTypes.array.isRequired,
-//     getVehicle: PropTypes.func.isRequired
-// };
-
-// export default connect(mapStateToProps)(PeopleResultsPage);
 
 
 

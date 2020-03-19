@@ -9,8 +9,6 @@ const middleware = [thunk];
 
 const checkTokenExpirationMiddleware = () => next => action => {
   const token = localStorage.getItem("token");
-    // JSON.parse(localStorage.getItem("user"))["token"];
-    console.log(token);
   if (jwtDecode(token).exp < Date.now() / 1000) {
     next(action);
     localStorage.clear();

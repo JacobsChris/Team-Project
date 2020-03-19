@@ -23,10 +23,16 @@
   
   .error {
     color:#db2269;
-    font-size: 0.625em;
+    font-size: 15px;
     display: relative;
   }
   
+  .reg,
+  .make,
+  .model,
+  .colour,
+  .regDate,
+  .owner,
   .forename,
   .surname,
   .dob,
@@ -35,7 +41,14 @@
   .houseName,
   .street,
   .town,
-  .postcode {
+  .postcode,
+  .username,
+  .password,
+  .latitude,
+  .longitude,
+  .radius,
+  .startDateTime,
+  .endDateTime {
     display: flex;
     flex-direction: column;
     margin-bottom: 15px;
@@ -54,4 +67,8 @@
 
   .form-status{
     text-align: center;
+  }
+
+  .reg-message {
+    color: #534e4e;
   }
