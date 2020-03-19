@@ -2,6 +2,7 @@ import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 import rootReducer from './reducers';
 import jwtDecode from 'jwt-decode';
+import { composeWithDevTools } from 'redux-devtools-extension';
 
 const initialState = {};
 
@@ -20,9 +21,8 @@ const checkTokenExpirationMiddleware = () => next => action => {
 const searchStore = createStore(
   rootReducer,
   initialState,
-  compose(
-    applyMiddleware(...middleware, checkTokenExpirationMiddleware),
-    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+  composeWithDevTools(
+    applyMiddleware(...middleware, checkTokenExpirationMiddleware)
   )
 );
 
