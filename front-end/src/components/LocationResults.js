@@ -2,6 +2,8 @@ import React from 'react';
 import axios from 'axios';
 import { Map, GoogleApiWrapper, Marker, InfoWindow, Circle } from 'google-maps-react';
 import '../styles/personlocation.css';
+import loading from '../loading.gif';
+import '../styles/spinner.css';
 
 const mapStyles = {
     width: '100%',
@@ -122,7 +124,7 @@ export class LocationResults extends React.Component {
                         </InfoWindow>
 
                     </Map>
-                         )): (<div>Loading</div>)}
+                         )): (<img src={loading} className="spinner" id="spinner"/>)}
             </div>
         );
     }
