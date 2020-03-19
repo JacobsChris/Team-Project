@@ -42,9 +42,8 @@ module.exports =
             inputLongitude = exactStr(inputLongitude);
             Radius = exactStr(Radius);
 
-            if (maxLon === NaN || minLon === NaN) {
+            if (isNaN(maxLon) || isNaN(minLon)) {
                 throw new Error('The entered radius was bigger than the size of the radius of the earth so the function could not be performed');
-                return "The entered radius was bigger than the size of the radius of the earth so the function could not be performed";
             } else {
 
                 return Promise.all([

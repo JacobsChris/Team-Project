@@ -11,3 +11,9 @@ test('checks that rad2Deg works', () => {
     }
     expect(outputArray).toStrictEqual(expectedOutputArray);
 });
+
+test('checks that rad2Deg doesn\'t work correctly', () => {
+    expect(() => {
+        rad2Deg("abc")
+    }).toThrow("error occurred at rad 2 deg");
+});
