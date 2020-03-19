@@ -85,12 +85,12 @@ export default class PeopleResultsPage extends React.Component {
         if (acquaintancesData && acquaintancesData.length > 0) {
             return (
                 <div>
-                    <a onClick={this.personClick(acquaintancesData[0])}>
-                        {acquaintancesData[0].forenames + ' ' + acquaintancesData[0].surname + ', '}</a>
-                    <a onClick={this.personClick(acquaintancesData[1])}>
-                        {acquaintancesData[1].forenames + ' ' + acquaintancesData[1].surname + ', '}</a>
-                    <a onClick={this.personClick(acquaintancesData[2])}>
-                        {acquaintancesData[2].forenames + ' ' + acquaintancesData[2].surname}</a>
+                    <p className='stretched-link link-style' onClick={this.personClick(acquaintancesData[0])} >
+                        {acquaintancesData[0].forenames + ' ' + acquaintancesData[0].surname + ', '}</p>
+                    <p className='stretched-link link-style' onClick={this.personClick(acquaintancesData[1])}>
+                        {acquaintancesData[1].forenames + ' ' + acquaintancesData[1].surname + ', '}</p>
+                    <p className='stretched-link link-style' onClick={this.personClick(acquaintancesData[2])}>
+                        {acquaintancesData[2].forenames + ' ' + acquaintancesData[2].surname}</p>
                 </div>
             );
         } else if (this.state.detailsLoaded) {
@@ -115,15 +115,18 @@ export default class PeopleResultsPage extends React.Component {
     }
 
     recentLocation = () => {
-        // const { bankAccountData } = this.state.personDetails;
         const data = {
             transactions: this.state.personDetails.transactionsData,
             vehicleSightings: this.state.personDetails.vehicleSightings,
             callIncoming: this.state.personDetails.outGoingCallHistory,
             callOutgoing: this.state.personDetails.inComingCallHistory
         }
-        console.log('recent', this.state.personDetails.transactionsData);
-        this.props.history.push('/user/home/personlocation', data);
+        if(!this.props.admin){
+              this.props.history.push('/user/home/personlocation', data);
+            }
+        else {
+              this.props.history.push('/admin/personlocation', data);
+            }
     }
 
     render() {
@@ -184,10 +187,10 @@ export default class PeopleResultsPage extends React.Component {
                                             <li className="list-group-item">Mobile Number: {mobilesData && mobilesData.length > 0 ?
                                                 mobilesData[0].phoneNumber : ''}</li>
                                             <li className="list-group-item">Associates: {this.getAcquaintances(acquaintancesData)}</li>
-                                            <li className="list-group-item">Vehicles: {vehicleData && vehicleData.length > 0 ? (<a onClick={this.vehicleClick(vehicleData)}
-                                                className='stretched-link link-style'>{this.getVehicles(vehicleData)}</a>) : ''}</li>
-                                            <li className="list-group-item">Recent locations: <a onClick={this.recentLocation} 
-                                            className='stretched-link link-style'></a></li>
+                                            <li className="list-group-item">Vehicles: {vehicleData && vehicleData.length > 0 ? (<p onClick={this.vehicleClick(vehicleData)}
+                                                className='stretched-link link-style'>{this.getVehicles(vehicleData)}</p>) : ''}</li>
+                                            <li className="list-group-item">Recent locations: <p onClick={this.recentLocation} 
+                                            className='stretched-link link-style'>Click here</p></li>
                                         </ul>
                                     </Card.Body>
                                 </Card>

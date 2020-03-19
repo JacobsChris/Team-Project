@@ -1,6 +1,5 @@
 import React from 'react';
 import axios from 'axios';
-import SearchVehicle from './searchVehicle';
 import { Container, Card, Row, Col } from 'react-bootstrap';
 import '../styles/peopleResults.css';
 import { MdDirectionsCar } from 'react-icons/md';
@@ -149,10 +148,10 @@ export default class VehicleResultsPage extends React.Component {
                                                 <h5>Registration Date</h5>{vehicleData !== undefined ?
                                                     vehicleData.registrationDate : ' '}</li>
                                             <li className="list-group-item">
-                                                <h5>Owner</h5><a onClick={this.personClick(vehicleData)}
+                                                <h5>Owner</h5><p onClick={this.personClick(vehicleData)}
                                             className='stretched-link link-style'>{vehicleData !== undefined ?
                                                 vehicleData.forenames : ' '}{' '} {vehicleData !== undefined ?
-                                                    vehicleData.surname : ' '}</a></li>
+                                                    vehicleData.surname : ' '}</p></li>
                                         </ul>
                                     </Card.Body>
                                 </Card>
