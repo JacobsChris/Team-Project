@@ -8,6 +8,7 @@ const initialState = {
 export default function(state = initialState, action){
     switch(action.type){
         case SIGN_IN:
+            console.log('reducers sign in', action.payload.data)
             return {
                 ...state,
                 user: [action.payload.data],
