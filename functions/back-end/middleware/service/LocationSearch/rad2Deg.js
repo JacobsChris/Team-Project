@@ -5,14 +5,11 @@ module.exports =
      * @returns number equivalent of input
      */
     function rad2Deg(input) {
-        try {
+        if (!(isNaN(input))) {
             let pi = Math.PI;
             return input * (180 / pi);
-        } catch (e) {
-            console.info(e);
-            console.info(e.name);
-            console.info(e.message);
-            throw new Error('error occured at rad 2 deg');
+        } else {
+            throw new Error('error occurred at rad 2 deg');
         }
     };
 
