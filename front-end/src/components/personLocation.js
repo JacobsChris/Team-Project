@@ -195,6 +195,9 @@ export class PersonLocation extends React.Component {
                                         position={{ lat: location.latitude, lng: location.longitude }}
                                         onClick={this.onMarkerClick}
                                         name={'EPOS'}
+                                        time={`Time: ${location.timestamp}`}
+                                        streetname={`Street: ${location.streetName}`}
+                                        amount={`Amount: ${location.amount}`}
                                     />
                                 )
                         : ''}
@@ -204,6 +207,9 @@ export class PersonLocation extends React.Component {
                                     position={{ lat: location.latitude, lng: location.longitude }}
                                     onClick={this.onMarkerClick}
                                     name={'ATM'}
+                                    time={`Time: ${location.timestamp}`}
+                                    streetname={`Street: ${location.streetName}`}
+                                    amount={`Amount: ${location.amount}`}
                                 />
                             )
                         : ''}
@@ -213,6 +219,8 @@ export class PersonLocation extends React.Component {
                                         position={{ lat: location.latitude, lng: location.longitude }}
                                         onClick={this.onMarkerClick}
                                         name={'Vehicle Sighting'}
+                                        time={`Time: ${location.timestamp}`}
+                                        streetname={`Street: ${location.streetName}`}
                                     />
                                 )
                             
@@ -223,6 +231,7 @@ export class PersonLocation extends React.Component {
                                         position={{ lat: location.latitude, lng: location.longitude }}
                                         onClick={this.onMarkerClick}
                                         name={'Incoming Call'}
+                                        time={`Time: ${location.timestamp}`}
                                     />
                                 )
                         : ''}
@@ -232,6 +241,7 @@ export class PersonLocation extends React.Component {
                                     position={{ lat: location.latitude, lng: location.longitude }}
                                     onClick={this.onMarkerClick}
                                     name={'Outgoing Call'}
+                                    time={`Time: ${location.timestamp}`}
                                 />
                             )
                     : ''}
@@ -241,6 +251,9 @@ export class PersonLocation extends React.Component {
                                         position={{ lat: location.latitude, lng: location.longitude }}
                                         onClick={this.onMarkerClick}
                                         name={'EPOS'}
+                                        time={`Time: ${location.timestamp}`}
+                                        streetname={`Street: ${location.streetName}`}
+                                        amount={`Amount: ${location.amount}`}
                                     />
                                 )
                         : ''}
@@ -250,6 +263,9 @@ export class PersonLocation extends React.Component {
                                     position={{ lat: location.latitude, lng: location.longitude }}
                                     onClick={this.onMarkerClick}
                                     name={'ATM'}
+                                    time={`Time: ${location.timestamp}`}
+                                    streetname={`Street: ${location.streetName}`}
+                                    amount={`Amount: ${location.amount}`}
                                 />
                             )
                         : ''}
@@ -259,6 +275,8 @@ export class PersonLocation extends React.Component {
                                         position={{ lat: location.latitude, lng: location.longitude }}
                                         onClick={this.onMarkerClick}
                                         name={'Vehicle Sighting'}
+                                        time={`Time: ${location.timestamp}`}
+                                        streetname={`Street: ${location.streetName}`}
                                     />
                                 )
                             
@@ -269,7 +287,7 @@ export class PersonLocation extends React.Component {
                                         position={{ lat: location.latitude, lng: location.longitude }}
                                         onClick={this.onMarkerClick}
                                         name={'Incoming Call'}
-                                        
+                                        time={`Time: ${location.timestamp}`}
                                     />
                                 )
                         : ''}
@@ -279,7 +297,7 @@ export class PersonLocation extends React.Component {
                                     position={{ lat: location.latitude, lng: location.longitude }}
                                     onClick={this.onMarkerClick}
                                     name={'Outgoing Call'}
-                                    
+                                    time={`Time: ${location.timestamp}`}
                                 />
                             )
                     : ''}
@@ -290,7 +308,9 @@ export class PersonLocation extends React.Component {
                     >
                         <div>
                             <h4>{this.state.selectedMarker.name}</h4>
-                            
+                            <h4>{this.state.selectedMarker.time}</h4>
+                            <h4>{this.state.selectedMarker.streetname}</h4> 
+                            <h4>{this.state.selectedMarker.amount}</h4>
                         </div>
                     </InfoWindow>
                 </Map>

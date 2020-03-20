@@ -124,9 +124,11 @@ export default class PeopleResultsPage extends React.Component {
             callIncoming: this.state.personDetails.outGoingCallHistory,
             callOutgoing: this.state.personDetails.inComingCallHistory
         }
+
         if (!this.props.admin) {
             this.props.history.push('/user/home/personlocation', data);
         }
+
         else {
             this.props.history.push('/admin/personlocation', data);
         }
