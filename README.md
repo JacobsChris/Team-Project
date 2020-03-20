@@ -9,8 +9,8 @@ Example searches are finding the full details of a person, their transaction rec
 
 ### How use:
 
-By navigating to the URL, do the search stuff.
-
+Having signed in, select a search you would like to make.  
+Enter any relevant information you wish to search from.  You will receive a list of all persons, vehicles or events that match your search parameters.  By clicking on one of the persons or vehicles, you can receive further information and details about them such as call history and recent locations for persons.
 
 ## HOW DEPLOY
 
@@ -106,14 +106,12 @@ Node.JS and Express:
 React:
 * how the front-end works
 
-Jest, Chai, Mocha:
+Jest, Chai, SuperTest:
 * Provides testing functionality
 
 BCrypt and Passport:
-* Security stuff, ask Harris
 
 Morgan and Winston:
-*Logging stuff, ask someone else
 
 For a full list of all dependencies, please see the package.json.
 
