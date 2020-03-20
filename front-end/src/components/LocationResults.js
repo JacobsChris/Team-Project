@@ -124,7 +124,7 @@ export class LocationResults extends React.Component {
                         </InfoWindow>
 
                     </Map>
-                         )): (<img src={loading} className="spinner" id="spinner"/>)}
+                         )): (<img alt='loading' src={loading} className="spinner" id="spinner"/>)}
             </div>
         );
     }
