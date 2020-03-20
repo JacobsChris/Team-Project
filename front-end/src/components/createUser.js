@@ -78,22 +78,12 @@ class CreateUser extends Component {
                 passwordError: ''
             })
         }
-        if ((this.state.username === this.state.verUsername)) {
-            this.setState({
-                userMatch: true
-            })
-        }
-        if ((this.state.password !== this.state.verPassword)) {
-            this.setState({
-                passwordMatch: false
-            })
-        }
     }
 
     submit = (e) => {
         e.preventDefault();
 
-        if ((this.state.passwordMatch && this.state.userMatch) && !this.state.invalid) {
+        if ((this.state.password === this.state.verPassword) && this.state.username === this.state.verUsername) {
             let data = {
                 username: this.state.username,
                 password: this.state.password,
@@ -122,7 +112,7 @@ class CreateUser extends Component {
                         <Form.Label>Confirm username</Form.Label>
                         <FormInput name='verUsername' placeholder='Confirm username' value={this.state.verUsername} handleChange={this.handleChange} />
                         {this.state.verUserError !== '' ? <span>{this.state.verUserError}</span> : ''}
-                        {((this.state.username && this.state.verUsername) !== '') && this.state.userMatch ?
+                        {((this.state.username !== this.state.verUsername))  ?
                             <span>Usernames do not match</span> : ''}
                     </Form.Group>
                     <Form.Group className='password'>
@@ -133,8 +123,8 @@ class CreateUser extends Component {
                     <Form.Group className='password'>
                         <Form.Label>Confirm password</Form.Label>
                         <FormInput name='verPassword' type="password" placeholder='Confirm password' value={this.state.verPassword} handleChange={this.handleChange} />
-                        {this.state.verPasswordError !== '' ? <span>{this.state.verPasswordError}</span> : ''} {!this.state.passwordMatch ?
-                        <span>Passwords do not match</span> : ''}
+                        {((this.state.password !== this.state.verPassword))  ?
+                            <span>Passwords do not match</span> : ''}
                     </Form.Group>
                     <Form.Check type="checkbox" label="Make admin" name="isAdmin" onChange={this.handleChange} />
                     <br />
