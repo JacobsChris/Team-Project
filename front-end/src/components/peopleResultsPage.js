@@ -15,7 +15,8 @@ export default class PeopleResultsPage extends React.Component {
                 citizenData: [],
                 bankAccountData: [],
                 mobilesData: [],
-                vehicleData: []
+                vehicleData: [],
+                targetHasCalled: [],
             },
             detailsLoaded: true,
             peopleLoaded: false
@@ -87,11 +88,11 @@ export default class PeopleResultsPage extends React.Component {
         if (acquaintancesData && acquaintancesData.length > 0) {
             return (
                 <div>
-                    <p className='stretched-link link-style' onClick={this.personClick(acquaintancesData[0])} >
+                    <p onClick={this.personClick(acquaintancesData[0])} >
                         {acquaintancesData[0].forenames + ' ' + acquaintancesData[0].surname + ', '}</p>
-                    <p className='stretched-link link-style' onClick={this.personClick(acquaintancesData[1])}>
+                    <p onClick={this.personClick(acquaintancesData[1])}>
                         {acquaintancesData[1].forenames + ' ' + acquaintancesData[1].surname + ', '}</p>
-                    <p className='stretched-link link-style' onClick={this.personClick(acquaintancesData[2])}>
+                    <p onClick={this.personClick(acquaintancesData[2])}>
                         {acquaintancesData[2].forenames + ' ' + acquaintancesData[2].surname}</p>
                 </div>
             );
@@ -135,7 +136,7 @@ export default class PeopleResultsPage extends React.Component {
         const { citizenData: [citizen = {}] } = this.state.personDetails;
         const { bankAccountData } = this.state.personDetails;
         const { mobilesData } = this.state.personDetails;
-        const { acquaintancesData } = this.state.personDetails;
+        const { targetHasCalled } = this.state.personDetails;
         const { vehicleData } = this.state.personDetails;
 
         return (
@@ -188,7 +189,7 @@ export default class PeopleResultsPage extends React.Component {
                                                 bankAccountData[0].accountNumber : ''}</li>
                                             <li className="list-group-item">Mobile Number: {mobilesData && mobilesData.length > 0 ?
                                                 mobilesData[0].phoneNumber : ''}</li>
-                                            <li className="list-group-item">Associates: {this.getAcquaintances(acquaintancesData)}</li>
+                                            <li className="list-group-item">Associates: {this.getAcquaintances(targetHasCalled)}</li>
                                             <li className="list-group-item">Vehicles: {vehicleData && vehicleData.length > 0 ? (<p onClick={this.vehicleClick(vehicleData)}
                                                 className='stretched-link link-style'>{this.getVehicles(vehicleData)}</p>) : ''}</li>
                                             <li className="list-group-item">Recent locations: <p onClick={this.recentLocation}
