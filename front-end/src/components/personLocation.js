@@ -269,7 +269,7 @@ export class PersonLocation extends React.Component {
                                         position={{ lat: location.latitude, lng: location.longitude }}
                                         onClick={this.onMarkerClick}
                                         name={'Incoming Call'}
-                                        time={new Date(location.timestamp)}
+                                        
                                     />
                                 )
                         : ''}
@@ -279,7 +279,7 @@ export class PersonLocation extends React.Component {
                                     position={{ lat: location.latitude, lng: location.longitude }}
                                     onClick={this.onMarkerClick}
                                     name={'Outgoing Call'}
-                                    time={location.timestamp}
+                                    
                                 />
                             )
                     : ''}
@@ -290,7 +290,7 @@ export class PersonLocation extends React.Component {
                     >
                         <div>
                             <h4>{this.state.selectedMarker.name}</h4>
-                            <h4>{this.state.selectedMarker.time}</h4>
+                            
                         </div>
                     </InfoWindow>
                 </Map>
