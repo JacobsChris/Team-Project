@@ -124,7 +124,7 @@ export default class VehicleResultsPage extends React.Component {
                                     <Row>
                                         <Col>
                                             {this.state.detailsLoaded ? (<MdDirectionsCar className='large-person-icon' />) :
-                                                (<img src={loading} className="spinner" id="spinner"/>)}
+                                                (<img alt='loading' src={loading} className="spinner" id="spinner"/>)}
                                         </Col>
                                         <Col>
                                             <br />
@@ -160,7 +160,7 @@ export default class VehicleResultsPage extends React.Component {
                             </Container>
                         </Col>
                     </Row>) 
-                ) : (<img src={loading} className="spinner" id="spinner"/>)
+                ) : (<img alt='loading' src={loading} className="spinner" id="spinner"/>)
                 }
             </div>
 
