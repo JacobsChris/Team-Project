@@ -41,7 +41,7 @@ export default class PeopleResultsPage extends React.Component {
                 console.log('response', this.state.results);
             });
     }
-    
+
 
     handleClick = (person) => {
         this.setState({
@@ -78,7 +78,7 @@ export default class PeopleResultsPage extends React.Component {
             dateOfBirth: personData.dateOfBirth,
             placeOfBirth: '',
             sex: ''
-          };
+        };
 
         this.getResults(data);
     }
@@ -123,12 +123,12 @@ export default class PeopleResultsPage extends React.Component {
             callIncoming: this.state.personDetails.outGoingCallHistory,
             callOutgoing: this.state.personDetails.inComingCallHistory
         }
-        if(!this.props.admin){
-              this.props.history.push('/user/home/personlocation', data);
-            }
+        if (!this.props.admin) {
+            this.props.history.push('/user/home/personlocation', data);
+        }
         else {
-              this.props.history.push('/admin/personlocation', data);
-            }
+            this.props.history.push('/admin/personlocation', data);
+        }
     }
 
     render() {
@@ -169,7 +169,7 @@ export default class PeopleResultsPage extends React.Component {
                                     <Row>
                                         <Col>
                                             {this.state.detailsLoaded ? (<MdPerson className='large-person-icon' />) :
-                                                (<img src={loading} className="spinner" id="spinner"/>)}
+                                                (<img alt='loading' src={loading} className="spinner" id="spinner" />)}
                                         </Col>
                                         <Col>
                                             <br />
@@ -191,8 +191,8 @@ export default class PeopleResultsPage extends React.Component {
                                             <li className="list-group-item">Associates: {this.getAcquaintances(acquaintancesData)}</li>
                                             <li className="list-group-item">Vehicles: {vehicleData && vehicleData.length > 0 ? (<p onClick={this.vehicleClick(vehicleData)}
                                                 className='stretched-link link-style'>{this.getVehicles(vehicleData)}</p>) : ''}</li>
-                                            <li className="list-group-item">Recent locations: <p onClick={this.recentLocation} 
-                                            className='stretched-link link-style'>Click here</p></li>
+                                            <li className="list-group-item">Recent locations: <p onClick={this.recentLocation}
+                                                className='stretched-link link-style'>Click here</p></li>
                                         </ul>
                                     </Card.Body>
                                 </Card>
@@ -200,7 +200,7 @@ export default class PeopleResultsPage extends React.Component {
                         </Col>
                     </Row>
                 )
-                ) : (<img src={loading} className="spinner" id="spinner"/>)};
+                ) : (<img alt='loading' src={loading} className="spinner" id="spinner" />)};
             </div>
 
         )
