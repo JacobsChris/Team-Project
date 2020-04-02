@@ -8,7 +8,7 @@ export const getPeople = (searchData) => dispatch => {
         type: SET_RESULTS_LOADING,
         payload: true
     });
-    axios.post('http://35.246.9.251:8080/back-end/person/getData', searchData, {
+    axios.post('http://10.154.0.3:8080/back-end/person/getData', searchData, {
         headers: {
             Authorization: localStorage.getItem('token')
         }

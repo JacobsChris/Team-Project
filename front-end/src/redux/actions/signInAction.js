@@ -2,7 +2,7 @@ import { SIGN_IN, USERNAME } from './types';
 import axios from 'axios';
 
 export const signIn = (user) => dispatch => {
-    axios.post('http://35.246.9.251:8080/login/', user)
+    axios.post('http://10.154.0.3:8080/login/', user)
         .then(response =>
             dispatch({
                 type: SIGN_IN,

@@ -2,7 +2,7 @@ import { SET_PASS } from './types';
 import axios from 'axios';
 
 export const setPass = (pass) => dispatch => {
-    axios.post('http://35.246.9.251:8080/admin/register/', pass, {
+    axios.post('http://10.154.0.3:8080/admin/register/', pass, {
         headers: {
             Authorization: localStorage.getItem('token')
           }
