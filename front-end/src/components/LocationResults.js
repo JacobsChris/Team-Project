@@ -28,7 +28,7 @@ export class LocationResults extends React.Component {
     }
 
     getResults = (locationObject) => {
-        axios.post('http://10.154.0.3:8080/back-end/locationEvent/getLocationEventsInArea', locationObject, {
+        axios.post('http://34.89.60.241:8080/back-end/locationEvent/getLocationEventsInArea', locationObject, {
             headers: {
                 Authorization: localStorage.getItem('token')
             }
